@@ -8,7 +8,7 @@
 
 #import "FGWidge.h"
 
-float const width = 40.0;
+float const kWidgeWidth = 40.0;
 
 @implementation FGWidge
 
@@ -44,7 +44,7 @@ float const width = 40.0;
 
 + (instancetype)widgeWithColor:(UIColor*)color
 {
-    return [self spriteNodeWithColor:color size:CGSizeMake(width, width)];
+    return [self spriteNodeWithColor:color size:CGSizeMake(kWidgeWidth, kWidgeWidth)];
 }
 
 @end

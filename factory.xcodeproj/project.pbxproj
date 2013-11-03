@@ -24,6 +24,7 @@
 		84872C15182607D5008F86DE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84872C13182607D5008F86DE /* InfoPlist.strings */; };
 		84872C17182607D5008F86DE /* factoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C16182607D5008F86DE /* factoryTests.m */; };
 		84872C2218260A3E008F86DE /* FGWidge.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C2118260A3E008F86DE /* FGWidge.m */; };
+		84872C2518260CE0008F86DE /* FGTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C2418260CE0008F86DE /* FGTile.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		84872C16182607D5008F86DE /* factoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = factoryTests.m; sourceTree = "<group>"; };
 		84872C2018260A3E008F86DE /* FGWidge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGWidge.h; sourceTree = "<group>"; };
 		84872C2118260A3E008F86DE /* FGWidge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGWidge.m; sourceTree = "<group>"; };
+		84872C2318260CE0008F86DE /* FGTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGTile.h; sourceTree = "<group>"; };
+		84872C2418260CE0008F86DE /* FGTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGTile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +134,8 @@
 				84872BFF182607D5008F86DE /* FGMyScene.m */,
 				84872C2018260A3E008F86DE /* FGWidge.h */,
 				84872C2118260A3E008F86DE /* FGWidge.m */,
+				84872C2318260CE0008F86DE /* FGTile.h */,
+				84872C2418260CE0008F86DE /* FGTile.m */,
 				84872C03182607D5008F86DE /* Images.xcassets */,
 				84872BED182607D4008F86DE /* Supporting Files */,
 			);
@@ -267,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84872C2518260CE0008F86DE /* FGTile.m in Sources */,
 				84872BF3182607D4008F86DE /* main.m in Sources */,
 				84872BF7182607D4008F86DE /* FGAppDelegate.m in Sources */,
 				84872BFD182607D4008F86DE /* FGViewController.m in Sources */,
