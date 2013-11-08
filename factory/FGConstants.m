@@ -8,9 +8,6 @@
 
 #import "FGConstants.h"
 
-const uint32_t widgeCategory = 0x1 << 0;
-const uint32_t tileCategory = 0x1 << 1;
-
 @implementation FGConstants
 
 @end

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84374E33182CA65200F74638 /* FGMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 84374E32182CA65200F74638 /* FGMachine.m */; };
+		84374E36182CA9EF00F74638 /* FGConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 84374E35182CA9EF00F74638 /* FGConnector.m */; };
+		84374E39182CB4EF00F74638 /* FGGravity.m in Sources */ = {isa = PBXBuildFile; fileRef = 84374E38182CB4EF00F74638 /* FGGravity.m */; };
+		84374E3D182CC6D700F74638 /* FGBelt.m in Sources */ = {isa = PBXBuildFile; fileRef = 84374E3C182CC6D700F74638 /* FGBelt.m */; };
 		84872BE5182607D4008F86DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84872BE4182607D4008F86DE /* Foundation.framework */; };
 		84872BE7182607D4008F86DE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84872BE6182607D4008F86DE /* CoreGraphics.framework */; };
 		84872BE9182607D4008F86DE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84872BE8182607D4008F86DE /* UIKit.framework */; };
@@ -39,6 +43,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84374E31182CA65200F74638 /* FGMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGMachine.h; sourceTree = "<group>"; };
+		84374E32182CA65200F74638 /* FGMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGMachine.m; sourceTree = "<group>"; };
+		84374E34182CA9EF00F74638 /* FGConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGConnector.h; sourceTree = "<group>"; };
+		84374E35182CA9EF00F74638 /* FGConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGConnector.m; sourceTree = "<group>"; };
+		84374E37182CB4EF00F74638 /* FGGravity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGGravity.h; sourceTree = "<group>"; };
+		84374E38182CB4EF00F74638 /* FGGravity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGGravity.m; sourceTree = "<group>"; };
+		84374E3B182CC6D700F74638 /* FGBelt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGBelt.h; sourceTree = "<group>"; };
+		84374E3C182CC6D700F74638 /* FGBelt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGBelt.m; sourceTree = "<group>"; };
 		84872BE1182607D4008F86DE /* factory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = factory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84872BE4182607D4008F86DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		84872BE6182607D4008F86DE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -94,6 +106,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84374E3A182CB4FA00F74638 /* Machines */ = {
+			isa = PBXGroup;
+			children = (
+				84374E3B182CC6D700F74638 /* FGBelt.h */,
+				84374E3C182CC6D700F74638 /* FGBelt.m */,
+				84374E37182CB4EF00F74638 /* FGGravity.h */,
+				84374E38182CB4EF00F74638 /* FGGravity.m */,
+			);
+			name = Machines;
+			sourceTree = "<group>";
+		};
 		84872BD8182607D4008F86DE = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +158,11 @@
 				84F9D4DD18277410002728A0 /* FGConstants.m */,
 				84872BFB182607D4008F86DE /* FGViewController.h */,
 				84872BFC182607D4008F86DE /* FGViewController.m */,
+				84374E34182CA9EF00F74638 /* FGConnector.h */,
+				84374E35182CA9EF00F74638 /* FGConnector.m */,
+				84374E31182CA65200F74638 /* FGMachine.h */,
+				84374E32182CA65200F74638 /* FGMachine.m */,
+				84374E3A182CB4FA00F74638 /* Machines */,
 				84872BFE182607D5008F86DE /* FGMyScene.h */,
 				84872BFF182607D5008F86DE /* FGMyScene.m */,
 				84872C2318260CE0008F86DE /* FGTile.h */,
@@ -277,10 +305,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84374E33182CA65200F74638 /* FGMachine.m in Sources */,
+				84374E39182CB4EF00F74638 /* FGGravity.m in Sources */,
 				84872C2518260CE0008F86DE /* FGTile.m in Sources */,
 				84872BF3182607D4008F86DE /* main.m in Sources */,
 				84872BF7182607D4008F86DE /* FGAppDelegate.m in Sources */,
+				84374E3D182CC6D700F74638 /* FGBelt.m in Sources */,
 				84872BFD182607D4008F86DE /* FGViewController.m in Sources */,
+				84374E36182CA9EF00F74638 /* FGConnector.m in Sources */,
 				84F9D4DE18277410002728A0 /* FGConstants.m in Sources */,
 				84872C00182607D5008F86DE /* FGMyScene.m in Sources */,
 				84872C2218260A3E008F86DE /* FGWidge.m in Sources */,
