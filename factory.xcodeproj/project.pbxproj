@@ -25,6 +25,7 @@
 		84872C17182607D5008F86DE /* factoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C16182607D5008F86DE /* factoryTests.m */; };
 		84872C2218260A3E008F86DE /* FGWidge.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C2118260A3E008F86DE /* FGWidge.m */; };
 		84872C2518260CE0008F86DE /* FGTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C2418260CE0008F86DE /* FGTile.m */; };
+		84F9D4DE18277410002728A0 /* FGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9D4DD18277410002728A0 /* FGConstants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		84872C2118260A3E008F86DE /* FGWidge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGWidge.m; sourceTree = "<group>"; };
 		84872C2318260CE0008F86DE /* FGTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGTile.h; sourceTree = "<group>"; };
 		84872C2418260CE0008F86DE /* FGTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGTile.m; sourceTree = "<group>"; };
+		84F9D4DC18277410002728A0 /* FGConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGConstants.h; sourceTree = "<group>"; };
+		84F9D4DD18277410002728A0 /* FGConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,17 +128,19 @@
 		84872BEC182607D4008F86DE /* factory */ = {
 			isa = PBXGroup;
 			children = (
+				84872BF8182607D4008F86DE /* Main.storyboard */,
 				84872BF5182607D4008F86DE /* FGAppDelegate.h */,
 				84872BF6182607D4008F86DE /* FGAppDelegate.m */,
-				84872BF8182607D4008F86DE /* Main.storyboard */,
+				84F9D4DC18277410002728A0 /* FGConstants.h */,
+				84F9D4DD18277410002728A0 /* FGConstants.m */,
 				84872BFB182607D4008F86DE /* FGViewController.h */,
 				84872BFC182607D4008F86DE /* FGViewController.m */,
 				84872BFE182607D5008F86DE /* FGMyScene.h */,
 				84872BFF182607D5008F86DE /* FGMyScene.m */,
-				84872C2018260A3E008F86DE /* FGWidge.h */,
-				84872C2118260A3E008F86DE /* FGWidge.m */,
 				84872C2318260CE0008F86DE /* FGTile.h */,
 				84872C2418260CE0008F86DE /* FGTile.m */,
+				84872C2018260A3E008F86DE /* FGWidge.h */,
+				84872C2118260A3E008F86DE /* FGWidge.m */,
 				84872C03182607D5008F86DE /* Images.xcassets */,
 				84872BED182607D4008F86DE /* Supporting Files */,
 			);
@@ -276,6 +281,7 @@
 				84872BF3182607D4008F86DE /* main.m in Sources */,
 				84872BF7182607D4008F86DE /* FGAppDelegate.m in Sources */,
 				84872BFD182607D4008F86DE /* FGViewController.m in Sources */,
+				84F9D4DE18277410002728A0 /* FGConstants.m in Sources */,
 				84872C00182607D5008F86DE /* FGMyScene.m in Sources */,
 				84872C2218260A3E008F86DE /* FGWidge.m in Sources */,
 			);
@@ -496,6 +502,7 @@
 				84872C1C182607D5008F86DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		84872C1D182607D5008F86DE /* Build configuration list for PBXNativeTarget "factoryTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +511,7 @@
 				84872C1F182607D5008F86DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

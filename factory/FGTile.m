@@ -17,7 +17,16 @@ float const kTileHorizontalBeltHeight = 12.0;
 
 + (instancetype)beltEast
 {
-    return [self spriteNodeWithColor:[UIColor grayColor] size:CGSizeMake(64, kTileHorizontalBeltHeight)];
+    FGTile *tile = [self spriteNodeWithColor:[UIColor grayColor] size:CGSizeMake(64, kTileHorizontalBeltHeight)];
+    
+    tile.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:tile.size];
+    tile.physicsBody.dynamic = YES;
+     /*
+    tile.physicsBody.categoryBitMask = tileCategory;
+    tile.physicsBody.contactTestBitMask = widgeCategory;
+    tile.physicsBody.collisionBitMask = 0; // don't bounce off anything
+    */
+    return tile;
 }
 
 @end

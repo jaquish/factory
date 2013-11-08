@@ -8,7 +8,8 @@
 
 #import "FGWidge.h"
 
-float const kWidgeWidth = 40.0;
+const float kWidgeWidth = 40.0;
+
 
 @implementation FGWidge
 
@@ -44,7 +45,14 @@ float const kWidgeWidth = 40.0;
 
 + (instancetype)widgeWithColor:(UIColor*)color
 {
-    return [self spriteNodeWithColor:color size:CGSizeMake(kWidgeWidth, kWidgeWidth)];
+    FGWidge *widge = [self spriteNodeWithColor:color size:CGSizeMake(kWidgeWidth, kWidgeWidth)];
+    widge.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:widge.size];
+//    widge.physicsBody.dynamic = YES;
+    widge.physicsBody.categoryBitMask = widgeCategory;
+    widge.physicsBody.contactTestBitMask = tileCategory;
+    widge.physicsBody.collisionBitMask = 0; // don't bounce off anything
+    
+    return widge;
 }
 
 @end
