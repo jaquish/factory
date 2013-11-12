@@ -15,4 +15,6 @@
 
 @property FGZone endZone;
 
+- (id)initFromRootZone:(FGZone)fromZone toZone:(FGZone)toZone;
+
 @end

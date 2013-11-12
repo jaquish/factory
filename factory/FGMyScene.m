@@ -58,9 +58,7 @@
         [self.connectors addObject:toGrav];
         
         // belt
-        FGBelt *belt = [[FGBelt alloc] init];
-        belt.rootZone = FGZoneMake(3, 3);
-        belt.endZone = CGPointMake(4, 3);
+        FGBelt *belt = [[FGBelt alloc] initFromRootZone:FGZoneMake(3, 3) toZone:FGZoneMake(7, 3)];
         [self addChild:belt];
         [self.machines addObject:belt];
         
@@ -86,7 +84,7 @@
         
         // output
         FGOutput *output = [[FGOutput alloc] init];
-        output.position = compassPointOfZone(SW, FGZoneMake(4, 0));
+        output.position = compassPointOfZone(SW, FGZoneMake(8, 0));
         [self addChild:output];
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];

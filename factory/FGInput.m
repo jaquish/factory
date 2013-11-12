@@ -20,7 +20,7 @@
 {
     if (self = [super init])
     {
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithColor:[UIColor whiteColor] size:CGSizeMake(64, 64)];
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithColor:[UIColor whiteColor] size:CGSizeMake(ZoneSize, ZoneSize)];
         sprite.anchorPoint = CGPointZero;
         [self addChild:sprite];
         
@@ -33,7 +33,8 @@
 - (void)generateWidge
 {
     FGWidge *widge = [FGWidge redWidge];
-    widge.position = CGPointMake(self.position.x + 32, self.position.y + 32);
+    CGPoint generationPoint = compassPointOfZone(center, self.rootZone);
+    widge.position = generationPoint;
     [self.generated addObject:widge];
     [self.scene addChild:widge];
 }

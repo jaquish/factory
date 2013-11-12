@@ -11,7 +11,6 @@
 const float kBeltSpeedPointsPerSecond = 100.0;
 
 float const kHorizontalBeltHeight = 12.0;
-float const kVerticalBeltHeight = 64.0;
 
 @interface FGBelt ()
 
@@ -21,13 +20,17 @@ float const kVerticalBeltHeight = 64.0;
 
 @implementation FGBelt
 
-- (id)init
+- (id)initFromRootZone:(FGZone)fromZone toZone:(FGZone)toZone
 {
     if (self = [super init])
     {
-        SKSpriteNode *spriteNode = [SKSpriteNode spriteNodeWithColor:[UIColor grayColor] size:CGSizeMake(64, kHorizontalBeltHeight)];
+        self.rootZone = fromZone;
+        self.endZone = toZone;
+        
+        SKSpriteNode *spriteNode = [SKSpriteNode spriteNodeWithColor:[UIColor grayColor] size:CGSizeMake(ZoneSize * (toZone.x - fromZone.x + 1), kHorizontalBeltHeight)];
         spriteNode.anchorPoint = CGPointZero;
         [self addChild:spriteNode];
+        
         self.moving = [NSMutableArray array];
     }
     
@@ -41,8 +44,9 @@ float const kVerticalBeltHeight = 64.0;
     for (FGWidge* widge in self.moving) {
         [widge changeXBy:kBeltSpeedPointsPerSecond * _dt];
         
-        if (widge.position.x > compassPointOfZone(center, self.endZone).x) {
-            [widge changeXTo:compassPointOfZone(center, self.endZone).x];
+        int fallingPointX = compassPointOfZone(center, zoneInDirectionFromZone(E, self.endZone)).x;
+        if (widge.position.x > fallingPointX) {
+            [widge changeXTo:fallingPointX];
             [self.output insert:widge];
             [self.moving removeObject:widge];
         }

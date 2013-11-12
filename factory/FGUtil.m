@@ -27,6 +27,21 @@ CGPoint compassPointOfZone(CompassPoint cp, FGZone z)
     }    
 }
 
+FGZone zoneInDirectionFromZone(CompassPoint cp, FGZone z)
+{
+    switch (cp) {
+        case N:     return FGZoneMake(z.x    , z.y + 1);
+        case NE:    return FGZoneMake(z.x + 1, z.y + 1);
+        case E:     return FGZoneMake(z.x + 1, z.y    );
+        case SE:    return FGZoneMake(z.x + 1, z.y - 1);
+        case S:     return FGZoneMake(z.x    , z.y - 1);
+        case SW:    return FGZoneMake(z.x - 1, z.y - 1);
+        case W:     return FGZoneMake(z.x - 1, z.y    );
+        case NW:    return FGZoneMake(z.x - 1, z.y + 1);
+        case center:return z;
+    }
+}
+
 FGZone FGZoneMake(int x, int y)
 {
     FGZone z;
