@@ -66,7 +66,7 @@
         
         // connect gravity to belt
         FGConnector *toBelt = [[FGConnector alloc] init];
-        toBelt.position = belt.position;    // set belt position is important
+        toBelt.position = CGPointMake(64 * 3.5, 64 * 3 + 12 + 20);    // set belt position is important
         gravity1.output = toBelt;
         belt.input = toBelt;
         [self.connectors addObject:toBelt];
@@ -78,7 +78,6 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
-    
     [self.input generateWidge];
 }
 
@@ -100,12 +99,6 @@
     
     _prevTime = currentTime;
 }
-
-- (void)addConnectionFrom:(FGMachine*)machineA to:(FGMachine*)machineB
-{
-    ;
-}
-
 
 
 @end

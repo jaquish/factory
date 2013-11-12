@@ -8,7 +8,7 @@
 
 #import "FGBelt.h"
 
-const float kBeltSpeedPointsPerSecond = 50.0;
+const float kBeltSpeedPointsPerSecond = 100.0;
 
 float const kHorizontalBeltHeight = 12.0;
 float const kVerticalBeltHeight = 64.0;
@@ -38,6 +38,13 @@ float const kVerticalBeltHeight = 64.0;
     for (FGWidge* widge in self.moving) {
         CGPoint position = widge.position;
         position.x += kBeltSpeedPointsPerSecond * _dt;
+        
+        if (position.x > self.endZone.x * 64 + 32) {
+            position.x = self.endZone.x * 64 + 32;
+            [self.output insert:widge];
+            [self.moving removeObject:widge];
+        }
+        
         widge.position = position;
     }
 }

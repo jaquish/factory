@@ -11,5 +11,9 @@
 @interface FGBelt : FGMachine
 
 @property (nonatomic) FGConnector *input;
+@property (nonatomic) FGConnector *output;
+
+@property CGPoint startZone;
+@property CGPoint endZone;
 
 @end

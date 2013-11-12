@@ -11,3 +11,10 @@
 @implementation FGConstants
 
 @end
+
+const float WorldHeight = 768;
+const float WorldWidth = 1024;
+const float ZoneSize = 64;
+
+const float ZonesWide = WorldWidth / ZoneSize;
+const float ZonesHigh = WorldHeight / ZoneSize;

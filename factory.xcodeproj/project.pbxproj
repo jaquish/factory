@@ -30,6 +30,7 @@
 		84872C17182607D5008F86DE /* factoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C16182607D5008F86DE /* factoryTests.m */; };
 		84872C2218260A3E008F86DE /* FGWidge.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C2118260A3E008F86DE /* FGWidge.m */; };
 		84A4CD911831FA6700DAD99C /* FGGridOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4CD901831FA6700DAD99C /* FGGridOverlay.m */; };
+		84A4CD95183203DF00DAD99C /* FGUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4CD94183203DF00DAD99C /* FGUtil.m */; };
 		84F9D4DE18277410002728A0 /* FGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9D4DD18277410002728A0 /* FGConstants.m */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,8 @@
 		84872C2118260A3E008F86DE /* FGWidge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGWidge.m; sourceTree = "<group>"; };
 		84A4CD8F1831FA6700DAD99C /* FGGridOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGGridOverlay.h; sourceTree = "<group>"; };
 		84A4CD901831FA6700DAD99C /* FGGridOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGGridOverlay.m; sourceTree = "<group>"; };
+		84A4CD93183203DF00DAD99C /* FGUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGUtil.h; sourceTree = "<group>"; };
+		84A4CD94183203DF00DAD99C /* FGUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGUtil.m; sourceTree = "<group>"; };
 		84F9D4DC18277410002728A0 /* FGConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGConstants.h; sourceTree = "<group>"; };
 		84F9D4DD18277410002728A0 /* FGConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,6 +178,8 @@
 				84872C2118260A3E008F86DE /* FGWidge.m */,
 				84872C03182607D5008F86DE /* Images.xcassets */,
 				84872BED182607D4008F86DE /* Supporting Files */,
+				84A4CD93183203DF00DAD99C /* FGUtil.h */,
+				84A4CD94183203DF00DAD99C /* FGUtil.m */,
 			);
 			path = factory;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 				84374E39182CB4EF00F74638 /* FGGravity.m in Sources */,
 				84872BF3182607D4008F86DE /* main.m in Sources */,
 				84872BF7182607D4008F86DE /* FGAppDelegate.m in Sources */,
+				84A4CD95183203DF00DAD99C /* FGUtil.m in Sources */,
 				84374E40182CCA9200F74638 /* FGInput.m in Sources */,
 				84374E3D182CC6D700F74638 /* FGBelt.m in Sources */,
 				84872BFD182607D4008F86DE /* FGViewController.m in Sources */,
