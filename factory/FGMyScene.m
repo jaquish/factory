@@ -40,7 +40,6 @@
         
         // input
         self.input = [[FGInput alloc] init];
-        self.input.anchorPoint = CGPointZero; // position tile from lower left
         self.input.position = CGPointMake(64 * 3, 64 * 8);
         [self.machines addObject:self.input];
         [self addChild:self.input];
@@ -60,7 +59,6 @@
         
         // belt
         FGBelt *belt = [[FGBelt alloc] init];
-        belt.anchorPoint = CGPointZero; // position tile from lower left
         belt.position = CGPointMake(64 * 3, 64 * 3);
         belt.startZone = CGPointMake(3, 3);
         belt.endZone = CGPointMake(4, 3);
@@ -89,7 +87,7 @@
         
         // output
         FGOutput *output = [[FGOutput alloc] init];
-        output.position = compassPointOfZone(center, FGZoneMake(4, 0));
+        output.position = compassPointOfZone(SW, FGZoneMake(4, 0));
         [self addChild:output];
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];

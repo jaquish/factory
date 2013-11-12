@@ -23,8 +23,11 @@ float const kVerticalBeltHeight = 64.0;
 
 - (id)init
 {
-    if (self = [super initWithColor:[UIColor grayColor] size:CGSizeMake(64, kHorizontalBeltHeight)])
+    if (self = [super init])
     {
+        SKSpriteNode *spriteNode = [SKSpriteNode spriteNodeWithColor:[UIColor grayColor] size:CGSizeMake(64, kHorizontalBeltHeight)];
+        spriteNode.anchorPoint = CGPointZero;
+        [self addChild:spriteNode];
         self.moving = [NSMutableArray array];
     }
     

@@ -22,7 +22,7 @@
 {
     if (self = [super init])
     {
-        ;
+        self.anchorPoint = CGPointZero; // position machine from lower left
     }
     
     return self;

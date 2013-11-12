@@ -18,8 +18,12 @@
 
 - (id)init
 {
-    if (self = [super initWithColor:[UIColor whiteColor] size:CGSizeMake(64, 64)])
+    if (self = [super init])
     {
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithColor:[UIColor whiteColor] size:CGSizeMake(64, 64)];
+        sprite.anchorPoint = CGPointZero;
+        [self addChild:sprite];
+        
         self.generated = [NSMutableArray array];
     }
     
