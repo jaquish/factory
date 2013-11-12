@@ -14,7 +14,10 @@
 
 extern const float WorldHeight;
 extern const float WorldWidth;
+
 extern const float ZoneSize;
+
+extern const float WidgeSize;
 
 extern const float ZonesWide;
 extern const float ZonesHigh;

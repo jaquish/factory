@@ -25,19 +25,18 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetStrokeColorWithColor(context, [UIColor grayColor].CGColor);
     
-    // Draw them with a 2.0 stroke width so they are a bit more visible.
     CGContextSetLineWidth(context, 1.0);
     
-    for (int x = 0; x <= 1024; x += 64) {
+    for (int x = 0; x <= WorldWidth; x += ZoneSize) {
         CGContextMoveToPoint(context, x, 0); //start at this point
-        CGContextAddLineToPoint(context, x, 768); //draw to this point
+        CGContextAddLineToPoint(context, x, WorldHeight); //draw to this point
         // and now draw the Path!
         CGContextStrokePath(context);
     }
     
-    for (int y = 0; y <= 768; y += 64) {
+    for (int y = 0; y <= WorldHeight; y += ZoneSize) {
         CGContextMoveToPoint(context, 0,y); //start at this point
-        CGContextAddLineToPoint(context, 1024, y); //draw to this point
+        CGContextAddLineToPoint(context, WorldWidth, y); //draw to this point
         // and now draw the Path!
         CGContextStrokePath(context);
     }
