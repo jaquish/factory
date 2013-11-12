@@ -13,7 +13,6 @@
 @property (nonatomic) FGConnector *input;
 @property (nonatomic) FGConnector *output;
 
-@property CGPoint startZone;
-@property CGPoint endZone;
+@property FGZone endZone;
 
 @end

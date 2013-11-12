@@ -12,7 +12,6 @@
 @interface FGMachine ()
 
 @property (nonatomic) NSMutableArray *connectors;
-@property (nonatomic) FGZone rootZone;
 
 @end
 
@@ -36,6 +35,12 @@
 - (void)propogate
 {
     ;   // Do something!
+}
+
+- (void)setRootZone:(FGZone)rootZone
+{
+    _rootZone = rootZone;
+    self.position = compassPointOfZone(SW, rootZone);
 }
 
 @end

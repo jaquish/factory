@@ -40,7 +40,7 @@
         
         // input
         self.input = [[FGInput alloc] init];
-        self.input.position = CGPointMake(64 * 3, 64 * 8);
+        self.input.rootZone = FGZoneMake(3, 8);
         [self.machines addObject:self.input];
         [self addChild:self.input];
         
@@ -59,8 +59,7 @@
         
         // belt
         FGBelt *belt = [[FGBelt alloc] init];
-        belt.position = CGPointMake(64 * 3, 64 * 3);
-        belt.startZone = CGPointMake(3, 3);
+        belt.rootZone = FGZoneMake(3, 3);
         belt.endZone = CGPointMake(4, 3);
         [self addChild:belt];
         [self.machines addObject:belt];

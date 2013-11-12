@@ -14,4 +14,6 @@
 
 - (void)render:(CFTimeInterval)_dt;
 
+@property (nonatomic) FGZone rootZone;
+
 @end
