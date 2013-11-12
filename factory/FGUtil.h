@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SpriteKit/SpriteKit.h>
 
 @interface FGUtil : NSObject
 
@@ -18,3 +19,16 @@ typedef enum { N, NE, E, SE, S, SW, W, NW, center } CompassPoint;
 
 // return the compass point of the zone in
 CGPoint compassPointOfZone(CompassPoint cp, FGZone z);
+
+// represents a zone
+FGZone FGZoneMake(int x, int y);
+
+
+@interface SKNode (FGExtensions)
+
+- (void)changeXBy:(float)deltaX;
+- (void)changeXTo:(float)x;
+- (void)changeYBy:(float)deltaY;
+- (void)changeYTo:(float)y;
+
+@end

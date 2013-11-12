@@ -12,6 +12,7 @@
 @interface FGMachine ()
 
 @property (nonatomic) NSMutableArray *connectors;
+@property (nonatomic) FGZone rootZone;
 
 @end
 

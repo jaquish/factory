@@ -31,6 +31,7 @@
 		84872C2218260A3E008F86DE /* FGWidge.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C2118260A3E008F86DE /* FGWidge.m */; };
 		84A4CD911831FA6700DAD99C /* FGGridOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4CD901831FA6700DAD99C /* FGGridOverlay.m */; };
 		84A4CD95183203DF00DAD99C /* FGUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4CD94183203DF00DAD99C /* FGUtil.m */; };
+		84E5E2B018320B5C00524D0F /* FGOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E5E2AF18320B5C00524D0F /* FGOutput.m */; };
 		84F9D4DE18277410002728A0 /* FGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9D4DD18277410002728A0 /* FGConstants.m */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,8 @@
 		84A4CD901831FA6700DAD99C /* FGGridOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGGridOverlay.m; sourceTree = "<group>"; };
 		84A4CD93183203DF00DAD99C /* FGUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGUtil.h; sourceTree = "<group>"; };
 		84A4CD94183203DF00DAD99C /* FGUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGUtil.m; sourceTree = "<group>"; };
+		84E5E2AE18320B5C00524D0F /* FGOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGOutput.h; sourceTree = "<group>"; };
+		84E5E2AF18320B5C00524D0F /* FGOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGOutput.m; sourceTree = "<group>"; };
 		84F9D4DC18277410002728A0 /* FGConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGConstants.h; sourceTree = "<group>"; };
 		84F9D4DD18277410002728A0 /* FGConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +124,8 @@
 				84374E38182CB4EF00F74638 /* FGGravity.m */,
 				84374E3E182CCA9200F74638 /* FGInput.h */,
 				84374E3F182CCA9200F74638 /* FGInput.m */,
+				84E5E2AE18320B5C00524D0F /* FGOutput.h */,
+				84E5E2AF18320B5C00524D0F /* FGOutput.m */,
 			);
 			name = Machines;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 				84872BF3182607D4008F86DE /* main.m in Sources */,
 				84872BF7182607D4008F86DE /* FGAppDelegate.m in Sources */,
 				84A4CD95183203DF00DAD99C /* FGUtil.m in Sources */,
+				84E5E2B018320B5C00524D0F /* FGOutput.m in Sources */,
 				84374E40182CCA9200F74638 /* FGInput.m in Sources */,
 				84374E3D182CC6D700F74638 /* FGBelt.m in Sources */,
 				84872BFD182607D4008F86DE /* FGViewController.m in Sources */,

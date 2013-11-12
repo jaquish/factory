@@ -12,6 +12,7 @@
 #import "FGBelt.h"
 #import "FGGravity.h"
 #import "FGInput.h"
+#import "FGOutput.h"
 
 @interface FGMyScene ()
 {
@@ -61,6 +62,8 @@
         FGBelt *belt = [[FGBelt alloc] init];
         belt.anchorPoint = CGPointZero; // position tile from lower left
         belt.position = CGPointMake(64 * 3, 64 * 3);
+        belt.startZone = CGPointMake(3, 3);
+        belt.endZone = CGPointMake(4, 3);
         [self addChild:belt];
         [self.machines addObject:belt];
         
@@ -70,6 +73,24 @@
         gravity1.output = toBelt;
         belt.input = toBelt;
         [self.connectors addObject:toBelt];
+        
+        // gravity2
+        FGGravity *gravity2 = [[FGGravity alloc] init];
+        [self.machines addObject:gravity2];
+        
+        // connect belt to gravity
+        FGConnector *toGrav2 = [[FGConnector alloc] init];
+        toGrav2.position = compassPointOfZone(center, belt.endZone);
+        belt.output = toGrav2;
+        toGrav2.input = belt;
+        toGrav2.output = gravity2;
+        gravity2.input = toGrav2;
+        [self.connectors addObject:toGrav2];
+        
+        // output
+        FGOutput *output = [[FGOutput alloc] init];
+        output.position = compassPointOfZone(center, FGZoneMake(4, 0));
+        [self addChild:output];
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
     }

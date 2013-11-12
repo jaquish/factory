@@ -26,3 +26,44 @@ CGPoint compassPointOfZone(CompassPoint cp, FGZone z)
         case center:return CGPointMake(ZoneSize * (z.x + 0.5), ZoneSize * (z.y + 0.5));
     }    
 }
+
+FGZone FGZoneMake(int x, int y)
+{
+    FGZone z;
+    z.x = x;
+    z.y = y;
+    return z;
+}
+
+@implementation SKNode (FGExtensions)
+
+- (void)changeXBy:(float)deltaX
+{
+    CGPoint pos = self.position;
+    pos.x += deltaX;
+    self.position = pos;
+}
+
+- (void)changeXTo:(float)x
+{
+    CGPoint pos = self.position;
+    pos.x = x;
+    self.position = pos;
+}
+
+- (void)changeYBy:(float)deltaY
+{
+    CGPoint pos = self.position;
+    pos.y += deltaY;
+    self.position = pos;
+}
+
+- (void)changeYTo:(float)y
+{
+    CGPoint pos = self.position;
+    pos.y = y;
+    self.position = pos;
+}
+
+
+@end

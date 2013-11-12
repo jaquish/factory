@@ -36,16 +36,13 @@ float const kVerticalBeltHeight = 64.0;
     [self.moving addObjectsFromArray:self.input.widges];
     
     for (FGWidge* widge in self.moving) {
-        CGPoint position = widge.position;
-        position.x += kBeltSpeedPointsPerSecond * _dt;
+        [widge changeXBy:kBeltSpeedPointsPerSecond * _dt];
         
-        if (position.x > self.endZone.x * 64 + 32) {
-            position.x = self.endZone.x * 64 + 32;
+        if (widge.position.x > compassPointOfZone(center, self.endZone).x) {
+            [widge changeXTo:compassPointOfZone(center, self.endZone).x];
             [self.output insert:widge];
             [self.moving removeObject:widge];
         }
-        
-        widge.position = position;
     }
 }
 
