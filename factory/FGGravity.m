@@ -28,16 +28,21 @@ const float kGravityPointsPerSecond = 300.0;
 
 - (void)render:(CFTimeInterval)_dt
 {
+    [self.falling addObjectsFromArray:self.input.widges];
+    
     for (FGWidge *widge in self.falling) {
         CGPoint position = widge.position;
         position.y -= kGravityPointsPerSecond * _dt;
         widge.position = position;
+        
+        if (widge.position.y < self.output.position.y) {
+            CGPoint position = widge.position;
+            position.y = self.output.position.y;
+            widge.position = position;
+            [self.falling removeObject:widge];
+            [self.output insert:widge];
+        }
     }
-}
-
-- (void)add:(FGWidge *)widge
-{
-    [self.falling addObject:widge];
 }
 
 @end

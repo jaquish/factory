@@ -8,7 +8,10 @@
 
 #import "FGBelt.h"
 
-const float kBeltSpeedPointsPerSecond;
+const float kBeltSpeedPointsPerSecond = 50.0;
+
+float const kHorizontalBeltHeight = 12.0;
+float const kVerticalBeltHeight = 64.0;
 
 @interface FGBelt ()
 
@@ -20,7 +23,7 @@ const float kBeltSpeedPointsPerSecond;
 
 - (id)init
 {
-    if (self = [super init])
+    if (self = [super initWithColor:[UIColor grayColor] size:CGSizeMake(64, kHorizontalBeltHeight)])
     {
         self.moving = [NSMutableArray array];
     }
@@ -30,9 +33,11 @@ const float kBeltSpeedPointsPerSecond;
 
 - (void)render:(CFTimeInterval)_dt
 {
+    [self.moving addObjectsFromArray:self.input.widges];
+    
     for (FGWidge* widge in self.moving) {
         CGPoint position = widge.position;
-        position.x += kBeltSpeedPointsPerSecond;
+        position.x += kBeltSpeedPointsPerSecond * _dt;
         widge.position = position;
     }
 }

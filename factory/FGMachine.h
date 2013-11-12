@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "FGWidge.h"
+#import "FGConnector.h"
 
-@interface FGMachine : NSObject
+@interface FGMachine : SKSpriteNode
 
 - (void)render:(CFTimeInterval)_dt;
-- (void)propogate;
 
 @end

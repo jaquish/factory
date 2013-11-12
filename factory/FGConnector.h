@@ -7,7 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FGWidge.h"
+
+@class FGMachine;
 
 @interface FGConnector : NSObject
+
+@property (nonatomic) CGPoint position;
+
+@property (nonatomic) FGMachine *input;
+@property (nonatomic) FGMachine *output;
+
+- (void)insert:(FGWidge*)widge;
+
+- (void)propogate;
+
+- (NSArray*)widges;
 
 @end

@@ -8,9 +8,10 @@
 
 #import "FGMyScene.h"
 #import "FGWidge.h"
-#import "FGTile.h"
 #import "FGMachine.h"
+#import "FGBelt.h"
 #import "FGGravity.h"
+#import "FGInput.h"
 
 @interface FGMyScene ()
 {
@@ -18,8 +19,12 @@
     CFTimeInterval _dt;
 }
 
+/* Lists */
 @property (nonatomic) NSMutableArray *machines;
-@property (nonatomic) FGGravity *gravity;
+@property (nonatomic) NSMutableArray *connectors;
+
+/* Temporary direct links */
+@property (nonatomic) FGInput *input;
 
 @end
 
@@ -27,18 +32,46 @@
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
-        /* Setup your scene here */
         
+        // ivar setup
         self.machines = [NSMutableArray array];
-        self.gravity = [[FGGravity alloc] init];
-        [self.machines addObject:self.gravity];
+        self.connectors = [NSMutableArray array];
+        
+        // input
+        self.input = [[FGInput alloc] init];
+        self.input.anchorPoint = CGPointZero; // position tile from lower left
+        self.input.position = CGPointMake(64 * 3, 64 * 8);
+        [self.machines addObject:self.input];
+        [self addChild:self.input];
+        
+        // gravity
+        FGGravity *gravity1 = [[FGGravity alloc] init];
+        [self.machines addObject:gravity1];
+        
+        // connect input to gravity
+        FGConnector *toGrav = [[FGConnector alloc] init];
+        toGrav.position = self.input.position;  // set connection position is important
+        self.input.next = toGrav;
+        gravity1.input = toGrav;
+        toGrav.input = self.input;
+        toGrav.output = gravity1;
+        [self.connectors addObject:toGrav];
+        
+        // belt
+        FGBelt *belt = [[FGBelt alloc] init];
+        belt.anchorPoint = CGPointZero; // position tile from lower left
+        belt.position = CGPointMake(64 * 3, 64 * 3);
+        [self addChild:belt];
+        [self.machines addObject:belt];
+        
+        // connect gravity to belt
+        FGConnector *toBelt = [[FGConnector alloc] init];
+        toBelt.position = belt.position;    // set belt position is important
+        gravity1.output = toBelt;
+        belt.input = toBelt;
+        [self.connectors addObject:toBelt];
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
-        
-        // belts
-        for (int i = 1; i <= 5; i++) {
-            [self addBeltAtZone:CGPointMake(i, 3)];
-        }
     }
     return self;
 }
@@ -46,17 +79,7 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
-    for (UITouch *touch in touches) {
-        
-        CGPoint location = [touch locationInNode:self];
-        
-        FGWidge *widge = [FGWidge redWidge];
-        
-        widge.position = location;
-        
-        [self addChild:widge];
-        [self.gravity add:widge];
-    }
+    [self.input generateWidge];
 }
 
 - (void)update:(CFTimeInterval)currentTime {
@@ -69,28 +92,20 @@
     }
     
     // propogate
-    for (FGMachine* machine in self.machines) {
-        [machine propogate];
+    for (FGConnector* connector in self.connectors) {
+        [connector propogate];
     }
     
-    // TODO - insert phase 2 processing here
+    /*** TODO - insert phase 2 processing here ***/
     
     _prevTime = currentTime;
 }
 
-- (void)addBeltAtZone:(CGPoint)zone
+- (void)addConnectionFrom:(FGMachine*)machineA to:(FGMachine*)machineB
 {
-    FGTile *tile = [FGTile beltEast];
-    tile.anchorPoint = CGPointZero; // position tile from lower left
-    tile.position = CGPointMake(64 * zone.x, 64 * zone.y);
-    [self addChild:tile];
+    ;
 }
 
-- (void)widge:(FGWidge*)widge didCollideWithTile:(FGTile*)tile
-{
-    CGPoint pos = widge.position;
-    pos.y += 300.0;
-    widge.position = pos;
-}
+
 
 @end

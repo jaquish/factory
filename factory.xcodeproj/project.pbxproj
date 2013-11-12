@@ -11,6 +11,7 @@
 		84374E36182CA9EF00F74638 /* FGConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 84374E35182CA9EF00F74638 /* FGConnector.m */; };
 		84374E39182CB4EF00F74638 /* FGGravity.m in Sources */ = {isa = PBXBuildFile; fileRef = 84374E38182CB4EF00F74638 /* FGGravity.m */; };
 		84374E3D182CC6D700F74638 /* FGBelt.m in Sources */ = {isa = PBXBuildFile; fileRef = 84374E3C182CC6D700F74638 /* FGBelt.m */; };
+		84374E40182CCA9200F74638 /* FGInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 84374E3F182CCA9200F74638 /* FGInput.m */; };
 		84872BE5182607D4008F86DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84872BE4182607D4008F86DE /* Foundation.framework */; };
 		84872BE7182607D4008F86DE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84872BE6182607D4008F86DE /* CoreGraphics.framework */; };
 		84872BE9182607D4008F86DE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84872BE8182607D4008F86DE /* UIKit.framework */; };
@@ -28,7 +29,7 @@
 		84872C15182607D5008F86DE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84872C13182607D5008F86DE /* InfoPlist.strings */; };
 		84872C17182607D5008F86DE /* factoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C16182607D5008F86DE /* factoryTests.m */; };
 		84872C2218260A3E008F86DE /* FGWidge.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C2118260A3E008F86DE /* FGWidge.m */; };
-		84872C2518260CE0008F86DE /* FGTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C2418260CE0008F86DE /* FGTile.m */; };
+		84A4CD911831FA6700DAD99C /* FGGridOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4CD901831FA6700DAD99C /* FGGridOverlay.m */; };
 		84F9D4DE18277410002728A0 /* FGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9D4DD18277410002728A0 /* FGConstants.m */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,8 @@
 		84374E38182CB4EF00F74638 /* FGGravity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGGravity.m; sourceTree = "<group>"; };
 		84374E3B182CC6D700F74638 /* FGBelt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGBelt.h; sourceTree = "<group>"; };
 		84374E3C182CC6D700F74638 /* FGBelt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGBelt.m; sourceTree = "<group>"; };
+		84374E3E182CCA9200F74638 /* FGInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGInput.h; sourceTree = "<group>"; };
+		84374E3F182CCA9200F74638 /* FGInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGInput.m; sourceTree = "<group>"; };
 		84872BE1182607D4008F86DE /* factory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = factory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84872BE4182607D4008F86DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		84872BE6182607D4008F86DE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -75,8 +78,8 @@
 		84872C16182607D5008F86DE /* factoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = factoryTests.m; sourceTree = "<group>"; };
 		84872C2018260A3E008F86DE /* FGWidge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGWidge.h; sourceTree = "<group>"; };
 		84872C2118260A3E008F86DE /* FGWidge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGWidge.m; sourceTree = "<group>"; };
-		84872C2318260CE0008F86DE /* FGTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGTile.h; sourceTree = "<group>"; };
-		84872C2418260CE0008F86DE /* FGTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGTile.m; sourceTree = "<group>"; };
+		84A4CD8F1831FA6700DAD99C /* FGGridOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGGridOverlay.h; sourceTree = "<group>"; };
+		84A4CD901831FA6700DAD99C /* FGGridOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGGridOverlay.m; sourceTree = "<group>"; };
 		84F9D4DC18277410002728A0 /* FGConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGConstants.h; sourceTree = "<group>"; };
 		84F9D4DD18277410002728A0 /* FGConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +116,8 @@
 				84374E3C182CC6D700F74638 /* FGBelt.m */,
 				84374E37182CB4EF00F74638 /* FGGravity.h */,
 				84374E38182CB4EF00F74638 /* FGGravity.m */,
+				84374E3E182CCA9200F74638 /* FGInput.h */,
+				84374E3F182CCA9200F74638 /* FGInput.m */,
 			);
 			name = Machines;
 			sourceTree = "<group>";
@@ -151,6 +156,7 @@
 		84872BEC182607D4008F86DE /* factory */ = {
 			isa = PBXGroup;
 			children = (
+				84A4CD921831FA6D00DAD99C /* Custom Views */,
 				84872BF8182607D4008F86DE /* Main.storyboard */,
 				84872BF5182607D4008F86DE /* FGAppDelegate.h */,
 				84872BF6182607D4008F86DE /* FGAppDelegate.m */,
@@ -165,8 +171,6 @@
 				84374E3A182CB4FA00F74638 /* Machines */,
 				84872BFE182607D5008F86DE /* FGMyScene.h */,
 				84872BFF182607D5008F86DE /* FGMyScene.m */,
-				84872C2318260CE0008F86DE /* FGTile.h */,
-				84872C2418260CE0008F86DE /* FGTile.m */,
 				84872C2018260A3E008F86DE /* FGWidge.h */,
 				84872C2118260A3E008F86DE /* FGWidge.m */,
 				84872C03182607D5008F86DE /* Images.xcassets */,
@@ -202,6 +206,15 @@
 				84872C13182607D5008F86DE /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		84A4CD921831FA6D00DAD99C /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				84A4CD8F1831FA6700DAD99C /* FGGridOverlay.h */,
+				84A4CD901831FA6700DAD99C /* FGGridOverlay.m */,
+			);
+			name = "Custom Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,11 +320,12 @@
 			files = (
 				84374E33182CA65200F74638 /* FGMachine.m in Sources */,
 				84374E39182CB4EF00F74638 /* FGGravity.m in Sources */,
-				84872C2518260CE0008F86DE /* FGTile.m in Sources */,
 				84872BF3182607D4008F86DE /* main.m in Sources */,
 				84872BF7182607D4008F86DE /* FGAppDelegate.m in Sources */,
+				84374E40182CCA9200F74638 /* FGInput.m in Sources */,
 				84374E3D182CC6D700F74638 /* FGBelt.m in Sources */,
 				84872BFD182607D4008F86DE /* FGViewController.m in Sources */,
+				84A4CD911831FA6700DAD99C /* FGGridOverlay.m in Sources */,
 				84374E36182CA9EF00F74638 /* FGConnector.m in Sources */,
 				84F9D4DE18277410002728A0 /* FGConstants.m in Sources */,
 				84872C00182607D5008F86DE /* FGMyScene.m in Sources */,

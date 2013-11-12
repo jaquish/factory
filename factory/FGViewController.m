@@ -8,8 +8,14 @@
 
 #import "FGViewController.h"
 #import "FGMyScene.h"
+#import "FGGridOverlay.h"
 
 @implementation FGViewController
+
+- (void)viewDidLoad
+{
+    
+}
 
 - (void)viewWillLayoutSubviews
 {
@@ -27,6 +33,9 @@
         
         // Present the scene.
         [skView presentScene:scene];
+        
+        FGGridOverlay *grid = [[FGGridOverlay alloc] initWithFrame:self.view.bounds];
+        [self.view addSubview:grid];
     }
 }
 

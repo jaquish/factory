@@ -10,4 +10,6 @@
 
 @interface FGBelt : FGMachine
 
+@property (nonatomic) FGConnector *input;
+
 @end

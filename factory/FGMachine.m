@@ -27,6 +27,11 @@
     return self;
 }
 
+- (void)render:(CFTimeInterval)_dt
+{
+    ;   // Do something!
+}
+
 - (void)propogate
 {
     ;   // Do something!

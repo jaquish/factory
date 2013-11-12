@@ -1,5 +1,5 @@
 //
-//  FGGravity.h
+//  FGInput.h
 //  factory
 //
 //  Created by admin on 11/7/13.
@@ -8,9 +8,10 @@
 
 #import "FGMachine.h"
 
-@interface FGGravity : FGMachine
+@interface FGInput : FGMachine
 
-@property (nonatomic) FGConnector *input;
-@property (nonatomic) FGConnector *output;
+@property (nonatomic) FGConnector *next;
+
+- (void)generateWidge;
 
 @end
