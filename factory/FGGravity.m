@@ -27,18 +27,10 @@ const float kGravityPointsPerSecond = 300.0;
         self.falling = [NSMutableArray array];
         
         // describe I/O
-        FGConnectionPoint *top = [[FGConnectionPoint alloc] init];
-        top.position = compassPointOfZone(center, self.rootZone);
-        top.name = @"top";
-        top.machine = self;
-        [self.connectionPointInputs addObject:top];
-        
-        FGConnectionPoint *bottom = [[FGConnectionPoint alloc] init];
-        bottom.position = compassPointOfZone(center, self.endZone);
-        bottom.name = @"bottom";
-        bottom.machine = self;
-        [self.connectionPointOutputs addObject:bottom];
+        [self addInput: [FGConnectionPoint pointWithPosition:compassPointOfZone(center, self.rootZone) name:@"top"]];
+        [self addOutput:[FGConnectionPoint pointWithPosition:compassPointOfZone(center, self.endZone)  name:@"bottom"]];
     }
+    
     return self;
 }
 

@@ -37,11 +37,7 @@
         [sprite addChild:inner];
         
         // describe I/O
-        FGConnectionPoint *cp = [[FGConnectionPoint alloc] init];
-        cp.position = compassPointOfZone(center, self.rootZone);
-        cp.name = @"next";
-        cp.machine = self;
-        [self.connectionPointOutputs addObject:cp];
+        [self addOutput:[FGConnectionPoint pointWithPosition:compassPointOfZone(center, self.rootZone) name:@"next"]];
     }
     
     return self;

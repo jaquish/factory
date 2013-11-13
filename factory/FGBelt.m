@@ -34,17 +34,8 @@ float const kHorizontalBeltHeight = 12.0;
         [self addChild:spriteNode];
         
         // describe I/O
-        FGConnectionPoint *input = [[FGConnectionPoint alloc] init];
-        input.position = compassPointOfZone(center, self.rootZone);
-        input.name = @"input";
-        input.machine = self;
-        [self.connectionPointInputs addObject:input];
-        
-        FGConnectionPoint *output = [[FGConnectionPoint alloc] init];
-        output.position = compassPointOfZone(center, zoneInDirectionFromZone(E, self.endZone));
-        output.name = @"output";
-        output.machine = self;
-        [self.connectionPointOutputs addObject:output];
+        [self addInput: [FGConnectionPoint pointWithPosition:compassPointOfZone(center, self.rootZone) name:@"input"]];
+        [self addOutput:[FGConnectionPoint pointWithPosition:compassPointOfZone(center, zoneInDirectionFromZone(E, self.endZone)) name:@"output"]];
     }
     
     return self;

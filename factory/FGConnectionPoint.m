@@ -7,8 +7,27 @@
 //
 
 #import "FGConnectionPoint.h"
+#import "FGConnector.h"
+#import "FGMachine.h"
 
 @implementation FGConnectionPoint
+
++ (instancetype)pointWithPosition:(CGPoint)position name:(NSString*)name
+{
+    return [[FGConnectionPoint alloc] initWithPosition:position name:name];
+}
+
+- (instancetype)initWithPosition:(CGPoint)position name:(NSString*)name
+{
+    if (self = [super init])
+    {
+        self.position = position;
+        self.name = name;
+    }
+    
+    return self;
+}
+
 
 - (void)tryToConnectToPoint:(FGConnectionPoint *)otherPoint
 {

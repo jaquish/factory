@@ -8,6 +8,7 @@
 
 #import "FGMachine.h"
 #import "FGConnector.h"
+#import "FGConnectionPoint.h"
 
 @implementation FGMachine
 
@@ -51,6 +52,20 @@
             NSLog(@"-- %@", cp.name);
         }
     }
+}
+
+- (void)addInput:(FGConnectionPoint*)cp
+{
+    cp.machine = self;
+    NSAssert([cp.name length], @"Connection point should have a name.");
+    [self.connectionPointInputs addObject:cp];
+}
+
+- (void)addOutput:(FGConnectionPoint*)cp
+{
+    cp.machine = self;
+    NSAssert([cp.name length], @"Connection point should have a name.");
+    [self.connectionPointOutputs addObject:cp];
 }
 
 @end

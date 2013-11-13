@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FGConnector.h"
-#include "FGMachine.h"
+
+// fix for circular referencing
+@class FGMachine;
+@class FGConnectionPoint;
+@class FGConnector;
 
 @interface FGConnectionPoint : NSObject
 
@@ -16,6 +19,8 @@
 @property (nonatomic) FGConnector *connector;   // if null, connection point has not been connected
 @property (nonatomic) FGMachine *machine;
 @property (nonatomic) NSString *name;
+
++ (instancetype)pointWithPosition:(CGPoint)position name:(NSString*)name;
 
 - (void)tryToConnectToPoint:(FGConnectionPoint*)point;
 

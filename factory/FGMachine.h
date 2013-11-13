@@ -32,4 +32,8 @@
 // Move connectors from connection points into list
 - (void)organizeConnectors;
 
+// Convenience methods used by subclass
+- (void)addInput:(FGConnectionPoint*)cp;
+- (void)addOutput:(FGConnectionPoint*)cp;
+
 @end

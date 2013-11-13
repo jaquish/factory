@@ -34,7 +34,7 @@
         inner.position = CGPointMake(inset, inset);
         [sprite addChild:inner];
         
-        SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"ZZZ"];
+        SKLabelNode *label = [SKLabelNode node];
         label.position = compassPointOfZone(center, FGZoneMake(0, 0));
         [self addChild:label];
         label.text = @"0";
@@ -42,11 +42,7 @@
         self.count = 0;
         
         // describe I/O
-        FGConnectionPoint *input = [[FGConnectionPoint alloc] init];
-        input.position = compassPointOfZone(center, self.rootZone);
-        input.name = @"input";
-        input.machine = self;
-        [self.connectionPointInputs addObject:input];
+        [self addInput:[FGConnectionPoint pointWithPosition:compassPointOfZone(center, self.rootZone) name:@"input"]];
     }
     
     return self;
