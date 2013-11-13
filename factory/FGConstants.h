@@ -12,12 +12,19 @@
 
 @end
 
+/* iPad Constraints */
+
 extern const float WorldHeight;
 extern const float WorldWidth;
 
-extern const float ZoneSize;
+/* World Constants */
 
+extern const float ZoneSize;
 extern const float WidgeSize;
 
 extern const float ZonesWide;
 extern const float ZonesHigh;
+
+/* Debug Flags */
+
+extern BOOL DEBUG_SHOW_GRID;

@@ -13,6 +13,7 @@
 #import "FGGravity.h"
 #import "FGInput.h"
 #import "FGOutput.h"
+#import "FGTransformer.h"
 
 @interface FGMyScene ()
 {
@@ -59,11 +60,15 @@
         gravity2.name = @"gravity2";
         [self addMachine:gravity2];
         
-        
         // output
         FGOutput *output = [[FGOutput alloc] initWithRootZone:FGZoneMake(9, 0)];
         output.name = @"output";
         [self addMachine:output];
+        
+        // transformer
+        FGTransformer *transformer = [[FGTransformer alloc] initWithRootZone:FGZoneMake(6, 2)];
+        transformer.name = @"transformer";
+        [self addMachine:transformer];
         
         [self makeConnections];
     }

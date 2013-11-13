@@ -24,7 +24,7 @@
 
 - (void)propogate;
 
-- (NSArray*)widges;
+- (NSArray*)dequeueWidges;
 
 @end
 

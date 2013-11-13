@@ -23,8 +23,13 @@ typedef enum { N, NE, E, SE, S, SW, W, NW, center } CompassPoint;
 // return the compass point of the zone in screen points
 CGPoint compassPointOfZone(CompassPoint cp, FGZone z);
 
+// return the center point of a zone
+CGPoint centerOf(FGZone z);
+
 // return the zone in that direction from the zone
 FGZone zoneInDirectionFromZone(CompassPoint cp, FGZone z);
+
+
 
 // zone constructor
 FGZone FGZoneMake(int x, int y);

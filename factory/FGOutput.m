@@ -40,7 +40,7 @@
 
 - (void)render:(CFTimeInterval)_dt
 {
-    for (FGWidge *widge in [self.connectors[@"input"] widges]) {
+    for (FGWidge *widge in [self.connectors[@"input"] dequeueWidges]) {
         [widge removeFromParent];
         self.count++;
     }

@@ -20,3 +20,5 @@ const float WidgeSize = 40.0;   // default 40
 
 const float ZonesWide = WorldWidth / ZoneSize;
 const float ZonesHigh = WorldHeight / ZoneSize;
+
+BOOL DEBUG_SHOW_GRID = YES;

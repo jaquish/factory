@@ -42,7 +42,7 @@
 //    NSLog(@"Propogated %@", self);
 }
 
-- (NSArray*)widges
+- (NSArray*)dequeueWidges
 {
     NSArray *copy = [self.destinationList copy];
     [self.destinationList removeAllObjects];

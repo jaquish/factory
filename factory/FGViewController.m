@@ -34,8 +34,10 @@
         // Present the scene.
         [skView presentScene:scene];
         
-        FGGridOverlay *grid = [[FGGridOverlay alloc] initWithFrame:self.view.bounds];
-        [self.view addSubview:grid];
+        if (DEBUG_SHOW_GRID) {
+            FGGridOverlay *grid = [[FGGridOverlay alloc] initWithFrame:self.view.bounds];
+            [self.view addSubview:grid];
+        }
     }
 }
 

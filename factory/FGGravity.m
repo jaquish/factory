@@ -36,7 +36,7 @@ const float kGravityPointsPerSecond = 300.0;
 
 - (void)render:(CFTimeInterval)_dt
 {
-    [self.falling addObjectsFromArray:[self.connectors[@"top"] widges]];
+    [self.falling addObjectsFromArray:[self.connectors[@"top"] dequeueWidges]];
     
 //    NSLog(@"Falling %d objects", [self.falling count]);
     NSMutableArray *toDelete = [NSMutableArray array];

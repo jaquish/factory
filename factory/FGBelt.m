@@ -34,8 +34,8 @@ float const kHorizontalBeltHeight = 12.0;
         [self addChild:spriteNode];
         
         // describe I/O
-        [self addInput: [FGConnectionPoint pointWithPosition:compassPointOfZone(center, self.rootZone) name:@"input"]];
-        [self addOutput:[FGConnectionPoint pointWithPosition:compassPointOfZone(center, zoneInDirectionFromZone(E, self.endZone)) name:@"output"]];
+        [self addInput: [FGConnectionPoint pointWithPosition:centerOf(self.rootZone) name:@"input"]];
+        [self addOutput:[FGConnectionPoint pointWithPosition:centerOf(zoneInDirectionFromZone(E, self.endZone)) name:@"output"]];
     }
     
     return self;
@@ -43,7 +43,7 @@ float const kHorizontalBeltHeight = 12.0;
 
 - (void)render:(CFTimeInterval)_dt
 {
-    [self.moving addObjectsFromArray:[self.connectors[@"input"] widges]];
+    [self.moving addObjectsFromArray:[self.connectors[@"input"] dequeueWidges]];
     
     NSMutableArray *toDelete = [NSMutableArray array];
     for (FGWidge* widge in self.moving) {
