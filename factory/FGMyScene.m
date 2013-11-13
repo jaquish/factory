@@ -33,6 +33,8 @@
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         
+        self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
+
         // ivar setup
         self.machines = [NSMutableArray array];
         
@@ -57,14 +59,13 @@
         gravity2.name = @"gravity2";
         [self addMachine:gravity2];
         
-        [self makeConnections];
         
         // output
         FGOutput *output = [[FGOutput alloc] initWithRootZone:FGZoneMake(9, 0)];
         output.name = @"output";
         [self addMachine:output];
         
-        self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
+        [self makeConnections];
     }
     return self;
 }

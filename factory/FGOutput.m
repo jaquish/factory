@@ -30,6 +30,7 @@
         label.position = compassPointOfZone(center, FGZoneMake(0, 0));
         [self addChild:label];
         label.text = @"0";
+        self.label = label;
         self.count = 0;
         
         // describe I/O
@@ -45,9 +46,11 @@
 
 - (void)render:(CFTimeInterval)_dt
 {
-    for (FGWidge *widge in self.connectors[@"input"]) {
+    for (FGWidge *widge in [self.connectors[@"input"] widges]) {
+        [widge removeFromParent];
         self.count++;
     }
+    self.label.text = [NSString stringWithFormat:@"%d", self.count];
 }
 
 @end
