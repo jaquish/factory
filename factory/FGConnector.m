@@ -11,8 +11,8 @@
 
 @interface FGConnector ()
 
-@property (nonatomic) NSMutableArray *outList;
-@property (nonatomic) NSMutableArray *inList;
+@property (nonatomic) NSMutableArray *sourceList;
+@property (nonatomic) NSMutableArray *destinationList;
 
 @end
 
@@ -21,8 +21,8 @@
 - (id)init
 {
     if (self = [super init]) {
-        self.outList = [NSMutableArray array];
-        self.inList = [NSMutableArray array];
+        self.sourceList = [NSMutableArray array];
+        self.destinationList = [NSMutableArray array];
     }
     
     return self;
@@ -30,21 +30,23 @@
 
 - (void)insert:(FGWidge *)widge
 {
-    [self.outList insertObject:widge atIndex:0];
+    [self.sourceList insertObject:widge atIndex:0];
 }
 
 - (void)propogate
 {
-    for (FGWidge *widge in [self.outList reverseObjectEnumerator]) {
-        [self.inList insertObject:widge atIndex:0];
+    for (FGWidge *widge in [self.sourceList reverseObjectEnumerator]) {
+        [self.destinationList insertObject:widge atIndex:0];
     }
-    [self.outList removeAllObjects];
-    NSLog(@"Propogated %@", self);
+    [self.sourceList removeAllObjects];
+//    NSLog(@"Propogated %@", self);
 }
 
 - (NSArray*)widges
 {
-    return [self.outList copy];
+    NSArray *copy = [self.destinationList copy];
+    [self.destinationList removeAllObjects];
+    return copy;
 }
 
 - (NSString *)description

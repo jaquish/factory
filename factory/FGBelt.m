@@ -41,7 +41,7 @@ float const kHorizontalBeltHeight = 12.0;
         [self.connectionPointInputs addObject:input];
         
         FGConnectionPoint *output = [[FGConnectionPoint alloc] init];
-        output.position = compassPointOfZone(center, self.endZone);
+        output.position = compassPointOfZone(center, zoneInDirectionFromZone(E, self.endZone));
         output.name = @"output";
         output.machine = self;
         [self.connectionPointOutputs addObject:output];

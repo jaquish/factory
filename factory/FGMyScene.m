@@ -37,75 +37,42 @@
         self.machines = [NSMutableArray array];
         
         // input
-        self.input = [[FGInput alloc] initWithRootZone:FGZoneMake(3, 8)];
-        self.input.name = @"input";
-        [self.machines addObject:self.input];
-        [self addChild:self.input];
+        FGInput *input = [[FGInput alloc] initWithRootZone:FGZoneMake(3, 8)];
+        input.name = @"input";
+        self.input = input; // to tell when a touch occurred
+        [self addMachine:input];
         
         // gravity
         FGGravity *gravity = [[FGGravity alloc] initWithRootZone:FGZoneMake(3, 8) endZone:FGZoneMake(3, 2)];
         gravity.name = @"gravity1";
-        [self.machines addObject:gravity];
-        [self addChild:gravity];
+        [self addMachine:gravity];
         
         // belt
         FGBelt *belt = [[FGBelt alloc] initFromRootZone:FGZoneMake(3, 2) toZone:FGZoneMake(8, 2)];
         belt.name = @"belt";
-        [self.machines addObject:belt];
-        [self addChild:belt];
+        [self addMachine:belt];
         
         // gravity part 2
-        FGGravity *gravity2 = [[FGGravity alloc] initWithRootZone:FGZoneMake(8, 2) endZone:FGZoneMake(8, 0)];
+        FGGravity *gravity2 = [[FGGravity alloc] initWithRootZone:FGZoneMake(9, 2) endZone:FGZoneMake(9, 0)];
         gravity2.name = @"gravity2";
-        [self.machines addObject:gravity2];
-        [self addChild:gravity2];
+        [self addMachine:gravity2];
         
         [self makeConnections];
         
-        /*
-        // connect input to gravity
-        FGConnector *toGrav = [[FGConnector alloc] init];
-        toGrav.position = self.input.position;  // set connection position is important
-        self.input.next = toGrav;
-        gravity1.input = toGrav;
-        toGrav.source = self.input;
-        toGrav.destination = gravity1;
-        [self.connectors addObject:toGrav];
-        
-        // belt
-        FGBelt *belt = [[FGBelt alloc] initFromRootZone:FGZoneMake(3, 3) toZone:FGZoneMake(7, 3)];
-        [self addChild:belt];
-        [self.machines addObject:belt];
-        
-        // connect gravity to belt
-        FGConnector *toBelt = [[FGConnector alloc] init];
-        toBelt.position = CGPointMake(64 * 3.5, 64 * 3 + 12 + 20);    // set belt position is important
-        gravity1.output = toBelt;
-        belt.input = toBelt;
-        [self.connectors addObject:toBelt];
-        
-        // gravity2
-        FGGravity *gravity2 = [[FGGravity alloc] init];
-        [self.machines addObject:gravity2];
-        
-        // connect belt to gravity
-        FGConnector *toGrav2 = [[FGConnector alloc] init];
-        toGrav2.position = compassPointOfZone(center, belt.endZone);
-        belt.output = toGrav2;
-        toGrav2.source = belt;
-        toGrav2.destination = gravity2;
-        gravity2.input = toGrav2;
-        [self.connectors addObject:toGrav2];
-        
         // output
-        FGOutput *output = [[FGOutput alloc] init];
-        output.position = compassPointOfZone(SW, FGZoneMake(8, 0));
-        [self addChild:output];
-         */
+        FGOutput *output = [[FGOutput alloc] initWithRootZone:FGZoneMake(9, 0)];
+        output.name = @"output";
+        [self addMachine:output];
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
     }
     return self;
+}
+
+- (void)addMachine:(FGMachine*)machine
+{
+    [self.machines addObject:machine];
+    [self addChild:machine];
 }
 
 - (void)makeConnections

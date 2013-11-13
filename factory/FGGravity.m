@@ -46,7 +46,7 @@ const float kGravityPointsPerSecond = 300.0;
 {
     [self.falling addObjectsFromArray:[self.connectors[@"top"] widges]];
     
-    NSLog(@"Falling %d objects", [self.falling count]);
+//    NSLog(@"Falling %d objects", [self.falling count]);
     NSMutableArray *toDelete = [NSMutableArray array];
     for (FGWidge *widge in self.falling) {
         [widge changeYBy:-kGravityPointsPerSecond * _dt];
