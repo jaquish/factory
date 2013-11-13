@@ -9,11 +9,23 @@
 #import <Foundation/Foundation.h>
 #import "FGWidge.h"
 #import "FGConnector.h"
+#import "FGConnectionPoint.h"
 
 @interface FGMachine : SKSpriteNode
 
+// The most lower-left zone of the machine.
+@property (nonatomic) FGZone rootZone;
+
+// A list of connection points for possible connectors
+@property (nonatomic) NSMutableArray *connectionPoints;
+
+// A list of connectors
+@property (nonatomic) NSMutableArray *connectors;
+
+// Called every frame
 - (void)render:(CFTimeInterval)_dt;
 
-@property (nonatomic) FGZone rootZone;
+// Move connectors from connection points into list
+- (void)organizeConnectors;
 
 @end

@@ -11,12 +11,14 @@
 
 @class FGMachine;
 
+// Connector is active during gameplay
 @interface FGConnector : NSObject
 
 @property (nonatomic) CGPoint position;
 
-@property (nonatomic) FGMachine *input;
-@property (nonatomic) FGMachine *output;
+// Connectors have a source and a destination
+@property (nonatomic) FGMachine *source;
+@property (nonatomic) FGMachine *destination;
 
 - (void)insert:(FGWidge*)widge;
 
@@ -25,3 +27,5 @@
 - (NSArray*)widges;
 
 @end
+
+

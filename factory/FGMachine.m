@@ -9,18 +9,13 @@
 #import "FGMachine.h"
 #import "FGConnector.h"
 
-@interface FGMachine ()
-
-@property (nonatomic) NSMutableArray *connectors;
-
-@end
-
 @implementation FGMachine
 
 - (id)init
 {
     if (self = [super init])
     {
+        self.connectors = [NSMutableArray array];
         self.anchorPoint = CGPointZero; // position machine from lower left
     }
     
@@ -41,6 +36,15 @@
 {
     _rootZone = rootZone;
     self.position = compassPointOfZone(SW, rootZone);
+}
+
+- (void)organizeConnectors
+{
+    for (FGConnectionPoint *cp in self.connectionPoints) {
+        if (cp.connector) {
+            [self.connectors addObject:cp.connector];
+        }
+    }
 }
 
 @end

@@ -53,8 +53,8 @@
         toGrav.position = self.input.position;  // set connection position is important
         self.input.next = toGrav;
         gravity1.input = toGrav;
-        toGrav.input = self.input;
-        toGrav.output = gravity1;
+        toGrav.source = self.input;
+        toGrav.destination = gravity1;
         [self.connectors addObject:toGrav];
         
         // belt
@@ -77,8 +77,8 @@
         FGConnector *toGrav2 = [[FGConnector alloc] init];
         toGrav2.position = compassPointOfZone(center, belt.endZone);
         belt.output = toGrav2;
-        toGrav2.input = belt;
-        toGrav2.output = gravity2;
+        toGrav2.source = belt;
+        toGrav2.destination = gravity2;
         gravity2.input = toGrav2;
         [self.connectors addObject:toGrav2];
         

@@ -32,6 +32,7 @@
 		84A4CD911831FA6700DAD99C /* FGGridOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4CD901831FA6700DAD99C /* FGGridOverlay.m */; };
 		84A4CD95183203DF00DAD99C /* FGUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A4CD94183203DF00DAD99C /* FGUtil.m */; };
 		84E5E2B018320B5C00524D0F /* FGOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E5E2AF18320B5C00524D0F /* FGOutput.m */; };
+		84E5E2B31833543700524D0F /* FGConnectionPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E5E2B21833543700524D0F /* FGConnectionPoint.m */; };
 		84F9D4DE18277410002728A0 /* FGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9D4DD18277410002728A0 /* FGConstants.m */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,8 @@
 		84A4CD94183203DF00DAD99C /* FGUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGUtil.m; sourceTree = "<group>"; };
 		84E5E2AE18320B5C00524D0F /* FGOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGOutput.h; sourceTree = "<group>"; };
 		84E5E2AF18320B5C00524D0F /* FGOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGOutput.m; sourceTree = "<group>"; };
+		84E5E2B11833543700524D0F /* FGConnectionPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGConnectionPoint.h; sourceTree = "<group>"; };
+		84E5E2B21833543700524D0F /* FGConnectionPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGConnectionPoint.m; sourceTree = "<group>"; };
 		84F9D4DC18277410002728A0 /* FGConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGConstants.h; sourceTree = "<group>"; };
 		84F9D4DD18277410002728A0 /* FGConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +177,8 @@
 				84872BFC182607D4008F86DE /* FGViewController.m */,
 				84374E34182CA9EF00F74638 /* FGConnector.h */,
 				84374E35182CA9EF00F74638 /* FGConnector.m */,
+				84E5E2B11833543700524D0F /* FGConnectionPoint.h */,
+				84E5E2B21833543700524D0F /* FGConnectionPoint.m */,
 				84374E31182CA65200F74638 /* FGMachine.h */,
 				84374E32182CA65200F74638 /* FGMachine.m */,
 				84374E3A182CB4FA00F74638 /* Machines */,
@@ -329,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84374E33182CA65200F74638 /* FGMachine.m in Sources */,
+				84E5E2B31833543700524D0F /* FGConnectionPoint.m in Sources */,
 				84374E39182CB4EF00F74638 /* FGGravity.m in Sources */,
 				84872BF3182607D4008F86DE /* main.m in Sources */,
 				84872BF7182607D4008F86DE /* FGAppDelegate.m in Sources */,
