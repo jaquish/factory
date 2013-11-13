@@ -30,11 +30,13 @@ const float kGravityPointsPerSecond = 300.0;
         FGConnectionPoint *top = [[FGConnectionPoint alloc] init];
         top.position = compassPointOfZone(center, self.rootZone);
         top.name = @"top";
+        top.machine = self;
         [self.connectionPointInputs addObject:top];
         
         FGConnectionPoint *bottom = [[FGConnectionPoint alloc] init];
         bottom.position = compassPointOfZone(center, self.endZone);
         bottom.name = @"bottom";
+        bottom.machine = self;
         [self.connectionPointOutputs addObject:bottom];
     }
     return self;
@@ -44,6 +46,8 @@ const float kGravityPointsPerSecond = 300.0;
 {
     [self.falling addObjectsFromArray:[self.connectors[@"top"] widges]];
     
+    NSLog(@"Falling %d objects", [self.falling count]);
+    NSMutableArray *toDelete = [NSMutableArray array];
     for (FGWidge *widge in self.falling) {
         [widge changeYBy:-kGravityPointsPerSecond * _dt];
         
@@ -51,11 +55,12 @@ const float kGravityPointsPerSecond = 300.0;
             float bottomY = [self.connectors[@"bottom"] position].y;
             if (widge.position.y < bottomY) {
                 [widge changeYTo:bottomY];
-                [self.falling removeObject:widge];
+                [toDelete addObject:widge];
                 [self.connectors[@"bottom"] insert:widge];
             }
         }
     }
+    [self.falling removeObjectsInArray:toDelete];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "FGConnector.h"
+#include "FGMachine.h"
 
 @interface FGConnectionPoint : NSObject
 

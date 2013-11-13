@@ -37,11 +37,13 @@ float const kHorizontalBeltHeight = 12.0;
         FGConnectionPoint *input = [[FGConnectionPoint alloc] init];
         input.position = compassPointOfZone(center, self.rootZone);
         input.name = @"input";
+        input.machine = self;
         [self.connectionPointInputs addObject:input];
         
         FGConnectionPoint *output = [[FGConnectionPoint alloc] init];
         output.position = compassPointOfZone(center, self.endZone);
         output.name = @"output";
+        output.machine = self;
         [self.connectionPointOutputs addObject:output];
     }
     
@@ -52,6 +54,7 @@ float const kHorizontalBeltHeight = 12.0;
 {
     [self.moving addObjectsFromArray:[self.connectors[@"input"] widges]];
     
+    NSMutableArray *toDelete = [NSMutableArray array];
     for (FGWidge* widge in self.moving) {
         [widge changeXBy:kBeltSpeedPointsPerSecond * _dt];
         
@@ -59,9 +62,10 @@ float const kHorizontalBeltHeight = 12.0;
         if (widge.position.x > fallingPointX) {
             [widge changeXTo:fallingPointX];
             [self.connectors[@"output"] insert:widge];
-            [self.moving removeObject:widge];
+            [toDelete addObject:widge];
         }
     }
+    [self.moving removeObjectsInArray:toDelete];
 }
 
 @end

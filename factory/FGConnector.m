@@ -7,6 +7,7 @@
 //
 
 #import "FGConnector.h"
+#import "FGMachine.h"
 
 @interface FGConnector ()
 
@@ -38,11 +39,17 @@
         [self.inList insertObject:widge atIndex:0];
     }
     [self.outList removeAllObjects];
+    NSLog(@"Propogated %@", self);
 }
 
 - (NSArray*)widges
 {
     return [self.outList copy];
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"Connector from %@ to %@", self.source.name, self.destination.name];
 }
 
 @end

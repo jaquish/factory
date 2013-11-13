@@ -44,7 +44,7 @@
 
 - (void)organizeConnectors
 {
-    NSLog(@"Connectors for %@", self);
+    NSLog(@"Connectors for %@", self.name);
     for (FGConnectionPoint *cp in [self.connectionPointInputs arrayByAddingObjectsFromArray:self.connectionPointOutputs]) {
         if (cp.connector) {
             self.connectors[cp.name] = cp.connector;    // key on named connection point

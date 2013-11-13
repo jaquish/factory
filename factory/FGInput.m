@@ -32,6 +32,7 @@
         FGConnectionPoint *cp = [[FGConnectionPoint alloc] init];
         cp.position = compassPointOfZone(center, self.rootZone);
         cp.name = @"next";
+        cp.machine = self;
         [self.connectionPointOutputs addObject:cp];
     }
     

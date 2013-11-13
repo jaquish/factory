@@ -28,7 +28,7 @@
         self.connector = connector;
         otherPoint.connector = connector;
         
-        NSLog(@"Connected point \"%@\" to \"%@\"", self.name, otherPoint.name);
+        NSLog(@"Connected %@ \"%@\" to %@ \"%@\"", self.machine.name, self.name, otherPoint.machine.name, otherPoint.name);
     }
 }
 
