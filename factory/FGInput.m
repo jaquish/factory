@@ -24,17 +24,7 @@
         self.generated = [NSMutableArray array];
         
         // draw
-        UIColor *borderColor = [UIColor grayColor];
-        UIColor *innerColor = [UIColor greenColor];
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithColor:borderColor size:CGSizeMake(ZoneSize, ZoneSize)];
-        sprite.anchorPoint = CGPointZero;
-        [self addChild:sprite];
-        
-        int inset = 5;
-        SKSpriteNode *inner = [SKSpriteNode spriteNodeWithColor:innerColor size:CGSizeMake(ZoneSize - 2*inset, ZoneSize - 2*inset)];
-        inner.anchorPoint = CGPointZero;
-        inner.position = CGPointMake(inset, inset);
-        [sprite addChild:inner];
+        [self addChild:[FGUtil zoneBoxWithBorder:[UIColor grayColor] innerColor:[UIColor greenColor]]];
         
         // describe I/O
         [self addOutput:[FGConnectionPoint pointWithPosition:compassPointOfZone(center, self.rootZone) name:@"next"]];

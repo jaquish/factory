@@ -22,22 +22,12 @@
     if (self = [super initWithRootZone:zone])
     {
         // draw
-        UIColor *borderColor = [UIColor grayColor];
-        UIColor *innerColor = [UIColor blueColor];
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithColor:borderColor size:CGSizeMake(ZoneSize, ZoneSize)];
-        sprite.anchorPoint = CGPointZero;
-        [self addChild:sprite];
-        
-        int inset = 5;
-        SKSpriteNode *inner = [SKSpriteNode spriteNodeWithColor:innerColor size:CGSizeMake(ZoneSize - 2*inset, ZoneSize - 2*inset)];
-        inner.anchorPoint = CGPointZero;
-        inner.position = CGPointMake(inset, inset);
-        [sprite addChild:inner];
+        [self addChild:[FGUtil zoneBoxWithBorder:[UIColor grayColor] innerColor:[UIColor blueColor]]];
         
         SKLabelNode *label = [SKLabelNode node];
         label.position = compassPointOfZone(center, FGZoneMake(0, 0));
         [self addChild:label];
-        label.text = @"0";
+        
         self.label = label;
         self.count = 0;
         

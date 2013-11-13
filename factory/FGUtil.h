@@ -11,6 +11,9 @@
 
 @interface FGUtil : NSObject
 
++ (SKSpriteNode*)zoneBoxWithColor:(UIColor*)color;
++ (SKSpriteNode*)zoneBoxWithBorder:(UIColor*)border innerColor:(UIColor*)inner;
+
 @end
 
 typedef CGPoint FGZone;

@@ -8,7 +8,29 @@
 
 #import "FGUtil.h"
 
+const static float kBorderInset = 5.0;
+
 @implementation FGUtil
+
++ (SKSpriteNode *)zoneBoxWithColor:(UIColor *)color
+{
+    SKSpriteNode *box = [SKSpriteNode spriteNodeWithColor:color size:CGSizeMake(ZoneSize, ZoneSize)];
+    box.anchorPoint = CGPointZero;
+    return box;
+}
+
++ (SKSpriteNode *)zoneBoxWithBorder:(UIColor *)borderColor innerColor:(UIColor *)innerColor
+{
+    SKSpriteNode *box = [SKSpriteNode spriteNodeWithColor:borderColor size:CGSizeMake(ZoneSize, ZoneSize)];
+    box.anchorPoint = CGPointZero;
+    
+    SKSpriteNode *inner = [SKSpriteNode spriteNodeWithColor:innerColor size:CGSizeMake(ZoneSize - 2*kBorderInset, ZoneSize - 2*kBorderInset)];
+    inner.anchorPoint = CGPointZero;
+    inner.position = CGPointMake(kBorderInset, kBorderInset);
+    [box addChild:inner];
+    
+    return box;
+}
 
 @end
 
