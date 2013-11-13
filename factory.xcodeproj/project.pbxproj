@@ -175,15 +175,11 @@
 				84872BF6182607D4008F86DE /* FGAppDelegate.m */,
 				84872BFB182607D4008F86DE /* FGViewController.h */,
 				84872BFC182607D4008F86DE /* FGViewController.m */,
-				84374E34182CA9EF00F74638 /* FGConnector.h */,
-				84374E35182CA9EF00F74638 /* FGConnector.m */,
-				84E5E2B11833543700524D0F /* FGConnectionPoint.h */,
-				84E5E2B21833543700524D0F /* FGConnectionPoint.m */,
+				DD17B2F218340D650011AC7C /* Connections */,
 				84374E3A182CB4FA00F74638 /* Machines */,
+				DD17B2F318340D7E0011AC7C /* Widges */,
 				84872BFE182607D5008F86DE /* FGMyScene.h */,
 				84872BFF182607D5008F86DE /* FGMyScene.m */,
-				84872C2018260A3E008F86DE /* FGWidge.h */,
-				84872C2118260A3E008F86DE /* FGWidge.m */,
 				84872C03182607D5008F86DE /* Images.xcassets */,
 				84872BED182607D4008F86DE /* Supporting Files */,
 				84F9D4DC18277410002728A0 /* FGConstants.h */,
@@ -230,6 +226,26 @@
 				84A4CD901831FA6700DAD99C /* FGGridOverlay.m */,
 			);
 			name = "Custom Views";
+			sourceTree = "<group>";
+		};
+		DD17B2F218340D650011AC7C /* Connections */ = {
+			isa = PBXGroup;
+			children = (
+				84374E34182CA9EF00F74638 /* FGConnector.h */,
+				84374E35182CA9EF00F74638 /* FGConnector.m */,
+				84E5E2B11833543700524D0F /* FGConnectionPoint.h */,
+				84E5E2B21833543700524D0F /* FGConnectionPoint.m */,
+			);
+			name = Connections;
+			sourceTree = "<group>";
+		};
+		DD17B2F318340D7E0011AC7C /* Widges */ = {
+			isa = PBXGroup;
+			children = (
+				84872C2018260A3E008F86DE /* FGWidge.h */,
+				84872C2118260A3E008F86DE /* FGWidge.m */,
+			);
+			name = Widges;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
