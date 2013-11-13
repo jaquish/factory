@@ -10,9 +10,6 @@
 
 @interface FGBelt : FGMachine
 
-@property (nonatomic) FGConnector *input;
-@property (nonatomic) FGConnector *output;
-
 @property FGZone endZone;
 
 - (id)initFromRootZone:(FGZone)fromZone toZone:(FGZone)toZone;

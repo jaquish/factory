@@ -42,8 +42,19 @@
         [self addChild:self.input];
         
         // gravity
-        FGGravity *gravity = [[FGGravity alloc] initWithRootZone:FGZoneMake(3, 8) endZone:FGZoneMake(3, 0)];
+        FGGravity *gravity = [[FGGravity alloc] initWithRootZone:FGZoneMake(3, 8) endZone:FGZoneMake(3, 2)];
         [self.machines addObject:gravity];
+        [self addChild:gravity];
+        
+        // belt
+        FGBelt *belt = [[FGBelt alloc] initFromRootZone:FGZoneMake(3, 2) toZone:FGZoneMake(8, 2)];
+        [self.machines addObject:belt];
+        [self addChild:belt];
+        
+        // gravity part 2
+        FGGravity *gravity2 = [[FGGravity alloc] initWithRootZone:FGZoneMake(8, 2) endZone:FGZoneMake(8, 0)];
+        [self.machines addObject:gravity2];
+        [self addChild:gravity2];
         
         [self makeConnections];
         
