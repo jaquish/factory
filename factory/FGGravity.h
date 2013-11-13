@@ -10,7 +10,6 @@
 
 @interface FGGravity : FGMachine
 
-@property (nonatomic) FGConnector *input;
-@property (nonatomic) FGConnector *output;
+- (id)initWithRootZone:(FGZone)zone endZone:(FGZone)end;
 
 @end

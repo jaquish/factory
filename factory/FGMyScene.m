@@ -22,7 +22,6 @@
 
 /* Lists */
 @property (nonatomic) NSMutableArray *machines;
-@property (nonatomic) NSMutableArray *connectors;
 
 /* Temporary direct links */
 @property (nonatomic) FGInput *input;
@@ -36,18 +35,19 @@
         
         // ivar setup
         self.machines = [NSMutableArray array];
-        self.connectors = [NSMutableArray array];
         
         // input
-        self.input = [[FGInput alloc] init];
-        self.input.rootZone = FGZoneMake(3, 8);
+        self.input = [[FGInput alloc] initWithRootZone:FGZoneMake(3, 8)];
         [self.machines addObject:self.input];
         [self addChild:self.input];
         
         // gravity
-        FGGravity *gravity1 = [[FGGravity alloc] init];
-        [self.machines addObject:gravity1];
+        FGGravity *gravity = [[FGGravity alloc] initWithRootZone:FGZoneMake(3, 8) endZone:FGZoneMake(3, 0)];
+        [self.machines addObject:gravity];
         
+        [self makeConnections];
+        
+        /*
         // connect input to gravity
         FGConnector *toGrav = [[FGConnector alloc] init];
         toGrav.position = self.input.position;  // set connection position is important
@@ -86,13 +86,31 @@
         FGOutput *output = [[FGOutput alloc] init];
         output.position = compassPointOfZone(SW, FGZoneMake(8, 0));
         [self addChild:output];
+         */
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
     }
     return self;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)makeConnections
+{
+    for (FGMachine *machines1 in self.machines) {
+        for (FGConnectionPoint *output in machines1.connectionPointOutputs) {
+            for (FGMachine *machines2 in self.machines) {
+                for (FGConnectionPoint *input in machines2.connectionPointInputs) {
+                    [output tryToConnectToPoint:input];
+                }
+            }
+        }
+    }
+    
+    for (FGMachine *machine in self.machines) {
+        [machine organizeConnectors];
+    }
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     [self.input generateWidge];
 }
@@ -107,14 +125,15 @@
     }
     
     // propogate
-    for (FGConnector* connector in self.connectors) {
-        [connector propogate];
+    for (FGMachine *machine in self.machines) {
+        for (FGConnector *connector in [machine.connectors allValues]) {    // efficiency - only do outputs?
+            [connector propogate];
+        }
     }
     
     /*** TODO - insert phase 2 processing here ***/
     
     _prevTime = currentTime;
 }
-
 
 @end

@@ -10,8 +10,6 @@
 
 @interface FGInput : FGMachine
 
-@property (nonatomic) FGConnector *next;
-
 - (void)generateWidge;
 
 @end

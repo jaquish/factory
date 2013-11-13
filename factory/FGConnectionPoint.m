@@ -14,13 +14,21 @@
 {
     if (self.connector || otherPoint.connector) {
         return; // one end-point was already connected
-    } else {
+    }
+    
+    if (self.position.x == otherPoint.position.x &&
+        self.position.y == otherPoint.position.y    ) {
         // create new connector and set
         FGConnector *connector = [[FGConnector alloc] init];
         connector.position = self.position;
         connector.source = self.machine;
         connector.destination = otherPoint.machine;
+        
+        // point both connection points to single connector
         self.connector = connector;
+        otherPoint.connector = connector;
+        
+        NSLog(@"Connected point \"%@\" to \"%@\"", self.name, otherPoint.name);
     }
 }
 

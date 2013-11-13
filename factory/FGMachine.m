@@ -11,12 +11,16 @@
 
 @implementation FGMachine
 
-- (id)init
+- (id)initWithRootZone:(FGZone)zone
 {
     if (self = [super init])
     {
-        self.connectors = [NSMutableArray array];
+        self.connectionPointInputs = [NSMutableArray array];
+        self.connectionPointOutputs = [NSMutableArray array];
+        self.connectors = [NSMutableDictionary dictionary];
         self.anchorPoint = CGPointZero; // position machine from lower left
+        
+        self.rootZone = zone;
     }
     
     return self;
@@ -40,9 +44,11 @@
 
 - (void)organizeConnectors
 {
-    for (FGConnectionPoint *cp in self.connectionPoints) {
+    NSLog(@"Connectors for %@", self);
+    for (FGConnectionPoint *cp in [self.connectionPointInputs arrayByAddingObjectsFromArray:self.connectionPointOutputs]) {
         if (cp.connector) {
-            [self.connectors addObject:cp.connector];
+            self.connectors[cp.name] = cp.connector;    // key on named connection point
+            NSLog(@"-- %@", cp.name);
         }
     }
 }

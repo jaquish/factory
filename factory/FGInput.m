@@ -16,15 +16,23 @@
 
 @implementation FGInput
 
-- (id)init
+- (id)initWithRootZone:(FGZone)zone
 {
-    if (self = [super init])
+    if (self = [super initWithRootZone:zone])
     {
+        // ivars
+        self.generated = [NSMutableArray array];
+        
+        // draw
         SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithColor:[UIColor whiteColor] size:CGSizeMake(ZoneSize, ZoneSize)];
         sprite.anchorPoint = CGPointZero;
         [self addChild:sprite];
         
-        self.generated = [NSMutableArray array];
+        // describe I/O
+        FGConnectionPoint *cp = [[FGConnectionPoint alloc] init];
+        cp.position = compassPointOfZone(center, self.rootZone);
+        cp.name = @"next";
+        [self.connectionPointOutputs addObject:cp];
     }
     
     return self;
@@ -42,7 +50,7 @@
 - (void)render:(CFTimeInterval)_dt
 {
     for (FGWidge* widge in self.generated) {
-        [self.next insert:widge];
+        [self.connectors[@"next"] insert:widge];
     }
     [self.generated removeAllObjects];
 }

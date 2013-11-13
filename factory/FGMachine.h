@@ -16,11 +16,15 @@
 // The most lower-left zone of the machine.
 @property (nonatomic) FGZone rootZone;
 
-// A list of connection points for possible connectors
-@property (nonatomic) NSMutableArray *connectionPoints;
+// Lists of connection points for possible connectors
+@property (nonatomic) NSMutableArray *connectionPointInputs;
+@property (nonatomic) NSMutableArray *connectionPointOutputs;
 
 // A list of connectors
-@property (nonatomic) NSMutableArray *connectors;
+@property (nonatomic) NSMutableDictionary *connectors;
+
+// Root zone necessary to calculate connection point positions
+- (id)initWithRootZone:(FGZone)zone;
 
 // Called every frame
 - (void)render:(CFTimeInterval)_dt;
