@@ -22,9 +22,17 @@
     if (self = [super initWithRootZone:zone])
     {
         // draw
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithColor:[UIColor colorWithRed:0.1 green:0.7 blue:0.2 alpha:1.0] size:CGSizeMake(ZoneSize, ZoneSize)];
+        UIColor *borderColor = [UIColor grayColor];
+        UIColor *innerColor = [UIColor blueColor];
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithColor:borderColor size:CGSizeMake(ZoneSize, ZoneSize)];
         sprite.anchorPoint = CGPointZero;
         [self addChild:sprite];
+        
+        int inset = 5;
+        SKSpriteNode *inner = [SKSpriteNode spriteNodeWithColor:innerColor size:CGSizeMake(ZoneSize - 2*inset, ZoneSize - 2*inset)];
+        inner.anchorPoint = CGPointZero;
+        inner.position = CGPointMake(inset, inset);
+        [sprite addChild:inner];
         
         SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"ZZZ"];
         label.position = compassPointOfZone(center, FGZoneMake(0, 0));
