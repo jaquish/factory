@@ -34,7 +34,11 @@ float const kHorizontalBeltHeight = 12.0;
         [self addChild:spriteNode];
         
         // describe I/O
-        [self addInput: [FGConnectionPoint pointWithPosition:centerOf(self.rootZone) name:@"input"]];
+        for (int i = self.rootZone.x; i <= self.endZone.x; i++) {
+            [self addInput: [FGConnectionPoint pointWithPosition:centerOf(FGZoneMake(i, self.rootZone.y)) name:[NSString stringWithFormat:@"input-%d", i]]];
+            [self addInput: [FGConnectionPoint pointWithPosition:centerOf(FGZoneMake(i, self.rootZone.y)) name:[NSString stringWithFormat:@"output-%d", i]]];
+        }
+        
         [self addOutput:[FGConnectionPoint pointWithPosition:centerOf(zoneInDirectionFromZone(E, self.endZone)) name:@"output"]];
     }
     
@@ -43,6 +47,15 @@ float const kHorizontalBeltHeight = 12.0;
 
 - (void)render:(CFTimeInterval)_dt
 {
+    for (FGConnector *connector in [self inputs]) {
+        NSArray *widges = [connector dequeueWidges];
+        for (FGWidge *widge in widges) {
+            [widge changeXBy:kBeltSpeedPointsPerSecond * _dt];
+        }
+        [self.moving addObjectsFromArray:widges];
+    }
+    
+    /*
     [self.moving addObjectsFromArray:[self.connectors[@"input"] dequeueWidges]];
     
     NSMutableArray *toDelete = [NSMutableArray array];
@@ -57,6 +70,7 @@ float const kHorizontalBeltHeight = 12.0;
         }
     }
     [self.moving removeObjectsInArray:toDelete];
+     */
 }
 
 @end

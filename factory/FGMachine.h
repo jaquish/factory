@@ -36,4 +36,7 @@
 - (void)addInput:(FGConnectionPoint*)cp;
 - (void)addOutput:(FGConnectionPoint*)cp;
 
+- (NSArray*)inputs;
+- (NSArray*)outputs;
+
 @end

@@ -68,4 +68,19 @@
     [self.connectionPointOutputs addObject:cp];
 }
 
+- (FGConnector*)connectorWithName:(NSString*)name
+{
+    return self.connectors[name];
+}
+
+- (NSArray*)inputs
+{
+    return [[self.connectors allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"destination == self"]];
+}
+
+- (NSArray*)outputs
+{
+    return [[self.connectors allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"source == self"]];
+}
+
 @end

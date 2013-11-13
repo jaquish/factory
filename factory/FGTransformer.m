@@ -30,6 +30,7 @@
     NSArray* widges = [self.connectors[@"input"] dequeueWidges];
     
     for (FGWidge *widge in widges) {
+        [widge removeFromParent];
         FGWidge* widge2 = [FGWidge yellowWidge];
         widge2.position = widge.position;
         [self.scene addChild:widge2];

@@ -35,6 +35,10 @@
         return; // one end-point was already connected
     }
     
+    if (self.machine == otherPoint.machine) {
+        return; // don't connect a machine to itself
+    }
+    
     if (self.position.x == otherPoint.position.x &&
         self.position.y == otherPoint.position.y    ) {
         // create new connector and set
