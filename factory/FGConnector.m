@@ -30,6 +30,7 @@
 
 - (void)insert:(FGWidge *)widge
 {
+    NSAssert(CGPointEqualToPoint(widge.position, self.position), @"Widget position was not set correctly before inserting into output connector!");
     [self.sourceList insertObject:widge atIndex:0];
 }
 

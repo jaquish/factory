@@ -10,7 +10,9 @@
 
 const float kBeltSpeedPointsPerSecond = 100.0;
 
-float const kHorizontalBeltHeight = 12.0;
+const float kHorizontalBeltHeight = 12.0;
+
+const float kFallingPointX;
 
 @interface FGBelt ()
 
@@ -47,36 +49,30 @@ float const kHorizontalBeltHeight = 12.0;
 
 - (void)update:(CFTimeInterval)_dt
 {
-    // iterate over subtiles
-    for (int i = self.originZone.x; i <= self.endZone.x; i++) {
-        <#statements#>
-    }
+    // TODO - save leftover deltaTime to update
+
+    float deltaX = kBeltSpeedPointsPerSecond * _dt;
     
-    // widges already in motion
+    // Fetch fresh widgets
+    for (FGConnector* connector in self.inputs) {
+        [self.moving addObjectsFromArray:[connector dequeueWidges]];
+    }
+
+    // Move widges, check for collision with output
     NSMutableArray *toDelete = [NSMutableArray array];
     for (FGWidge* widge in self.moving) {
-        
-        float fallingPointX = compassPointOfZone(center, zoneInDirectionFromZone(E, self.endZone)).x;
-        float deltaX = kBeltSpeedPointsPerSecond * _dt;
-        
-        if (widge.position.x + deltaX > fallingPointX) {
-            [widge changeXTo:fallingPointX];
-            [self.connectors[@"output"] insert:widge];
-            [toDelete addObject:widge];
-        } else {
-            [widge changeXBy:kBeltSpeedPointsPerSecond * _dt];
+        CGPoint oldPosition = widge.position;
+        [widge changeXBy:deltaX];
+        for (FGConnector *connector in [self outputs]) {
+            // check if widge passed over connection point
+            if (oldPosition.x < connector.position.x && widge.position.x >= connector.position.x) {
+                [widge changeXTo:connector.position.x];
+                [connector insert:widge];
+                [toDelete addObject:widge];
+            }
         }
     }
     [self.moving removeObjectsInArray:toDelete];
-    
-    // new widges
-    for (FGConnector *connector in [self inputs]) {
-        NSArray *widges = [connector dequeueWidges];
-        for (FGWidge *widge in widges) {
-            [widge changeXBy:kBeltSpeedPointsPerSecond * _dt];
-        }
-        [self.moving addObjectsFromArray:widges];
-    }
 }
 
 @end
