@@ -75,12 +75,26 @@
 
 - (NSArray*)inputs
 {
-    return [[self.connectors allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"destination == self"]];
+    NSMutableArray *inputs = [NSMutableArray array];
+    for (FGConnector *connector in [self.connectors allValues]) {
+        if (connector.destination == self) {
+            [inputs addObject:connector];
+        }
+    }
+    return inputs;
+//    return [[self.connectors allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"destination == self"]];
 }
 
 - (NSArray*)outputs
 {
-    return [[self.connectors allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"source == self"]];
+    NSMutableArray *outputs = [NSMutableArray array];
+    for (FGConnector *connector in [self.connectors allValues]) {
+        if (connector.source == self) {
+            [outputs addObject:connector];
+        }
+    }
+    return outputs;
+//    return [[self.connectors allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"source == self"]];
 }
 
 @end

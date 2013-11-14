@@ -35,8 +35,8 @@ float const kHorizontalBeltHeight = 12.0;
         
         // describe I/O
         for (int i = self.rootZone.x; i <= self.endZone.x; i++) {
-            [self addInput: [FGConnectionPoint pointWithPosition:centerOf(FGZoneMake(i, self.rootZone.y)) name:[NSString stringWithFormat:@"input-%d", i]]];
-            [self addInput: [FGConnectionPoint pointWithPosition:centerOf(FGZoneMake(i, self.rootZone.y)) name:[NSString stringWithFormat:@"output-%d", i]]];
+            [self addInput:  [FGConnectionPoint pointWithPosition:centerOf(FGZoneMake(i, self.rootZone.y)) name:[NSString stringWithFormat:@"input-%d", i]]];
+            [self addOutput: [FGConnectionPoint pointWithPosition:centerOf(FGZoneMake(i, self.rootZone.y)) name:[NSString stringWithFormat:@"output-%d", i]]];
         }
         
         [self addOutput:[FGConnectionPoint pointWithPosition:centerOf(zoneInDirectionFromZone(E, self.endZone)) name:@"output"]];
@@ -47,6 +47,24 @@ float const kHorizontalBeltHeight = 12.0;
 
 - (void)render:(CFTimeInterval)_dt
 {
+    // widges already in motion
+    NSMutableArray *toDelete = [NSMutableArray array];
+    for (FGWidge* widge in self.moving) {
+        
+        float fallingPointX = compassPointOfZone(center, zoneInDirectionFromZone(E, self.endZone)).x;
+        float deltaX = kBeltSpeedPointsPerSecond * _dt;
+        
+        if (widge.position.x + deltaX > fallingPointX) {
+            [widge changeXTo:fallingPointX];
+            [self.connectors[@"output"] insert:widge];
+            [toDelete addObject:widge];
+        } else {
+            [widge changeXBy:kBeltSpeedPointsPerSecond * _dt];
+        }
+    }
+    [self.moving removeObjectsInArray:toDelete];
+    
+    // new widges
     for (FGConnector *connector in [self inputs]) {
         NSArray *widges = [connector dequeueWidges];
         for (FGWidge *widge in widges) {
@@ -54,23 +72,6 @@ float const kHorizontalBeltHeight = 12.0;
         }
         [self.moving addObjectsFromArray:widges];
     }
-    
-    /*
-    [self.moving addObjectsFromArray:[self.connectors[@"input"] dequeueWidges]];
-    
-    NSMutableArray *toDelete = [NSMutableArray array];
-    for (FGWidge* widge in self.moving) {
-        [widge changeXBy:kBeltSpeedPointsPerSecond * _dt];
-        
-        int fallingPointX = compassPointOfZone(center, zoneInDirectionFromZone(E, self.endZone)).x;
-        if (widge.position.x > fallingPointX) {
-            [widge changeXTo:fallingPointX];
-            [self.connectors[@"output"] insert:widge];
-            [toDelete addObject:widge];
-        }
-    }
-    [self.moving removeObjectsInArray:toDelete];
-     */
 }
 
 @end
