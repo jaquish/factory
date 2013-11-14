@@ -26,6 +26,8 @@ CGPoint compassPointOfZone(CompassPoint cp, FGZone z);
 // return the center point of a zone
 CGPoint centerOf(FGZone z);
 
+extern const FGZone FGZoneZero;
+
 // return the zone in that direction from the zone
 FGZone zoneInDirectionFromZone(CompassPoint cp, FGZone z);
 

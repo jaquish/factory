@@ -28,7 +28,7 @@ const float kGravityPointsPerSecond = 300.0;
         
         // describe I/O
         [self addInput: [FGConnectionPoint pointWithPosition:centerOf(self.originZone) name:@"top"]];
-        [self addOutput:[FGConnectionPoint pointWithPosition:centerOf(self.endZone)  name:@"bottom"]];
+        [self addOutput:[FGConnectionPoint pointWithPosition:centerOf(self.endZone)    name:@"bottom"]];
     }
     
     return self;

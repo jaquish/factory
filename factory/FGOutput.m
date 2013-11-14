@@ -25,7 +25,7 @@
         [self addChild:[FGUtil zoneBoxWithBorder:[UIColor grayColor] innerColor:[UIColor blueColor]]];
         
         SKLabelNode *label = [SKLabelNode node];
-        label.position = compassPointOfZone(center, FGZoneMake(0, 0));
+        label.position = centerOf(FGZoneMake(0, 0));
         [self addChild:label];
         
         self.label = label;

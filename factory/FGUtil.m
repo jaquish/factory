@@ -54,6 +54,8 @@ CGPoint centerOf(FGZone z)
     return compassPointOfZone(center, z);
 }
 
+const FGZone FGZoneZero = { .x = 0.0, .y = 0.0 };
+
 FGZone zoneInDirectionFromZone(CompassPoint cp, FGZone z)
 {
     switch (cp) {
