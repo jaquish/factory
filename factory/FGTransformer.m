@@ -25,7 +25,7 @@
     return self;
 }
 
-- (void)render:(CFTimeInterval)_dt
+- (void)update:(CFTimeInterval)_dt
 {
     NSArray* widges = [self.connectors[@"input"] dequeueWidges];
     

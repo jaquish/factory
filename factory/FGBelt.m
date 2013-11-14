@@ -45,8 +45,13 @@ float const kHorizontalBeltHeight = 12.0;
     return self;
 }
 
-- (void)render:(CFTimeInterval)_dt
+- (void)update:(CFTimeInterval)_dt
 {
+    // iterate over subtiles
+    for (int i = self.originZone.x; i <= self.endZone.x; i++) {
+        <#statements#>
+    }
+    
     // widges already in motion
     NSMutableArray *toDelete = [NSMutableArray array];
     for (FGWidge* widge in self.moving) {

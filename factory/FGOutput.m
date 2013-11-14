@@ -38,7 +38,7 @@
     return self;
 }
 
-- (void)render:(CFTimeInterval)_dt
+- (void)update:(CFTimeInterval)_dt
 {
     for (FGWidge *widge in [self.connectors[@"input"] dequeueWidges]) {
         [widge removeFromParent];

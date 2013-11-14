@@ -34,7 +34,7 @@ const float kGravityPointsPerSecond = 300.0;
     return self;
 }
 
-- (void)render:(CFTimeInterval)_dt
+- (void)update:(CFTimeInterval)_dt
 {
     [self.falling addObjectsFromArray:[self.connectors[@"top"] dequeueWidges]];
     

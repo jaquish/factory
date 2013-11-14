@@ -27,7 +27,7 @@
     return self;
 }
 
-- (void)render:(CFTimeInterval)_dt
+- (void)update:(CFTimeInterval)_dt
 {
     ;   // Do something!
 }

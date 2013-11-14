@@ -42,7 +42,7 @@
     [self.scene addChild:widge];
 }
 
-- (void)render:(CFTimeInterval)_dt
+- (void)update:(CFTimeInterval)_dt
 {
     for (FGWidge* widge in self.generated) {
         [self.connectors[@"next"] insert:widge];

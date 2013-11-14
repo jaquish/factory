@@ -27,7 +27,7 @@
 - (id)initWithOriginZone:(FGZone)zone;
 
 // Called every frame
-- (void)render:(CFTimeInterval)_dt;
+- (void)update:(CFTimeInterval)_dt;
 
 // Move connectors from connection points into list
 - (void)organizeConnectors;

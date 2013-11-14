@@ -109,7 +109,7 @@
     _dt = currentTime - _prevTime;
     
     for (FGMachine* machine in self.machines) {
-        [machine render:_dt];
+        [machine update:_dt];
     }
     
     // propogate
