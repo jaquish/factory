@@ -17,9 +17,9 @@
 
 @implementation FGOutput
 
-- (id)initWithRootZone:(FGZone)zone
+- (id)initWithOriginZone:(FGZone)zone
 {
-    if (self = [super initWithRootZone:zone])
+    if (self = [super initWithOriginZone:zone])
     {
         // draw
         [self addChild:[FGUtil zoneBoxWithBorder:[UIColor grayColor] innerColor:[UIColor blueColor]]];
@@ -32,7 +32,7 @@
         self.count = 0;
         
         // describe I/O
-        [self addInput:[FGConnectionPoint pointWithPosition:compassPointOfZone(center, self.rootZone) name:@"input"]];
+        [self addInput:[FGConnectionPoint pointWithPosition:centerOf(self.originZone) name:@"input"]];
     }
     
     return self;

@@ -20,9 +20,9 @@ float const kHorizontalBeltHeight = 12.0;
 
 @implementation FGBelt
 
-- (id)initFromRootZone:(FGZone)fromZone toZone:(FGZone)toZone
+- (id)initWithOriginZone:(FGZone)fromZone endZone:(FGZone)toZone
 {
-    if (self = [super initWithRootZone:fromZone])
+    if (self = [super initWithOriginZone:fromZone])
     {
         // ivars
         self.endZone = toZone;
@@ -34,9 +34,9 @@ float const kHorizontalBeltHeight = 12.0;
         [self addChild:spriteNode];
         
         // describe I/O
-        for (int i = self.rootZone.x; i <= self.endZone.x; i++) {
-            [self addInput:  [FGConnectionPoint pointWithPosition:centerOf(FGZoneMake(i, self.rootZone.y)) name:[NSString stringWithFormat:@"input-%d", i]]];
-            [self addOutput: [FGConnectionPoint pointWithPosition:centerOf(FGZoneMake(i, self.rootZone.y)) name:[NSString stringWithFormat:@"output-%d", i]]];
+        for (int i = self.originZone.x; i <= self.endZone.x; i++) {
+            [self addInput:  [FGConnectionPoint pointWithPosition:centerOf(FGZoneMake(i, self.originZone.y)) name:[NSString stringWithFormat:@"input-%d", i]]];
+            [self addOutput: [FGConnectionPoint pointWithPosition:centerOf(FGZoneMake(i, self.originZone.y)) name:[NSString stringWithFormat:@"output-%d", i]]];
         }
         
         [self addOutput:[FGConnectionPoint pointWithPosition:centerOf(zoneInDirectionFromZone(E, self.endZone)) name:@"output"]];

@@ -40,33 +40,33 @@
         self.machines = [NSMutableArray array];
         
         // input
-        FGInput *input = [[FGInput alloc] initWithRootZone:FGZoneMake(3, 8)];
+        FGInput *input = [[FGInput alloc] initWithOriginZone:FGZoneMake(3, 8)];
         input.name = @"input";
         self.input = input; // to tell when a touch occurred
         [self addMachine:input];
         
         // gravity
-        FGGravity *gravity = [[FGGravity alloc] initWithRootZone:FGZoneMake(3, 8) endZone:FGZoneMake(3, 2)];
+        FGGravity *gravity = [[FGGravity alloc] initWithOriginZone:FGZoneMake(3, 8) endZone:FGZoneMake(3, 2)];
         gravity.name = @"gravity1";
         [self addMachine:gravity];
         
         // belt
-        FGBelt *belt = [[FGBelt alloc] initFromRootZone:FGZoneMake(3, 2) toZone:FGZoneMake(8, 2)];
+        FGBelt *belt = [[FGBelt alloc] initWithOriginZone:FGZoneMake(3, 2) endZone:FGZoneMake(8, 2)];
         belt.name = @"belt";
         [self addMachine:belt];
         
         // gravity part 2
-        FGGravity *gravity2 = [[FGGravity alloc] initWithRootZone:FGZoneMake(9, 2) endZone:FGZoneMake(9, 0)];
+        FGGravity *gravity2 = [[FGGravity alloc] initWithOriginZone:FGZoneMake(9, 2) endZone:FGZoneMake(9, 0)];
         gravity2.name = @"gravity2";
         [self addMachine:gravity2];
         
         // output
-        FGOutput *output = [[FGOutput alloc] initWithRootZone:FGZoneMake(9, 0)];
+        FGOutput *output = [[FGOutput alloc] initWithOriginZone:FGZoneMake(9, 0)];
         output.name = @"output";
         [self addMachine:output];
         
         // transformer
-        FGTransformer *transformer = [[FGTransformer alloc] initWithRootZone:FGZoneMake(6, 2)];
+        FGTransformer *transformer = [[FGTransformer alloc] initWithOriginZone:FGZoneMake(6, 2)];
         transformer.name = @"transformer";
         [self addMachine:transformer];
         

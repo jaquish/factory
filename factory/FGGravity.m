@@ -19,16 +19,16 @@ const float kGravityPointsPerSecond = 300.0;
 
 @implementation FGGravity
 
-- (id)initWithRootZone:(FGZone)zone endZone:(FGZone)end
+- (id)initWithOriginZone:(FGZone)zone endZone:(FGZone)end
 {
-    if (self = [super initWithRootZone:zone]) {
+    if (self = [super initWithOriginZone:zone]) {
         // ivars
         self.endZone = end;
         self.falling = [NSMutableArray array];
         
         // describe I/O
-        [self addInput: [FGConnectionPoint pointWithPosition:compassPointOfZone(center, self.rootZone) name:@"top"]];
-        [self addOutput:[FGConnectionPoint pointWithPosition:compassPointOfZone(center, self.endZone)  name:@"bottom"]];
+        [self addInput: [FGConnectionPoint pointWithPosition:centerOf(self.originZone) name:@"top"]];
+        [self addOutput:[FGConnectionPoint pointWithPosition:centerOf(self.endZone)  name:@"bottom"]];
     }
     
     return self;

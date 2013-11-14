@@ -10,6 +10,6 @@
 
 @interface FGGravity : FGMachine
 
-- (id)initWithRootZone:(FGZone)zone endZone:(FGZone)end;
+- (id)initWithOriginZone:(FGZone)zone endZone:(FGZone)end;
 
 @end

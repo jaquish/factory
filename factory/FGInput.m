@@ -16,9 +16,9 @@
 
 @implementation FGInput
 
-- (id)initWithRootZone:(FGZone)zone
+- (id)initWithOriginZone:(FGZone)zone
 {
-    if (self = [super initWithRootZone:zone])
+    if (self = [super initWithOriginZone:zone])
     {
         // ivars
         self.generated = [NSMutableArray array];
@@ -27,7 +27,7 @@
         [self addChild:[FGUtil zoneBoxWithBorder:[UIColor grayColor] innerColor:[UIColor greenColor]]];
         
         // describe I/O
-        [self addOutput:[FGConnectionPoint pointWithPosition:compassPointOfZone(center, self.rootZone) name:@"next"]];
+        [self addOutput:[FGConnectionPoint pointWithPosition:centerOf(self.originZone) name:@"next"]];
     }
     
     return self;
@@ -36,7 +36,7 @@
 - (void)generateWidge
 {
     FGWidge *widge = [FGWidge redWidge];
-    CGPoint generationPoint = compassPointOfZone(center, self.rootZone);
+    CGPoint generationPoint = compassPointOfZone(center, self.originZone);
     widge.position = generationPoint;
     [self.generated addObject:widge];
     [self.scene addChild:widge];

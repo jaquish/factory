@@ -14,7 +14,7 @@
 @interface FGMachine : SKSpriteNode
 
 // The most lower-left zone of the machine.
-@property (nonatomic) FGZone rootZone;
+@property (nonatomic) FGZone originZone;
 
 // Lists of connection points for possible connectors
 @property (nonatomic) NSMutableArray *connectionPointInputs;
@@ -24,7 +24,7 @@
 @property (nonatomic) NSMutableDictionary *connectors;
 
 // Root zone necessary to calculate connection point positions
-- (id)initWithRootZone:(FGZone)zone;
+- (id)initWithOriginZone:(FGZone)zone;
 
 // Called every frame
 - (void)render:(CFTimeInterval)_dt;

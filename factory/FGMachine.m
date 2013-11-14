@@ -12,7 +12,7 @@
 
 @implementation FGMachine
 
-- (id)initWithRootZone:(FGZone)zone
+- (id)initWithOriginZone:(FGZone)zone
 {
     if (self = [super init])
     {
@@ -21,7 +21,7 @@
         self.connectors = [NSMutableDictionary dictionary];
         self.anchorPoint = CGPointZero; // position machine from lower left
         
-        self.rootZone = zone;
+        self.originZone = zone;
     }
     
     return self;
@@ -37,10 +37,10 @@
     ;   // Do something!
 }
 
-- (void)setRootZone:(FGZone)rootZone
+- (void)setOriginZone:(FGZone)originZone
 {
-    _rootZone = rootZone;
-    self.position = compassPointOfZone(SW, rootZone);
+    _originZone = originZone;
+    self.position = compassPointOfZone(SW, originZone);
 }
 
 - (void)organizeConnectors
