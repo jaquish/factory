@@ -35,6 +35,9 @@
 // Convenience methods used by subclass
 - (void)addInput:(FGConnectionPoint*)cp;
 - (void)addOutput:(FGConnectionPoint*)cp;
+- (void)addSimpleInputNamed:(NSString*)name;
+- (void)addSimpleOutputNamed:(NSString*)name;
+
 
 - (NSArray*)inputs;
 - (NSArray*)outputs;

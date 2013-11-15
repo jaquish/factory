@@ -18,8 +18,8 @@
         [self addChild:[FGUtil zoneBoxWithBorder:[UIColor yellowColor] innerColor:[UIColor colorWithRed:0.2 green:0.8 blue:0.8 alpha:1.0]]];
         
         // describe I/O
-        [self addInput:[FGConnectionPoint  pointWithPosition:centerOf(self.originZone) name:@"input"]];
-        [self addOutput:[FGConnectionPoint pointWithPosition:centerOf(self.originZone) name:@"output"]];
+        [self addSimpleInputNamed:@"input"];
+        [self addSimpleOutputNamed:@"output"];
     }
     
     return self;

@@ -68,6 +68,22 @@
     [self.connectionPointOutputs addObject:cp];
 }
 
+- (void)addSimpleInputNamed:(NSString*)name
+{
+    FGConnectionPoint *cp = [[FGConnectionPoint alloc] init];
+    cp.position = centerOf(self.originZone);
+    cp.name = name;
+    [self addInput:cp];
+}
+
+- (void)addSimpleOutputNamed:(NSString*)name
+{
+    FGConnectionPoint *cp = [[FGConnectionPoint alloc] init];
+    cp.position = centerOf(self.originZone);
+    cp.name = name;
+    [self addOutput:cp];
+}
+
 - (FGConnector*)connectorWithName:(NSString*)name
 {
     return self.connectors[name];

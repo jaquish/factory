@@ -35,6 +35,8 @@
 		84E5E2B31833543700524D0F /* FGConnectionPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E5E2B21833543700524D0F /* FGConnectionPoint.m */; };
 		84F9D4DE18277410002728A0 /* FGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9D4DD18277410002728A0 /* FGConstants.m */; };
 		DD17B2F618340E670011AC7C /* FGTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = DD17B2F518340E670011AC7C /* FGTransformer.m */; };
+		DD17B2F918358E030011AC7C /* FGTransferBox.m in Sources */ = {isa = PBXBuildFile; fileRef = DD17B2F818358E030011AC7C /* FGTransferBox.m */; };
+		DD17B2FC183593370011AC7C /* FGVerticalBelt.m in Sources */ = {isa = PBXBuildFile; fileRef = DD17B2FB183593370011AC7C /* FGVerticalBelt.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,10 @@
 		84F9D4DD18277410002728A0 /* FGConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGConstants.m; sourceTree = "<group>"; };
 		DD17B2F418340E670011AC7C /* FGTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGTransformer.h; sourceTree = "<group>"; };
 		DD17B2F518340E670011AC7C /* FGTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGTransformer.m; sourceTree = "<group>"; };
+		DD17B2F718358E030011AC7C /* FGTransferBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGTransferBox.h; sourceTree = "<group>"; };
+		DD17B2F818358E030011AC7C /* FGTransferBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGTransferBox.m; sourceTree = "<group>"; };
+		DD17B2FA183593370011AC7C /* FGVerticalBelt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGVerticalBelt.h; sourceTree = "<group>"; };
+		DD17B2FB183593370011AC7C /* FGVerticalBelt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGVerticalBelt.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,10 @@
 				84E5E2AF18320B5C00524D0F /* FGOutput.m */,
 				DD17B2F418340E670011AC7C /* FGTransformer.h */,
 				DD17B2F518340E670011AC7C /* FGTransformer.m */,
+				DD17B2F718358E030011AC7C /* FGTransferBox.h */,
+				DD17B2F818358E030011AC7C /* FGTransferBox.m */,
+				DD17B2FA183593370011AC7C /* FGVerticalBelt.h */,
+				DD17B2FB183593370011AC7C /* FGVerticalBelt.m */,
 			);
 			name = Machines;
 			sourceTree = "<group>";
@@ -358,8 +368,10 @@
 				84E5E2B31833543700524D0F /* FGConnectionPoint.m in Sources */,
 				84374E39182CB4EF00F74638 /* FGGravity.m in Sources */,
 				84872BF3182607D4008F86DE /* main.m in Sources */,
+				DD17B2F918358E030011AC7C /* FGTransferBox.m in Sources */,
 				84872BF7182607D4008F86DE /* FGAppDelegate.m in Sources */,
 				84A4CD95183203DF00DAD99C /* FGUtil.m in Sources */,
+				DD17B2FC183593370011AC7C /* FGVerticalBelt.m in Sources */,
 				84E5E2B018320B5C00524D0F /* FGOutput.m in Sources */,
 				84374E40182CCA9200F74638 /* FGInput.m in Sources */,
 				84374E3D182CC6D700F74638 /* FGBelt.m in Sources */,

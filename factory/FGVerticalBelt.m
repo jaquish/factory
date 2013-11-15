@@ -1,24 +1,24 @@
 //
-//  FGBelt.m
+//  FGVerticalBelt.m
 //  factory
 //
-//  Created by admin on 11/7/13.
+//  Created by Zach Jaquish on 11/14/13.
 //  Copyright (c) 2013 Zach Jaquish. All rights reserved.
 //
 
-#import "FGBelt.h"
+#import "FGVerticalBelt.h"
 
 const static float kBeltSpeedPointsPerSecond = 100.0;
 
 const static float kVerticalBeltWidth = 12.0;
 
-@interface FGBelt ()
+@interface FGVerticalBelt ()
 
 @property NSMutableArray *moving;
 
 @end
 
-@implementation FGBelt
+@implementation FGVerticalBelt
 
 - (id)initWithOriginZone:(FGZone)fromZone endZone:(FGZone)toZone
 {
@@ -29,33 +29,29 @@ const static float kVerticalBeltWidth = 12.0;
         self.moving = [NSMutableArray array];
         
         // draw
-        SKSpriteNode *spriteNode = [SKSpriteNode spriteNodeWithColor:[UIColor grayColor] size:CGSizeMake(ZoneSize * (toZone.x - fromZone.x + 1), kVerticalBeltWidth)];
-        spriteNode.anchorPoint = CGPointZero;
+        SKSpriteNode *spriteNode = [SKSpriteNode spriteNodeWithColor:[UIColor grayColor] size:CGSizeMake(kVerticalBeltWidth, ZoneSize * (toZone.y - fromZone.x + 1))];
+        spriteNode.anchorPoint = CGPointMake(kVerticalBeltWidth / 2, 0);
+        spriteNode.position = compassPointOfZone(S, self.originZone);
         [self addChild:spriteNode];
         
         // describe I/O
-        for (int i = self.originZone.x; i <= self.endZone.x; i++) {
-            [self addInput:  [FGConnectionPoint pointWithPosition:centerOf(FGZoneMake(i, self.originZone.y)) name:[NSString stringWithFormat:@"input-%d", i]]];
-            [self addOutput: [FGConnectionPoint pointWithPosition:centerOf(FGZoneMake(i, self.originZone.y)) name:[NSString stringWithFormat:@"output-%d", i]]];
-        }
-        
-        [self addOutput:[FGConnectionPoint pointWithPosition:centerOf(zoneInDirectionFromZone(E, self.endZone)) name:@"output"]];
+        [self addSimpleInputNamed:@"input"];
+        [self addOutput:[FGConnectionPoint pointWithPosition:centerOf(self.endZone) name:@"output"]];
     }
-    
     return self;
 }
-
+/*
 - (void)update:(CFTimeInterval)_dt
 {
     // TODO - save leftover deltaTime to update
-
+    
     float deltaX = kBeltSpeedPointsPerSecond * _dt;
     
     // Fetch fresh widgets
     for (FGConnector* connector in self.inputs) {
         [self.moving addObjectsFromArray:[connector dequeueWidges]];
     }
-
+    
     // Move widges, check for collision with output
     NSMutableArray *toDelete = [NSMutableArray array];
     for (FGWidge* widge in self.moving) {
@@ -72,5 +68,6 @@ const static float kVerticalBeltWidth = 12.0;
     }
     [self.moving removeObjectsInArray:toDelete];
 }
+ */
 
 @end

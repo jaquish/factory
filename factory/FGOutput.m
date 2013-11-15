@@ -32,7 +32,7 @@
         self.count = 0;
         
         // describe I/O
-        [self addInput:[FGConnectionPoint pointWithPosition:centerOf(self.originZone) name:@"input"]];
+        [self addSimpleInputNamed:@"input"];
     }
     
     return self;

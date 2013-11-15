@@ -14,6 +14,8 @@
 #import "FGInput.h"
 #import "FGOutput.h"
 #import "FGTransformer.h"
+#import "FGTransferBox.h"
+#import "FGVerticalBelt.h"
 
 @interface FGMyScene ()
 {
@@ -69,6 +71,16 @@
         FGTransformer *transformer = [[FGTransformer alloc] initWithOriginZone:FGZoneMake(6, 2)];
         transformer.name = @"transformer";
         [self addMachine:transformer];
+        
+        // transfer box
+        FGTransferBox *transferBox = [[FGTransferBox alloc] initWithOriginZone:FGZoneMake(8, 3)];
+        transferBox.name = @"transfer-box";
+        [self addMachine:transferBox];
+        
+        // vertical belt
+        FGVerticalBelt *vertical = [[FGVerticalBelt alloc] initWithOriginZone:FGZoneMake(8, 3) endZone:FGZoneMake(8, 7)];
+        vertical.name = @"vertical";
+        [self addMachine:vertical];
         
         [self makeConnections];
     }
