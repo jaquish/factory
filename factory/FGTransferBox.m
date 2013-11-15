@@ -17,8 +17,13 @@
         [self addChild:[FGUtil zoneBoxWithBorder:[UIColor darkGrayColor] innerColor:[UIColor grayColor]]];
         
         // describe IO
-        [self addSimpleInputNamed:@"input"];
-        [self addSimpleOutputNamed:@"output"];
+        FGConnectionPoint *input  = [FGConnectionPoint pointWithPosition:centerOf(self.originZone) name:@"input"];
+        input.priority = kConnectionPointPriorityHigh;
+        [self addInput:input];
+        
+        FGConnectionPoint *output = [FGConnectionPoint pointWithPosition:centerOf(self.originZone) name:@"output"];
+        output.priority = kConnectionPointPriorityHigh;
+        [self addOutput:output];
     }
     
     return self;

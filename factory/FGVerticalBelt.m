@@ -10,7 +10,7 @@
 
 const static float kBeltSpeedPointsPerSecond = 100.0;
 
-const static float kVerticalBeltWidth = 12.0;
+const static float kVerticalBeltWidth = 30.0;
 
 @interface FGVerticalBelt ()
 
@@ -29,9 +29,9 @@ const static float kVerticalBeltWidth = 12.0;
         self.moving = [NSMutableArray array];
         
         // draw
-        SKSpriteNode *spriteNode = [SKSpriteNode spriteNodeWithColor:[UIColor grayColor] size:CGSizeMake(kVerticalBeltWidth, ZoneSize * (toZone.y - fromZone.x + 1))];
-        spriteNode.anchorPoint = CGPointMake(kVerticalBeltWidth / 2, 0);
-        spriteNode.position = compassPointOfZone(S, self.originZone);
+        SKSpriteNode *spriteNode = [SKSpriteNode spriteNodeWithColor:[UIColor colorWithRed:0.0 green:0.4 blue:0.9 alpha:1.0] size:CGSizeMake(kVerticalBeltWidth, ZoneSize * (toZone.y - fromZone.y + 1))];
+        spriteNode.anchorPoint = CGPointMake(0.5, 0);
+        spriteNode.position = compassPointOfZone(S, FGZoneZero);
         [self addChild:spriteNode];
         
         // describe I/O

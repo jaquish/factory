@@ -10,6 +10,8 @@
 #import "FGConnector.h"
 #import "FGMachine.h"
 
+const unsigned int kConnectionPointPriorityHigh = 1;
+
 @implementation FGConnectionPoint
 
 + (instancetype)pointWithPosition:(CGPoint)position name:(NSString*)name

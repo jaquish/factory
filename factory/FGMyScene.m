@@ -73,12 +73,12 @@
         [self addMachine:transformer];
         
         // transfer box
-        FGTransferBox *transferBox = [[FGTransferBox alloc] initWithOriginZone:FGZoneMake(8, 3)];
+        FGTransferBox *transferBox = [[FGTransferBox alloc] initWithOriginZone:FGZoneMake(8, 2)];
         transferBox.name = @"transfer-box";
         [self addMachine:transferBox];
         
         // vertical belt
-        FGVerticalBelt *vertical = [[FGVerticalBelt alloc] initWithOriginZone:FGZoneMake(8, 3) endZone:FGZoneMake(8, 7)];
+        FGVerticalBelt *vertical = [[FGVerticalBelt alloc] initWithOriginZone:FGZoneMake(8, 2) endZone:FGZoneMake(8, 7)];
         vertical.name = @"vertical";
         [self addMachine:vertical];
         
