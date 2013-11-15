@@ -24,6 +24,8 @@ const static float kVerticalBeltWidth = 12.0;
 {
     if (self = [super initWithOriginZone:fromZone])
     {
+        self.zPosition = SpriteLayerBehindWidges;
+        
         // ivars
         self.endZone = toZone;
         self.moving = [NSMutableArray array];

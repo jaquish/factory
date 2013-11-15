@@ -21,9 +21,10 @@ const float WidgeSize = 40.0;   // default 40
 const float ZonesWide = WorldWidth / ZoneSize;
 const float ZonesHigh = WorldHeight / ZoneSize;
 
-const float SpriteLayerBackground = -1;
-const float SpriteLayerWidges     =  0;
-const float SpriteLayerMachines   =  1;
+const float SpriteLayerBackground      = -1;
+const float SpriteLayerBehindWidges    =  0;
+const float SpriteLayerWidges          =  1;
+const float SpriteLayerInFrontOfWidges =  2;
 
 BOOL DEBUG_SHOW_GRID = YES;
 

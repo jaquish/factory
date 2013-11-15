@@ -24,6 +24,8 @@ const static float kVerticalBeltWidth = 30.0;
 {
     if (self = [super initWithOriginZone:fromZone])
     {
+        self.zPosition = SpriteLayerBehindWidges;
+
         // ivars
         self.endZone = toZone;
         self.moving = [NSMutableArray array];
@@ -40,12 +42,12 @@ const static float kVerticalBeltWidth = 30.0;
     }
     return self;
 }
-/*
+
 - (void)update:(CFTimeInterval)_dt
 {
     // TODO - save leftover deltaTime to update
     
-    float deltaX = kBeltSpeedPointsPerSecond * _dt;
+    float deltaY = kBeltSpeedPointsPerSecond * _dt;
     
     // Fetch fresh widgets
     for (FGConnector* connector in self.inputs) {
@@ -56,11 +58,11 @@ const static float kVerticalBeltWidth = 30.0;
     NSMutableArray *toDelete = [NSMutableArray array];
     for (FGWidge* widge in self.moving) {
         CGPoint oldPosition = widge.position;
-        [widge changeXBy:deltaX];
+        [widge changeYBy:deltaY];
         for (FGConnector *connector in [self outputs]) {
             // check if widge passed over connection point
-            if (oldPosition.x < connector.position.x && widge.position.x >= connector.position.x) {
-                [widge changeXTo:connector.position.x];
+            if (oldPosition.y < connector.position.y && widge.position.y >= connector.position.y) {
+                [widge changeYTo:connector.position.y];
                 [connector insert:widge];
                 [toDelete addObject:widge];
             }
@@ -68,6 +70,5 @@ const static float kVerticalBeltWidth = 30.0;
     }
     [self.moving removeObjectsInArray:toDelete];
 }
- */
 
 @end

@@ -20,7 +20,7 @@
         self.connectionPointOutputs = [NSMutableArray array];
         self.connectors = [NSMutableDictionary dictionary];
         self.anchorPoint = CGPointZero; // position machine from lower left
-        self.zPosition = SpriteLayerMachines;
+        self.zPosition = SpriteLayerInFrontOfWidges;
         self.originZone = zone;
     }
     
@@ -113,7 +113,7 @@
 //    return [[self.connectors allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"source == self"]];
 }
 
-- (BOOL)allowConnectionToMachine:(FGMachine *)machine
+- (BOOL)allowConnectionWithMachine:(FGMachine*)machine;
 {
     // override for advanced decision making
     return YES;

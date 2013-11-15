@@ -31,8 +31,6 @@ extern const FGZone FGZoneZero;
 // return the zone in that direction from the zone
 FGZone zoneInDirectionFromZone(CompassPoint cp, FGZone z);
 
-
-
 // zone constructor
 FGZone FGZoneMake(int x, int y);
 

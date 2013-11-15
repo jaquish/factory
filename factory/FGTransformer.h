@@ -10,4 +10,6 @@
 
 @interface FGTransformer : FGMachine
 
+- (id)initWithOriginZone:(FGZone)zone color:(UIColor*)color;
+
 @end

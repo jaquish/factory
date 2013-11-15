@@ -42,35 +42,30 @@
         self.machines = [NSMutableArray array];
         
         // input
-        FGInput *input = [[FGInput alloc] initWithOriginZone:FGZoneMake(3, 8)];
+        FGInput *input = [[FGInput alloc] initWithOriginZone:FGZoneMake(2, 8)];
         input.name = @"input";
         self.input = input; // to tell when a touch occurred
         [self addMachine:input];
         
         // gravity
-        FGGravity *gravity = [[FGGravity alloc] initWithOriginZone:FGZoneMake(3, 8) endZone:FGZoneMake(3, 2)];
+        FGGravity *gravity = [[FGGravity alloc] initWithOriginZone:FGZoneMake(2, 8) endZone:FGZoneMake(2, 2)];
         gravity.name = @"gravity1";
         [self addMachine:gravity];
         
         // belt
-        FGBelt *belt = [[FGBelt alloc] initWithOriginZone:FGZoneMake(3, 2) endZone:FGZoneMake(8, 2)];
+        FGBelt *belt = [[FGBelt alloc] initWithOriginZone:FGZoneMake(2, 2) endZone:FGZoneMake(7, 2)];
         belt.name = @"belt";
         [self addMachine:belt];
         
-        // gravity part 2
-        FGGravity *gravity2 = [[FGGravity alloc] initWithOriginZone:FGZoneMake(9, 2) endZone:FGZoneMake(9, 0)];
-        gravity2.name = @"gravity2";
-        [self addMachine:gravity2];
-        
-        // output
-        FGOutput *output = [[FGOutput alloc] initWithOriginZone:FGZoneMake(9, 0)];
-        output.name = @"output";
-        [self addMachine:output];
-        
         // transformer
-        FGTransformer *transformer = [[FGTransformer alloc] initWithOriginZone:FGZoneMake(6, 2)];
+        FGTransformer *transformer = [[FGTransformer alloc] initWithOriginZone:FGZoneMake(4, 2) color:[UIColor yellowColor]];
         transformer.name = @"transformer";
         [self addMachine:transformer];
+        
+        // transformer
+        FGTransformer *transformer2 = [[FGTransformer alloc] initWithOriginZone:FGZoneMake(6, 2) color:[UIColor greenColor]];
+        transformer.name = @"transformer-2";
+        [self addMachine:transformer2];
         
         // transfer box
         FGTransferBox *transferBox = [[FGTransferBox alloc] initWithOriginZone:FGZoneMake(8, 2)];
@@ -81,6 +76,26 @@
         FGVerticalBelt *vertical = [[FGVerticalBelt alloc] initWithOriginZone:FGZoneMake(8, 2) endZone:FGZoneMake(8, 7)];
         vertical.name = @"vertical";
         [self addMachine:vertical];
+        
+        // transfer box 2
+        FGTransferBox *transferBox2 = [[FGTransferBox alloc] initWithOriginZone:FGZoneMake(8, 7)];
+        transferBox.name = @"transfer-box-2";
+        [self addMachine:transferBox2];
+        
+        // belt 2
+        FGBelt *belt2 = [[FGBelt alloc] initWithOriginZone:FGZoneMake(8, 7) endZone:FGZoneMake(11, 7)];
+        belt.name = @"belt-2";
+        [self addMachine:belt2];
+        
+        // gravity part 2
+        FGGravity *gravity2 = [[FGGravity alloc] initWithOriginZone:FGZoneMake(12, 7) endZone:FGZoneMake(12, 0)];
+        gravity2.name = @"gravity2";
+        [self addMachine:gravity2];
+        
+        // output
+        FGOutput *output = [[FGOutput alloc] initWithOriginZone:FGZoneMake(12, 0)];
+        output.name = @"output";
+        [self addMachine:output];
         
         [self makeConnections];
     }

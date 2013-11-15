@@ -45,6 +45,6 @@
 // Access connector with type safety
 - (FGConnector*)connectorWithName:(NSString*)name;
 
-- (BOOL)allowConnectionToMachine:(FGMachine*)machine;
+- (BOOL)allowConnectionWithMachine:(FGMachine*)machine;
 
 @end

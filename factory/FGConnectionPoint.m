@@ -51,8 +51,8 @@ const unsigned int kConnectionPointPriorityHigh = 1;
     }
     
     /* Ask the machines involved for advanced connection point rules */
-    if ([self.machine       allowConnectionToMachine:otherPoint.machine] &&
-        [otherPoint.machine allowConnectionToMachine:self.machine]        ) {
+    if ([self.machine       allowConnectionWithMachine:otherPoint.machine] &&
+        [otherPoint.machine allowConnectionWithMachine:self.machine]        ) {
         
         // create new connector and set
         FGConnector *connector = [[FGConnector alloc] init];

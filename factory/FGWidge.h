@@ -16,5 +16,6 @@
 + (instancetype)greenWidge;
 + (instancetype)blueWidge;
 + (instancetype)purpleWidge;
++ (instancetype)widgeWithColor:(UIColor*)color;
 
 @end

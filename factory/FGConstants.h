@@ -24,8 +24,9 @@ extern const float ZonesHigh;
 
 /* Sprite Layers */
 extern const float SpriteLayerBackground;
+extern const float SpriteLayerBehindWidges;
 extern const float SpriteLayerWidges;
-extern const float SpriteLayerMachines;
+extern const float SpriteLayerInFrontOfWidges;
 
 /* Debug Flags */
 extern BOOL DEBUG_SHOW_GRID;

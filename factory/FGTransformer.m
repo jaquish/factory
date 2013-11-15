@@ -8,14 +8,22 @@
 
 #import "FGTransformer.h"
 
+@interface FGTransformer ()
+
+@property (nonatomic) UIColor *finalColor;
+
+@end
+
 @implementation FGTransformer
 
-- (id)initWithOriginZone:(FGZone)zone
+- (id)initWithOriginZone:(FGZone)zone color:(UIColor*)color
 {
     if (self = [super initWithOriginZone:zone]) {
+        // ivars
+        self.finalColor = color;
         
         // draw
-        [self addChild:[FGUtil zoneBoxWithBorder:[UIColor yellowColor] innerColor:[UIColor colorWithRed:0.2 green:0.8 blue:0.8 alpha:1.0]]];
+        [self addChild:[FGUtil zoneBoxWithBorder:self.finalColor innerColor:[UIColor darkGrayColor]]];
         
         // describe I/O
         [self addSimpleInputNamed:@"input"];
@@ -31,7 +39,7 @@
     
     for (FGWidge *widge in widges) {
         [widge removeFromParent];
-        FGWidge* widge2 = [FGWidge yellowWidge];
+        FGWidge* widge2 = [FGWidge widgeWithColor:self.finalColor];
         widge2.position = widge.position;
         [self.scene addChild:widge2];
         [self.connectors[@"output"] insert:widge2];
