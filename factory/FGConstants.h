@@ -13,18 +13,22 @@
 @end
 
 /* iPad Constraints */
-
 extern const float WorldHeight;
 extern const float WorldWidth;
 
-/* World Constants */
-
+/* 2D World Constants */
 extern const float ZoneSize;
 extern const float WidgeSize;
-
 extern const float ZonesWide;
 extern const float ZonesHigh;
 
-/* Debug Flags */
+/* Sprite Layers */
+extern const float SpriteLayerBackground;
+extern const float SpriteLayerWidges;
+extern const float SpriteLayerMachines;
 
+/* Debug Flags */
 extern BOOL DEBUG_SHOW_GRID;
+
+/* Other */
+extern const float LabelFontSize;

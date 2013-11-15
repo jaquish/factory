@@ -43,6 +43,7 @@
 + (instancetype)widgeWithColor:(UIColor*)color
 {
     FGWidge *widge = [self spriteNodeWithColor:color size:CGSizeMake(WidgeSize, WidgeSize)];
+    widge.zPosition = SpriteLayerWidges;
     return widge;
 }
 

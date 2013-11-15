@@ -24,13 +24,24 @@
         self.generated = [NSMutableArray array];
         
         // draw
-        [self addChild:[FGUtil zoneBoxWithBorder:[UIColor grayColor] innerColor:[UIColor greenColor]]];
+        [self addChild:[FGUtil zoneBoxWithBorder:[UIColor grayColor] innerColor:[UIColor colorWithRed:0.2 green:0.8 blue:0.2 alpha:1.0]]];
+        SKLabelNode *label = [SKLabelNode node];
+        label.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        label.position = centerOf(FGZoneMake(0, 0));
+        label.text = @"IN";
+        label.fontSize = LabelFontSize;
+        [self addChild:label];
         
         // describe I/O
         [self addSimpleOutputNamed:@"next"];
     }
     
     return self;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    /* Called when a touch begins */
+    [self generateWidge];
 }
 
 - (void)generateWidge

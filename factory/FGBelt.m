@@ -39,7 +39,7 @@ const static float kVerticalBeltWidth = 12.0;
             [self addOutput: [FGConnectionPoint pointWithPosition:centerOf(FGZoneMake(i, self.originZone.y)) name:[NSString stringWithFormat:@"output-%d", i]]];
         }
         
-        [self addOutput:[FGConnectionPoint pointWithPosition:centerOf(zoneInDirectionFromZone(E, self.endZone)) name:@"output"]];
+        [self addOutput:[FGConnectionPoint pointWithPosition:centerOf(zoneInDirectionFromZone(E, self.endZone)) name:@"over-right-edge"]];
     }
     
     return self;

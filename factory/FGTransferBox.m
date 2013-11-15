@@ -31,7 +31,9 @@
 
 - (void)update:(CFTimeInterval)_dt
 {
-    ;
+    for (FGWidge *widge in [[self connectorWithName:@"input"] dequeueWidges]) {
+        [[self connectorWithName:@"output"] insert:widge];
+    }
 }
 
 @end

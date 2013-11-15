@@ -95,13 +95,26 @@
 
 - (void)makeConnections
 {
-    for (FGMachine *machines1 in self.machines) {
-        for (FGConnectionPoint *output in machines1.connectionPointOutputs) {
-            for (FGMachine *machines2 in self.machines) {
-                for (FGConnectionPoint *input in machines2.connectionPointInputs) {
-                    [output tryToConnectToPoint:input];
-                }
-            }
+    NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"priority" ascending:NO];
+    
+    // get outputs in sorted priority order
+    NSMutableArray *allOutputs = [NSMutableArray array];
+    for (FGMachine *machine in self.machines) {
+        [allOutputs addObjectsFromArray:machine.connectionPointOutputs];
+    }
+    [allOutputs sortUsingDescriptors:@[sorter]];
+    
+    // get inputs in sorted priority order
+    NSMutableArray *allInputs  = [NSMutableArray array];
+    for (FGMachine *machine in self.machines) {
+        [allInputs addObjectsFromArray:machine.connectionPointInputs];
+    }
+    [allInputs sortUsingDescriptors:@[sorter]];
+    
+    // shotgun connections
+    for (FGConnectionPoint *output in allOutputs) {
+        for (FGConnectionPoint *input in allInputs) {
+            [output tryToConnectToPoint:input];
         }
     }
     

@@ -21,6 +21,10 @@ extern const unsigned int kConnectionPointPriorityHigh;
 @property (nonatomic) FGConnector *connector;   // if null, connection point has not been connected
 @property (nonatomic) FGMachine *machine;
 @property (nonatomic) NSString *name;
+
+/* advanced connection point settings */
+
+// higher priority will be set earlier
 @property (nonatomic) unsigned int priority;
 
 + (instancetype)pointWithPosition:(CGPoint)position name:(NSString*)name;

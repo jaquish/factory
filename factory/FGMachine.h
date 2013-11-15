@@ -42,4 +42,9 @@
 - (NSArray*)inputs;
 - (NSArray*)outputs;
 
+// Access connector with type safety
+- (FGConnector*)connectorWithName:(NSString*)name;
+
+- (BOOL)allowConnectionToMachine:(FGMachine*)machine;
+
 @end

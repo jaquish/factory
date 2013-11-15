@@ -33,16 +33,27 @@ const unsigned int kConnectionPointPriorityHigh = 1;
 
 - (void)tryToConnectToPoint:(FGConnectionPoint *)otherPoint
 {
+    /* Basic connection point rules */
+    
+    // don't connect a connection point that has already been connected
     if (self.connector || otherPoint.connector) {
-        return; // one end-point was already connected
+        return;
     }
     
+     // don't connect a machine to itself
     if (self.machine == otherPoint.machine) {
-        return; // don't connect a machine to itself
+        return;
     }
     
-    if (self.position.x == otherPoint.position.x &&
-        self.position.y == otherPoint.position.y    ) {
+    // don't connect if connection points are not in the same position
+    if (!CGPointEqualToPoint(self.position, otherPoint.position)) {
+        return;
+    }
+    
+    /* Ask the machines involved for advanced connection point rules */
+    if ([self.machine       allowConnectionToMachine:otherPoint.machine] &&
+        [otherPoint.machine allowConnectionToMachine:self.machine]        ) {
+        
         // create new connector and set
         FGConnector *connector = [[FGConnector alloc] init];
         connector.position = self.position;
