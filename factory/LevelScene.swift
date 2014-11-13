@@ -30,22 +30,13 @@ class LevelScene: SKScene {
         
         self.machines = Array()
         self.backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)
-        input = Input(Zone(2, 8))
-        addMachine(input!)
         
-        addMachines([
-            Gravity(from: Zone(2, 8), thru: Zone(2, 2)),
-            Belt(from: Zone(2, 2), thru: Zone(7, 2)),
-            Transformer(Zone(4, 2), color: UIColor.yellowColor()),
-            Transformer(Zone(6, 2), color: UIColor.greenColor()),
-            TransferBox(Zone(8, 2)),
-            TransferBox(Zone(8, 7)),
-            VerticalBelt(from: Zone(8, 2), thru: Zone(8, 7)),
-            Belt(from: Zone(8,7), thru: Zone(11,7)),
-            Gravity(from: Zone(12,7), thru: Zone(12,0)),
-            Output(originZone: Zone(12, 0))
-        ])
-        
+        loadLevel(Level(1))
+    }
+    
+    func loadLevel(level: Level) {
+        input = level.input
+        addMachines(level.machines)
         makeConnections()
     }
 

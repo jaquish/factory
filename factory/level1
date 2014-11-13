@@ -1,0 +1,22 @@
+Input 2,8
+Gravity 2,8 2,2
+Belt 2,2 7,2
+Transformer 4,2 1,1,0
+Transformer 6,2 0,1,0
+TransferBox 8,2
+TransferBox 8,7
+VerticalBelt 8,2 8,7
+Belt 8,7 11,7
+Gravity 12,7 12,0
+Output 12,0
+
+#Gravity(from: Zone(2, 8), thru: Zone(2, 2)),
+#//            Belt(from: Zone(2, 2), thru: Zone(7, 2)),
+#//            Transformer(Zone(4, 2), color: UIColor.yellowColor()),
+#//            Transformer(Zone(6, 2), color: UIColor.greenColor()),
+#//            TransferBox(Zone(8, 2)),
+#//            TransferBox(Zone(8, 7)),
+#//            VerticalBelt(from: Zone(8, 2), thru: Zone(8, 7)),
+#//            Belt(from: Zone(8,7), thru: Zone(11,7)),
+#//            Gravity(from: Zone(12,7), thru: Zone(12,0)),
+#//            Output(Zone(12, 0))

@@ -19,6 +19,13 @@ struct Zone {
         self.y = y
     }
     
+    init(_ string: String) {
+        let pieces = string.componentsSeparatedByString(",") as [String]
+        assert(pieces.count == 2, "expected two pieces from string for Zone")
+        x = pieces[0].toInt()!
+        y = pieces[1].toInt()!
+    }
+    
     func worldPoint(cp: CompassPoint) -> CGPoint {
         switch (cp) {
             case .N:     return CGPointMake(ZoneSize * (CGFloat(x) + 0.5), ZoneSize * (CGFloat(y) + 1.0));
@@ -45,6 +52,10 @@ struct Zone {
             case .NW:    return Zone(x - 1, y + 1)
             case .center:return self;
         }
+    }
+    
+    func toString() -> String {
+        return "\(x),\(y)"
     }
 }
 

@@ -18,7 +18,7 @@ class Output: Machine {
         }
     }
     
-    override init(originZone: Zone) {
+    init(_ originZone: Zone) {
         
         let title = SKLabelNode()
         title.position = ZoneZero.worldPoint(.center)
