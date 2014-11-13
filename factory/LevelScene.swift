@@ -29,9 +29,7 @@ class LevelScene: SKScene {
         super.init(size: size)
         
         self.machines = Array()
-        self.backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)
-        
-        loadLevel(Level(1))
+        self.backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)        
     }
     
     func loadLevel(level: Level) {

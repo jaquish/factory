@@ -8,10 +8,29 @@
 
 import UIKit
 
-class LevelSelectViewController: UIViewController {
+class LevelSelectViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    @IBOutlet var picker: UIPickerView?
     
     @IBAction func playLevel() {
         performSegueWithIdentifier("playLevelSegue", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let levelSelectVC = segue.destinationViewController as LevelViewController
+        levelSelectVC.level = Level(picker!.selectedRowInComponent(0))
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 10
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return "Level \(row)"
     }
 
     /*

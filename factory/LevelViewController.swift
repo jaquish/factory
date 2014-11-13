@@ -11,6 +11,8 @@ import SpriteKit
 
 class LevelViewController: UIViewController {
 
+    var level: Level?
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
@@ -26,6 +28,8 @@ class LevelViewController: UIViewController {
             if DEBUG_SHOW_GRID {
                 self.view.addSubview(GridOverlay(frame: self.view.bounds))
             }
+            
+            scene.loadLevel(level!)
             
             // add double-touch double-tap back to level selection screen
             let doubleTapGesture = UITapGestureRecognizer (target: self, action: "backToLevelSelector")

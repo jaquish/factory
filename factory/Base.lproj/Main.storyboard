@@ -26,14 +26,24 @@
                                     <action selector="playLevel" destination="BV1-FR-VrT" eventType="touchUpInside" id="9ad-VA-ZTZ"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1H-gQ-G4k">
+                                <rect key="frame" x="224" y="241" width="320" height="216"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BV1-FR-VrT" id="1gY-zt-jMj"/>
+                                    <outlet property="delegate" destination="BV1-FR-VrT" id="XH3-Ai-rvm"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="PpS-mI-V6a" secondAttribute="centerX" id="2U3-ak-3h2"/>
+                            <constraint firstItem="PpS-mI-V6a" firstAttribute="top" secondItem="p1H-gQ-G4k" secondAttribute="bottom" constant="40" id="CFo-00-LFF"/>
                             <constraint firstAttribute="centerY" secondItem="PpS-mI-V6a" secondAttribute="centerY" id="GCs-y9-a86"/>
+                            <constraint firstAttribute="centerX" secondItem="p1H-gQ-G4k" secondAttribute="centerX" id="Pvo-MQ-0Jb"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="picker" destination="p1H-gQ-G4k" id="Zyb-UC-HNo"/>
                         <segue destination="A3N-X1-Ha1" kind="modal" identifier="playLevelSegue" id="zWk-7x-aDv"/>
                     </connections>
                 </viewController>

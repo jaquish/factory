@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Zone {
+struct Zone : Printable {
     var x: Int
     var y: Int
     
@@ -56,6 +56,11 @@ struct Zone {
     
     func toString() -> String {
         return "\(x),\(y)"
+    }
+    
+    // Printable
+    var description: String {
+        get { return "(\(x), \(y))" }
     }
 }
 
