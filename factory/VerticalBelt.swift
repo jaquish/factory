@@ -30,7 +30,7 @@ class VerticalBelt: Machine {
         addChild(sprite)
         
         addSimpleInput("input")
-        addOutput(ConnectionPoint(position:endZone.worldPoint(.center), name: "ouput"))
+        addOutput(ConnectionPoint(position:endZone.worldPoint(.center), name: "output"))
     }
 
     required init?(coder aDecoder: NSCoder) {

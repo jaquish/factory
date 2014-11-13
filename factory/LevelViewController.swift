@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class FGViewController: UIViewController {
+class LevelViewController: UIViewController {
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -19,13 +19,19 @@ class FGViewController: UIViewController {
             skView.showsFPS = true
             skView.showsNodeCount = true
             
-            let scene = MyScene(size: skView.bounds.size)
+            let scene = LevelScene(size: skView.bounds.size)
             scene.scaleMode = .AspectFill
             skView.presentScene(scene)
             
             if DEBUG_SHOW_GRID {
                 self.view.addSubview(GridOverlay(frame: self.view.bounds))
             }
+            
+            // add double-touch double-tap back to level selection screen
+            let doubleTapGesture = UITapGestureRecognizer (target: self, action: "backToLevelSelector")
+            doubleTapGesture.numberOfTapsRequired = 2
+            doubleTapGesture.numberOfTouchesRequired = 2
+            view.addGestureRecognizer(doubleTapGesture)
         }
     }
     
@@ -43,5 +49,9 @@ class FGViewController: UIViewController {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    func backToLevelSelector() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }

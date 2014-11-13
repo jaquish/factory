@@ -5,22 +5,59 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Level Select View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="FGViewController" customModule="factory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="LevelSelectViewController" customModule="factory" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="E1v-nM-qdy"/>
                         <viewControllerLayoutGuide type="bottom" id="RKi-sW-WVE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
+                    <view key="view" contentMode="scaleToFill" id="3se-qz-xqx">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PpS-mI-V6a">
+                                <rect key="frame" x="369" y="497" width="30" height="30"/>
+                                <state key="normal" title="Play">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playLevel" destination="BV1-FR-VrT" eventType="touchUpInside" id="9ad-VA-ZTZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="PpS-mI-V6a" secondAttribute="centerX" id="2U3-ak-3h2"/>
+                            <constraint firstAttribute="centerY" secondItem="PpS-mI-V6a" secondAttribute="centerY" id="GCs-y9-a86"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <segue destination="A3N-X1-Ha1" kind="modal" identifier="playLevelSegue" id="zWk-7x-aDv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="364" y="-47"/>
+        </scene>
+        <!--Level View Controller-->
+        <scene sceneID="pVb-Xc-4JR">
+            <objects>
+                <viewController id="A3N-X1-Ha1" customClass="LevelViewController" customModule="factory" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vMZ-f8-dlg"/>
+                        <viewControllerLayoutGuide type="bottom" id="YqR-dL-NQx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YJb-hj-zhI" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZRS-Kj-LPy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1324" y="-47"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

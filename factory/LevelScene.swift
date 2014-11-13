@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class MyScene: SKScene {
+class LevelScene: SKScene {
    
     var _prevTime: CFTimeInterval
     var _dt: CFTimeInterval
@@ -54,7 +54,7 @@ class MyScene: SKScene {
     }
     
     func addMachine(machine: Machine) {
-        println("added machine \(machine.name) at \(machine.position)")
+        println("added machine \(machine)")
         machines.append(machine)
         addChild(machine)
     }

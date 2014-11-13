@@ -95,6 +95,6 @@ class Machine: SKSpriteNode {
     }
     
     func description() -> String {
-        return "\(name) at \(originZone)"
+        return "\(name!) at \(originZone)"
     }
 }
