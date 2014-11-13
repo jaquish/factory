@@ -13,11 +13,11 @@ class Transformer: Machine {
    
     let finalColor: UIColor
     
-    init(originZone: FGZone, color: UIColor) {
+    init(originZone: Zone, color: UIColor) {
         finalColor = color
         super.init(originZone: originZone)
         
-        addChild(FGUtil.zoneBoxWithBorder(finalColor, innerColor: UIColor.darkGrayColor()))
+        addChild(Util.zoneBoxWithBorder(finalColor, innerColor: UIColor.darkGrayColor()))
         
         addSimpleInput("input")
         addSimpleOutput("output")

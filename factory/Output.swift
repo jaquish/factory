@@ -18,22 +18,22 @@ class Output: Machine {
         }
     }
     
-    override init(originZone: FGZone) {
+    override init(originZone: Zone) {
         
         let title = SKLabelNode()
-        title.position = compassPointOfZone(.center, FGZoneZero)
-        title.position.y += 8
+        title.position = ZoneZero.worldPoint(.center)
+        title.position.y += 4
         title.fontSize = LabelFontSize
         title.text = "OUT"
         
         label = SKLabelNode()
-        label.position = compassPointOfZone(.center, FGZoneZero)
-        label.position.y -= 25
+        label.position = ZoneZero.worldPoint(.center)
+        label.position.y -= 20
         label.fontSize = LabelFontSize
         
         super.init(originZone: originZone)
         
-        addChild(FGUtil .zoneBoxWithBorder(UIColor.grayColor(), innerColor:UIColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 1.0)))
+        addChild(Util .zoneBoxWithBorder(UIColor.grayColor(), innerColor:UIColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 1.0)))
         addChild(title)
         addChild(label)
         addSimpleInput("input")

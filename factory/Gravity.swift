@@ -11,12 +11,12 @@ import SpriteKit
 
 class Gravity: Machine {
     
-    let kGravityPointsPerSecond: CGFloat = 300.0
+    let kGravityPointsPerSecond: CGFloat = 300.0    // gravity linear
     
     var falling: [Widge]
-    let endZone: FGZone
+    let endZone: Zone
     
-    init(originZone: FGZone, endZone: FGZone) {
+    init(originZone: Zone, endZone: Zone) {
         self.endZone = endZone
         self.falling = Array()
         
@@ -24,8 +24,8 @@ class Gravity: Machine {
         
         self.zPosition = SpriteLayerBehindWidges
         
-        addInput (ConnectionPoint(position: centerOf(originZone), name: "top"))
-        addOutput(ConnectionPoint(position: centerOf(endZone),    name: "bottom"))
+        addInput (ConnectionPoint(position: originZone.worldPoint(.center), name: "top"))
+        addOutput(ConnectionPoint(position:    endZone.worldPoint(.center), name: "bottom"))
     }
 
     required init?(coder aDecoder: NSCoder) {

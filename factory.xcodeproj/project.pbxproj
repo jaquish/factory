@@ -23,6 +23,7 @@
 		84872C17182607D5008F86DE /* factoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C16182607D5008F86DE /* factoryTests.m */; };
 		924B1A4219A95AC10096EED9 /* Connector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924B1A4119A95AC10096EED9 /* Connector.swift */; };
 		924B1A4519A95B060096EED9 /* ConnectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924B1A4419A95B060096EED9 /* ConnectorTests.swift */; };
+		92576EC71A14679F00815C05 /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92576EC61A14679F00815C05 /* Zone.swift */; };
 		9270239D1A08A7B2004DB6CB /* Widge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9270239C1A08A7B2004DB6CB /* Widge.swift */; };
 		928933201A0EAF220013A598 /* Gravity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289331F1A0EAF220013A598 /* Gravity.swift */; };
 		928933221A0EB17F0013A598 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928933211A0EB17F0013A598 /* Input.swift */; };
@@ -32,7 +33,7 @@
 		9289332A1A0EBF750013A598 /* VerticalBelt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928933291A0EBF750013A598 /* VerticalBelt.swift */; };
 		9289332C1A0ECD160013A598 /* MyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289332B1A0ECD160013A598 /* MyScene.swift */; };
 		9289332E1A0ECDB40013A598 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289332D1A0ECDB40013A598 /* Constants.swift */; };
-		928933301A0ECEB90013A598 /* FGUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289332F1A0ECEB90013A598 /* FGUtil.swift */; };
+		928933301A0ECEB90013A598 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289332F1A0ECEB90013A598 /* Utility.swift */; };
 		92AB7F771A0B3AB500128B91 /* Machine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB7F761A0B3AB500128B91 /* Machine.swift */; };
 		92AB7F791A0B568C00128B91 /* Belt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB7F781A0B568C00128B91 /* Belt.swift */; };
 		92C1FCA319E9D439001C1178 /* ConnectionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FCA219E9D439001C1178 /* ConnectionPoint.swift */; };
@@ -73,6 +74,7 @@
 		924B1A4119A95AC10096EED9 /* Connector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connector.swift; sourceTree = "<group>"; };
 		924B1A4319A95B050096EED9 /* factoryTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "factoryTests-Bridging-Header.h"; path = "../factory/factoryTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		924B1A4419A95B060096EED9 /* ConnectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectorTests.swift; path = ../factory/ConnectorTests.swift; sourceTree = "<group>"; };
+		92576EC61A14679F00815C05 /* Zone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zone.swift; sourceTree = "<group>"; };
 		9270239C1A08A7B2004DB6CB /* Widge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Widge.swift; sourceTree = "<group>"; };
 		9289331F1A0EAF220013A598 /* Gravity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gravity.swift; sourceTree = "<group>"; };
 		928933211A0EB17F0013A598 /* Input.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
@@ -82,7 +84,7 @@
 		928933291A0EBF750013A598 /* VerticalBelt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalBelt.swift; sourceTree = "<group>"; };
 		9289332B1A0ECD160013A598 /* MyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyScene.swift; sourceTree = "<group>"; };
 		9289332D1A0ECDB40013A598 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		9289332F1A0ECEB90013A598 /* FGUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FGUtil.swift; sourceTree = "<group>"; };
+		9289332F1A0ECEB90013A598 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		92AB7F761A0B3AB500128B91 /* Machine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Machine.swift; sourceTree = "<group>"; };
 		92AB7F781A0B568C00128B91 /* Belt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Belt.swift; sourceTree = "<group>"; };
 		92C1FCA219E9D439001C1178 /* ConnectionPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionPoint.swift; sourceTree = "<group>"; };
@@ -177,7 +179,8 @@
 				84872C03182607D5008F86DE /* Images.xcassets */,
 				84872BED182607D4008F86DE /* Supporting Files */,
 				9289332D1A0ECDB40013A598 /* Constants.swift */,
-				9289332F1A0ECEB90013A598 /* FGUtil.swift */,
+				9289332F1A0ECEB90013A598 /* Utility.swift */,
+				92576EC61A14679F00815C05 /* Zone.swift */,
 			);
 			path = factory;
 			sourceTree = "<group>";
@@ -283,7 +286,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = FG;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Zach Jaquish";
 				TargetAttributes = {
 					84872BE0182607D4008F86DE = {
@@ -344,8 +347,9 @@
 				928933201A0EAF220013A598 /* Gravity.swift in Sources */,
 				92C7FB001A0F070000ED13AD /* FGViewController.swift in Sources */,
 				928933261A0EB8CE0013A598 /* Transformer.swift in Sources */,
-				928933301A0ECEB90013A598 /* FGUtil.swift in Sources */,
+				928933301A0ECEB90013A598 /* Utility.swift in Sources */,
 				928933241A0EB37C0013A598 /* Output.swift in Sources */,
+				92576EC71A14679F00815C05 /* Zone.swift in Sources */,
 				9270239D1A08A7B2004DB6CB /* Widge.swift in Sources */,
 				9289332A1A0EBF750013A598 /* VerticalBelt.swift in Sources */,
 				924B1A4219A95AC10096EED9 /* Connector.swift in Sources */,
@@ -411,7 +415,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -451,7 +454,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -498,6 +500,7 @@
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "factory/factory-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -518,6 +521,7 @@
 				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "factory/factory-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -525,7 +529,6 @@
 		84872C1E182607D5008F86DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/factory.app/factory";
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -552,7 +555,6 @@
 		84872C1F182607D5008F86DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/factory.app/factory";
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (

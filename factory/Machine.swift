@@ -11,9 +11,9 @@ import SpriteKit
 
 class Machine: SKSpriteNode {
 
-    var originZone: FGZone = FGZoneZero {  // The most lower-left zone of the machine.
+    var originZone: Zone = ZoneZero {  // The most lower-left zone of the machine.
         didSet {
-            position = compassPointOfZone(.SW, originZone)
+            position = originZone.worldPoint(.SW)
         }
     }
     
@@ -21,12 +21,12 @@ class Machine: SKSpriteNode {
     var connectionPointOutputs: [ConnectionPoint] = Array()
     var connectors: [String:Connector] = Dictionary()
     
-    init(originZone: FGZone) {
+    init(originZone: Zone) {
         super.init(texture: nil, color: nil, size: CGSizeZero)
         self.anchorPoint = CGPointZero
         self.zPosition = SpriteLayerInFrontOfWidges
         self.originZone = originZone
-        position = compassPointOfZone(.SW, originZone)  // :-( no didSet
+        position = originZone.worldPoint(.SW)  // :-( no didSet
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -34,11 +34,11 @@ class Machine: SKSpriteNode {
     }
     
     func update(_dt: CFTimeInterval) {
-         // Do something
+         fatalError("update has not been implemented")
     }
     
     func propogate() {
-        // Do something
+        fatalError("propogate has not been implemented")
     }
     
     func organizeConnectors() {
@@ -64,12 +64,12 @@ class Machine: SKSpriteNode {
     }
     
     func addSimpleInput(name: String) {
-        let cp = ConnectionPoint(position: centerOf(originZone), name: name)
+        let cp = ConnectionPoint(position: originZone.worldPoint(.center), name: name)
         self.addInput(cp)
     }
     
     func addSimpleOutput(name: String) {
-        let cp = ConnectionPoint(position: centerOf(originZone), name: name)
+        let cp = ConnectionPoint(position: originZone.worldPoint(.center), name: name)
         self.addOutput(cp)
     }
 
@@ -87,7 +87,6 @@ class Machine: SKSpriteNode {
     
     func allowConnectionWith(machine: Machine) -> Bool {
         return true // override for advanced decision making
-
     }
     
     func description() -> String {

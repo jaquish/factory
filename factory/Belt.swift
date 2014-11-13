@@ -9,16 +9,16 @@
 import UIKit
 import SpriteKit
 
-let kBeltSpeedPointsPerSecond: CGFloat = 100.0
-let kVerticalBeltWidth: CGFloat = 12.0
-
 class Belt: Machine {
    
-    let endZone: FGZone
+    let kBeltSpeedPointsPerSecond: CGFloat = 100.0
+    let kVerticalBeltWidth: CGFloat = 12.0
+    
+    let endZone: Zone
     
     var moving: [Widge]
     
-    init(originZone: FGZone, endZone: FGZone) {
+    init(originZone: Zone, endZone: Zone) {
         self.endZone = endZone
         self.moving = Array()
 
@@ -26,17 +26,17 @@ class Belt: Machine {
         
         self.zPosition = SpriteLayerBehindWidges
         
-        let spriteNode = SKSpriteNode(color: UIColor.grayColor(), size: CGSizeMake(ZoneSize * (endZone.x - originZone.x + 1), kVerticalBeltWidth))
+        let spriteNode = SKSpriteNode(color: UIColor.grayColor(), size: CGSizeMake(ZoneSize * CGFloat(endZone.x - originZone.x + 1), kVerticalBeltWidth))
         spriteNode.anchorPoint = CGPointZero
         addChild(spriteNode)
         
         for i in stride(from: self.originZone.x, through: self.endZone.x, by: 1) {
-            let p = centerOf(FGZoneMake(i, originZone.y))
+            let p = Zone(i, originZone.y).worldPoint(.center)
             addInput (ConnectionPoint(position: p, name:  "input-\(i)"))
             addOutput(ConnectionPoint(position: p, name: "output-\(i)"))
         }
         
-        addOutput(ConnectionPoint(position: centerOf(zoneInDirectionFromZone(.E, endZone)), name: "over-right-edge"))
+        addOutput(ConnectionPoint(position:endZone.zone(.E).worldPoint(.center), name: "over-right-edge"))
     }
 
     required init?(coder aDecoder: NSCoder) {

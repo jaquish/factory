@@ -13,15 +13,15 @@ class Input: Machine {
    
     var generated: [Widge]
     
-    override init(originZone: FGZone) {
+    override init(originZone: Zone) {
         generated = Array()
         super.init(originZone: originZone)
         
-        addChild(FGUtil.zoneBoxWithBorder(UIColor.grayColor(), innerColor: UIColor(red: 0.2, green: 0.8, blue: 0.2, alpha: 1.0)))
+        addChild(Util.zoneBoxWithBorder(UIColor.grayColor(), innerColor: UIColor(red: 0.2, green: 0.8, blue: 0.2, alpha: 1.0)))
         
         let label = SKLabelNode()
         label.verticalAlignmentMode = .Center
-        label.position = centerOf(FGZoneZero)
+        label.position = ZoneZero.worldPoint(.center)
         label.text = "IN"
         label.fontSize = LabelFontSize
         addChild(label)
@@ -39,7 +39,7 @@ class Input: Machine {
     
     func generateWidge() {
         let widge = Widge.redWidge()
-        widge.position = compassPointOfZone(.center, originZone)
+        widge.position = originZone.worldPoint(.center)
         generated.append(widge)
         scene?.addChild(widge)
     }

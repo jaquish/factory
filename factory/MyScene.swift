@@ -28,47 +28,47 @@ class MyScene: SKScene {
         
         self.machines = Array()
         self.backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)
-        input = Input(originZone: FGZoneMake(2, 8))
+        input = Input(originZone: Zone(2, 8))
         input!.name = "input"
         addMachine(input!)
         
-        let gravity = Gravity(originZone: FGZoneMake(2, 8), endZone: FGZoneMake(2, 2))
+        let gravity = Gravity(originZone: Zone(2, 8), endZone: Zone(2, 2))
         gravity.name = "gravity1"
         addMachine(gravity)
         
-        let belt = Belt(originZone: FGZoneMake(2, 2), endZone: FGZoneMake(7, 2))
+        let belt = Belt(originZone: Zone(2, 2), endZone: Zone(7, 2))
         belt.name = "belt"
         addMachine(belt)
         
-        let transformer = Transformer(originZone: FGZoneMake(4, 2), color: UIColor.yellowColor())
+        let transformer = Transformer(originZone: Zone(4, 2), color: UIColor.yellowColor())
         transformer.name = "transformer"
         addMachine(transformer)
         
-        let transformer2 = Transformer(originZone: FGZoneMake(6, 2), color: UIColor.greenColor())
+        let transformer2 = Transformer(originZone: Zone(6, 2), color: UIColor.greenColor())
         transformer2.name = "transformer-2"
         addMachine(transformer2)
 
-        let transferBox = TransferBox(originZone: FGZoneMake(8, 2))
+        let transferBox = TransferBox(originZone: Zone(8, 2))
         transferBox.name = "transfer-box"
         addMachine(transferBox)
         
-        let transferBox2 = TransferBox(originZone: FGZoneMake(8, 7))
+        let transferBox2 = TransferBox(originZone: Zone(8, 7))
         transferBox2.name = "transfer-box-2"
         addMachine(transferBox2)
         
-        let verticalBelt = VerticalBelt(originZone: FGZoneMake(8, 2), endZone: FGZoneMake(8, 7))
+        let verticalBelt = VerticalBelt(originZone: Zone(8, 2), endZone: Zone(8, 7))
         verticalBelt.name = "vertical"
         addMachine(verticalBelt)
         
-        let belt2 = Belt(originZone: FGZoneMake(8,7), endZone: FGZoneMake(11,7))
+        let belt2 = Belt(originZone: Zone(8,7), endZone: Zone(11,7))
         belt2.name = "belt-2"
         addMachine(belt2)
         
-        let gravity2 = Gravity(originZone: FGZoneMake(12,7), endZone: FGZoneMake(12,0))
+        let gravity2 = Gravity(originZone: Zone(12,7), endZone: Zone(12,0))
         gravity2.name = "gravity2"
         addMachine(gravity2)
         
-        let output = Output(originZone: FGZoneMake(12, 0))
+        let output = Output(originZone: Zone(12, 0))
         output.name = "output"
         addMachine(output)
         

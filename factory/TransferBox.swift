@@ -11,17 +11,17 @@ import SpriteKit
 
 class TransferBox: Machine {
 
-    override init(originZone: FGZone) {
+    override init(originZone: Zone) {
         super.init(originZone: originZone)
         zPosition = SpriteLayerInFrontOfWidges
         
-        addChild(FGUtil.zoneBoxWithBorder(UIColor.darkGrayColor(), innerColor: UIColor.grayColor()))
+        addChild(Util.zoneBoxWithBorder(UIColor.darkGrayColor(), innerColor: UIColor.grayColor()))
         
-        let input = ConnectionPoint(position: centerOf(originZone), name: "input")
+        let input = ConnectionPoint(position: originZone.worldPoint(.center), name: "input")
         input.priority = 1
         addInput(input)
         
-        let output = ConnectionPoint(position: centerOf(originZone), name: "output")
+        let output = ConnectionPoint(position: originZone.worldPoint(.center), name: "output")
         input.priority = 1
         addOutput(output)
     }

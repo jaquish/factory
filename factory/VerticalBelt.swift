@@ -15,9 +15,9 @@ class VerticalBelt: Machine {
     let kVerticalBeltWidth: CGFloat = 30.0
     
     var moving: [Widge]
-    let endZone: FGZone
+    let endZone: Zone
 
-    init(originZone: FGZone, endZone: FGZone) {
+    init(originZone: Zone, endZone: Zone) {
         
         self.endZone = endZone
         self.moving  = Array()
@@ -25,12 +25,12 @@ class VerticalBelt: Machine {
         
         zPosition = SpriteLayerBehindWidges
         
-        let sprite = SKSpriteNode(color: UIColor(red: 0.0, green: 0.4, blue: 0.9, alpha: 1.0), size: CGSizeMake(kVerticalBeltWidth, ZoneSize * (endZone.y - originZone.y + 1)))
+        let sprite = SKSpriteNode(color: UIColor(red: 0.0, green: 0.4, blue: 0.9, alpha: 1.0), size: CGSizeMake(kVerticalBeltWidth, ZoneSize * CGFloat(endZone.y - originZone.y + 1)))
         sprite.anchorPoint = CGPointZero
         addChild(sprite)
         
         addSimpleInput("input")
-        addOutput(ConnectionPoint(position: centerOf(endZone), name: "ouput"))
+        addOutput(ConnectionPoint(position:endZone.worldPoint(.center), name: "ouput"))
     }
 
     required init?(coder aDecoder: NSCoder) {
