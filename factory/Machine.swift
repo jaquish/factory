@@ -9,8 +9,10 @@
 import UIKit
 import SpriteKit
 
-class Machine: SKSpriteNode {
+var machineCount = 0
 
+class Machine: SKSpriteNode {
+    
     var originZone: Zone = ZoneZero {  // The most lower-left zone of the machine.
         didSet {
             position = originZone.worldPoint(.SW)
@@ -27,6 +29,9 @@ class Machine: SKSpriteNode {
         self.zPosition = SpriteLayerInFrontOfWidges
         self.originZone = originZone
         position = originZone.worldPoint(.SW)  // :-( no didSet
+        
+        machineCount++
+        self.name = "\(NSStringFromClass(self.dynamicType))-\(machineCount)"
     }
 
     required init?(coder aDecoder: NSCoder) {
