@@ -30,38 +30,21 @@ class MyScene: SKScene {
         
         self.machines = Array()
         self.backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)
-        input = Input(originZone: Zone(2, 8))
+        input = Input(Zone(2, 8))
         addMachine(input!)
         
-        let gravity = Gravity(originZone: Zone(2, 8), endZone: Zone(2, 2))
-        addMachine(gravity)
-        
-        let belt = Belt(originZone: Zone(2, 2), endZone: Zone(7, 2))
-        addMachine(belt)
-        
-        let transformer = Transformer(originZone: Zone(4, 2), color: UIColor.yellowColor())
-        addMachine(transformer)
-        
-        let transformer2 = Transformer(originZone: Zone(6, 2), color: UIColor.greenColor())
-        addMachine(transformer2)
-
-        let transferBox = TransferBox(originZone: Zone(8, 2))
-        addMachine(transferBox)
-        
-        let transferBox2 = TransferBox(originZone: Zone(8, 7))
-        addMachine(transferBox2)
-        
-        let verticalBelt = VerticalBelt(originZone: Zone(8, 2), endZone: Zone(8, 7))
-        addMachine(verticalBelt)
-        
-        let belt2 = Belt(originZone: Zone(8,7), endZone: Zone(11,7))
-        addMachine(belt2)
-        
-        let gravity2 = Gravity(originZone: Zone(12,7), endZone: Zone(12,0))
-        addMachine(gravity2)
-        
-        let output = Output(originZone: Zone(12, 0))
-        addMachine(output)
+        addMachines([
+            Gravity(from: Zone(2, 8), thru: Zone(2, 2)),
+            Belt(from: Zone(2, 2), thru: Zone(7, 2)),
+            Transformer(Zone(4, 2), color: UIColor.yellowColor()),
+            Transformer(Zone(6, 2), color: UIColor.greenColor()),
+            TransferBox(Zone(8, 2)),
+            TransferBox(Zone(8, 7)),
+            VerticalBelt(from: Zone(8, 2), thru: Zone(8, 7)),
+            Belt(from: Zone(8,7), thru: Zone(11,7)),
+            Gravity(from: Zone(12,7), thru: Zone(12,0)),
+            Output(originZone: Zone(12, 0))
+        ])
         
         makeConnections()
     }
@@ -74,6 +57,10 @@ class MyScene: SKScene {
         println("added machine \(machine.name) at \(machine.position)")
         machines.append(machine)
         addChild(machine)
+    }
+    
+    func addMachines(machines: [Machine]) {
+        machines.map { self.addMachine($0) }
     }
     
     func makeConnections() {

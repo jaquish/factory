@@ -16,11 +16,11 @@ class Gravity: Machine {
     var falling: [Widge]
     let endZone: Zone
     
-    init(originZone: Zone, endZone: Zone) {
-        self.endZone = endZone
+    init(from: Zone, thru: Zone) {
+        self.endZone = thru
         self.falling = Array()
         
-        super.init(originZone: originZone)
+        super.init(originZone: from)
         
         self.zPosition = SpriteLayerBehindWidges
         

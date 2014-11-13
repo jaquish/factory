@@ -17,11 +17,11 @@ class VerticalBelt: Machine {
     var moving: [Widge]
     let endZone: Zone
 
-    init(originZone: Zone, endZone: Zone) {
+    init(from: Zone, thru: Zone) {
         
-        self.endZone = endZone
+        self.endZone = thru
         self.moving  = Array()
-        super.init(originZone: originZone)
+        super.init(originZone: from)
         
         zPosition = SpriteLayerBehindWidges
         

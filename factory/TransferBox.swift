@@ -11,7 +11,7 @@ import SpriteKit
 
 class TransferBox: Machine {
 
-    override init(originZone: Zone) {
+    init(_ originZone: Zone) {
         super.init(originZone: originZone)
         zPosition = SpriteLayerInFrontOfWidges
         

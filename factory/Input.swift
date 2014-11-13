@@ -13,7 +13,7 @@ class Input: Machine {
    
     var generated: [Widge]
     
-    override init(originZone: Zone) {
+    init(_ originZone: Zone) {
         generated = Array()
         super.init(originZone: originZone)
         

@@ -13,7 +13,7 @@ class Transformer: Machine {
    
     let finalColor: UIColor
     
-    init(originZone: Zone, color: UIColor) {
+    init(_ originZone: Zone, color: UIColor) {
         finalColor = color
         super.init(originZone: originZone)
         

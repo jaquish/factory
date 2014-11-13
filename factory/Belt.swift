@@ -18,11 +18,11 @@ class Belt: Machine {
     
     var moving: [Widge]
     
-    init(originZone: Zone, endZone: Zone) {
-        self.endZone = endZone
+    init(from: Zone, thru: Zone) {
+        self.endZone = thru
         self.moving = Array()
 
-        super.init(originZone: originZone)
+        super.init(originZone: from)
         
         self.zPosition = SpriteLayerBehindWidges
         
