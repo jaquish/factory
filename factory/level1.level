@@ -1,7 +1,7 @@
 @Metadata
-Version:1.0
+Format-Version:1.0
 Name:Level 1
-#
+
 @Machines
 Input 2,8
 Gravity 2,8 2,2

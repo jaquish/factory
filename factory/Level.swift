@@ -9,7 +9,7 @@
 import UIKit
 
 enum ParseSection {
-    case Unknown, Metadata, Machines
+    case Unknown, Metadata, Machines, Widges, Context, Actions
 }
 
 class Level: NSObject {
@@ -28,63 +28,97 @@ class Level: NSObject {
         
         for line in stringData?.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()) as [String] {
             
-            if !line.hasPrefix("#") {
-                
-                if line.hasPrefix("@Metadata") {
-                    section = .Metadata
-                    continue
-                } else if line.hasPrefix("@Machines") {
-                    section = .Machines
-                    continue
-                }
-                
-                switch section {
-                    case .Metadata:
-                        let parts = line.componentsSeparatedByString(":") as [String]
-                        assert(parts.count == 2, "Expected key and value for metadata")
-                        let key = parts[0]
-                        let value = parts[1]
-                        metadata[key] = value
-                    
-                    case .Machines:
-                        let parts = line.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) as [String]
-                        
-                        let machineType = parts[0]
-                        
-                        if machineType == "Belt" {
-                            assert(parts.count == 3, "Not the right amount of arguments")
-                            machines.append(Belt(from: Zone(parts[1]), thru: Zone(parts[2])))
-                            
-                        } else if machineType == "Gravity" {
-                            assert(parts.count == 3, "Not the right amount of arguments")
-                            machines.append(Gravity(from: Zone(parts[1]), thru: Zone(parts[2])))
-                            
-                        } else if machineType == "Input" {
-                            assert(parts.count == 2, "Not the right amount of arguments")
-                            input = Input(Zone(parts[1]))
-                            machines.append(input)
-                            
-                        } else if machineType == "Output" {
-                            assert(parts.count == 2, "Not the right amount of arguments")
-                            machines.append(Output(Zone(parts[1])))
-                            
-                        } else if machineType == "Transformer" {
-                            assert(parts.count == 3, "Not the right amount of arguments")
-                            machines.append(Transformer(Zone(parts[1]), color:UIColor(parts[2])))
-                            
-                        } else if machineType == "TransferBox" {
-                            assert(parts.count == 2, "Not the right amount of arguments")
-                            machines.append(TransferBox(Zone(parts[1])))
-                            
-                        } else if machineType == "VerticalBelt" {
-                            assert(parts.count == 3, "Not the right amount of arguments")
-                            machines.append(VerticalBelt(from: Zone(parts[1]), thru: Zone(parts[2])))
-                        }
-                    
-                    default:
-                        break;
-                }
+            // Use # to mark comments. Empty lines (all whitespace) are also ignored.
+            if line.hasPrefix("#") ||
+               line.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).isEmpty {
+                continue
             }
+            if line.hasPrefix("@Metadata") {
+                section = .Metadata
+                continue
+            } else if line.hasPrefix("@Machines") {
+                section = .Machines
+                continue
+            } else if line.hasPrefix("@Context") {
+                section = .Context
+                continue
+            } else if line.hasPrefix("@Actions") {
+                section = .Actions
+                continue
+            }
+            
+            switch section {
+            case .Metadata:
+                let parts = line.componentsSeparatedByString(":") as [String]
+                assert(parts.count == 2, "Expected key and value for metadata")
+                let key = parts[0]
+                let value = parts[1]
+                metadata[key] = value
+                
+            case .Machines:
+                let parts = line.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) as [String]
+                
+                let machineType = parts[0]
+                
+                if machineType == "Belt" {
+                    assert(parts.count == 3, "Not the right amount of arguments")
+                    machines.append(Belt(from: Zone(parts[1]), thru: Zone(parts[2])))
+                    
+                } else if machineType == "Gravity" {
+                    assert(parts.count == 3, "Not the right amount of arguments")
+                    machines.append(Gravity(from: Zone(parts[1]), thru: Zone(parts[2])))
+                    
+                } else if machineType == "Input" {
+                    assert(parts.count == 2, "Not the right amount of arguments")
+                    input = Input(Zone(parts[1]))
+                    machines.append(input)
+                    
+                } else if machineType == "Output" {
+                    assert(parts.count == 2, "Not the right amount of arguments")
+                    machines.append(Output(Zone(parts[1])))
+                    
+                } else if machineType == "Transformer" {
+                    assert(parts.count == 3, "Not the right amount of arguments")
+                    machines.append(Transformer(Zone(parts[1]), color:UIColor(parts[2])))
+                    
+                } else if machineType == "TransferBox" {
+                    assert(parts.count == 2, "Not the right amount of arguments")
+                    machines.append(TransferBox(Zone(parts[1])))
+                    
+                } else if machineType == "VerticalBelt" {
+                    assert(parts.count == 3, "Not the right amount of arguments")
+                    machines.append(VerticalBelt(from: Zone(parts[1]), thru: Zone(parts[2])))
+                }
+                
+            case .Widges:
+                if line == "[default]" {
+                    // register default set
+                    break
+                }
+                
+                let parts = line.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) as [String]
+                
+            case .Context:
+                let parts = line.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) as [String]
+                
+                if parts[0].hasPrefix("inputs") {
+                    let widgeIDs = parts[1].componentsSeparatedByString(",")
+                    // mark widge as input
+                    
+                } else if parts[0].hasPrefix("winning-outputs") {
+                    let widgeIDs = parts[1].componentsSeparatedByString(",")
+                    // mark widge as output
+                }
+                
+            case .Actions:
+                break;
+            default:
+                break;
+            }
+        }
+        
+        func registerWidge(widge: Widge) {
+            
         }
     }
     

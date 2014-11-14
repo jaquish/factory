@@ -26,6 +26,7 @@
 		92576EC71A14679F00815C05 /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92576EC61A14679F00815C05 /* Zone.swift */; };
 		92576EC91A14791800815C05 /* LevelSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92576EC81A14791800815C05 /* LevelSelectViewController.swift */; };
 		926BD2951A15DFCA005BD6FF /* level2.level in Resources */ = {isa = PBXBuildFile; fileRef = 926BD2941A15DFCA005BD6FF /* level2.level */; };
+		926BD2971A15FAE4005BD6FF /* LevelTemplate in Resources */ = {isa = PBXBuildFile; fileRef = 926BD2961A15FAE4005BD6FF /* LevelTemplate */; };
 		9270239D1A08A7B2004DB6CB /* Widge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9270239C1A08A7B2004DB6CB /* Widge.swift */; };
 		928933201A0EAF220013A598 /* Gravity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289331F1A0EAF220013A598 /* Gravity.swift */; };
 		928933221A0EB17F0013A598 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928933211A0EB17F0013A598 /* Input.swift */; };
@@ -81,6 +82,7 @@
 		92576EC61A14679F00815C05 /* Zone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zone.swift; sourceTree = "<group>"; };
 		92576EC81A14791800815C05 /* LevelSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectViewController.swift; sourceTree = "<group>"; };
 		926BD2941A15DFCA005BD6FF /* level2.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2.level; sourceTree = "<group>"; };
+		926BD2961A15FAE4005BD6FF /* LevelTemplate */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LevelTemplate; sourceTree = "<group>"; };
 		9270239C1A08A7B2004DB6CB /* Widge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Widge.swift; sourceTree = "<group>"; };
 		9289331F1A0EAF220013A598 /* Gravity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gravity.swift; sourceTree = "<group>"; };
 		928933211A0EB17F0013A598 /* Input.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			children = (
 				92C7FAFF1A0F070000ED13AD /* LevelViewController.swift */,
 				9289332B1A0ECD160013A598 /* LevelScene.swift */,
+				92C62CEC1A148B3D00DC2D5C /* Level.swift */,
 			);
 			name = "Level Scene";
 			sourceTree = "<group>";
@@ -261,7 +264,7 @@
 		92C62CEE1A148C1800DC2D5C /* Levels */ = {
 			isa = PBXGroup;
 			children = (
-				92C62CEC1A148B3D00DC2D5C /* Level.swift */,
+				926BD2961A15FAE4005BD6FF /* LevelTemplate */,
 				92C62CEF1A148D7700DC2D5C /* level1.level */,
 				926BD2941A15DFCA005BD6FF /* level2.level */,
 			);
@@ -370,6 +373,7 @@
 				926BD2951A15DFCA005BD6FF /* level2.level in Resources */,
 				84872BFA182607D4008F86DE /* Main.storyboard in Resources */,
 				92C62CF01A148D7700DC2D5C /* level1.level in Resources */,
+				926BD2971A15FAE4005BD6FF /* LevelTemplate in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,16 @@
+@Metadata
+Format-Version:<string>
+Name:<string>
+
+@Machines
+
+@Widges
+[default]
+<widge id>
+
+@Context
+#inputs          <comma-separated list of widge ids>
+#winning-outputs <comma-separated list of widge ids>
+
+@Actions
+<id>
