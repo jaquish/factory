@@ -1,0 +1,10 @@
+@Metadata
+Version:1.0
+Name:Long Belts
+#
+@Machines
+Input 1,12
+Gravity 1,12 1,10
+Belt 1,10 12,10
+Gravity 13,10 13,1
+Output 13,1

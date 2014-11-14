@@ -17,33 +17,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PpS-mI-V6a">
-                                <rect key="frame" x="369" y="497" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PpS-mI-V6a">
+                                <rect key="frame" x="264" y="491" width="240" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Udj-ux-gp5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <state key="normal" title="Play">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="playLevel" destination="BV1-FR-VrT" eventType="touchUpInside" id="9ad-VA-ZTZ"/>
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1H-gQ-G4k">
-                                <rect key="frame" x="224" y="241" width="320" height="216"/>
+                                <rect key="frame" x="224" y="235" width="320" height="216"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BV1-FR-VrT" id="1gY-zt-jMj"/>
                                     <outlet property="delegate" destination="BV1-FR-VrT" id="XH3-Ai-rvm"/>
                                 </connections>
                             </pickerView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N44-cX-Axx">
+                                <rect key="frame" x="234" y="572" width="300" height="431.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="7ai-8v-Q26"/>
+                                </constraints>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="N44-cX-Axx" secondAttribute="centerX" id="0Ge-6r-Ohp"/>
                             <constraint firstAttribute="centerX" secondItem="PpS-mI-V6a" secondAttribute="centerX" id="2U3-ak-3h2"/>
+                            <constraint firstItem="N44-cX-Axx" firstAttribute="top" secondItem="PpS-mI-V6a" secondAttribute="bottom" constant="40" id="5hL-5b-jeF"/>
                             <constraint firstItem="PpS-mI-V6a" firstAttribute="top" secondItem="p1H-gQ-G4k" secondAttribute="bottom" constant="40" id="CFo-00-LFF"/>
                             <constraint firstAttribute="centerY" secondItem="PpS-mI-V6a" secondAttribute="centerY" id="GCs-y9-a86"/>
                             <constraint firstAttribute="centerX" secondItem="p1H-gQ-G4k" secondAttribute="centerX" id="Pvo-MQ-0Jb"/>
+                            <constraint firstItem="RKi-sW-WVE" firstAttribute="top" secondItem="N44-cX-Axx" secondAttribute="bottom" constant="20" id="s4b-Eq-sn5"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="picker" destination="p1H-gQ-G4k" id="Zyb-UC-HNo"/>
+                        <outlet property="summary" destination="N44-cX-Axx" id="B6I-ia-aUZ"/>
                         <segue destination="A3N-X1-Ha1" kind="modal" identifier="playLevelSegue" id="zWk-7x-aDv"/>
                     </connections>
                 </viewController>

@@ -10,7 +10,15 @@ import UIKit
 
 class LevelSelectViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    @IBOutlet var picker: UIPickerView?
+    var currentLevel: Level? {
+        didSet {
+            summary!.text = currentLevel?.summary()
+        }
+    }
+    var levelFileURLS = [NSURL]()
+    
+    @IBOutlet var picker: UIPickerView!
+    @IBOutlet var summary: UITextView!
     
     @IBAction func playLevel() {
         performSegueWithIdentifier("playLevelSegue", sender: self)
@@ -18,7 +26,13 @@ class LevelSelectViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let levelSelectVC = segue.destinationViewController as LevelViewController
-        levelSelectVC.level = Level(picker!.selectedRowInComponent(0))
+        levelSelectVC.level = Level(filepath:levelFileURLS[picker.selectedRowInComponent(0)])
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        summary.text = ""
+        levelFileURLS = NSBundle.mainBundle().URLsForResourcesWithExtension("level", subdirectory: nil) as [NSURL]
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -26,21 +40,14 @@ class LevelSelectViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 10
+        return levelFileURLS.count
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return "Level \(row)"
+        return levelFileURLS[row].lastPathComponent
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        currentLevel = Level(filepath:levelFileURLS[row])
     }
-    */
-
 }

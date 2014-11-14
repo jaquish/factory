@@ -1,0 +1,16 @@
+@Metadata
+Version:1.0
+Name:Level 1
+#
+@Machines
+Input 2,8
+Gravity 2,8 2,2
+Belt 2,2 7,2
+Transformer 4,2 1,1,0
+Transformer 6,2 0,1,0
+TransferBox 8,2
+TransferBox 8,7
+VerticalBelt 8,2 8,7
+Belt 8,7 11,7
+Gravity 12,7 12,0
+Output 12,0
