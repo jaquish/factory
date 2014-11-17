@@ -13,27 +13,21 @@ class LevelScene: SKScene {
    
     var _prevTime: CFTimeInterval
     var _dt: CFTimeInterval
-    var machines: [Machine]
-    
-    /* Temporary direct links */
-    var input: Input?
+    var machines: [Machine] = Array()
+    var level:Level!
 
     override init(size: CGSize) {
         
         _prevTime = 0
         _dt = 0
-        machines = Array()
-        
-        machineCount = 0
         
         super.init(size: size)
         
-        self.machines = Array()
-        self.backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)        
+        self.backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)
     }
     
     func loadLevel(level: Level) {
-        input = level.input
+        self.level = level
         addMachines(level.machines)
         makeConnections()
     }
@@ -82,7 +76,7 @@ class LevelScene: SKScene {
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        input?.generateWidge()
+        level.inputMachine.generateWidge()
     }
     
     override func update(currentTime: NSTimeInterval) {

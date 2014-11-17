@@ -14,3 +14,9 @@ VerticalBelt 8,2 8,7
 Belt 8,7 11,7
 Gravity 12,7 12,0
 Output 12,0
+
+@Widges
+[basic]
+
+@Context
+inputs red,yellow,blue

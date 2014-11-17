@@ -6,7 +6,7 @@ Name:<string>
 
 @Widges
 [default]
-<widge id>
+<widge id> <sprite name>
 
 @Context
 #inputs          <comma-separated list of widge ids>

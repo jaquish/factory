@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class Input: Machine {
-   
+       
     var generated: [Widge]
     
     init(_ originZone: Zone) {
@@ -25,7 +25,7 @@ class Input: Machine {
         label.text = "IN"
         label.fontSize = LabelFontSize
         addChild(label)
-        
+                
         addSimpleOutput("next")
     }
 
@@ -38,7 +38,7 @@ class Input: Machine {
     }
     
     func generateWidge() {
-        let widge = Widge.redWidge()
+        let widge = (scene as LevelScene).level.createInput()
         widge.position = originZone.worldPoint(.center)
         generated.append(widge)
         scene?.addChild(widge)

@@ -8,15 +8,3 @@ Gravity 1,12 1,10
 Belt 1,10 12,10
 Gravity 13,10 13,1
 Output 13,1
-
-<widge id>
-@Widges
-[default]
-
-#inputs          <comma-separated list of widge ids>
-#winning-outputs <comma-separated list of widge ids>
-@Context
-inputs red orange yellow green blue purple
-winning-outputs
-
-@Actions

@@ -12,7 +12,7 @@ import SpriteKit
 var machineCount = 0
 
 class Machine: SKSpriteNode {
-    
+        
     var originZone: Zone = ZoneZero {  // The most lower-left zone of the machine.
         didSet {
             position = originZone.worldPoint(.SW)

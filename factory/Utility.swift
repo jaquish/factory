@@ -19,6 +19,7 @@ class Util : NSObject {
     
     class func zoneBoxWithColor(color: UIColor) -> SKSpriteNode {
         let box = SKSpriteNode(texture: nil, color: color, size: CGSizeMake(ZoneSize, ZoneSize))
+        box.userInteractionEnabled = false
         box.anchorPoint = CGPointZero
         return box
     }
@@ -29,6 +30,7 @@ class Util : NSObject {
         
         let inner = SKSpriteNode(texture: nil, color: innerColor, size:CGSizeMake(ZoneSize - 2*kBorderInset, ZoneSize - 2*kBorderInset))
         inner.anchorPoint = CGPointZero
+        inner.userInteractionEnabled = false
         inner.position = CGPointMake(kBorderInset, kBorderInset)
         
         box.addChild(inner)
@@ -36,7 +38,12 @@ class Util : NSObject {
     }
 }
 
-
+extension Array {
+    func randomItem() -> T {
+        let index = Int(arc4random_uniform(UInt32(self.count)))
+        return self[index]
+    }
+}
 
 extension SKNode {
     

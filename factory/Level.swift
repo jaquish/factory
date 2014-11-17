@@ -16,7 +16,12 @@ class Level: NSObject {
    
     var section: ParseSection = .Unknown
 
-    var input: Input!
+    var inputMachine: Input!
+    var inputWidgeTypes  = [String]()
+    var outputWidgeTypes = [String]()
+    
+    var widgeTypes = [String : String]()
+
     var machines: [Machine] = Array()
     
     var metadata = [String : AnyObject]()
@@ -38,6 +43,9 @@ class Level: NSObject {
                 continue
             } else if line.hasPrefix("@Machines") {
                 section = .Machines
+                continue
+            } else if line.hasPrefix("@Widges") {
+                section = .Widges
                 continue
             } else if line.hasPrefix("@Context") {
                 section = .Context
@@ -70,8 +78,8 @@ class Level: NSObject {
                     
                 } else if machineType == "Input" {
                     assert(parts.count == 2, "Not the right amount of arguments")
-                    input = Input(Zone(parts[1]))
-                    machines.append(input)
+                    inputMachine = Input(Zone(parts[1]))
+                    machines.append(inputMachine)
                     
                 } else if machineType == "Output" {
                     assert(parts.count == 2, "Not the right amount of arguments")
@@ -91,23 +99,29 @@ class Level: NSObject {
                 }
                 
             case .Widges:
-                if line == "[default]" {
-                    // register default set
+                if line == "[basic]" {
+                    register("red",     spriteName: "$\(UIColor.redColor().toString())")
+                    register("orange",  spriteName: "$\(UIColor.orangeColor().toString())")
+                    register("yellow",  spriteName: "$\(UIColor.yellowColor().toString())")
+                    register("green",   spriteName: "$\(UIColor.greenColor().toString())")
+                    register("blue",    spriteName: "$\(UIColor.blueColor().toString())")
+                    register("purple",  spriteName: "$\(UIColor.purpleColor().toString())")
                     break
                 }
                 
                 let parts = line.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) as [String]
+                assert(parts.count == 2, "Not the right amount of arguments")
                 
             case .Context:
                 let parts = line.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) as [String]
                 
                 if parts[0].hasPrefix("inputs") {
-                    let widgeIDs = parts[1].componentsSeparatedByString(",")
-                    // mark widge as input
+                    let widgeTypeIDs = parts[1].componentsSeparatedByString(",")
+                    inputWidgeTypes += widgeTypeIDs
                     
                 } else if parts[0].hasPrefix("winning-outputs") {
-                    let widgeIDs = parts[1].componentsSeparatedByString(",")
-                    // mark widge as output
+                    let widgeTypeIDs = parts[1].componentsSeparatedByString(",")
+                    outputWidgeTypes += widgeTypeIDs
                 }
                 
             case .Actions:
@@ -115,10 +129,6 @@ class Level: NSObject {
             default:
                 break;
             }
-        }
-        
-        func registerWidge(widge: Widge) {
-            
         }
     }
     
@@ -133,6 +143,25 @@ class Level: NSObject {
         }
         return summary
     }
+    
+    func register(typeName:String, spriteName:String) {
+        widgeTypes[typeName] = spriteName
+    }
+    
+    func createWidge(widgeTypeID: String) -> Widge {
+        var spriteName = widgeTypes[widgeTypeID]!
+        if spriteName.hasPrefix("$") {
+            spriteName = spriteName.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "$"))
+            return Widge.widgeWith(UIColor(spriteName))
+        } else {
+            println("Warning! not ready to process")
+            return Widge.redWidge()
+        }
+    }
+    
+    func createInput() -> Widge {
+        return createWidge(inputWidgeTypes.randomItem())
+    }
 }
 
 extension UIColor {
@@ -140,7 +169,7 @@ extension UIColor {
         var r:CGFloat = 0
         var g:CGFloat = 0
         var b:CGFloat = 0
-        self.getRed(&r, green: &g, blue: &r, alpha: nil)
+        self.getRed(&r, green: &g, blue: &b, alpha: nil)
         return "\(r),\(g),\(b)"
     }
     
