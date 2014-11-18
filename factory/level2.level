@@ -2,6 +2,9 @@
 Format-Version:1.0
 Name:Long Belts
 
+@Widges
+[basic]
+
 @Machines
 Input 1,12
 Gravity 1,12 1,10

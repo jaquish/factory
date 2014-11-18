@@ -27,6 +27,9 @@ class Level: NSObject {
     
     var metadata = [String : AnyObject]()
     
+    var outputs = [String : Int]()
+    var endgame_output_count: Int = 0
+    
     init(filepath: NSURL) {
         super.init()
         
@@ -141,6 +144,9 @@ class Level: NSObject {
                 } else if parts[0].hasPrefix("winning-outputs") {
                     let widgeTypeIDs = parts[1].componentsSeparatedByString(",")
                     outputWidgeTypes += widgeTypeIDs
+                    
+                } else if parts[0].hasPrefix("endgame-output-count") {
+                    endgame_output_count = parts[1].toInt()!
                 }
 
             default:
@@ -178,6 +184,17 @@ class Level: NSObject {
     
     func createInput() -> Widge {
         return createWidge(inputWidgeTypes.randomItem())
+    }
+    
+    func isGameOver() -> Bool {
+        return outputs.values.array.reduce(0,+) >= endgame_output_count
+    }
+    
+    func addOutput(widgeTypeID: String) {
+        if (outputs[widgeTypeID] == nil) {
+            outputs[widgeTypeID] = 0
+        }
+        outputs[widgeTypeID] = outputs[widgeTypeID]! + 1
     }
 }
 

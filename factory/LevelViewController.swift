@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class LevelViewController: UIViewController {
+class LevelViewController: UIViewController, SKSceneDelegate {
 
     var level: Level?
     
@@ -23,6 +23,7 @@ class LevelViewController: UIViewController {
             
             let scene = LevelScene(size: skView.bounds.size)
             scene.scaleMode = .AspectFill
+            scene.delegate = self
             skView.presentScene(scene)
             
             if DEBUG_SHOW_GRID {
@@ -53,6 +54,12 @@ class LevelViewController: UIViewController {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    func didFinishUpdateForScene(scene: SKScene) {
+        if level!.isGameOver() {
+            self.performSegueWithIdentifier("kSegueGameOver", sender: nil)
+        }
     }
     
     func backToLevelSelector() {

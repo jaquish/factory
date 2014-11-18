@@ -13,8 +13,9 @@ Name:<string>
 <id> <[input widgeTypeIDs]> <[success widgeTypeIDs]> <[failure widgeTypeIDs]>
 
 @Machines
+<class name> ...initializer parameters
 
 @Context
-#inputs          <[widgeTypeIDs]>
-#winning-outputs <[widgeTypeIDs]>
-
+inputs          <[widgeTypeIDs]>
+winning-outputs <[widgeTypeIDs]>
+endgame-output-count <#>
