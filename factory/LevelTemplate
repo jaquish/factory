@@ -1,16 +1,20 @@
+# Comments start with #
+# [] means a comma-delimited list, no spaces
+
 @Metadata
 Format-Version:<string>
 Name:<string>
-
-@Machines
 
 @Widges
 [default]
 <widge id> <sprite name>
 
-@Context
-#inputs          <comma-separated list of widge ids>
-#winning-outputs <comma-separated list of widge ids>
-
 @Actions
-<id>
+<id> <[input widgeTypeIDs]> <[success widgeTypeIDs]> <[failure widgeTypeIDs]>
+
+@Machines
+
+@Context
+#inputs          <[widgeTypeIDs]>
+#winning-outputs <[widgeTypeIDs]>
+

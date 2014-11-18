@@ -44,6 +44,7 @@
 		92C62CF01A148D7700DC2D5C /* level1.level in Resources */ = {isa = PBXBuildFile; fileRef = 92C62CEF1A148D7700DC2D5C /* level1.level */; };
 		92C7FB001A0F070000ED13AD /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7FAFF1A0F070000ED13AD /* LevelViewController.swift */; };
 		92C7FB021A0F07D500ED13AD /* GridOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7FB011A0F07D500ED13AD /* GridOverlay.swift */; };
+		92E51D411A19F17200F1EEA2 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E51D401A19F17200F1EEA2 /* Action.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		92C62CEF1A148D7700DC2D5C /* level1.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level1.level; sourceTree = "<group>"; };
 		92C7FAFF1A0F070000ED13AD /* LevelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
 		92C7FB011A0F07D500ED13AD /* GridOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridOverlay.swift; sourceTree = "<group>"; };
+		92E51D401A19F17200F1EEA2 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				928933251A0EB8CE0013A598 /* Transformer.swift */,
 				928933271A0EBC800013A598 /* TransferBox.swift */,
 				928933291A0EBF750013A598 /* VerticalBelt.swift */,
+				92E51D401A19F17200F1EEA2 /* Action.swift */,
 			);
 			name = Machines;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84872BF3182607D4008F86DE /* main.m in Sources */,
+				92E51D411A19F17200F1EEA2 /* Action.swift in Sources */,
 				9289332E1A0ECDB40013A598 /* Constants.swift in Sources */,
 				928933201A0EAF220013A598 /* Gravity.swift in Sources */,
 				92C7FB001A0F070000ED13AD /* LevelViewController.swift in Sources */,

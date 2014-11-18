@@ -9,7 +9,7 @@
 import UIKit
 
 enum ParseSection {
-    case Unknown, Metadata, Machines, Widges, Context, Actions
+    case Unknown, Metadata, Widges, Actions, Machines, Context
 }
 
 class Level: NSObject {
@@ -21,6 +21,7 @@ class Level: NSObject {
     var outputWidgeTypes = [String]()
     
     var widgeTypes = [String : String]()
+    var actions = [String : Action]()
 
     var machines: [Machine] = Array()
     
@@ -63,6 +64,36 @@ class Level: NSObject {
                 let value = parts[1]
                 metadata[key] = value
                 
+            case .Widges:
+                if line == "[basic]" {
+                    register("red",     spriteName: "$\(UIColor.redColor().toString())")
+                    register("orange",  spriteName: "$\(UIColor.orangeColor().toString())")
+                    register("yellow",  spriteName: "$\(UIColor.yellowColor().toString())")
+                    register("green",   spriteName: "$\(UIColor.greenColor().toString())")
+                    register("blue",    spriteName: "$\(UIColor.blueColor().toString())")
+                    register("purple",  spriteName: "$\(UIColor.purpleColor().toString())")
+                    break
+                }
+                
+                let parts = line.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) as [String]
+                assert(parts.count == 2, "Not the right amount of arguments")
+            
+                
+            case .Actions:
+                
+                let parts = line.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) as [String]
+                assert(parts.count == 4, "Not the right amount of arguments")
+                
+                let name = parts[0]
+                let actionType = ActionType(rawValue: parts[1])!
+                let inputIDs = parts[1].componentsSeparatedByString(",")
+                let successIDs = parts[2].componentsSeparatedByString(",")
+                let failureIDs = parts[3].componentsSeparatedByString(",")
+                
+                self.actions[name] = Action(actionID: name, actionType: actionType, inputTypeIDs: inputIDs, successTypeIDs: successIDs, failureTypeIDs: failureIDs)
+                
+                break;
+                
             case .Machines:
                 let parts = line.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) as [String]
                 
@@ -86,8 +117,10 @@ class Level: NSObject {
                     machines.append(Output(Zone(parts[1])))
                     
                 } else if machineType == "Transformer" {
-                    assert(parts.count == 3, "Not the right amount of arguments")
-                    machines.append(Transformer(Zone(parts[1]), color:UIColor(parts[2])))
+                    assert(parts.count == 4, "Not the right amount of arguments")
+                    
+                    let action = actions[parts[3]]!
+                    machines.append(Transformer(Zone(parts[1]), color:UIColor(parts[2]), action: action))
                     
                 } else if machineType == "TransferBox" {
                     assert(parts.count == 2, "Not the right amount of arguments")
@@ -97,20 +130,6 @@ class Level: NSObject {
                     assert(parts.count == 3, "Not the right amount of arguments")
                     machines.append(VerticalBelt(from: Zone(parts[1]), thru: Zone(parts[2])))
                 }
-                
-            case .Widges:
-                if line == "[basic]" {
-                    register("red",     spriteName: "$\(UIColor.redColor().toString())")
-                    register("orange",  spriteName: "$\(UIColor.orangeColor().toString())")
-                    register("yellow",  spriteName: "$\(UIColor.yellowColor().toString())")
-                    register("green",   spriteName: "$\(UIColor.greenColor().toString())")
-                    register("blue",    spriteName: "$\(UIColor.blueColor().toString())")
-                    register("purple",  spriteName: "$\(UIColor.purpleColor().toString())")
-                    break
-                }
-                
-                let parts = line.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) as [String]
-                assert(parts.count == 2, "Not the right amount of arguments")
                 
             case .Context:
                 let parts = line.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) as [String]
@@ -123,9 +142,7 @@ class Level: NSObject {
                     let widgeTypeIDs = parts[1].componentsSeparatedByString(",")
                     outputWidgeTypes += widgeTypeIDs
                 }
-                
-            case .Actions:
-                break;
+
             default:
                 break;
             }
@@ -152,7 +169,7 @@ class Level: NSObject {
         var spriteName = widgeTypes[widgeTypeID]!
         if spriteName.hasPrefix("$") {
             spriteName = spriteName.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "$"))
-            return Widge.widgeWith(UIColor(spriteName))
+            return Widge.widgeWith(widgeTypeID, color: UIColor(spriteName))
         } else {
             println("Warning! not ready to process")
             return Widge.redWidge()

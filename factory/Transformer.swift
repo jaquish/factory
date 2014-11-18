@@ -12,9 +12,13 @@ import SpriteKit
 class Transformer: Machine {
    
     let finalColor: UIColor
+    var action: Action
     
-    init(_ originZone: Zone, color: UIColor) {
+    init(_ originZone: Zone, color: UIColor, action: Action) {
         finalColor = color
+        
+        self.action = action
+        
         super.init(originZone: originZone)
         
         addChild(Util.zoneBoxWithBorder(finalColor, innerColor: UIColor.darkGrayColor()))
@@ -28,10 +32,13 @@ class Transformer: Machine {
     }
     
     override func update(_dt: CFTimeInterval) {
-        let widges = connectors["input"]!.dequeueWidges()
+        let inputWidges = connectors["input"]!.dequeueWidges()
         
-        for widge in widges {
-            let replacement = Widge.widgeWith(finalColor)
+        for widge in inputWidges {
+            
+            let newType = action.performAction([widge.widgeTypeID]).first!
+            
+            let replacement = level.createWidge(newType)
             replacement.position = widge.position
             
             scene?.addChild(replacement)
