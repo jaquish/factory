@@ -97,10 +97,4 @@ class Machine: SKSpriteNode {
     func description() -> String {
         return "\(name!) at \(originZone)"
     }
-    
-    var level: Level {
-        get {
-            return (self.scene! as LevelScene).level
-        }
-    }
 }

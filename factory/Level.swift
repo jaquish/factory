@@ -12,6 +12,8 @@ enum ParseSection {
     case Unknown, Metadata, Widges, Actions, Machines, Context
 }
 
+var CurrentLevel: Level!
+
 class Level: NSObject {
    
     var section: ParseSection = .Unknown
@@ -32,6 +34,8 @@ class Level: NSObject {
     
     init(filepath: NSURL) {
         super.init()
+        
+        CurrentLevel = self
         
         let stringData = NSString(contentsOfURL: filepath, encoding: NSUTF8StringEncoding, error: nil)
         
@@ -75,6 +79,7 @@ class Level: NSObject {
                     register("green",   spriteName: "$\(UIColor.greenColor().toString())")
                     register("blue",    spriteName: "$\(UIColor.blueColor().toString())")
                     register("purple",  spriteName: "$\(UIColor.purpleColor().toString())")
+                    register("black",   spriteName: "$\(UIColor.blackColor().toString())")
                     break
                 }
                 
@@ -85,13 +90,13 @@ class Level: NSObject {
             case .Actions:
                 
                 let parts = line.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) as [String]
-                assert(parts.count == 4, "Not the right amount of arguments")
+                assert(parts.count == 5, "Not the right amount of arguments")
                 
                 let name = parts[0]
                 let actionType = ActionType(rawValue: parts[1])!
-                let inputIDs = parts[1].componentsSeparatedByString(",")
-                let successIDs = parts[2].componentsSeparatedByString(",")
-                let failureIDs = parts[3].componentsSeparatedByString(",")
+                let inputIDs = parts[2].componentsSeparatedByString(",")
+                let successIDs = parts[3].componentsSeparatedByString(",")
+                let failureIDs = parts[4].componentsSeparatedByString(",")
                 
                 self.actions[name] = Action(actionID: name, actionType: actionType, inputTypeIDs: inputIDs, successTypeIDs: successIDs, failureTypeIDs: failureIDs)
                 

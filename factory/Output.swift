@@ -48,7 +48,7 @@ class Output: Machine {
     override func update(_dt: CFTimeInterval) {
         let widges = connectors["input"]!.dequeueWidges()
         count += widges.count
-        widges.map { self.level.addOutput($0.widgeTypeID) }
+        widges.map { CurrentLevel.addOutput($0.widgeTypeID) }
         widges.map { $0.removeFromParent() }
     }
 }

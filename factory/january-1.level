@@ -6,8 +6,8 @@ Name:January 1st
 [basic]
 
 @Actions
-make-yellow Transformation * yellow
-make-green Transformation * green
+make-yellow Transformation * yellow black
+make-green Transformation * green black
 
 @Machines
 Input 1,7

@@ -21,6 +21,13 @@ class Transformer: Machine {
         
         addChild(Util.zoneBoxWithBorder(UIColor.greenColor(), innerColor: UIColor.darkGrayColor()))
         
+        // show a preview of the output in the center
+        let outputType = action.successTypeIDs.first!
+        let outputPreview = CurrentLevel.createWidge(outputType)
+        outputPreview.setScale(0.5)
+        addChild(outputPreview)
+        outputPreview.position = ZoneZero.worldPoint(.center)
+        
         addSimpleInput("input")
         addSimpleOutput("output")
     }
@@ -36,7 +43,7 @@ class Transformer: Machine {
             
             let newType = action.performAction([widge.widgeTypeID]).first!
             
-            let replacement = level.createWidge(newType)
+            let replacement = CurrentLevel.createWidge(newType)
             replacement.position = widge.position
             
             scene?.addChild(replacement)
