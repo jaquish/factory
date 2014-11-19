@@ -32,10 +32,17 @@ class LevelViewController: UIViewController, SKSceneDelegate {
             
             scene.loadLevel(level!)
             
-            // add double-touch double-tap back to level selection screen
+            // double-touch triple-tap back to level selection screen
+            let tripleTapGesture = UITapGestureRecognizer (target: self, action: "gameOver")
+            tripleTapGesture.numberOfTapsRequired = 3
+            tripleTapGesture.numberOfTouchesRequired = 2
+            view.addGestureRecognizer(tripleTapGesture)
+            
+            // double-touch double-tap back to level selection screen
             let doubleTapGesture = UITapGestureRecognizer (target: self, action: "backToLevelSelector")
             doubleTapGesture.numberOfTapsRequired = 2
             doubleTapGesture.numberOfTouchesRequired = 2
+            doubleTapGesture.requireGestureRecognizerToFail(tripleTapGesture)
             view.addGestureRecognizer(doubleTapGesture)
         }
     }
@@ -58,11 +65,16 @@ class LevelViewController: UIViewController, SKSceneDelegate {
     
     func didFinishUpdateForScene(scene: SKScene) {
         if level!.isGameOver() {
-            self.performSegueWithIdentifier("kSegueGameOver", sender: nil)
+            gameOver()
         }
     }
     
     func backToLevelSelector() {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func gameOver() {
+        (self.view as SKView).paused = true
+        self.performSegueWithIdentifier("kSegueGameOver", sender: nil)
     }
 }
