@@ -1,0 +1,22 @@
+@Metadata
+Format-Version:1.0
+Name:January 1st
+
+@Widges
+[basic]
+
+@Actions
+make-yellow Transformation * yellow
+make-green Transformation * green
+
+@Machines
+Input 1,7
+Gravity 1,7 1,5
+Belt 1,5 10,5
+Transformer 6,5 1,1,0 make-yellow
+Gravity 11,5 11,3
+Output 11,3
+
+@Context
+inputs red,yellow,blue
+endgame-output-count 5

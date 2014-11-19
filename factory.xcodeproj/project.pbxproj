@@ -46,6 +46,7 @@
 		92C7FB021A0F07D500ED13AD /* GridOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7FB011A0F07D500ED13AD /* GridOverlay.swift */; };
 		92E51D411A19F17200F1EEA2 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E51D401A19F17200F1EEA2 /* Action.swift */; };
 		92FBF2B51A1C54A300C7300D /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FBF2B41A1C54A300C7300D /* GameOverViewController.swift */; };
+		92FBF2B71A1C56CB00C7300D /* january-1.level in Resources */ = {isa = PBXBuildFile; fileRef = 92FBF2B61A1C56CB00C7300D /* january-1.level */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,7 @@
 		92C7FB011A0F07D500ED13AD /* GridOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridOverlay.swift; sourceTree = "<group>"; };
 		92E51D401A19F17200F1EEA2 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		92FBF2B41A1C54A300C7300D /* GameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
+		92FBF2B61A1C56CB00C7300D /* january-1.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-1.level"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +275,7 @@
 				926BD2961A15FAE4005BD6FF /* LevelTemplate */,
 				92C62CEF1A148D7700DC2D5C /* level1.level */,
 				926BD2941A15DFCA005BD6FF /* level2.level */,
+				92FBF2B61A1C56CB00C7300D /* january-1.level */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				926BD2951A15DFCA005BD6FF /* level2.level in Resources */,
 				84872BFA182607D4008F86DE /* Main.storyboard in Resources */,
 				92C62CF01A148D7700DC2D5C /* level1.level in Resources */,
+				92FBF2B71A1C56CB00C7300D /* january-1.level in Resources */,
 				926BD2971A15FAE4005BD6FF /* LevelTemplate in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
