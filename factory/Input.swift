@@ -27,6 +27,7 @@ class Input: Machine {
         addChild(label)
                 
         addSimpleOutput("next")
+        userInteractionEnabled = true
     }
 
     required init?(coder aDecoder: NSCoder) {

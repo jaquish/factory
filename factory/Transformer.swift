@@ -12,6 +12,13 @@ import SpriteKit
 class Transformer: Machine {
    
     var action: Action
+    var box:SKSpriteNode!
+
+    var isOn: Bool = true {
+        didSet {
+            box.color = isOn ? UIColor.greenColor() : UIColor.redColor()
+        }
+    }
     
     init(_ originZone: Zone, action: Action) {
         
@@ -19,7 +26,8 @@ class Transformer: Machine {
         
         super.init(originZone: originZone)
         
-        addChild(Util.zoneBoxWithBorder(UIColor.greenColor(), innerColor: UIColor.darkGrayColor()))
+        box = Util.zoneBoxWithBorder(UIColor.greenColor(), innerColor: UIColor.darkGrayColor())
+        addChild(box)
         
         // show a preview of the output in the center
         let outputType = action.successTypeIDs.first!
@@ -30,6 +38,9 @@ class Transformer: Machine {
         
         addSimpleInput("input")
         addSimpleOutput("output")
+        
+//        self.size = self.calculateAccumulatedFrame().size necessary?
+        self.userInteractionEnabled = true
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -41,15 +52,24 @@ class Transformer: Machine {
         
         for widge in inputWidges {
             
-            let newType = action.performAction([widge.widgeTypeID]).first!
-            
-            let replacement = CurrentLevel.createWidge(newType)
-            replacement.position = widge.position
-            
-            scene?.addChild(replacement)
-            widge.removeFromParent()
-            
-            connectors["output"]!.insert(replacement)
+            if isOn {
+                let newType = action.performAction([widge.widgeTypeID]).first!
+                
+                let replacement = CurrentLevel.createWidge(newType)
+                replacement.position = widge.position
+                
+                scene?.addChild(replacement)
+                widge.removeFromParent()
+                
+                connectors["output"]!.insert(replacement)
+                
+            } else {
+                connectors["output"]!.insert(widge)
+            }
         }
+    }
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        isOn = !isOn
     }
 }
