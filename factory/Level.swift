@@ -120,10 +120,10 @@ class Level: NSObject {
                     machines.append(Output(Zone(parts[1])))
                     
                 } else if machineType == "Transformer" {
-                    assert(parts.count == 4, "Not the right amount of arguments")
+                    assert(parts.count == 3, "Not the right amount of arguments")
                     
-                    let action = actions[parts[3]]!
-                    machines.append(Transformer(Zone(parts[1]), color:UIColor(parts[2]), action: action))
+                    let action = actions[parts[2]]!
+                    machines.append(Transformer(Zone(parts[1]), action: action))
                     
                 } else if machineType == "TransferBox" {
                     assert(parts.count == 2, "Not the right amount of arguments")

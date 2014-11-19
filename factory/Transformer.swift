@@ -11,17 +11,15 @@ import SpriteKit
 
 class Transformer: Machine {
    
-    let finalColor: UIColor
     var action: Action
     
-    init(_ originZone: Zone, color: UIColor, action: Action) {
-        finalColor = color
+    init(_ originZone: Zone, action: Action) {
         
         self.action = action
         
         super.init(originZone: originZone)
         
-        addChild(Util.zoneBoxWithBorder(finalColor, innerColor: UIColor.darkGrayColor()))
+        addChild(Util.zoneBoxWithBorder(UIColor.greenColor(), innerColor: UIColor.darkGrayColor()))
         
         addSimpleInput("input")
         addSimpleOutput("output")
