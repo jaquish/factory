@@ -26,7 +26,7 @@ struct Zone : Printable {
         y = pieces[1].toInt()!
     }
     
-    func worldPoint(cp: CompassPoint) -> CGPoint {
+    func worldPoint(cp: Direction) -> CGPoint {
         switch (cp) {
             case .N:     return CGPointMake(ZoneSize * (CGFloat(x) + 0.5), ZoneSize * (CGFloat(y) + 1.0));
             case .NE:    return CGPointMake(ZoneSize * (CGFloat(x) + 1.0), ZoneSize * (CGFloat(y) + 1.0));
@@ -40,7 +40,7 @@ struct Zone : Printable {
         }
     }
     
-    func zone(cp: CompassPoint) -> Zone {
+    func zone(cp: Direction) -> Zone {
         switch (cp) {
             case .N:     return Zone(x    , y + 1)
             case .NE:    return Zone(x + 1, y + 1)

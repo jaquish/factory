@@ -11,7 +11,7 @@ import SpriteKit
 
 let kBorderInset:CGFloat = 5.0
 
-enum CompassPoint {
+enum Direction {
     case N, NE, E, SE, S, SW, W, NW, center
 }
 
