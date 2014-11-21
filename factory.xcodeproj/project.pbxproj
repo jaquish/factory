@@ -25,6 +25,7 @@
 		924B1A4519A95B060096EED9 /* ConnectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924B1A4419A95B060096EED9 /* ConnectorTests.swift */; };
 		92576EC71A14679F00815C05 /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92576EC61A14679F00815C05 /* Zone.swift */; };
 		92576EC91A14791800815C05 /* LevelSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92576EC81A14791800815C05 /* LevelSelectViewController.swift */; };
+		926B3D931A1EE6630095D60F /* FileProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B3D921A1EE6630095D60F /* FileProtocols.swift */; };
 		926BD2951A15DFCA005BD6FF /* level2.level in Resources */ = {isa = PBXBuildFile; fileRef = 926BD2941A15DFCA005BD6FF /* level2.level */; };
 		926BD2971A15FAE4005BD6FF /* LevelTemplate in Resources */ = {isa = PBXBuildFile; fileRef = 926BD2961A15FAE4005BD6FF /* LevelTemplate */; };
 		9270239D1A08A7B2004DB6CB /* Widge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9270239C1A08A7B2004DB6CB /* Widge.swift */; };
@@ -45,6 +46,7 @@
 		92C7FB001A0F070000ED13AD /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7FAFF1A0F070000ED13AD /* LevelViewController.swift */; };
 		92C7FB021A0F07D500ED13AD /* GridOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7FB011A0F07D500ED13AD /* GridOverlay.swift */; };
 		92E51D411A19F17200F1EEA2 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E51D401A19F17200F1EEA2 /* Action.swift */; };
+		92E7CB8D1A1DB33A007A78DA /* LevelFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7CB8C1A1DB33A007A78DA /* LevelFileParser.swift */; };
 		92FBF2B51A1C54A300C7300D /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FBF2B41A1C54A300C7300D /* GameOverViewController.swift */; };
 		92FBF2B71A1C56CB00C7300D /* january-1.level in Resources */ = {isa = PBXBuildFile; fileRef = 92FBF2B61A1C56CB00C7300D /* january-1.level */; };
 /* End PBXBuildFile section */
@@ -84,6 +86,7 @@
 		924B1A4419A95B060096EED9 /* ConnectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectorTests.swift; path = ../factory/ConnectorTests.swift; sourceTree = "<group>"; };
 		92576EC61A14679F00815C05 /* Zone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zone.swift; sourceTree = "<group>"; };
 		92576EC81A14791800815C05 /* LevelSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectViewController.swift; sourceTree = "<group>"; };
+		926B3D921A1EE6630095D60F /* FileProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileProtocols.swift; sourceTree = "<group>"; };
 		926BD2941A15DFCA005BD6FF /* level2.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2.level; sourceTree = "<group>"; };
 		926BD2961A15FAE4005BD6FF /* LevelTemplate */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LevelTemplate; sourceTree = "<group>"; };
 		9270239C1A08A7B2004DB6CB /* Widge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Widge.swift; sourceTree = "<group>"; };
@@ -104,6 +107,7 @@
 		92C7FAFF1A0F070000ED13AD /* LevelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
 		92C7FB011A0F07D500ED13AD /* GridOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridOverlay.swift; sourceTree = "<group>"; };
 		92E51D401A19F17200F1EEA2 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		92E7CB8C1A1DB33A007A78DA /* LevelFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelFileParser.swift; sourceTree = "<group>"; };
 		92FBF2B41A1C54A300C7300D /* GameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 		92FBF2B61A1C56CB00C7300D /* january-1.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-1.level"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +149,7 @@
 				928933271A0EBC800013A598 /* TransferBox.swift */,
 				928933291A0EBF750013A598 /* VerticalBelt.swift */,
 				92E51D401A19F17200F1EEA2 /* Action.swift */,
+				926B3D921A1EE6630095D60F /* FileProtocols.swift */,
 			);
 			name = Machines;
 			sourceTree = "<group>";
@@ -255,6 +260,7 @@
 				92C7FAFF1A0F070000ED13AD /* LevelViewController.swift */,
 				9289332B1A0ECD160013A598 /* LevelScene.swift */,
 				92C62CEC1A148B3D00DC2D5C /* Level.swift */,
+				92E7CB8C1A1DB33A007A78DA /* LevelFileParser.swift */,
 			);
 			name = "Level Scene";
 			sourceTree = "<group>";
@@ -425,12 +431,14 @@
 				84872BF7182607D4008F86DE /* FGAppDelegate.m in Sources */,
 				92AB7F791A0B568C00128B91 /* Belt.swift in Sources */,
 				928933281A0EBC800013A598 /* TransferBox.swift in Sources */,
+				926B3D931A1EE6630095D60F /* FileProtocols.swift in Sources */,
 				928933221A0EB17F0013A598 /* Input.swift in Sources */,
 				92C62CED1A148B3D00DC2D5C /* Level.swift in Sources */,
 				92AB7F771A0B3AB500128B91 /* Machine.swift in Sources */,
 				92C7FB021A0F07D500ED13AD /* GridOverlay.swift in Sources */,
 				92FBF2B51A1C54A300C7300D /* GameOverViewController.swift in Sources */,
 				92576EC91A14791800815C05 /* LevelSelectViewController.swift in Sources */,
+				92E7CB8D1A1DB33A007A78DA /* LevelFileParser.swift in Sources */,
 				9289332C1A0ECD160013A598 /* LevelScene.swift in Sources */,
 				92C1FCA319E9D439001C1178 /* ConnectionPoint.swift in Sources */,
 			);

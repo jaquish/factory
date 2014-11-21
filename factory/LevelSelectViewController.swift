@@ -26,13 +26,14 @@ class LevelSelectViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let levelSelectVC = segue.destinationViewController as LevelViewController
-        levelSelectVC.level = Level(filepath:levelFileURLS[picker.selectedRowInComponent(0)])
+        levelSelectVC.level = currentLevel
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         summary.text = ""
         levelFileURLS = NSBundle.mainBundle().URLsForResourcesWithExtension("level", subdirectory: nil) as [NSURL]
+        pickerView(picker, didSelectRow: 0, inComponent: 0)
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -48,6 +49,7 @@ class LevelSelectViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        currentLevel = Level(filepath:levelFileURLS[row])
+        let parser = LevelFileParser(url: levelFileURLS[row])
+        currentLevel = parser.parseLevel()
     }
 }

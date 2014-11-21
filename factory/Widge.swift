@@ -9,10 +9,22 @@
 import UIKit
 import SpriteKit
 
-class Widge: SKSpriteNode {
-    
+var widgeTypes = [String : String]()
+
+
+class Widge: SKSpriteNode, LevelFileObject {
+        
     var widgeTypeID: String!
 
+    class func widgeBy(typeID:String) -> Widge? {
+        if let value = widgeTypes[typeID] {
+            UIColor(value)
+            return widgeWith(typeID, color: UIColor(value))
+        } else {
+            return nil
+        }
+    }
+    
     class func widgeWith(typeID:String, color: UIColor) -> Widge {
         let widge = Widge(color: color, size: CGSizeMake(WidgeSize, WidgeSize))
         widge.widgeTypeID = typeID
@@ -20,27 +32,25 @@ class Widge: SKSpriteNode {
         return widge
     }
     
-    class func redWidge() -> Widge {
-        return Widge.widgeWith("red", color:UIColor.redColor())
+    class func garbage() -> Widge {
+        return widgeWith("garbage", color: UIColor.blackColor())
     }
     
-    class func orangeWidge() -> Widge {
-        return Widge.widgeWith("orange", color:UIColor.orangeColor())
+    class func numberOfInitializerParameters() -> Int {
+        return 2
     }
     
-    class func yellowWidge() -> Widge {
-        return Widge.widgeWith("yellow", color:UIColor.yellowColor())
+    class func register(typeName:String, spriteName:String) {
+        widgeTypes[typeName] = spriteName
     }
     
-    class func greenWidge() -> Widge {
-        return Widge.widgeWith("green", color:UIColor.greenColor())
-    }
-    
-    class func blueWidge() -> Widge {
-        return Widge.widgeWith("blue", color:UIColor.blueColor())
-    }
-    
-    class func purpleWidge() -> Widge {
-        return Widge.widgeWith("purple", color:UIColor.purpleColor())
+    class func registerBasicWidges() {
+        register("red",     spriteName: "$\(UIColor.redColor().toString())")
+        register("orange",  spriteName: "$\(UIColor.orangeColor().toString())")
+        register("yellow",  spriteName: "$\(UIColor.yellowColor().toString())")
+        register("green",   spriteName: "$\(UIColor.greenColor().toString())")
+        register("blue",    spriteName: "$\(UIColor.blueColor().toString())")
+        register("purple",  spriteName: "$\(UIColor.purpleColor().toString())")
+        register("black",   spriteName: "$\(UIColor.blackColor().toString())")
     }
 }

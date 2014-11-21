@@ -27,6 +27,10 @@ class Gravity: Machine {
         addInput (ConnectionPoint(position: originZone.worldPoint(.center), name: "top"))
         addOutput(ConnectionPoint(position:    endZone.worldPoint(.center), name: "bottom"))
     }
+    
+    class override func numberOfInitializerParameters() -> Int {
+        return 2
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

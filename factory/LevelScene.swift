@@ -75,10 +75,6 @@ class LevelScene: SKScene {
         }
     }
     
-//    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-//        level.inputMachine.generateWidge()
-//    }
-    
     override func update(currentTime: NSTimeInterval) {
         /* Called before each frame is rendered */
         _dt = currentTime - _prevTime;

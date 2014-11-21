@@ -12,7 +12,7 @@ enum ActionType : String {
     case Transformation = "Transformation"
 }
 
-struct Action {
+struct Action : LevelFileObject {
     let actionID: String
     let actionType: ActionType
     let inputTypeIDs: [String]
@@ -25,5 +25,9 @@ struct Action {
         } else {
             return failureTypeIDs
         }
+    }
+    
+    static func numberOfInitializerParameters() -> Int {
+        return 5
     }
 }

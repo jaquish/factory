@@ -31,7 +31,7 @@ class Transformer: Machine {
         
         // show a preview of the output in the center
         let outputType = action.successTypeIDs.first!
-        let outputPreview = CurrentLevel.createWidge(outputType)
+        let outputPreview = Widge.widgeBy(outputType)!
         outputPreview.setScale(0.5)
         addChild(outputPreview)
         outputPreview.position = ZoneZero.worldPoint(.center)

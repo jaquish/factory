@@ -18,5 +18,5 @@ Gravity 11,5 11,3
 Output 11,3
 
 @Context
-inputs red,yellow,blue
-endgame-output-count 5
+inputs:red,yellow,blue
+endgame-output-count:5

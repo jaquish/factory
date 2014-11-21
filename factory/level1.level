@@ -6,8 +6,8 @@ Name:Level 1
 [basic]
 
 @Actions
-make-yellow Transformation * yellow
-make-green Transformation * green
+make-yellow Transformation * yellow black
+make-green Transformation * green black
 
 @Machines
 Input 2,8
@@ -23,5 +23,5 @@ Gravity 12,7 12,0
 Output 12,0
 
 @Context
-inputs red,yellow,blue
-endgame-output-count 5
+inputs:red,yellow,blue
+endgame-output-count:5

@@ -11,7 +11,7 @@ import SpriteKit
 
 var machineCount = 0
 
-class Machine: SKSpriteNode {
+class Machine: SKSpriteNode, LevelFileObject {
         
     var originZone: Zone = ZoneZero {  // The most lower-left zone of the machine.
         didSet {
@@ -32,6 +32,10 @@ class Machine: SKSpriteNode {
         
         machineCount++
         self.name = "\(NSStringFromClass(self.dynamicType))-\(machineCount)"
+    }
+    
+    class func numberOfInitializerParameters() -> Int {
+        return 0
     }
 
     required init?(coder aDecoder: NSCoder) {

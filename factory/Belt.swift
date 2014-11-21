@@ -38,6 +38,10 @@ class Belt: Machine {
         
         addOutput(ConnectionPoint(position:endZone.zone(.E).worldPoint(.center), name: "over-right-edge"))
     }
+    
+    class override func numberOfInitializerParameters() -> Int {
+        return 2
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
