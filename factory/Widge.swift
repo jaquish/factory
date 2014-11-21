@@ -18,11 +18,12 @@ class Widge: SKSpriteNode, LevelFileObject {
 
     class func widgeBy(typeID:String) -> Widge? {
         if let value = widgeTypes[typeID] {
-            UIColor(value)
-            return widgeWith(typeID, color: UIColor(value))
-        } else {
-            return nil
+            if value.hasPrefix("$") {
+                let colorString = value.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "$"))
+                return widgeWith(typeID, color: UIColor(colorString))
+            }
         }
+        return nil
     }
     
     class func widgeWith(typeID:String, color: UIColor) -> Widge {

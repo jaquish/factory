@@ -9,16 +9,23 @@
 import UIKit
 import SpriteKit
 
+private let kBeltSpeedPointsPerSecond: CGFloat = 100.0
+private let kVerticalBeltWidth: CGFloat = 30.0
+
 class VerticalBelt: Machine {
     
-    let kBeltSpeedPointsPerSecond: CGFloat = 100.0
-    let kVerticalBeltWidth: CGFloat = 30.0
-    
+    let direction: Direction
     var moving: [Widge]
     let endZone: Zone
 
-    init(from: Zone, thru: Zone) {
+    init(from: Zone, thru: Zone, direction: Direction) {
         
+        if !(direction == .N || direction == .S) {
+            println("Warning: invalid direction \(direction) for belt")
+            direction == .N
+        }
+        
+        self.direction = direction
         self.endZone = thru
         self.moving  = Array()
         super.init(originZone: from)
@@ -29,8 +36,11 @@ class VerticalBelt: Machine {
         sprite.anchorPoint = CGPointZero
         addChild(sprite)
         
-        addSimpleInput("input")
-        addOutput(ConnectionPoint(position:endZone.worldPoint(.center), name: "output"))
+        let inputZone  = (direction == .N) ? originZone : endZone
+        let outputZone = (direction == .N) ? endZone : originZone
+        
+        addInput(ConnectionPoint(position:inputZone.worldPoint(.center), name: "input"))
+        addOutput(ConnectionPoint(position:outputZone.worldPoint(.center), name: "output"))
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -40,7 +50,7 @@ class VerticalBelt: Machine {
     override func update(_dt: CFTimeInterval) {
         // TODO - save leftover deltaTime to update
 
-        let deltaY = kBeltSpeedPointsPerSecond * CGFloat(_dt)
+        let deltaY = kBeltSpeedPointsPerSecond * CGFloat(_dt) * (direction == .S ? -1.0 : 1.0)
         
         // Fetch fresh widgets
         for connector in inputs() {
@@ -55,8 +65,7 @@ class VerticalBelt: Machine {
         
             // check if widge passed over connection point
             for connector in outputs() {
-                if oldPosition.y < connector.position.y && widge.position.y >= connector.position.y {
-                    widge.changeYTo(connector.position.y)
+                if min(oldPosition.y, widge.position.y)...max(oldPosition.y, widge.position.y) ~= connector.position.y {                    widge.changeYTo(connector.position.y)
                     connector.insert(widge)
                     toDelete.append(widge)
                 }

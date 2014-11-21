@@ -1,0 +1,27 @@
+@Metadata
+Format-Version:1.0
+Name:January 1st
+
+@Widges
+[basic]
+
+@Machines
+Input 1,10
+Gravity 1,10 1,7
+Belt 1,7 12,7 E
+TransferBox 12,7
+VerticalBelt 12,1 12,7 S
+Belt 5,1 12,1 W
+TransferBox 5,1
+VerticalBelt 5,1 5,8 N
+TransferBox 5,8
+Belt 3,8 5,8 W
+TransferBox 3,8
+VerticalBelt 3,1 3,8 S
+Belt 3,1 3,1 E
+Gravity 4,1 4,0
+Output 4,0
+
+@Context
+inputs:red,yellow,blue
+endgame-output-count:5

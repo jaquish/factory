@@ -12,7 +12,7 @@ make-green Transformation * green black
 @Machines
 Input 1,7
 Gravity 1,7 1,5
-Belt 1,5 10,5
+Belt 1,5 10,5 E
 Transformer 6,5 make-yellow
 Gravity 11,5 11,3
 Output 11,3

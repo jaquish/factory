@@ -26,6 +26,7 @@
 		92576EC71A14679F00815C05 /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92576EC61A14679F00815C05 /* Zone.swift */; };
 		92576EC91A14791800815C05 /* LevelSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92576EC81A14791800815C05 /* LevelSelectViewController.swift */; };
 		926B3D931A1EE6630095D60F /* FileProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B3D921A1EE6630095D60F /* FileProtocols.swift */; };
+		926B3D951A1F2F730095D60F /* january-2.level in Resources */ = {isa = PBXBuildFile; fileRef = 926B3D941A1F2F730095D60F /* january-2.level */; };
 		926BD2951A15DFCA005BD6FF /* level2.level in Resources */ = {isa = PBXBuildFile; fileRef = 926BD2941A15DFCA005BD6FF /* level2.level */; };
 		926BD2971A15FAE4005BD6FF /* LevelTemplate in Resources */ = {isa = PBXBuildFile; fileRef = 926BD2961A15FAE4005BD6FF /* LevelTemplate */; };
 		9270239D1A08A7B2004DB6CB /* Widge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9270239C1A08A7B2004DB6CB /* Widge.swift */; };
@@ -87,6 +88,7 @@
 		92576EC61A14679F00815C05 /* Zone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zone.swift; sourceTree = "<group>"; };
 		92576EC81A14791800815C05 /* LevelSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectViewController.swift; sourceTree = "<group>"; };
 		926B3D921A1EE6630095D60F /* FileProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileProtocols.swift; sourceTree = "<group>"; };
+		926B3D941A1F2F730095D60F /* january-2.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-2.level"; sourceTree = "<group>"; };
 		926BD2941A15DFCA005BD6FF /* level2.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2.level; sourceTree = "<group>"; };
 		926BD2961A15FAE4005BD6FF /* LevelTemplate */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LevelTemplate; sourceTree = "<group>"; };
 		9270239C1A08A7B2004DB6CB /* Widge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Widge.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				92C62CEF1A148D7700DC2D5C /* level1.level */,
 				926BD2941A15DFCA005BD6FF /* level2.level */,
 				92FBF2B61A1C56CB00C7300D /* january-1.level */,
+				926B3D941A1F2F730095D60F /* january-2.level */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				84872BFA182607D4008F86DE /* Main.storyboard in Resources */,
 				92C62CF01A148D7700DC2D5C /* level1.level in Resources */,
 				92FBF2B71A1C56CB00C7300D /* january-1.level in Resources */,
+				926B3D951A1F2F730095D60F /* january-2.level in Resources */,
 				926BD2971A15FAE4005BD6FF /* LevelTemplate in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

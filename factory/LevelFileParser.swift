@@ -120,7 +120,7 @@ class LevelFileParser {
 
             switch machineType {
                 case "Belt":
-                    level.machines.append(Belt(from: Zone(parts[1]), thru: Zone(parts[2])))
+                    level.machines.append(Belt(from: Zone(parts[1]), thru: Zone(parts[2]), direction: Direction(rawValue: parts[3])!))
                 case "Gravity":
                     level.machines.append(Gravity(from: Zone(parts[1]), thru: Zone(parts[2])))
                 case "Input":
@@ -134,7 +134,7 @@ class LevelFileParser {
                 case "TransferBox":
                     level.machines.append(TransferBox(Zone(parts[1])))
                 case "VerticalBelt":
-                    level.machines.append(VerticalBelt(from: Zone(parts[1]), thru: Zone(parts[2])))
+                    level.machines.append(VerticalBelt(from: Zone(parts[1]), thru: Zone(parts[2]), direction: Direction(rawValue:parts[3])!))
                 default:
                     failWithError("Unknown class of machine '\(machineType)'")
             }

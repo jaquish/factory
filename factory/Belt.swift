@@ -9,18 +9,26 @@
 import UIKit
 import SpriteKit
 
+private let kBeltSpeedPointsPerSecond: CGFloat = 100.0
+private let kVerticalBeltWidth: CGFloat = 12.0
+
 class Belt: Machine {
-   
-    let kBeltSpeedPointsPerSecond: CGFloat = 100.0
-    let kVerticalBeltWidth: CGFloat = 12.0
-    
+
     let endZone: Zone
+    let direction: Direction
     
     var moving: [Widge]
     
-    init(from: Zone, thru: Zone) {
+    init(from: Zone, thru: Zone, direction: Direction) {
+        
+        if !(direction == .E || direction == .W) {
+            println("Warning: invalid direction \(direction) for belt")
+            direction == .E
+        }
+        
         self.endZone = thru
         self.moving = Array()
+        self.direction = direction
 
         super.init(originZone: from)
         
@@ -36,7 +44,8 @@ class Belt: Machine {
             addOutput(ConnectionPoint(position: p, name: "output-\(i)"))
         }
         
-        addOutput(ConnectionPoint(position:endZone.zone(.E).worldPoint(.center), name: "over-right-edge"))
+        let overEdgeZone = (direction == .E) ? endZone.zone(.E) : endZone.zone(.W)
+        addOutput(ConnectionPoint(position:overEdgeZone.worldPoint(.center), name: "over-edge"))
     }
     
     class override func numberOfInitializerParameters() -> Int {
@@ -49,7 +58,7 @@ class Belt: Machine {
     
     override func update(_dt: CFTimeInterval) {
         // TODO - save leftover deltaTime to update
-        let deltaX = kBeltSpeedPointsPerSecond * CGFloat(_dt)
+        let deltaX = kBeltSpeedPointsPerSecond * CGFloat(_dt) * (direction == .W ? -1.0 : 1.0)
         
         for connector in inputs() {
             moving += connector.dequeueWidges()
@@ -62,7 +71,7 @@ class Belt: Machine {
             
             // check if widge passed over connection point
             for connector in outputs() {
-                if oldPosition.x < connector.position.x && widge.position.x >= connector.position.x {
+                if min(oldPosition.x, widge.position.x)...max(oldPosition.x, widge.position.x) ~= connector.position.x {
                     widge.changeXTo(connector.position.x)
                     connector.insert(widge)
                     toDelete.append(widge)

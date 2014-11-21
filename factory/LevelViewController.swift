@@ -30,6 +30,7 @@ class LevelViewController: UIViewController, SKSceneDelegate {
                 self.view.addSubview(GridOverlay(frame: self.view.bounds))
             }
             
+            CurrentLevel = level
             scene.loadLevel(level!)
             
             // double-touch triple-tap back to level selection screen

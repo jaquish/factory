@@ -11,8 +11,16 @@ import SpriteKit
 
 let kBorderInset:CGFloat = 5.0
 
-enum Direction {
-    case N, NE, E, SE, S, SW, W, NW, center
+enum Direction : String {
+    case N = "N"
+    case NE = "NE"
+    case E = "E"
+    case SE = "SE"
+    case S = "S"
+    case SW = "SW"
+    case W = "W"
+    case NW = "NW"
+    case center = "center"
 }
 
 class Util : NSObject {
