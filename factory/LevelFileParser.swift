@@ -9,7 +9,8 @@
 import UIKit
 
 enum LevelFileSection : String {
-    case Unknown  = "Unknown"
+    case Unknown  = "@End"
+    case Description = "@Description"
     case Metadata = "@Metadata"
     case Widges   = "@Widges"
     case Actions  = "@Actions"
@@ -99,6 +100,8 @@ class LevelFileParser {
         
         // Do Something
         switch currentSection {
+        case .Description:
+            level.preamble += line + "\n"
         case .Metadata:
             level.metadata[parts[0]] = parts[1]
         case .Widges:

@@ -12,6 +12,8 @@ var CurrentLevel: Level!
 
 class Level: NSObject {
    
+    var preamble = String()
+    
     var inputMachine: Input!
     var inputWidgeTypes  = [String]()
     var outputWidgeTypes = [String]()
@@ -30,6 +32,7 @@ class Level: NSObject {
         for (key, value) in metadata {
             summary += "\(key) : \(value)\n"
         }
+        summary += "\n\n" + preamble
         return summary
     }
 

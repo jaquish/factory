@@ -2,6 +2,10 @@
 Format-Version:1.0
 Name:January 1st
 
+@Description
+This is a description of the level.
+@End
+
 @Widges
 [basic]
 
