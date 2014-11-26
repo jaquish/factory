@@ -9,5 +9,9 @@
 import UIKit
 
 class GameOverViewController: UIViewController {
+    
+    @IBAction func unwindToMainMenu() {
+        self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
 
 }
