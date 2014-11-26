@@ -71,7 +71,7 @@ class Belt: Machine {
             
             // check if widge passed over connection point
             for connector in outputs() {
-                if min(oldPosition.x, widge.position.x)...max(oldPosition.x, widge.position.x) ~= connector.position.x {
+                if path(from: oldPosition, to: widge.position, ranOver: connector.position) {
                     widge.changeXTo(connector.position.x)
                     connector.insert(widge)
                     toDelete.append(widge)

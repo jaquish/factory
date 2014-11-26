@@ -65,7 +65,8 @@ class VerticalBelt: Machine {
         
             // check if widge passed over connection point
             for connector in outputs() {
-                if min(oldPosition.y, widge.position.y)...max(oldPosition.y, widge.position.y) ~= connector.position.y {                    widge.changeYTo(connector.position.y)
+                if path(from: oldPosition, to: widge.position, ranOver: connector.position) {
+                    widge.changeYTo(connector.position.y)
                     connector.insert(widge)
                     toDelete.append(widge)
                 }

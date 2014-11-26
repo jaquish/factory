@@ -79,3 +79,13 @@ extension SKNode {
         self.position = pos
     }
 }
+
+func path(#from:CGPoint, #to:CGPoint, #ranOver:CGPoint) -> Bool {
+    if (from.x == to.x && to.x == ranOver.x) {
+        return min(from.y, to.y)...max(from.y, to.y) ~= ranOver.y && from.y != ranOver.y
+    } else if (from.y == to.y && to.y == ranOver.y) {
+        return min(from.x, to.x)...max(from.x, to.x) ~= ranOver.x && from.x != ranOver.x
+    } else {
+        return false
+    }
+}
