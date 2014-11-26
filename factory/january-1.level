@@ -3,15 +3,15 @@ Format-Version:1.0
 Name:January 1st
 
 @Description
-This is a description of the level.
+Congratulations on your new job at Acme Corp. You'll start with something simple, quality control.
+If the widget isn't finished, make sure it goes through the transformer.
 @End
 
 @Widges
 [basic]
 
 @Actions
-make-yellow Transformation * yellow black
-make-green Transformation * green black
+make-yellow Transformation red yellow black
 
 @Machines
 Input 1,7
@@ -22,5 +22,6 @@ Gravity 11,5 11,3
 Output 11,3
 
 @Context
-inputs:red,yellow,blue
+inputs:red,yellow
+input-order:linear
 endgame-output-count:5

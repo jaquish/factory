@@ -8,10 +8,18 @@
 
 import UIKit
 
+enum InputOrder : String {
+    case Linear = "linear"
+    case Random = "random"
+}
+
 var CurrentLevel: Level!
 
 class Level: NSObject {
    
+    var inputOrder:InputOrder = .Linear
+    var inputIndex = 0
+    
     var preamble = String()
     
     var inputMachine: Input!
@@ -24,7 +32,7 @@ class Level: NSObject {
     
     var metadata = [String : AnyObject]()
     
-    var outputs = [String : Int]()
+    var outputs = [String]()
     var endgame_output_count: Int = 0
     
     func summary() -> String {
@@ -48,18 +56,19 @@ class Level: NSObject {
     }
     
     func createInput() -> Widge {
-        return createWidge(inputWidgeTypes.randomItem())
+        inputIndex++
+        switch inputOrder {
+        case .Random: return createWidge(inputWidgeTypes.randomItem())
+        case .Linear: return createWidge(inputWidgeTypes[(inputIndex-1) % inputWidgeTypes.count])
+        }
     }
     
     func isGameOver() -> Bool {
-        return outputs.values.array.reduce(0,+) >= endgame_output_count
+        return outputs.count >= endgame_output_count
     }
     
     func addOutput(widgeTypeID: String) {
-        if (outputs[widgeTypeID] == nil) {
-            outputs[widgeTypeID] = 0
-        }
-        outputs[widgeTypeID] = outputs[widgeTypeID]! + 1
+        outputs.append(widgeTypeID)
     }
 }
 
