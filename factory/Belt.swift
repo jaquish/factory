@@ -81,4 +81,8 @@ class Belt: Machine {
         
         moving = moving.filter { !contains(toDelete, $0) }
     }
+    
+    override func allowConnectionWith(machine: Machine) -> Bool {
+        return !(machine is VerticalBelt)
+    }
 }

@@ -58,6 +58,7 @@ class Machine: SKSpriteNode, LevelFileObject {
                 println("-- \(cp.name)")
             }
         }
+        didMakeConnections()
     }
     
     func addInput(cp: ConnectionPoint) {
@@ -96,6 +97,10 @@ class Machine: SKSpriteNode, LevelFileObject {
     
     func allowConnectionWith(machine: Machine) -> Bool {
         return true // override for advanced decision making
+    }
+    
+    func didMakeConnections() {
+        // do nothing
     }
     
     func description() -> String {

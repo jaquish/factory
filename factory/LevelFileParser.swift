@@ -138,6 +138,8 @@ class LevelFileParser {
                     level.machines.append(TransferBox(Zone(parts[1])))
                 case "VerticalBelt":
                     level.machines.append(VerticalBelt(from: Zone(parts[1]), thru: Zone(parts[2]), direction: Direction(rawValue:parts[3])!))
+                case "SwitchBox":
+                    level.machines.append(SwitchBox(Zone(parts[1])))
                 default:
                     failWithError("Unknown class of machine '\(machineType)'")
             }

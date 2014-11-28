@@ -75,4 +75,9 @@ class VerticalBelt: Machine {
             moving = moving.filter { !contains(toDelete, $0) }
         }
     }
+    
+    
+    override func allowConnectionWith(machine: Machine) -> Bool {
+        return (machine is TransferBox) || (machine is SwitchBox) || (machine is Input) || (machine is Output)
+    }
 }
