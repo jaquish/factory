@@ -73,7 +73,7 @@ class SwitchBox: Machine {
         case .SW: return "↙️"
         case .W:  return "⬅️"
         case .NW: return "↖️"
-        case .center: fatalError("Not okay")
+        case .center: fatalError("Invalid output direction for transfer box")
         }
     }
 
