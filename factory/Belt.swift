@@ -44,7 +44,7 @@ class Belt: Machine {
             addOutput(ConnectionPoint(position: p, name: "output-\(i)"))
         }
         
-        let overEdgeZone = (direction == .E) ? endZone.zone(.E) : endZone.zone(.W)
+        let overEdgeZone = (direction == .E) ? endZone.zone(.E) : originZone.zone(.W)
         addOutput(ConnectionPoint(position:overEdgeZone.worldPoint(.center), name: "over-edge"))
     }
     

@@ -18,6 +18,10 @@ class SwitchBox: Machine {
                 labelNode.text = labelForDirection(beltOutput.direction)
             } else if let beltOutput = selectedOutput.destination as? VerticalBelt  {
                 labelNode.text = labelForDirection(beltOutput.direction)
+            } else if let gravityOutput = selectedOutput.destination as? Gravity {
+                labelNode.text = labelForDirection(.S)
+            } else {
+                fatalError("Unable to process connection to output machine")
             }
         }
     }
@@ -60,7 +64,7 @@ class SwitchBox: Machine {
     }
     
     override func allowConnectionWith(machine: Machine) -> Bool {
-        return (machine is Belt) || (machine is VerticalBelt)
+        return (machine is Belt) || (machine is VerticalBelt) || (machine is Gravity)
     }
     
     func labelForDirection(d:Direction) -> String {

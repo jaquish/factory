@@ -41,6 +41,8 @@
 		928933301A0ECEB90013A598 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289332F1A0ECEB90013A598 /* Utility.swift */; };
 		92893B881A280B730069C3A4 /* SwitchBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92893B871A280B730069C3A4 /* SwitchBox.swift */; };
 		92893B8A1A285C190069C3A4 /* switchbox.level in Resources */ = {isa = PBXBuildFile; fileRef = 92893B891A285C190069C3A4 /* switchbox.level */; };
+		929198D71A286C2700A0EF35 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929198D61A286C2700A0EF35 /* Container.swift */; };
+		929198D91A286E3A00A0EF35 /* containers.level in Resources */ = {isa = PBXBuildFile; fileRef = 929198D81A286E3A00A0EF35 /* containers.level */; };
 		92AB7F771A0B3AB500128B91 /* Machine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB7F761A0B3AB500128B91 /* Machine.swift */; };
 		92AB7F791A0B568C00128B91 /* Belt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB7F781A0B568C00128B91 /* Belt.swift */; };
 		92C1FCA319E9D439001C1178 /* ConnectionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FCA219E9D439001C1178 /* ConnectionPoint.swift */; };
@@ -105,6 +107,8 @@
 		9289332F1A0ECEB90013A598 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		92893B871A280B730069C3A4 /* SwitchBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchBox.swift; sourceTree = "<group>"; };
 		92893B891A285C190069C3A4 /* switchbox.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = switchbox.level; sourceTree = "<group>"; };
+		929198D61A286C2700A0EF35 /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		929198D81A286E3A00A0EF35 /* containers.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = containers.level; sourceTree = "<group>"; };
 		92AB7F761A0B3AB500128B91 /* Machine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Machine.swift; sourceTree = "<group>"; };
 		92AB7F781A0B568C00128B91 /* Belt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Belt.swift; sourceTree = "<group>"; };
 		92C1FCA219E9D439001C1178 /* ConnectionPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionPoint.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 				928933271A0EBC800013A598 /* TransferBox.swift */,
 				928933291A0EBF750013A598 /* VerticalBelt.swift */,
 				92893B871A280B730069C3A4 /* SwitchBox.swift */,
+				929198D61A286C2700A0EF35 /* Container.swift */,
 			);
 			name = Machines;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				92FBF2B61A1C56CB00C7300D /* january-1.level */,
 				926B3D941A1F2F730095D60F /* january-2.level */,
 				92893B891A285C190069C3A4 /* switchbox.level */,
+				929198D81A286E3A00A0EF35 /* containers.level */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -398,6 +404,7 @@
 				926BD2951A15DFCA005BD6FF /* level2.level in Resources */,
 				84872BFA182607D4008F86DE /* Main.storyboard in Resources */,
 				92C62CF01A148D7700DC2D5C /* level1.level in Resources */,
+				929198D91A286E3A00A0EF35 /* containers.level in Resources */,
 				92FBF2B71A1C56CB00C7300D /* january-1.level in Resources */,
 				926B3D951A1F2F730095D60F /* january-2.level in Resources */,
 				926BD2971A15FAE4005BD6FF /* LevelTemplate in Resources */,
@@ -435,6 +442,7 @@
 				92AB7F791A0B568C00128B91 /* Belt.swift in Sources */,
 				928933281A0EBC800013A598 /* TransferBox.swift in Sources */,
 				926B3D931A1EE6630095D60F /* ValidationFileProtocols.swift in Sources */,
+				929198D71A286C2700A0EF35 /* Container.swift in Sources */,
 				928933221A0EB17F0013A598 /* Input.swift in Sources */,
 				92C62CED1A148B3D00DC2D5C /* Level.swift in Sources */,
 				92AB7F771A0B3AB500128B91 /* Machine.swift in Sources */,
