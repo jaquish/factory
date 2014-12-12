@@ -4,7 +4,7 @@ Name:January 1st
 
 @Description
 Congratulations on your new job at Acme Corp. You'll start with something simple, quality control.
-If the widget isn't finished, make sure it goes through the transformer.
+Some of the As are missing Bs. Put them through the B machine only if they need it.
 @End
 
 @Widges
@@ -24,4 +24,4 @@ Output 11,3
 @Context
 inputs:red,yellow
 input-order:linear
-endgame-output-count:5
+endgame-output-count:10

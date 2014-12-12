@@ -83,7 +83,12 @@ class SwitchBox: Machine {
 
     override func didMakeConnections() {
         outputList = outputs()
-        assert(outputList.count > 1, "Expected at least 2 outputs for a switchbox")
+        
+        let outputCount = outputs().count
+        assert(outputCount >= 2, "Expected switchbox to have at least 2 outputs, not \(outputCount)")
+        
+        let inputCount = inputs().count
+        assert(inputCount >= 1, "Expected switchbox to have at least 1 input, not \(inputCount)")
         
         selectedOutput = outputList.first!
     }

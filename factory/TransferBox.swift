@@ -17,13 +17,25 @@ class TransferBox: Machine {
         
         addChild(Util.zoneBoxWithBorder(UIColor.darkGrayColor(), innerColor: UIColor.grayColor()))
         
-        let input = ConnectionPoint(position: originZone.worldPoint(.center), name: "input")
-        input.priority = 1
-        addInput(input)
-        
+        // up to 3 inputs
+        for i in 0..<3 {
+            let input = ConnectionPoint(position: originZone.worldPoint(.center), name: "input-\(i)")
+            input.priority = 1
+            addInput(input)
+        }
+
+        // only 1 output
         let output = ConnectionPoint(position: originZone.worldPoint(.center), name: "output")
-        input.priority = 1
+        output.priority = 1
         addOutput(output)
+    }
+    
+    override func didMakeConnections() {
+        let outputCount = outputs().count
+        assert(outputCount == 1, "Expected transfer box to have 1 output, not \(outputCount)")
+        
+        let inputCount = inputs().count
+        assert(inputCount >= 1, "Expected transfer box to have at least input, not \(inputCount)")
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -31,8 +43,10 @@ class TransferBox: Machine {
     }
     
     override func update(_dt: CFTimeInterval) {
-        for widge in connectorWithName("input").dequeueWidges() {
-            connectorWithName("output").insert(widge)
+        for connector in inputs() {
+            for widge in connector.dequeueWidges() {
+                connectorWithName("output").insert(widge)
+            }
         }
     }
     

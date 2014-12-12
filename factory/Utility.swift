@@ -32,6 +32,24 @@ class Util : NSObject {
         return box
     }
     
+    class func combinerBottom() -> SKSpriteNode {
+        let box = SKSpriteNode(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(ZoneSize, ZoneSize))
+        
+        let left = SKSpriteNode(texture: nil, color: UIColor.grayColor(), size: CGSizeMake(0.1*ZoneSize, ZoneSize))
+        left.anchorPoint = CGPointZero
+        left.position = CGPointZero
+        box.addChild(left)
+        
+        let right = SKSpriteNode(texture: nil, color: UIColor.grayColor(), size: CGSizeMake(0.1*ZoneSize, ZoneSize))
+        right.anchorPoint = CGPointZero
+        right.position = CGPointZero
+        box.addChild(right)
+        
+        box.userInteractionEnabled = false
+        box.anchorPoint = CGPointZero
+        return box
+    }
+    
     class func zoneBoxWithBorder(color: UIColor, innerColor: UIColor) -> SKSpriteNode {
         let box = SKSpriteNode(texture: nil, color: color, size: CGSizeMake(ZoneSize, ZoneSize))
         box.anchorPoint = CGPointZero
