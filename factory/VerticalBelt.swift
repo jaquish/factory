@@ -16,6 +16,7 @@ class VerticalBelt: Machine {
     
     let direction: Direction
     var moving: [Widge]
+    let lastZone: Zone
     let endZone: Zone
 
     init(from: Zone, thru: Zone, direction: Direction) {
@@ -26,6 +27,7 @@ class VerticalBelt: Machine {
         }
         
         self.direction = direction
+        lastZone = (direction == .N) ? thru : from
         self.endZone = thru
         self.moving  = Array()
         super.init(originZone: from)
@@ -46,6 +48,14 @@ class VerticalBelt: Machine {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+        
+    override func allow(#inputPoint: ConnectionPoint, toConnectFromMachine machine: Machine) -> Bool {
+        return (machine is TransferBox) || (machine is SwitchBox) || (machine is Input)
+    }
+    
+    override func allow(#outputPoint: ConnectionPoint, toConnectToMachine machine: Machine) -> Bool {
+        return (machine is TransferBox) || (machine is SwitchBox) || (machine is Output)
+    }
     
     override func update(_dt: CFTimeInterval) {
         // TODO - save leftover deltaTime to update
@@ -65,6 +75,7 @@ class VerticalBelt: Machine {
         
             // check if widge passed over connection point
             for connector in outputs() {
+                
                 if path(from: oldPosition, to: widge.position, ranOver: connector.position) {
                     widge.changeYTo(connector.position.y)
                     connector.insert(widge)
@@ -74,10 +85,5 @@ class VerticalBelt: Machine {
             // Gross
             moving = moving.filter { !contains(toDelete, $0) }
         }
-    }
-    
-    
-    override func allowConnectionWith(machine: Machine) -> Bool {
-        return (machine is TransferBox) || (machine is SwitchBox) || (machine is Input) || (machine is Output)
     }
 }

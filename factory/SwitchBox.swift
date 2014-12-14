@@ -63,7 +63,11 @@ class SwitchBox: Machine {
         selectedOutput = outputs()[(currentIndex + 1) % outputs().count]
     }
     
-    override func allowConnectionWith(machine: Machine) -> Bool {
+    override func allow(#inputPoint: ConnectionPoint, toConnectFromMachine machine: Machine) -> Bool {
+        return (machine is Belt) || (machine is VerticalBelt)
+    }
+    
+    override func allow(#outputPoint: ConnectionPoint, toConnectToMachine machine: Machine) -> Bool {
         return (machine is Belt) || (machine is VerticalBelt) || (machine is Gravity)
     }
     

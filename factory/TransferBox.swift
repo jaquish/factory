@@ -30,17 +30,43 @@ class TransferBox: Machine {
         addOutput(output)
     }
     
+    // MARK: Connection Phase
+    
+    override func allow(#inputPoint: ConnectionPoint, toConnectFromMachine machine: Machine) -> Bool {
+        // don't input to a machine that's an output
+        let result = !contains(connectionPointOutputs.filter{$0.connector != nil}.map{$0.connector!.destination}, machine)
+        if !result {
+            println("\(self) denied incoming connection from \(machine) at \(inputPoint)")
+        }
+        return result
+    }
+    
+    override func allow(#outputPoint: ConnectionPoint, toConnectToMachine machine: Machine) -> Bool {
+        // don't output to a machine that's an input
+        let alreadyInput = contains(connectionPointInputs.filter{$0.connector != nil}.map{$0.connector!.source}, machine)
+        if machine is Belt {
+            // don't output to last tile of a belt
+            return !alreadyInput && Zone(containingPoint: outputPoint.position) != (machine as Belt).lastZone
+        } else if machine is VerticalBelt {
+            return !alreadyInput && Zone(containingPoint: outputPoint.position) != (machine as VerticalBelt).lastZone
+        } else {
+            return !alreadyInput
+        }
+    }
+    
     override func didMakeConnections() {
         let outputCount = outputs().count
-        assert(outputCount == 1, "Expected transfer box to have 1 output, not \(outputCount)")
+        assert(outputCount == 1, "Expected \(self) to have 1 output, not \(outputCount)")
         
         let inputCount = inputs().count
-        assert(inputCount >= 1, "Expected transfer box to have at least input, not \(inputCount)")
+        assert(inputCount >= 1, "Expected \(self) to have at least input, not \(inputCount)")
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: Game Phase
     
     override func update(_dt: CFTimeInterval) {
         for connector in inputs() {
@@ -48,14 +74,5 @@ class TransferBox: Machine {
                 connectorWithName("output").insert(widge)
             }
         }
-    }
-    
-    override func allowConnectionWith(machine: Machine) -> Bool {
-        for cp in connectionPointInputs + connectionPointOutputs {
-            if cp.connector?.source == machine || cp.connector?.destination == machine {
-                return false  // don't connect to a machine that you've already connected to
-            }
-        }
-        return true
     }
 }

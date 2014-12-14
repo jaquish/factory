@@ -12,17 +12,13 @@ import UIKit
     
     var position:CGPoint
     var connector:Connector?
-    var machine:Machine?
+    var machine:Machine!
     var name:NSString
     var priority = 0
 
     init(position:CGPoint, name:NSString) {
         self.position = position
         self.name = name
-    }
-    
-    class func pointWithPosition(position:CGPoint, name:NSString) -> ConnectionPoint {
-        return ConnectionPoint(position: position, name: name)
     }
     
     func tryToConnectToPoint(otherPoint:ConnectionPoint) {
@@ -49,9 +45,10 @@ import UIKit
         }
         
         /* Ask the machines involved for advanced connection point rules */
-
-        if machine!.allowConnectionWith(otherPoint.machine!) &&
-            otherPoint.machine!.allowConnectionWith(machine!) {
+        let allowedByThisMachine = machine.allow(outputPoint: self, toConnectToMachine: otherPoint.machine)
+        let allowedByOtherMachine = otherPoint.machine.allow(inputPoint: otherPoint, toConnectFromMachine: self.machine)
+        
+        if allowedByThisMachine && allowedByOtherMachine {
                 
             // create new connector and set
             let connector = Connector(position: self.position, source:machine!, destination: otherPoint.machine!)
@@ -60,7 +57,7 @@ import UIKit
             self.connector = connector;
             otherPoint.connector = connector;
                 
-            println("Connected \(self.machine!.name!) \(self.name) to \(otherPoint.machine!.name!) \(otherPoint.name)")
+            println("Connected \(self.machine!) \(self.name) to \(otherPoint.machine!) \(otherPoint.name)")
         }
     }
     

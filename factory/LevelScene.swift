@@ -56,7 +56,7 @@ class LevelScene: SKScene {
         }
         allOutputs.sort {$0.priority > $1.priority }
         
-        // get outputs in sorted priority order
+        // get inputs in sorted priority order
         var allInputs = [ConnectionPoint]()
         for machine in machines {
             allInputs += machine.connectionPointInputs

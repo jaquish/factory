@@ -51,7 +51,7 @@ class Machine: SKSpriteNode, LevelFileObject {
     }
     
     func organizeConnectors() {
-        println("Connectors for \(name!)")
+        println("Connectors for \(self)")
         for cp in (connectionPointInputs + connectionPointOutputs) {
             if let connector = cp.connector {
                 connectors[cp.name] = cp.connector
@@ -95,7 +95,11 @@ class Machine: SKSpriteNode, LevelFileObject {
         return connectors.values.array.filter { $0.source == self }
     }
     
-    func allowConnectionWith(machine: Machine) -> Bool {
+    func allow(#outputPoint: ConnectionPoint, toConnectToMachine machine: Machine) -> Bool {
+        return true // override for advanced decision making
+    }
+    
+    func allow(#inputPoint: ConnectionPoint, toConnectFromMachine machine: Machine) -> Bool {
         return true // override for advanced decision making
     }
     

@@ -14,6 +14,7 @@ private let kVerticalBeltWidth: CGFloat = 12.0
 
 class Belt: Machine {
 
+    let lastZone: Zone
     let endZone: Zone
     let direction: Direction
     
@@ -29,6 +30,7 @@ class Belt: Machine {
         self.endZone = thru
         self.moving = Array()
         self.direction = direction
+        lastZone = (direction == .E) ? endZone : from
 
         super.init(originZone: from)
         
@@ -56,6 +58,14 @@ class Belt: Machine {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func allow(#inputPoint: ConnectionPoint, toConnectFromMachine machine: Machine) -> Bool {
+        return !(machine is VerticalBelt)
+    }
+    
+    override func allow(#outputPoint: ConnectionPoint, toConnectToMachine machine: Machine) -> Bool {
+        return !(machine is VerticalBelt)
+    }
+    
     override func update(_dt: CFTimeInterval) {
         // TODO - save leftover deltaTime to update
         let deltaX = kBeltSpeedPointsPerSecond * CGFloat(_dt) * (direction == .W ? -1.0 : 1.0)
@@ -80,9 +90,5 @@ class Belt: Machine {
         }
         
         moving = moving.filter { !contains(toDelete, $0) }
-    }
-    
-    override func allowConnectionWith(machine: Machine) -> Bool {
-        return !(machine is VerticalBelt)
     }
 }

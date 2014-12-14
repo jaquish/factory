@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Zone : Printable {
+struct Zone : Printable, Equatable {
     var x: Int
     var y: Int
     
@@ -17,6 +17,11 @@ struct Zone : Printable {
     init(_ x: Int, _ y: Int) {
         self.x = x
         self.y = y
+    }
+    
+    init(containingPoint:CGPoint) {
+        x = Int(containingPoint.x) / Int(ZoneSize)
+        y = Int(containingPoint.y) / Int(ZoneSize)
     }
     
     init(_ string: String) {
@@ -62,6 +67,10 @@ struct Zone : Printable {
     var description: String {
         get { return "(\(x), \(y))" }
     }
+}
+
+func == (left: Zone, right: Zone) -> Bool {
+    return (left.x == right.x) && (left.y == right.y)
 }
 
 let ZoneZero = Zone(0,0)
