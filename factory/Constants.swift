@@ -23,5 +23,6 @@ let SpriteLayerWidges: CGFloat          =  1.0
 let SpriteLayerInFrontOfWidges: CGFloat =  2.0
 
 let DEBUG_SHOW_GRID = true
+let DEBUG_SHOW_NUMBERS = true
 
 let LabelFontSize: CGFloat = 24

@@ -30,6 +30,10 @@ class LevelViewController: UIViewController, SKSceneDelegate {
                 self.view.addSubview(GridOverlay(frame: self.view.bounds))
             }
             
+            if DEBUG_SHOW_NUMBERS {
+                self.view.addSubview(GridNumbering(frame: self.view.bounds))
+            }
+            
             CurrentLevel = level
             scene.loadLevel(level!)
             
