@@ -90,5 +90,42 @@ class Belt: Machine {
         }
         
         moving = moving.filter { !contains(toDelete, $0) }
+        
+        toDelete.removeAll()
+        var newGarbage = [Widge]()
+        
+        // Check for overlap, delete if necessary
+        // TODO: much smarter garbage logic
+        for widge1 in moving {
+            for widge2 in moving {
+                if widge1 != widge2 && CGRectIntersectsRect(widge1.frame, widge2.frame) {
+                    
+                    // don't consider the same pair twice
+                    if !(contains(toDelete, widge1) && contains(toDelete, widge2)) {
+                        let garbageReplacement = Widge.garbage()
+                        garbageReplacement.position = widge1.position
+                        newGarbage.append(garbageReplacement)
+                        
+                        if !contains(toDelete, widge1) {
+                            toDelete.append(widge1)
+                        }
+                        if !contains(toDelete, widge2) {
+                            toDelete.append(widge2)
+                        }
+                    }
+                }
+            }
+        }
+        
+        moving = moving.filter { !contains(toDelete, $0) }
+        
+        for widge in toDelete {
+            widge.removeFromParent()
+        }
+        
+        for widge in newGarbage {
+            scene!.addChild(widge)
+            moving.append(widge)
+        }
     }
 }
