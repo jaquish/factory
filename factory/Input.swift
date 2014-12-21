@@ -12,9 +12,13 @@ import SpriteKit
 class Input: Machine {
        
     var generated: [Widge]
+    let interval: CFTimeInterval
+    var timeRemaining: CFTimeInterval
     
-    init(_ originZone: Zone) {
+    init(_ originZone: Zone, interval:CFTimeInterval = 0) {
         generated = Array()
+        self.interval = interval
+        self.timeRemaining = interval
         super.init(originZone: originZone)
         
         addChild(Util.zoneBoxWithBorder(UIColor.grayColor(), innerColor: UIColor(red: 0.2, green: 0.8, blue: 0.2, alpha: 1.0)))
@@ -46,6 +50,22 @@ class Input: Machine {
     }
     
     override func update(_dt: CFTimeInterval) {
+        
+        if _dt > 1000 {
+            // CRAZY FIRST INTERVAL WTF
+            return
+        }
+        if interval > 0 {
+            timeRemaining -= _dt
+            if timeRemaining < 0 {
+                timeRemaining += interval
+                generateWidge()
+                if timeRemaining < 0 {
+                    fatalError("Rendering slipped too far behind.")
+                }
+            }
+        }
+        
         for widge in generated {
             connectors["next"]?.insert(widge)
         }

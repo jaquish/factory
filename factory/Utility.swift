@@ -42,7 +42,7 @@ class Util : NSObject {
         
         let right = SKSpriteNode(texture: nil, color: UIColor.grayColor(), size: CGSizeMake(0.1*ZoneSize, ZoneSize))
         right.anchorPoint = CGPointZero
-        right.position = CGPointZero
+        right.position = CGPointMake(ZoneSize*0.9, 0)
         box.addChild(right)
         
         box.userInteractionEnabled = false

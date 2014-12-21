@@ -23,6 +23,7 @@ class Combiner: Machine {
     init(_ originZone: Zone, action: Action) {
         
         self.action = action
+        self.containedType = action.inputTypeIDs.first!
         
         super.init(originZone: originZone)
         
@@ -32,24 +33,32 @@ class Combiner: Machine {
         zPosition = SpriteLayerInFrontOfWidges
 
         let box = Util.zoneBoxWithBorder(UIColor.blueColor(), innerColor: UIColor.darkGrayColor())
-        box.position = originZone.worldPoint(.NW)
+        box.position = ZoneZero.worldPoint(.NW)
         addChild(box)
         
         // show a preview of the output in the center
-        let outputPreview = Widge.widgeBy(containedType)!
-        outputPreview.setScale(0.5)
-        outputPreview.position = ZoneZero.worldPoint(.center)
-        outputPreview.changeYBy(ZoneSize*0.20)
-        box.addChild(outputPreview)
-
-        addSimpleInput("input")
-        addSimpleOutput("output")
+        let a = Widge.widgeBy(containedType)!
+        a.setScale(0.4)
+        a.position = ZoneZero.worldPoint(.center)
+        a.changeYBy(ZoneSize*0.20)
+        box.addChild(a)
+        
+        // gravity into the container
+        let cpInput = ConnectionPoint(position:originZone[.N].worldPoint(.center), name: "container-input")
+        self.addInput(cpInput)
+        
+        // widge out of the container
+        let cpOutput = ConnectionPoint(position: originZone.zone(.N).worldPoint(.center), name: "drop-output")
+        self.addOutput(cpOutput)
+        
+        let cpInput2 = ConnectionPoint(position: originZone.worldPoint(.center), name: "belt-input")
+        self.addInput(cpInput2)
         
         countLabel = SKLabelNode()
         countLabel.position = ZoneZero.worldPoint(.center)
         countLabel.changeYBy(-ZoneSize*0.40)
         countLabel.fontSize = LabelFontSize
-        addChild(countLabel)
+        box.addChild(countLabel)
         
         self.userInteractionEnabled = true
     }
@@ -74,8 +83,9 @@ class Combiner: Machine {
     }
     
     override func update(_dt: CFTimeInterval) {
+        // Container
         var madeGarbage = false
-        for widge in connectorWithName("input").dequeueWidges() {
+        for widge in connectorWithName("container-input").dequeueWidges() {
             if widge.widgeTypeID == containedType {
                 containedCount++
             } else {
@@ -88,8 +98,8 @@ class Combiner: Machine {
             containedCount = 0
             let garbage = Widge.garbage()
             scene?.addChild(garbage)
-            garbage.position = connectorWithName("output").position
-            connectorWithName("output").insert(garbage)
+            garbage.position = connectorWithName("drop-output").position
+            connectorWithName("drop-output").insert(garbage)
         }
     }
 }

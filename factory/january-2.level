@@ -1,6 +1,6 @@
 @Metadata
 Format-Version:1.0
-Name:January 1st
+Name:January 2nd
 
 @Description
 Same as yesterday. There's no on/off switch on the machine, so you'll need
@@ -14,7 +14,7 @@ to redirect traffic around the machine.
 make-yellow Transformation red yellow black
 
 @Machines
-Input 1,7
+Input 1,7 3
 Gravity 1,7 1,5
 Belt 1,5 10,5 E
 

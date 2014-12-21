@@ -10,6 +10,7 @@ import UIKit
 
 enum ActionType : String {
     case Transformation = "Transformation"
+    case Combination = "Combination"
 }
 
 struct Action : LevelFileObject {

@@ -67,6 +67,10 @@ struct Zone : Printable, Equatable {
     var description: String {
         get { return "(\(x), \(y))" }
     }
+    
+    subscript(direction: Direction) -> Zone {
+        return zone(direction)
+    }
 }
 
 func == (left: Zone, right: Zone) -> Bool {

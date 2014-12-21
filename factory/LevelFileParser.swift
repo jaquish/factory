@@ -127,7 +127,11 @@ class LevelFileParser {
                 case "Gravity":
                     level.machines.append(Gravity(from: Zone(parts[1]), thru: Zone(parts[2])))
                 case "Input":
-                    level.inputMachine = Input(Zone(parts[1]))
+                    if parts.count == 3 {
+                        level.inputMachine = Input(Zone(parts[1]), interval: (parts[2] as NSString).doubleValue)
+                    } else {
+                        level.inputMachine = Input(Zone(parts[1]))
+                    }
                     level.machines.append(level.inputMachine)
                 case "Output":
                     level.machines.append(Output(Zone(parts[1])))
@@ -142,6 +146,9 @@ class LevelFileParser {
                     level.machines.append(SwitchBox(Zone(parts[1])))
                 case "Container":
                     level.machines.append(Container(Zone(parts[1]), containedType:parts[2]))
+                case "Combiner":
+                    let action = level.actions[parts[2]]!
+                    level.machines.append(Combiner(Zone(parts[1]), action:action))
                 default:
                     failWithError("Unknown class of machine '\(machineType)'")
             }
