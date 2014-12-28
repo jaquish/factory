@@ -9,11 +9,15 @@
 import UIKit
 import SpriteKit
 
+var AllWidges = [Widge]()
+
 var widgeTypes = [String : String]()
 
-
 class Widge: SKSpriteNode, LevelFileObject {
-        
+    
+    var owner: AnyObject! // Machine or Connector
+    var state: WidgeState!
+    
     var widgeTypeID: String!
 
     class func widgeBy(typeID:String) -> Widge? {
@@ -30,6 +34,7 @@ class Widge: SKSpriteNode, LevelFileObject {
         let widge = Widge(color: color, size: CGSizeMake(WidgeSize, WidgeSize))
         widge.widgeTypeID = typeID
         widge.zPosition = SpriteLayerWidges
+        AllWidges.append(widge)
         return widge
     }
     

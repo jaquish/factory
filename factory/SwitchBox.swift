@@ -9,6 +9,8 @@
 import UIKit
 import SpriteKit
 
+private let WaitingToTransfer: WidgeState = "WaitingToTransfer"
+
 class SwitchBox: Machine {
     
     var labelNode:SKLabelNode!
@@ -41,13 +43,8 @@ class SwitchBox: Machine {
         addChild(labelNode)
         
         for i in 0..<2 {
-            let input = ConnectionPoint(position: originZone.worldPoint(.center), name: "input-\(i)")
-            input.priority = 1
-            addInput(input)
-            
-            let output = ConnectionPoint(position: originZone.worldPoint(.center), name: "output-\(i)")
-            input.priority = 1
-            addOutput(output)
+            addInput(originZone^(.center), name: "input-\(i)", startingState: WaitingToTransfer, priority: 1)
+            addOutput(originZone^(.center), name: "output-\(i)", priority: 1)
         }
 
         userInteractionEnabled = true
@@ -98,11 +95,12 @@ class SwitchBox: Machine {
     }
     
     override func update(_dt: CFTimeInterval) {
+        
+        dequeueAllWidges()
+        
         // stick input into the output connector
-        for connector in inputs() {
-            for widge in connector.dequeueWidges() {
-                selectedOutput.insert(widge)
-            }
+        for widge in widgesInState(WaitingToTransfer) {
+            selectedOutput.insert(widge)
         }
     }
 }

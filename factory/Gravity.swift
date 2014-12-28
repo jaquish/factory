@@ -9,23 +9,23 @@
 import UIKit
 import SpriteKit
 
+private let Falling: WidgeState = "Falling"
+
 class Gravity: Machine {
     
     let kGravityPointsPerSecond: CGFloat = 300.0    // gravity linear
     
-    var falling: [Widge]
     let endZone: Zone
     
     init(from: Zone, thru: Zone) {
         self.endZone = thru
-        self.falling = Array()
         
         super.init(originZone: from)
         
         self.zPosition = SpriteLayerBehindWidges
         
-        addInput (ConnectionPoint(position: originZone.worldPoint(.center), name: "top"))
-        addOutput(ConnectionPoint(position:    endZone.worldPoint(.center), name: "bottom"))
+        addInput (originZone^(.center), name: "top", startingState: "Falling")
+        addOutput(originZone^(.center), name: "bottom")
     }
     
     class override func numberOfInitializerParameters() -> Int {
@@ -37,22 +37,22 @@ class Gravity: Machine {
     }
     
     override func update(_dt: CFTimeInterval) {
-        let connector = connectors["top"]!
-        falling += connector.dequeueWidges()
         
-        var toDelete = [Widge]()
-        for widge in falling {
-            widge.changeYBy(-kGravityPointsPerSecond * CGFloat(_dt))
+        let top = connectorWithName("top")
+        let bottom = connectorWithName("bottom")
+
+        top.dequeueWidges()
+        
+        for widge in widgesInState(Falling) {
+            let deltaY = -kGravityPointsPerSecond * CGFloat(_dt)
+            let oldPosition = widge.position
+            widge.changeYBy(deltaY)
             
-            if let bottom = connectors["bottom"] {
-                if widge.position.y < bottom.position.y {
-                    widge.changeYTo(bottom.position.y)
-                    toDelete.append(widge)
-                    bottom.insert(widge)
-                }
+            if path(from: oldPosition, to: widge.position, ranOver: bottom.position) {
+                // TODO: Calculate extra distance delta
+                widge.changeYTo(bottom.position.x)
+                bottom.insert(widge)
             }
         }
-        
-        falling = falling.filter { !contains(toDelete, $0) }
     }
 }

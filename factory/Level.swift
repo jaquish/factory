@@ -55,11 +55,11 @@ class Level: NSObject {
         }
     }
     
-    func createInput() -> Widge {
+    func nextInputType() -> String {
         inputIndex++
         switch inputOrder {
-        case .Random: return createWidge(inputWidgeTypes.randomItem())
-        case .Linear: return createWidge(inputWidgeTypes[(inputIndex-1) % inputWidgeTypes.count])
+        case .Random: return inputWidgeTypes.randomItem()
+        case .Linear: return inputWidgeTypes[(inputIndex-1) % inputWidgeTypes.count]
         }
     }
     

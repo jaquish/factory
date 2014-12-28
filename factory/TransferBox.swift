@@ -9,6 +9,8 @@
 import UIKit
 import SpriteKit
 
+private let WaitingToTransfer: WidgeState = "WaitingToTransfer"
+
 class TransferBox: Machine {
 
     init(_ originZone: Zone) {
@@ -19,15 +21,11 @@ class TransferBox: Machine {
         
         // up to 3 inputs
         for i in 0..<3 {
-            let input = ConnectionPoint(position: originZone.worldPoint(.center), name: "input-\(i)")
-            input.priority = 1
-            addInput(input)
+            addInput(originZone^(.center), name: "input-\(i)", startingState: WaitingToTransfer, priority: 1)
         }
 
         // only 1 output
-        let output = ConnectionPoint(position: originZone.worldPoint(.center), name: "output")
-        output.priority = 1
-        addOutput(output)
+        addOutput(originZone^(.center), name: "output", priority: 1)
     }
     
     // MARK: Connection Phase
@@ -69,10 +67,11 @@ class TransferBox: Machine {
     // MARK: Game Phase
     
     override func update(_dt: CFTimeInterval) {
-        for connector in inputs() {
-            for widge in connector.dequeueWidges() {
-                connectorWithName("output").insert(widge)
-            }
+        
+        dequeueAllWidges()
+        
+        for widge in widgesInState(WaitingToTransfer) {
+            connectorWithName("output").insert(widge)
         }
     }
 }

@@ -9,6 +9,8 @@
 import UIKit
 import SpriteKit
 
+private let WaitingToTransform: WidgeState = "WaitingToTransform"
+
 class Transformer: Machine {
    
     var action: Action
@@ -36,10 +38,9 @@ class Transformer: Machine {
         addChild(outputPreview)
         outputPreview.position = ZoneZero.worldPoint(.center)
         
-        addSimpleInput("input")
-        addSimpleOutput("output")
+        addInput(originZone^(.center), name: "input", startingState: WaitingToTransform)
+        addOutput(originZone^(.center), name: "output")
         
-//        self.size = self.calculateAccumulatedFrame().size necessary?
         self.userInteractionEnabled = true
     }
 
@@ -48,19 +49,13 @@ class Transformer: Machine {
     }
     
     override func update(_dt: CFTimeInterval) {
-        let inputWidges = connectors["input"]!.dequeueWidges()
+        connectors["input"]!.dequeueWidges()
         
-        for widge in inputWidges {
+        for widge in widgesInState(WaitingToTransform) {
             
             if isOn {
                 let newType = action.performAction([widge.widgeTypeID]).first!
-                
-                let replacement = CurrentLevel.createWidge(newType)
-                replacement.position = widge.position
-                
-                scene?.addChild(replacement)
-                widge.removeFromParent()
-                
+                let replacement = transform(widge, toType: newType)
                 connectors["output"]!.insert(replacement)
                 
             } else {

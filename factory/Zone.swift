@@ -73,6 +73,37 @@ struct Zone : Printable, Equatable {
     }
 }
 
+func ZoneSequence(from:Zone, to: Zone) -> [Zone]! {
+    
+    // invalid cases
+    if from.x > to.x || from.y > to.y || (from.x != to.x && from.y != to.y) {
+        return nil
+    }
+    
+    var zones = [Zone]()
+    
+    if from.y == to.y {
+        // add x sequence
+        for x in stride(from: from.x, through: to.x, by: 1) {
+            zones.append(Zone(x, from.y))
+        }
+        
+    } else {
+        // add y sequence
+        for y in stride(from: from.y, through: to.y, by: 1) {
+            zones.append(Zone(from.x, y))
+        }
+    }
+    
+    return zones
+}
+
+infix operator ^ {}
+
+func ^ (lhs: Zone, rhs: Direction) -> CGPoint {
+    return lhs.worldPoint(rhs)
+}
+
 func == (left: Zone, right: Zone) -> Bool {
     return (left.x == right.x) && (left.y == right.y)
 }

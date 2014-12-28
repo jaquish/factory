@@ -43,16 +43,16 @@ class Combiner: Machine {
         a.changeYBy(ZoneSize*0.20)
         box.addChild(a)
         
-        // gravity into the container
-        let cpInput = ConnectionPoint(position:originZone[.N].worldPoint(.center), name: "container-input")
-        self.addInput(cpInput)
-        
-        // widge out of the container
-        let cpOutput = ConnectionPoint(position: originZone.zone(.N).worldPoint(.center), name: "drop-output")
-        self.addOutput(cpOutput)
-        
-        let cpInput2 = ConnectionPoint(position: originZone.worldPoint(.center), name: "belt-input")
-        self.addInput(cpInput2)
+//        // gravity into the container
+//        let cpInput = ConnectionPoint(position:originZone[.N].worldPoint(.center), name: "container-input")
+//        self.addInput(cpInput)
+//        
+//        // widge out of the container
+//        let cpOutput = ConnectionPoint(position: originZone.zone(.N).worldPoint(.center), name: "drop-output")
+//        self.addOutput(cpOutput)
+//        
+//        let cpInput2 = ConnectionPoint(position: originZone.worldPoint(.center), name: "belt-input")
+//        self.addInput(cpInput2)
         
         countLabel = SKLabelNode()
         countLabel.position = ZoneZero.worldPoint(.center)

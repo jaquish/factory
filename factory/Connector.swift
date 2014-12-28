@@ -8,40 +8,67 @@
 
 import UIKit
 
+// Widge States
+let Enqueued:   WidgeState = "Enqueued"
+let Propogated: WidgeState = "Propogated"
+
 @objc class Connector : NSObject {
     
-    var position: CGPoint = CGPointZero
-    var source: Machine
-    var destination: Machine
+    let position: CGPoint
+    let source: Machine
+    let destination: Machine
+    var destinationState: WidgeState
     
-    private var sourceList: [Widge]
-    private var destinationList: [Widge]
+    class func connect(#from: ConnectionPointSource, to: ConnectionPointDestination) {
+        assert(CGPointEqualToPoint(from.position, to.position) , "Connection points must be at same point")
+        assert(from.machine != to.machine , "Connection points must be on different machines")
+        
+        let connector = Connector(position: from.position, source:from.machine, destination:to.machine, destinationState:to.destinationState)
+        
+        // point both connection points to single connector
+        from.connector = connector
+        to.connector   = connector
+        
+        println("Connected \(from.machine) \(from.name) to \(to.machine) \(to.name)")
+    }
     
-    init(position: CGPoint, source: Machine, destination: Machine) {
+    init(position: CGPoint, source: Machine, destination: Machine, destinationState: WidgeState) {
         self.position = position
         self.source = source
         self.destination = destination
-        self.sourceList = []
-        self.destinationList = []
+        self.destinationState = destinationState
     }
     
     func insert(widge: Widge) {
         assert(CGPointEqualToPoint(widge.position, self.position), "Widget position was not set correctly before inserting into output connector!");
-        self.sourceList.append(widge)
+        widge.owner = self
+        widge.state = Enqueued
     }
     
     func propogate() {
-        for widge in reverse(self.sourceList) {
-            self.destinationList.insert(widge, atIndex:0)
+        for widge in widges() {
+            if widge.state != Enqueued {
+                fatalError("Widge \(widge) was not in equeued state before propogation")
+            }
+            widge.state = Propogated
         }
-        self.sourceList.removeAll()
     }
     
     func dequeueWidges() -> [Widge] {
-        var copy = (self.destinationList as NSArray).mutableCopy() as [Widge]
-        self.destinationList.removeAll()
-        return copy
+        let dequeued = widges()
+        for widge in dequeued {
+            widge.owner = destination
+            widge.state = destinationState
+        }
+        return dequeued
     }
+    
+    func widges() -> [Widge] {
+        return AllWidges.filter { ($0.owner as? Connector) == self }
+    }
+    
+    
+    // MARK: Debug
     
     func description() -> String {
         return "Connector from " + self.source.name! + " to " + self.destination.name! + " at " + "\(position)"

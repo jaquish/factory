@@ -12,12 +12,13 @@ import SpriteKit
 private let kBeltSpeedPointsPerSecond: CGFloat = 100.0
 private let kVerticalBeltWidth: CGFloat = 30.0
 
+private let Moving: WidgeState = "Moving"
+
 class VerticalBelt: Machine {
     
     let direction: Direction
-    var moving: [Widge]
-    let lastZone: Zone
     let endZone: Zone
+    var lastZone: Zone { return (direction == .N) ? originZone : endZone }
 
     init(from: Zone, thru: Zone, direction: Direction) {
         
@@ -27,9 +28,7 @@ class VerticalBelt: Machine {
         }
         
         self.direction = direction
-        lastZone = (direction == .N) ? thru : from
         self.endZone = thru
-        self.moving  = Array()
         super.init(originZone: from)
         
         zPosition = SpriteLayerBehindWidges
@@ -41,8 +40,8 @@ class VerticalBelt: Machine {
         let inputZone  = (direction == .N) ? originZone : endZone
         let outputZone = (direction == .N) ? endZone : originZone
         
-        addInput(ConnectionPoint(position:inputZone.worldPoint(.center), name: "input"))
-        addOutput(ConnectionPoint(position:outputZone.worldPoint(.center), name: "output"))
+        addInput(inputZone^(.center), name:"input", startingState: Moving)
+        addOutput(outputZone^(.center), name:"output")
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -62,28 +61,20 @@ class VerticalBelt: Machine {
 
         let deltaY = kBeltSpeedPointsPerSecond * CGFloat(_dt) * (direction == .S ? -1.0 : 1.0)
         
-        // Fetch fresh widgets
-        for connector in inputs() {
-            moving += connector.dequeueWidges()
-        }
+        dequeueAllWidges()
         
-        // Move widges, check for collision with output
-        var toDelete = [Widge]()
-        for widge in moving {
+        for widge in widgesInState(Moving) {
             let oldPosition = widge.position
             widge.changeYBy(deltaY)
-        
+            
+            let output = connectorWithName("output")
+            
             // check if widge passed over connection point
-            for connector in outputs() {
-                
-                if path(from: oldPosition, to: widge.position, ranOver: connector.position) {
-                    widge.changeYTo(connector.position.y)
-                    connector.insert(widge)
-                    toDelete.append(widge)
-                }
+            if path(from: oldPosition, to: widge.position, ranOver: output.position) {
+                // TODO: Calculate extra distance delta
+                widge.changeYTo(output.position.y)
+                output.insert(widge)
             }
-            // Gross
-            moving = moving.filter { !contains(toDelete, $0) }
         }
     }
 }

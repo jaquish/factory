@@ -9,6 +9,9 @@
 import UIKit
 import SpriteKit
 
+private let Contained: WidgeState = "Contained"
+private let ReadyToDrop: WidgeState = "ReadyToDrop"
+
 class Container: Machine {
    
     var containedCount: Int = 0 {
@@ -35,8 +38,8 @@ class Container: Machine {
         outputPreview.position = ZoneZero.worldPoint(.center)
         outputPreview.changeYBy(ZoneSize*0.20)
         
-        addSimpleInput("input")
-        addSimpleOutput("output")
+        addInput(originZone^(.center), name: "input", startingState: Contained)
+        addOutput(originZone^(.center), name: "output")
         
         countLabel = SKLabelNode()
         countLabel.position = ZoneZero.worldPoint(.center)
@@ -58,15 +61,18 @@ class Container: Machine {
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         if containedCount > 0 {
             containedCount--
+            
             // drop contained type
-            let created = Widge.widgeBy(containedType)!
-            scene?.addChild(created)
-            created.position = connectorWithName("output").position
-            connectorWithName("output").insert(created)
+            let output = connectorWithName("output")
+            let dropped = createWidge(containedType, position: output.position, state: ReadyToDrop)
+            output.insert(dropped)
         }
     }
     
     override func update(_dt: CFTimeInterval) {
+        
+        dequeueAllWidges()
+        
         var madeGarbage = false
         for widge in connectorWithName("input").dequeueWidges() {
             if widge.widgeTypeID == containedType {

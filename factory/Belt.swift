@@ -9,45 +9,49 @@
 import UIKit
 import SpriteKit
 
-private let kBeltSpeedPointsPerSecond: CGFloat = 100.0
-private let kVerticalBeltWidth: CGFloat = 12.0
+private let BeltSpeedPointsPerSecond: CGFloat = 100.0
+private let HorizontalBeltHeight: CGFloat = 12.0
+
+private let Moving: WidgeState = "Moving"
 
 class Belt: Machine {
 
-    let lastZone: Zone
-    let endZone: Zone
-    let direction: Direction
+    let thruZone: Zone!
+    let direction: Direction!
     
-    var moving: [Widge]
+    var lastZone: Zone     { return (direction == Direction.E) ? thruZone : originZone }
+    var overEdgeZone: Zone { return (direction == .E) ? thruZone.zone(.E) : originZone.zone(.W) }
     
-    init(from: Zone, thru: Zone, direction: Direction) {
+    init!(from: Zone, thru: Zone, direction: Direction) {
         
+        super.init(originZone: from)
+        
+        // Validation
         if !(direction == .E || direction == .W) {
-            println("Warning: invalid direction \(direction) for belt")
-            direction == .E
+            println("Error: invalid direction \(direction) for belt")
+            return nil
         }
         
-        self.endZone = thru
-        self.moving = Array()
+        if from.x > thru.x || thru.y < from.y {
+            println("Error: zoning should progress from lower-left to upper-right")
+            return nil
+        }
+        
+        self.thruZone = thru
         self.direction = direction
-        lastZone = (direction == .E) ? endZone : from
-
-        super.init(originZone: from)
         
         self.zPosition = SpriteLayerBehindWidges
         
-        let spriteNode = SKSpriteNode(color: UIColor.grayColor(), size: CGSizeMake(ZoneSize * CGFloat(endZone.x - originZone.x + 1), kVerticalBeltWidth))
+        let spriteNode = SKSpriteNode(color: UIColor.grayColor(), size: CGSizeMake(ZoneSize * CGFloat(thruZone.x - originZone.x + 1), HorizontalBeltHeight))
         spriteNode.anchorPoint = CGPointZero
         addChild(spriteNode)
         
-        for i in stride(from: self.originZone.x, through: self.endZone.x, by: 1) {
-            let p = Zone(i, originZone.y).worldPoint(.center)
-            addInput (ConnectionPoint(position: p, name:  "input-\(i)"))
-            addOutput(ConnectionPoint(position: p, name: "output-\(i)"))
+        for zone in ZoneSequence(originZone, thruZone) {
+            addInput(zone^(.center), name: "input-\(zone.x)", startingState: Moving)
+            addOutput(zone^(.center), name: "output-\(zone.x)")
         }
         
-        let overEdgeZone = (direction == .E) ? endZone.zone(.E) : originZone.zone(.W)
-        addOutput(ConnectionPoint(position:overEdgeZone.worldPoint(.center), name: "over-edge"))
+        addOutput(overEdgeZone^(.center), name: "over-edge")
     }
     
     class override func numberOfInitializerParameters() -> Int {
@@ -67,65 +71,63 @@ class Belt: Machine {
     }
     
     override func update(_dt: CFTimeInterval) {
+        
         // TODO - save leftover deltaTime to update
-        let deltaX = kBeltSpeedPointsPerSecond * CGFloat(_dt) * (direction == .W ? -1.0 : 1.0)
         
-        for connector in inputs() {
-            moving += connector.dequeueWidges()
-        }
+        let deltaX = BeltSpeedPointsPerSecond * CGFloat(_dt) * (direction == .W ? -1.0 : 1.0)
         
-        var toDelete = [Widge]()
-        for widge in moving {
+        dequeueAllWidges()
+        
+        for widge in widgesInState(Moving) {
             let oldPosition = widge.position
             widge.changeXBy(deltaX)
             
             // check if widge passed over connection point
             for connector in outputs() {
                 if path(from: oldPosition, to: widge.position, ranOver: connector.position) {
+                    // TODO: Calculate extra distance delta
                     widge.changeXTo(connector.position.x)
                     connector.insert(widge)
-                    toDelete.append(widge)
                 }
             }
         }
-        
-        moving = moving.filter { !contains(toDelete, $0) }
-        
-        toDelete.removeAll()
-        var newGarbage = [Widge]()
-        
-        // Check for overlap, delete if necessary
-        // TODO: much smarter garbage logic
-        for widge1 in moving {
-            for widge2 in moving {
-                if widge1 != widge2 && CGRectIntersectsRect(widge1.frame, widge2.frame) {
-                    
-                    // don't consider the same pair twice
-                    if !(contains(toDelete, widge1) && contains(toDelete, widge2)) {
-                        let garbageReplacement = Widge.garbage()
-                        garbageReplacement.position = widge1.position
-                        newGarbage.append(garbageReplacement)
-                        
-                        if !contains(toDelete, widge1) {
-                            toDelete.append(widge1)
-                        }
-                        if !contains(toDelete, widge2) {
-                            toDelete.append(widge2)
-                        }
-                    }
-                }
-            }
-        }
-        
-        moving = moving.filter { !contains(toDelete, $0) }
-        
-        for widge in toDelete {
-            widge.removeFromParent()
-        }
-        
-        for widge in newGarbage {
-            scene!.addChild(widge)
-            moving.append(widge)
-        }
+//        
+//        var newGarbage = [Widge]()
+//        
+//        // Check for overlap, delete if necessary
+//        // TODO: much smarter garbage logic
+//        for widge1 in widgesInState(Moving) {
+//            for widge2 in widgesInState(Moving) {
+//                if widge1 != widge2 && CGRectIntersectsRect(widge1.frame, widge2.frame) {
+//                    
+//                    // don't consider the same pair twice
+//                    if !(contains(toDelete, widge1) && contains(toDelete, widge2)) {
+//                        let garbageReplacement = Widge.garbage()
+//                        garbageReplacement.position = widge1.position
+//                        newGarbage.append(garbageReplacement)
+//                        
+//                        if !contains(toDelete, widge1) {
+//                            toDelete.append(widge1)
+//                        }
+//                        if !contains(toDelete, widge2) {
+//                            toDelete.append(widge2)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        
+//        removeWidges(toDelete)
+//        
+//        for widge in toDelete {
+//            widge.removeFromParent()
+//        }
+//        
+//        for widge in newGarbage {
+//            scene!.addChild(widge)
+//            addWidge(widge, startingState: Moving)
+//        }
     }
+    
+
 }

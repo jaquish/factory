@@ -9,14 +9,14 @@
 import UIKit
 import SpriteKit
 
+private let WaitingToDrop: WidgeState = "WaitingToDrop"
+
 class Input: Machine {
        
-    var generated: [Widge]
     let interval: CFTimeInterval
     var timeRemaining: CFTimeInterval
     
     init(_ originZone: Zone, interval:CFTimeInterval = 0) {
-        generated = Array()
         self.interval = interval
         self.timeRemaining = interval
         super.init(originZone: originZone)
@@ -29,8 +29,9 @@ class Input: Machine {
         label.text = "IN"
         label.fontSize = LabelFontSize
         addChild(label)
-                
-        addSimpleOutput("next")
+        
+        addOutput(originZone^(.center), name: "output")
+        
         userInteractionEnabled = true
     }
 
@@ -43,10 +44,7 @@ class Input: Machine {
     }
     
     func generateWidge() {
-        let widge = (scene as LevelScene).level.createInput()
-        widge.position = originZone.worldPoint(.center)
-        generated.append(widge)
-        scene?.addChild(widge)
+        createWidge((scene as LevelScene).level.nextInputType(), position: originZone^(.center), state: WaitingToDrop)
     }
     
     override func update(_dt: CFTimeInterval) {
@@ -66,9 +64,8 @@ class Input: Machine {
             }
         }
         
-        for widge in generated {
-            connectors["next"]?.insert(widge)
+        for widge in widgesInState(WaitingToDrop) {
+            connectors["next"]!.insert(widge)
         }
-        generated.removeAll()
     }
 }

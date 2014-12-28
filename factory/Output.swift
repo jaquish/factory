@@ -9,6 +9,8 @@
 import UIKit
 import SpriteKit
 
+private let OutputWidge: WidgeState = "OutputWidge"
+
 class Output: Machine {
     
     let label: SKLabelNode
@@ -36,7 +38,7 @@ class Output: Machine {
         addChild(Util .zoneBoxWithBorder(UIColor.grayColor(), innerColor:UIColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 1.0)))
         addChild(title)
         addChild(label)
-        addSimpleInput("input")
+        addInput(originZone^(.center), name: "input", startingState: OutputWidge)
         
         self.color = UIColor.grayColor().colorWithAlphaComponent(0.2)
     }
@@ -46,9 +48,11 @@ class Output: Machine {
     }
     
     override func update(_dt: CFTimeInterval) {
-        let widges = connectors["input"]!.dequeueWidges()
-        count += widges.count
-        widges.map { CurrentLevel.addOutput($0.widgeTypeID) }
-        widges.map { $0.removeFromParent() }
+        connectorWithName("input").dequeueWidges()
+        for widge in widgesInState(OutputWidge) {
+            count += 1
+            CurrentLevel.addOutput(widge.widgeTypeID)
+            deleteWidge(widge)
+        }
     }
 }

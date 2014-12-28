@@ -8,20 +8,39 @@
 
 import UIKit
 
-@objc class ConnectionPoint {
+class ConnectionPoint {
     
     var position:CGPoint
     var connector:Connector?
-    var machine:Machine!
+    var machine:Machine
     var name:NSString
-    var priority = 0
+    var priority: Int
 
-    init(position:CGPoint, name:NSString) {
+    init(machine: Machine, position:CGPoint, name:NSString, priority:Int = 0) {
+        assert(name.length > 0, "Connection point should have a name.")
+        self.machine = machine
         self.position = position
         self.name = name
+        self.priority = priority
     }
     
-    func tryToConnectToPoint(otherPoint:ConnectionPoint) {
+    // TODO
+//    func description() -> String {
+//        return "\(self.machine.name!) \(self.name)"
+//    }
+}
+
+class ConnectionPointDestination : ConnectionPoint {
+    var destinationState: WidgeState
+
+    init(machine: Machine, position: CGPoint, name: NSString, destinationState: WidgeState, priority:Int = 0) {
+        self.destinationState = destinationState
+        super.init(machine: machine, position: position, name: name, priority: priority)
+    }
+}
+
+class ConnectionPointSource : ConnectionPoint {
+    func tryToConnectToPoint(otherPoint:ConnectionPointDestination) {
         /* Basic connection point rules */
         
         // don't connect a connection point that has already been connected
@@ -39,29 +58,14 @@ import UIKit
             return;
         }
         
-        // don't connect if machines are not setup yet
-        if machine == nil || otherPoint.machine == nil {
-            return;
-        }
-        
         /* Ask the machines involved for advanced connection point rules */
         let allowedByThisMachine = machine.allow(outputPoint: self, toConnectToMachine: otherPoint.machine)
         let allowedByOtherMachine = otherPoint.machine.allow(inputPoint: otherPoint, toConnectFromMachine: self.machine)
         
         if allowedByThisMachine && allowedByOtherMachine {
-                
+            
             // create new connector and set
-            let connector = Connector(position: self.position, source:machine!, destination: otherPoint.machine!)
-                
-            // point both connection points to single connector
-            self.connector = connector;
-            otherPoint.connector = connector;
-                
-            println("Connected \(self.machine!) \(self.name) to \(otherPoint.machine!) \(otherPoint.name)")
+            Connector.connect(from: self, to: otherPoint)
         }
-    }
-    
-    func description() -> String {
-        return "\(self.machine!.name!) \(self.name)"
     }
 }
