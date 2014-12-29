@@ -63,10 +63,6 @@ class Combiner: Machine {
         self.userInteractionEnabled = true
     }
     
-    override func didMakeConnections() {
-        containedCount = 0
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

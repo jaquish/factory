@@ -94,7 +94,7 @@ func ZoneSequence(from:Zone, to: Zone) -> [Zone]! {
             zones.append(Zone(from.x, y))
         }
     }
-    
+
     return zones
 }
 

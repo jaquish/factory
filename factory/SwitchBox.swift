@@ -82,7 +82,10 @@ class SwitchBox: Machine {
         }
     }
 
-    override func didMakeConnections() {
+    override func validateConnections() {
+        
+        super.validateConnections()
+        
         outputList = outputs()
         
         let outputCount = outputs().count

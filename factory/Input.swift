@@ -30,7 +30,7 @@ class Input: Machine {
         label.fontSize = LabelFontSize
         addChild(label)
         
-        addOutput(originZone^(.center), name: "output")
+        addOutput(originZone^(.center), name: "next")
         
         userInteractionEnabled = true
     }
@@ -59,7 +59,8 @@ class Input: Machine {
                 timeRemaining += interval
                 generateWidge()
                 if timeRemaining < 0 {
-                    fatalError("Rendering slipped too far behind.")
+                    println("Warning: Rendering slipped too far behind.")
+//                    fatalError("Rendering slipped too far behind.")
                 }
             }
         }

@@ -52,7 +52,7 @@ class TransferBox: Machine {
         }
     }
     
-    override func didMakeConnections() {
+    override func validateConnections() {
         let outputCount = outputs().count
         assert(outputCount == 1, "Expected \(self) to have 1 output, not \(outputCount)")
         

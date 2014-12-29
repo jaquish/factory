@@ -49,17 +49,18 @@ class Transformer: Machine {
     }
     
     override func update(_dt: CFTimeInterval) {
-        connectors["input"]!.dequeueWidges()
+        
+        connectorWithName("input").dequeueWidges()
         
         for widge in widgesInState(WaitingToTransform) {
             
             if isOn {
                 let newType = action.performAction([widge.widgeTypeID]).first!
                 let replacement = transform(widge, toType: newType)
-                connectors["output"]!.insert(replacement)
+                connectorWithName("output").insert(replacement)
                 
             } else {
-                connectors["output"]!.insert(widge)
+                connectorWithName("output").insert(widge)
             }
         }
     }

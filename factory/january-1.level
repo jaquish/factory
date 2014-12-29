@@ -14,7 +14,7 @@ Some of the As are missing Bs. Put them through the B machine only if they need 
 make-yellow Transformation red yellow black
 
 @Machines
-Input 1,7 5
+Input 1,7 10
 Gravity 1,7 1,5
 Belt 1,5 10,5 E
 Transformer 6,5 make-yellow

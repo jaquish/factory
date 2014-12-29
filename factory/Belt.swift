@@ -47,8 +47,8 @@ class Belt: Machine {
         addChild(spriteNode)
         
         for zone in ZoneSequence(originZone, thruZone) {
-            addInput(zone^(.center), name: "input-\(zone.x)", startingState: Moving)
-            addOutput(zone^(.center), name: "output-\(zone.x)")
+            addInput(zone^(.center), name: "input-\(zone.x)", startingState: Moving, isRequired: false)
+            addOutput(zone^(.center), name: "output-\(zone.x)", isRequired: false)
         }
         
         addOutput(overEdgeZone^(.center), name: "over-edge")
@@ -128,6 +128,4 @@ class Belt: Machine {
 //            addWidge(widge, startingState: Moving)
 //        }
     }
-    
-
 }

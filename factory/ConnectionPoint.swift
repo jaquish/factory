@@ -15,13 +15,15 @@ class ConnectionPoint {
     var machine:Machine
     var name:NSString
     var priority: Int
+    var isRequired: Bool
 
-    init(machine: Machine, position:CGPoint, name:NSString, priority:Int = 0) {
+    init(machine: Machine, position:CGPoint, name:NSString, priority:Int = 0, isRequired: Bool = true) {
         assert(name.length > 0, "Connection point should have a name.")
         self.machine = machine
         self.position = position
         self.name = name
         self.priority = priority
+        self.isRequired = isRequired
     }
     
     // TODO
@@ -33,9 +35,9 @@ class ConnectionPoint {
 class ConnectionPointDestination : ConnectionPoint {
     var destinationState: WidgeState
 
-    init(machine: Machine, position: CGPoint, name: NSString, destinationState: WidgeState, priority:Int = 0) {
+    init(machine: Machine, position: CGPoint, name: NSString, destinationState: WidgeState, priority:Int = 0, isRequired: Bool = true) {
         self.destinationState = destinationState
-        super.init(machine: machine, position: position, name: name, priority: priority)
+        super.init(machine: machine, position: position, name: name, priority: priority, isRequired: isRequired)
     }
 }
 

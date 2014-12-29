@@ -24,8 +24,8 @@ class Gravity: Machine {
         
         self.zPosition = SpriteLayerBehindWidges
         
-        addInput (originZone^(.center), name: "top", startingState: "Falling")
-        addOutput(originZone^(.center), name: "bottom")
+        addInput(originZone^(.center), name: "top", startingState: "Falling")
+        addOutput(endZone^(.center), name: "bottom")
     }
     
     class override func numberOfInitializerParameters() -> Int {
@@ -50,7 +50,7 @@ class Gravity: Machine {
             
             if path(from: oldPosition, to: widge.position, ranOver: bottom.position) {
                 // TODO: Calculate extra distance delta
-                widge.changeYTo(bottom.position.x)
+                widge.changeYTo(bottom.position.y)
                 bottom.insert(widge)
             }
         }

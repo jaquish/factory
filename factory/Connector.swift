@@ -12,7 +12,7 @@ import UIKit
 let Enqueued:   WidgeState = "Enqueued"
 let Propogated: WidgeState = "Propogated"
 
-@objc class Connector : NSObject {
+@objc class Connector : NSObject, DebugPrintable {
     
     let position: CGPoint
     let source: Machine
@@ -56,9 +56,14 @@ let Propogated: WidgeState = "Propogated"
     
     func dequeueWidges() -> [Widge] {
         let dequeued = widges()
+        var count = 0
         for widge in dequeued {
             widge.owner = destination
             widge.state = destinationState
+            count++
+        }
+        if count > 0 {
+            println("Dequeued \(count) widges into machine \(destination))")
         }
         return dequeued
     }
@@ -70,7 +75,7 @@ let Propogated: WidgeState = "Propogated"
     
     // MARK: Debug
     
-    func description() -> String {
+    func debugDescription() -> String {
         return "Connector from " + self.source.name! + " to " + self.destination.name! + " at " + "\(position)"
     }
 }

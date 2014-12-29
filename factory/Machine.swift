@@ -13,6 +13,7 @@ var machineCount = 0
 
 // Global States
 typealias WidgeState = String
+let Created: WidgeState = "Created"
 let MarkedForDeletion: WidgeState = "MarkedForDeletion"
 
 class Machine: SKSpriteNode, LevelFileObject {
@@ -52,31 +53,16 @@ class Machine: SKSpriteNode, LevelFileObject {
         // Cycle through connectors, take control of all widges.
         // You may do this in any order.
     }
-
-    func propogate() {
-        fatalError("propogate has not been implemented")
-    }
-    
-    func organizeConnectors() {
-//        println("Connectors for \(self)")
-//        for cp in (connectionPointInputs + connectionPointOutputs) {
-//            if let connector = cp.connector {
-//                connectors[cp.name] = cp.connector
-//                println("-- \(cp.name)")
-//            }
-//        }
-        didMakeConnections()
-    }
     
     // MARK: Setup Phase
     
-    func addInput(position: CGPoint, name: String, startingState: WidgeState, priority:Int = 1) {
-        let cp = ConnectionPointDestination(machine: self, position: position, name: name, destinationState: startingState)
+    func addInput(position: CGPoint, name: String, startingState: WidgeState, priority:Int = 1, isRequired: Bool = true) {
+        let cp = ConnectionPointDestination(machine: self, position: position, name: name, destinationState: startingState, priority: priority, isRequired: isRequired)
         connectionPointInputs.append(cp)
     }
     
-    func addOutput(position: CGPoint, name: String, priority:Int = 1) {
-        let cp = ConnectionPointSource(machine: self, position: position, name: name)
+    func addOutput(position: CGPoint, name: String, priority:Int = 1, isRequired: Bool = true) {
+        let cp = ConnectionPointSource(machine: self, position: position, name: name, priority: priority, isRequired: isRequired)
         connectionPointOutputs.append(cp)
     }
     
@@ -90,8 +76,31 @@ class Machine: SKSpriteNode, LevelFileObject {
         return true // override for advanced decision making
     }
     
-    func didMakeConnections() {
-        // do nothing
+    func organizeConnectors() {
+        for cp in (connectionPointInputs as [ConnectionPoint] + connectionPointOutputs as [ConnectionPoint]) {
+            if let connector = cp.connector {
+                connectors[cp.name] = cp.connector
+            }
+        }
+        println("Connectors for \(self)")
+        connectors.keys.array.map { println("-- \($0)") }
+        validateConnections()
+    }
+    
+    func validateConnections() {
+        var printedHeader = false
+        
+        let printHeader = { () -> () in
+            printedHeader = true
+            println("Validation warning: \(self) did not make all required connections.")
+        }
+        
+        for cp in connectionPointInputs as [ConnectionPoint] + connectionPointOutputs as [ConnectionPoint] {
+            if cp.isRequired && cp.connector == nil {
+                if !printedHeader { printHeader() }
+                println("Required connection point \(cp) was not connected")
+            }
+        }
     }
     
     // MARK: Running Phase
@@ -115,10 +124,12 @@ class Machine: SKSpriteNode, LevelFileObject {
     // MARK: Widge Management
     
     func createWidge(type: String, position: CGPoint, state: WidgeState) -> Widge {
-        let replacement = CurrentLevel.createWidge(type)
-        replacement.position = position
-        scene?.addChild(replacement)
-        return replacement
+        let newWidge = CurrentLevel.createWidge(type)
+        newWidge.owner = self
+        newWidge.state = state
+        newWidge.position = position
+        scene?.addChild(newWidge)
+        return newWidge
     }
     
     func transform(widge: Widge, toType: String) -> Widge {

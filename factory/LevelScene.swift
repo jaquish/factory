@@ -66,6 +66,9 @@ class LevelScene: SKScene {
         // shotgun connections
         for output in allOutputs {
             for input in allInputs {
+                if (output.machine is Gravity) && CGPointEqualToPoint(output.position, input.position) {
+                    println("help")
+                }
                 output.tryToConnectToPoint(input)
             }
         }
@@ -84,11 +87,12 @@ class LevelScene: SKScene {
         }
         
         // propogate
+        let connectors = NSMutableSet()
+        
         for machine in machines {
-            for connector in machine.connectors.values {
-                connector.propogate()
-            }
+            connectors.addObjectsFromArray(machine.connectors.values.array)
         }
+        (connectors.allObjects as [Connector]).map { $0.propogate() }
         
         /*** TODO - insert phase 2 processing here ***/
         
