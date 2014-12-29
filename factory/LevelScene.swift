@@ -67,9 +67,6 @@ class LevelScene: SKScene {
         // shotgun connections
         for output in allOutputs {
             for input in allInputs {
-                if (output.machine is Gravity) && CGPointEqualToPoint(output.position, input.position) {
-                    println("help")
-                }
                 output.tryToConnectToPoint(input)
             }
         }

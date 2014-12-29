@@ -113,7 +113,7 @@ class Machine: SKSpriteNode, LevelFileObject {
         return connectors.values.array.filter { $0.source == self }
     }
     
-    func connectorWithName(name: String) -> Connector {
+    func connector(name: String) -> Connector {
         return connectors[name]!
     }
     
@@ -167,6 +167,6 @@ class Machine: SKSpriteNode, LevelFileObject {
     // MARK: Debug
     
     func description() -> String {
-        return "\(name!) at \(originZone)"
+        return "Machine with origin \(originZone)"
     }
 }

@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum ParseStatus {
+    case Waiting, InProgress, Failed, Success
+}
+
 enum LevelFileSection : String {
     case Unknown  = "@End"
     case Description = "@Description"
@@ -23,6 +27,7 @@ class LevelFileParser {
     var currentLine = 0
     var currentSection: LevelFileSection = .Unknown
     var level:Level!
+    var status: ParseStatus = .Waiting
     
     init(url: NSURL) {
         self.url = url
@@ -39,32 +44,47 @@ class LevelFileParser {
         self.init(url: url ?? NSURL())
     }
     
-    func parseLevel() -> Level {
+    func parseLevel() -> Level! {
+        
+        status = .InProgress
         
         let loadedStringData:NSString! = NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding, error: nil)
         
-        if loadedStringData == nil {
-            failWithError("Error: Unable to load level file at '\(url.path)")
-        }
-        
-        level = Level()
-        widgeTypes.removeAll()
-        currentLine = 1
-        
-        let lines = loadedStringData.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()) as [NSString]
-        for (lineNumber, line) in enumerate(lines) {
-            currentLine = lineNumber
-            let line = line.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-            if line.isEmpty || line.hasPrefix("#") {
-                // comment or an empty line, ignore
-            } else if line.hasPrefix("@") {
-                processLineSectionChange(line)
-            } else {
-                processLineInCurrentSection(line)
+        if loadedStringData != nil {
+            
+            level = Level()
+            widgeTypes.removeAll()
+            currentLine = 1
+            
+            let lines = loadedStringData.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()) as [NSString]
+            
+            for line in lines {
+                
+                let line = line.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                if line.isEmpty || line.hasPrefix("#") {
+                    // comment or an empty line, ignore
+                } else if line.hasPrefix("@") {
+                    processLineSectionChange(line)
+                } else {
+                    processLineInCurrentSection(line)
+                }
+                
+                if status == .Failed {
+                    break
+                }
+                
+                currentLine++
             }
+        } else {
+            failWithError("Unable to load level file at '\(url.path)")
         }
         
-        return level
+        switch status {
+        case .InProgress:
+            status = .Success
+            return level
+        default: return nil
+        }
     }
     
     func processLineSectionChange(line: String) {
@@ -84,18 +104,16 @@ class LevelFileParser {
         }())
         
         // Verify Count
-        let expectedPartsCount = { () -> Int in
-            switch self.currentSection {
-            case .Context:  return 2
-            case .Metadata: return 2
-            case .Actions:  return 5
-            case .Widges:   return 0
-            default: return 0
-            }
-        }()
+        let expectedPartsForSection: [LevelFileSection:Int] = [ .Context : 2,
+                                                               .Metadata : 2,
+                                                                .Actions : 5,
+                                                                 .Widges : 0];
+        
+        let expectedPartsCount = expectedPartsForSection[currentSection] ?? 0
         
         if expectedPartsCount != 0 && parts.count != expectedPartsCount {
             failWithError("Unexpected number of parts (have \(parts.count), expected \(expectedPartsCount))")
+            return
         }
         
         // Do Something
@@ -121,37 +139,46 @@ class LevelFileParser {
             
             // Assert argument count/types, based on Machine subclass
 
+            var machine: Machine!
+            
             switch machineType {
                 case "Belt":
-                    level.machines.append(Belt(from: Zone(parts[1]), thru: Zone(parts[2]), direction: Direction(rawValue: parts[3])!))
+                    machine = Belt(from: Zone(parts[1]), thru: Zone(parts[2]), direction: Direction(rawValue: parts[3])!)
                 case "Gravity":
-                    level.machines.append(Gravity(from: Zone(parts[1]), thru: Zone(parts[2])))
+                    machine = Gravity(from: Zone(parts[1]), thru: Zone(parts[2]))
                 case "Input":
                     if parts.count == 3 {
-                        level.inputMachine = Input(Zone(parts[1]), interval: (parts[2] as NSString).doubleValue)
+                        machine = Input(Zone(parts[1]), interval: (parts[2] as NSString).doubleValue)
                     } else {
-                        level.inputMachine = Input(Zone(parts[1]))
+                        machine = Input(Zone(parts[1]))
                     }
-                    level.machines.append(level.inputMachine)
                 case "Output":
-                    level.machines.append(Output(Zone(parts[1])))
+                    machine = Output(Zone(parts[1]))
                 case "Transformer":
+                    
                     let action = level.actions[parts[2]]!
-                    level.machines.append(Transformer(Zone(parts[1]), action: action))
+                    machine = Transformer(Zone(parts[1]), action: action)
                 case "TransferBox":
-                    level.machines.append(TransferBox(Zone(parts[1])))
+                    machine = TransferBox(Zone(parts[1]))
                 case "VerticalBelt":
-                    level.machines.append(VerticalBelt(from: Zone(parts[1]), thru: Zone(parts[2]), direction: Direction(rawValue:parts[3])!))
+                    machine = VerticalBelt(from: Zone(parts[1]), thru: Zone(parts[2]), direction: Direction(rawValue:parts[3])!)
                 case "SwitchBox":
-                    level.machines.append(SwitchBox(Zone(parts[1])))
+                    machine = SwitchBox(Zone(parts[1]))
                 case "Container":
-                    level.machines.append(Container(Zone(parts[1]), containedType:parts[2]))
+                    machine = Container(Zone(parts[1]), containedType:parts[2])
                 case "Combiner":
                     let action = level.actions[parts[2]]!
-                    level.machines.append(Combiner(Zone(parts[1]), action:action))
+                    machine = Combiner(Zone(parts[1]), action:action)
                 default:
-                    failWithError("Unknown class of machine '\(machineType)'")
+                    failWithError("Unknown class of machine '\(machineType)'"); return
             }
+            
+            if machine == nil {
+                failWithError("Failed to create machine of type \(machineType)"); return
+            } else {
+                level.machines.append(machine)
+            }
+            
         case .Context:
             let (key,value) = (parts[0], parts[1])
             
@@ -167,10 +194,10 @@ class LevelFileParser {
                 case "endgame-output-count":
                     level.endgame_output_count = parts[1].toInt()!
                 default:
-                    failWithError("Unknown context key '\(key)")
+                    failWithError("Unknown context key '\(key)"); return
             }
         case .Unknown:
-            failWithError("Trying to parse line in unknown section.")
+            failWithError("Trying to parse line in unknown section."); return
         }
     }
     
@@ -179,8 +206,10 @@ class LevelFileParser {
     func logInfo(info: String) {
         println(info)
     }
+    
     func failWithError(reason: String) {
-        println("[line \(currentLine)] Parsing failed: " + reason)
+        status = .Failed
+        println("[\(url.lastPathComponent!)][line \(currentLine)] Parsing failed: " + reason)
     }
     
     func logWarning(reason: String) {

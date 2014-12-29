@@ -27,6 +27,9 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <state key="highlighted">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -76,6 +79,7 @@
                     </view>
                     <connections>
                         <outlet property="picker" destination="p1H-gQ-G4k" id="Zyb-UC-HNo"/>
+                        <outlet property="playButton" destination="PpS-mI-V6a" id="X9X-tm-CbM"/>
                         <outlet property="summary" destination="N44-cX-Axx" id="B6I-ia-aUZ"/>
                         <segue destination="A3N-X1-Ha1" kind="modal" identifier="playLevelSegue" id="zWk-7x-aDv"/>
                     </connections>

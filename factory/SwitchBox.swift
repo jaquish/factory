@@ -106,4 +106,10 @@ class SwitchBox: Machine {
             selectedOutput.insert(widge)
         }
     }
+    
+    override func description() -> String {
+        let inputDirections = inputs().map { ($0.source as AnyObject).direction.rawValue } // TODO: Protocol conformance to Mover?
+        let outputDirections = outputs().map { ($0.source as AnyObject).direction.rawValue } // TODO: Protocol conformance to Mover?
+        return "SwitchBox at \(originZone) inputDirections=\(inputDirections) outputDirections=\(outputDirections)"
+    }
 }

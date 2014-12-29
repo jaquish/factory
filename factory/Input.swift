@@ -69,4 +69,8 @@ class Input: Machine {
             connectors["next"]!.insert(widge)
         }
     }
+    
+    override func description() -> String {
+        return "Input at \(originZone) generationInterval=\(interval)"
+    }
 }

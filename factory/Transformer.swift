@@ -31,12 +31,12 @@ class Transformer: Machine {
         box = Util.zoneBoxWithBorder(UIColor.greenColor(), innerColor: UIColor.darkGrayColor())
         addChild(box)
         
-//        // show a preview of the output in the center
-//        let outputType = action.successTypeIDs.first!
-//        let outputPreview = Widge.widgeBy(outputType)!
-//        outputPreview.setScale(0.5)
-//        addChild(outputPreview)
-//        outputPreview.position = ZoneZero.worldPoint(.center)
+        // show a preview of the output in the center
+        let outputType = action.successTypeIDs.first!
+        let outputPreview = Widge.widgeBy(outputType, isPreview: true)!
+        outputPreview.setScale(0.5)
+        addChild(outputPreview)
+        outputPreview.position = ZoneZero.worldPoint(.center)
         
         addInput(originZone^(.center), name: "input", startingState: WaitingToTransform)
         addOutput(originZone^(.center), name: "output")
@@ -50,22 +50,26 @@ class Transformer: Machine {
     
     override func update(_dt: CFTimeInterval) {
         
-        connectorWithName("input").dequeueWidges()
+        connector("input").dequeueWidges()
         
         for widge in widgesInState(WaitingToTransform) {
             
             if isOn {
                 let newType = action.performAction([widge.widgeTypeID]).first!
                 let replacement = transform(widge, toType: newType)
-                connectorWithName("output").insert(replacement)
+                connector("output").insert(replacement)
                 
             } else {
-                connectorWithName("output").insert(widge)
+                connector("output").insert(widge)
             }
         }
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         isOn = !isOn
+    }
+    
+    override func description() -> String {
+        return "Transformer at \(originZone) action=\(action) isOn=\(isOn)"
     }
 }

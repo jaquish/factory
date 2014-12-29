@@ -48,11 +48,15 @@ class Output: Machine {
     }
     
     override func update(_dt: CFTimeInterval) {
-        connectorWithName("input").dequeueWidges()
+        connector("input").dequeueWidges()
         for widge in widgesInState(OutputWidge) {
             count += 1
             CurrentLevel.addOutput(widge.widgeTypeID)
             deleteWidge(widge)
         }
+    }
+    
+    override func description() -> String {
+        return "Output at \(originZone)"
     }
 }

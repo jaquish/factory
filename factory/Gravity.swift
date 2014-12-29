@@ -13,19 +13,26 @@ private let Falling: WidgeState = "Falling"
 
 class Gravity: Machine {
     
+    let direction = Direction.S
+    
     let kGravityPointsPerSecond: CGFloat = 300.0    // gravity linear
     
     let endZone: Zone
     
-    init(from: Zone, thru: Zone) {
+    init!(from: Zone, thru: Zone) {
         self.endZone = thru
         
         super.init(originZone: from)
         
+        if from.x > thru.x || thru.y < from.y {
+            println("Error: zoning should progress from lower-left to upper-right")
+            return nil
+        }
+        
         self.zPosition = SpriteLayerBehindWidges
         
-        addInput(originZone^(.center), name: "top", startingState: "Falling")
-        addOutput(endZone^(.center), name: "bottom")
+        addInput(endZone^(.center), name: "top", startingState: "Falling")
+        addOutput(originZone^(.center), name: "bottom")
     }
     
     class override func numberOfInitializerParameters() -> Int {
@@ -38,8 +45,8 @@ class Gravity: Machine {
     
     override func update(_dt: CFTimeInterval) {
         
-        let top = connectorWithName("top")
-        let bottom = connectorWithName("bottom")
+        let top = connector("top")
+        let bottom = connector("bottom")
 
         top.dequeueWidges()
         
@@ -54,5 +61,9 @@ class Gravity: Machine {
                 bottom.insert(widge)
             }
         }
+    }
+    
+    override func description() -> String {
+        return "Gravity falling \(originZone) thru \(endZone)"
     }
 }

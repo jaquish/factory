@@ -13,12 +13,14 @@ class LevelSelectViewController: UIViewController, UIPickerViewDelegate, UIPicke
     var currentLevel: Level? {
         didSet {
             summary!.text = currentLevel?.summary()
+            playButton.enabled = (currentLevel != nil)
         }
     }
     var levelFileURLS = [NSURL]()
     
     @IBOutlet var picker: UIPickerView!
     @IBOutlet var summary: UITextView!
+    @IBOutlet var playButton: UIButton!
     
     @IBAction func playLevel() {
         performSegueWithIdentifier("playLevelSegue", sender: self)
@@ -32,6 +34,7 @@ class LevelSelectViewController: UIViewController, UIPickerViewDelegate, UIPicke
     override func viewDidLoad() {
         super.viewDidLoad()
         summary.text = ""
+        playButton.enabled = false
         levelFileURLS = NSBundle.mainBundle().URLsForResourcesWithExtension("level", subdirectory: nil) as [NSURL]
         pickerView(picker, didSelectRow: 0, inComponent: 0)
     }

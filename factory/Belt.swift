@@ -17,13 +17,14 @@ private let Moving: WidgeState = "Moving"
 class Belt: Machine {
 
     let thruZone: Zone!
-    let direction: Direction!
+    let direction: Direction
     
     var lastZone: Zone     { return (direction == Direction.E) ? thruZone : originZone }
     var overEdgeZone: Zone { return (direction == .E) ? thruZone.zone(.E) : originZone.zone(.W) }
     
     init!(from: Zone, thru: Zone, direction: Direction) {
         
+        self.direction = direction
         super.init(originZone: from)
         
         // Validation
@@ -38,7 +39,6 @@ class Belt: Machine {
         }
         
         self.thruZone = thru
-        self.direction = direction
         
         self.zPosition = SpriteLayerBehindWidges
         
@@ -128,4 +128,9 @@ class Belt: Machine {
 //            addWidge(widge, startingState: Moving)
 //        }
     }
+    
+    override func description() -> String {
+        return "Belt from \(originZone) thru \(thruZone) moving \(direction)"
+    }
+
 }

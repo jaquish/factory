@@ -71,7 +71,11 @@ class TransferBox: Machine {
         dequeueAllWidges()
         
         for widge in widgesInState(WaitingToTransfer) {
-            connectorWithName("output").insert(widge)
+            connector("output").insert(widge)
         }
+    }
+
+    override func description() -> String {
+        return "Transfer box at \(originZone)"
     }
 }

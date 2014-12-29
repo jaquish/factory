@@ -67,7 +67,7 @@ class VerticalBelt: Machine {
             let oldPosition = widge.position
             widge.changeYBy(deltaY)
             
-            let output = connectorWithName("output")
+            let output = connector("output")
             
             // check if widge passed over connection point
             if path(from: oldPosition, to: widge.position, ranOver: output.position) {
@@ -76,5 +76,9 @@ class VerticalBelt: Machine {
                 output.insert(widge)
             }
         }
+    }
+    
+    override func description() -> String {
+        return "VerticalBelt from \(originZone) thru \(endZone) moving \(direction)"
     }
 }

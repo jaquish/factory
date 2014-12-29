@@ -17,14 +17,14 @@ private var incrementingID = 1
 
 class Widge: SKSpriteNode, LevelFileObject {
     
-    var widgeID: Int!
+    var widgeID: Int = 0
     
     var owner: AnyObject! // Machine or Connector
     var state: WidgeState!
     
     var widgeTypeID: String!
 
-    class func widgeBy(typeID:String) -> Widge? {
+    class func widgeBy(typeID:String, isPreview: Bool = false) -> Widge? {
         if let value = widgeTypes[typeID] {
             if value.hasPrefix("$") {
                 let colorString = value.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "$"))
@@ -34,15 +34,16 @@ class Widge: SKSpriteNode, LevelFileObject {
         return nil
     }
     
-    class func widgeWith(typeID:String, color: UIColor) -> Widge {
+    class func widgeWith(typeID:String, color: UIColor, isPreview: Bool = false) -> Widge {
         let widge = Widge(color: color, size: CGSizeMake(WidgeSize, WidgeSize))
         widge.widgeTypeID = typeID
         widge.zPosition = SpriteLayerWidges
         
-        widge.widgeID = incrementingID
-        incrementingID++
-        
-        AllWidges.append(widge)
+        if !isPreview {
+            widge.widgeID = incrementingID
+            incrementingID++
+            AllWidges.append(widge)
+        }
 
         return widge
     }

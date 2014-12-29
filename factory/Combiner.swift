@@ -37,7 +37,7 @@ class Combiner: Machine {
         addChild(box)
         
         // show a preview of the output in the center
-        let a = Widge.widgeBy(containedType)!
+        let a = Widge.widgeBy(containedType, isPreview: true)!
         a.setScale(0.4)
         a.position = ZoneZero.worldPoint(.center)
         a.changeYBy(ZoneSize*0.20)
@@ -73,15 +73,18 @@ class Combiner: Machine {
             // drop contained type
             let created = Widge.widgeBy(containedType)!
             scene?.addChild(created)
-            created.position = connectorWithName("output").position
-            connectorWithName("output").insert(created)
+            created.position = connector("output").position
+            connector("output").insert(created)
         }
     }
     
     override func update(_dt: CFTimeInterval) {
+        
+        dequeueAllWidges()
+        
         // Container
         var madeGarbage = false
-        for widge in connectorWithName("container-input").dequeueWidges() {
+        for widge in connector("container-input").dequeueWidges() {
             if widge.widgeTypeID == containedType {
                 containedCount++
             } else {
@@ -94,8 +97,8 @@ class Combiner: Machine {
             containedCount = 0
             let garbage = Widge.garbage()
             scene?.addChild(garbage)
-            garbage.position = connectorWithName("drop-output").position
-            connectorWithName("drop-output").insert(garbage)
+            garbage.position = connector("drop-output").position
+            connector("drop-output").insert(garbage)
         }
     }
 }

@@ -59,7 +59,7 @@ class Container: Machine {
             containedCount--
             
             // drop contained type
-            let output = connectorWithName("output")
+            let output = connector("output")
             let dropped = createWidge(containedType, position: output.position, state: ReadyToDrop)
             output.insert(dropped)
         }
@@ -70,21 +70,22 @@ class Container: Machine {
         dequeueAllWidges()
         
         var madeGarbage = false
-        for widge in connectorWithName("input").dequeueWidges() {
+        for widge in connector("input").dequeueWidges() {
             if widge.widgeTypeID == containedType {
                 containedCount++
             } else {
                 madeGarbage = true
             }
-            widge.removeFromParent()
+            
+            deleteWidge(widge)
         }
         if madeGarbage {
-            // Oh no!
+            // Oh no! sound
             containedCount = 0
-            let garbage = Widge.garbage()
-            scene?.addChild(garbage)
-            garbage.position = connectorWithName("output").position
-            connectorWithName("output").insert(garbage)
+            
+            let output = connector("output")
+            let garbage = createWidge("garbage", position: output.position, state: ReadyToDrop)
+            output.insert(garbage)
         }
     }
 }

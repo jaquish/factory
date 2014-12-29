@@ -15,10 +15,10 @@ make-yellow Transformation red yellow black
 
 @Machines
 Input 1,7 1000
-Gravity 1,7 1,5
+Gravity 1,5 1,7
 Belt 1,5 10,5 E
 Transformer 6,5 make-yellow
-Gravity 11,5 11,3
+Gravity 11,3 11,5
 Output 11,3
 
 @Context
