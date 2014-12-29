@@ -30,6 +30,7 @@ class LevelScene: SKScene {
         self.level = level
         addMachines(level.machines)
         makeConnections()
+        AllWidges.removeAll()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -87,12 +88,10 @@ class LevelScene: SKScene {
         }
         
         // propogate
-        let connectors = NSMutableSet()
         
         for machine in machines {
-            connectors.addObjectsFromArray(machine.connectors.values.array)
+            machine.inputs().map { $0.propogate() }
         }
-        (connectors.allObjects as [Connector]).map { $0.propogate() }
         
         /*** TODO - insert phase 2 processing here ***/
         

@@ -31,12 +31,12 @@ class Transformer: Machine {
         box = Util.zoneBoxWithBorder(UIColor.greenColor(), innerColor: UIColor.darkGrayColor())
         addChild(box)
         
-        // show a preview of the output in the center
-        let outputType = action.successTypeIDs.first!
-        let outputPreview = Widge.widgeBy(outputType)!
-        outputPreview.setScale(0.5)
-        addChild(outputPreview)
-        outputPreview.position = ZoneZero.worldPoint(.center)
+//        // show a preview of the output in the center
+//        let outputType = action.successTypeIDs.first!
+//        let outputPreview = Widge.widgeBy(outputType)!
+//        outputPreview.setScale(0.5)
+//        addChild(outputPreview)
+//        outputPreview.position = ZoneZero.worldPoint(.center)
         
         addInput(originZone^(.center), name: "input", startingState: WaitingToTransform)
         addOutput(originZone^(.center), name: "output")

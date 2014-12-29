@@ -124,17 +124,22 @@ class Machine: SKSpriteNode, LevelFileObject {
     // MARK: Widge Management
     
     func createWidge(type: String, position: CGPoint, state: WidgeState) -> Widge {
+        let count = AllWidges.count
         let newWidge = CurrentLevel.createWidge(type)
         newWidge.owner = self
         newWidge.state = state
         newWidge.position = position
         scene?.addChild(newWidge)
+        assert(AllWidges.count == count + 1, "Expected one more widge after creating expected=\(count+1) actual=\(AllWidges.count)")
         return newWidge
     }
     
     func transform(widge: Widge, toType: String) -> Widge {
+        let count = AllWidges.count
         let replacement = createWidge(toType, position: widge.position, state: widge.state)
+
         deleteWidge(widge)
+        assert(AllWidges.count == count, "Expected same number of widges after transform \(AllWidges.count) as before \(count)")
         return replacement
     }
     
@@ -143,8 +148,12 @@ class Machine: SKSpriteNode, LevelFileObject {
     }
     
     func deleteWidge(widge: Widge) {
-        AllWidges = AllWidges.filter { $0 != widge }
+        assert((widge.owner as Machine) == self, "cannot delete a widge that you do not own")
+        
+        let count = AllWidges.count
+        AllWidges = AllWidges.filter { $0.widgeID != widge.widgeID }
         widge.removeFromParent()
+        assert(AllWidges.count == count - 1, "Expected one less widge after creating expected=\(count-1) actual=\(AllWidges.count)")
     }
     
     func widges() -> [Widge] {

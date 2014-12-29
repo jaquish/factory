@@ -62,9 +62,7 @@ let Propogated: WidgeState = "Propogated"
             widge.state = destinationState
             count++
         }
-        if count > 0 {
-            println("Dequeued \(count) widges into machine \(destination))")
-        }
+        
         return dequeued
     }
     

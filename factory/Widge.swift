@@ -13,7 +13,11 @@ var AllWidges = [Widge]()
 
 var widgeTypes = [String : String]()
 
+private var incrementingID = 1
+
 class Widge: SKSpriteNode, LevelFileObject {
+    
+    var widgeID: Int!
     
     var owner: AnyObject! // Machine or Connector
     var state: WidgeState!
@@ -34,7 +38,12 @@ class Widge: SKSpriteNode, LevelFileObject {
         let widge = Widge(color: color, size: CGSizeMake(WidgeSize, WidgeSize))
         widge.widgeTypeID = typeID
         widge.zPosition = SpriteLayerWidges
+        
+        widge.widgeID = incrementingID
+        incrementingID++
+        
         AllWidges.append(widge)
+
         return widge
     }
     
