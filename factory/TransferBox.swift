@@ -30,23 +30,23 @@ class TransferBox: Machine {
     
     // MARK: Connection Phase
     
-    override func allow(#inputPoint: ConnectionPoint, toConnectFromMachine machine: Machine) -> Bool {
-        // don't input from a machine that's an output
-        return !contains(connectionPointOutputs.filter{$0.connector != nil}.map{$0.connector!.destination}, machine)
-    }
-    
-    override func allow(#outputPoint: ConnectionPoint, toConnectToMachine machine: Machine) -> Bool {
-        // don't output to a machine that's an input
-        let alreadyInput = contains(connectionPointInputs.filter{$0.connector != nil}.map{$0.connector!.source}, machine)
-        if machine is Belt {
-            // don't output to last tile of a belt
-            return !alreadyInput && Zone(containingPoint: outputPoint.position) != (machine as Belt).lastZone
-        } else if machine is VerticalBelt {
-            return !alreadyInput && Zone(containingPoint: outputPoint.position) != (machine as VerticalBelt).lastZone
-        } else {
-            return !alreadyInput
-        }
-    }
+//    override func allow(#inputPoint: ConnectionPoint, toConnectFromMachine machine: Machine) -> Bool {
+//        // don't input from a machine that's an output
+//        return !contains(connectionPointOutputs.filter{$0.connector != nil}.map{$0.connector!.destination}, machine)
+//    }
+//    
+//    override func allow(#outputPoint: ConnectionPoint, toConnectToMachine machine: Machine) -> Bool {
+//        // don't output to a machine that's an input
+//        let alreadyInput = contains(connectionPointInputs.filter{$0.connector != nil}.map{$0.connector!.source}, machine)
+//        if machine is Belt {
+//            // don't output to last tile of a belt
+//            return !alreadyInput && Zone(containingPoint: outputPoint.position) != (machine as Belt).lastZone
+//        } else if machine is VerticalBelt {
+//            return !alreadyInput && Zone(containingPoint: outputPoint.position) != (machine as VerticalBelt).lastZone
+//        } else {
+//            return !alreadyInput
+//        }
+//    }
     
     override func validateConnections() {
         let outputCount = outputs().count

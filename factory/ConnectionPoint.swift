@@ -42,7 +42,21 @@ class ConnectionPointIntoMachine : ConnectionPoint {
 }
 
 class ConnectionPointOutOfMachine : ConnectionPoint {
-    func tryToConnectToPoint(otherPoint:ConnectionPointIntoMachine) {
+    
+    func tryToConnectToOneOf(var inputs:[ConnectionPointIntoMachine]) {
+        
+        let sorter = NSSortDescriptor(key: "priority", ascending: false)
+        inputs.sort {$0.priority > $1.priority }
+        
+        for input in inputs {
+            tryToConnectTo(input)
+            if connector != nil {
+                return
+            }
+        }
+    }
+
+    func tryToConnectTo(otherPoint:ConnectionPointIntoMachine) {
         /* Basic connection point rules */
         
         // don't connect a connection point that has already been connected

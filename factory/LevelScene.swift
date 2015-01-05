@@ -29,7 +29,7 @@ class LevelScene: SKScene {
     func loadLevel(level: Level) {
         self.level = level
         addMachines(level.machines)
-        makeConnections()
+        level.makeConnections()
         AllWidges.removeAll()
     }
 
@@ -45,35 +45,6 @@ class LevelScene: SKScene {
     
     func addMachines(machines: [Machine]) {
         machines.map { self.addMachine($0) }
-    }
-    
-    func makeConnections() {
-        let sorter = NSSortDescriptor(key: "priority", ascending: false)
-        
-        // get outputs in sorted priority order
-        var allOutputs = [ConnectionPointOutOfMachine]()
-        for machine in machines {
-            allOutputs += machine.connectionPointOutputs
-        }
-        allOutputs.sort {$0.priority > $1.priority }
-        
-        // get inputs in sorted priority order
-        var allInputs = [ConnectionPointIntoMachine]()
-        for machine in machines {
-            allInputs += machine.connectionPointInputs
-        }
-        allInputs.sort {$0.priority > $1.priority }
-        
-        // shotgun connections
-        for output in allOutputs {
-            for input in allInputs {
-                output.tryToConnectToPoint(input)
-            }
-        }
-        
-        for machine in machines {
-            machine.organizeConnectors()
-        }
     }
     
     override func update(currentTime: NSTimeInterval) {

@@ -35,6 +35,8 @@ class Level: NSObject {
     var outputs = [String]()
     var endgame_output_count: Int = 0
     
+    var connectionPoints = [ConnectionPoint]()
+    
     func summary() -> String {
         var summary = ""
         for (key, value) in metadata {
@@ -69,6 +71,35 @@ class Level: NSObject {
     
     func addOutput(widgeTypeID: String) {
         outputs.append(widgeTypeID)
+    }
+    
+    func makeConnections() {
+        
+        // priority order
+        let sorter = NSSortDescriptor(key: "priority", ascending: false)
+        connectionPoints.sort {$0.priority > $1.priority }
+        
+        // Bucket connections into points
+        
+        for cp in connectionPoints {
+            let atSamePoint = connectionPoints.filter { CGPointEqualToPoint(cp.position,$0.position) }
+            let outputs = atSamePoint.filter { $0 is ConnectionPointOutOfMachine } as [ConnectionPointOutOfMachine]
+            for output in outputs {
+                let inputs = atSamePoint.filter { $0 is ConnectionPointIntoMachine } as [ConnectionPointIntoMachine]
+                (output as ConnectionPointOutOfMachine).tryToConnectToOneOf(inputs)
+            }
+        }
+        
+        for cp in connectionPoints {
+            if let connector = cp.connector {
+                cp.machine.connectors[cp.name] = cp.connector
+            }
+        }
+        
+        for machine in machines {
+            machine.printConnections()
+            machine.validateConnections()
+        }
     }
 }
 

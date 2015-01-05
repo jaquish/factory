@@ -24,8 +24,6 @@ class Machine: SKSpriteNode, LevelFileObject {
         }
     }
     
-    var connectionPointInputs: [ConnectionPointIntoMachine] = Array()
-    var connectionPointOutputs: [ConnectionPointOutOfMachine] = Array()
     var connectors: [String:Connector] = Dictionary()
     
     init(originZone: Zone) {
@@ -58,12 +56,12 @@ class Machine: SKSpriteNode, LevelFileObject {
     
     func addInput(position: CGPoint, name: String, startingState: WidgeState, priority:Int = 1, isRequired: Bool = true) {
         let cp = ConnectionPointIntoMachine(machine: self, position: position, name: name, destinationState: startingState, priority: priority, isRequired: isRequired)
-        connectionPointInputs.append(cp)
+        CurrentLevel.connectionPoints.append(cp)
     }
     
     func addOutput(position: CGPoint, name: String, priority:Int = 1, isRequired: Bool = true) {
         let cp = ConnectionPointOutOfMachine(machine: self, position: position, name: name, priority: priority, isRequired: isRequired)
-        connectionPointOutputs.append(cp)
+        CurrentLevel.connectionPoints.append(cp)
     }
     
     // MARK: Connection Phase
@@ -76,15 +74,9 @@ class Machine: SKSpriteNode, LevelFileObject {
         return true // override for advanced decision making
     }
     
-    func organizeConnectors() {
-        for cp in (connectionPointInputs as [ConnectionPoint] + connectionPointOutputs as [ConnectionPoint]) {
-            if let connector = cp.connector {
-                connectors[cp.name] = cp.connector
-            }
-        }
+    func printConnections() {
         println("Connectors for \(self)")
         connectors.values.array.map { println("-- \($0)") }
-        validateConnections()
     }
     
     func validateConnections() {
@@ -95,12 +87,16 @@ class Machine: SKSpriteNode, LevelFileObject {
             println("Validation warning: \(self) did not make all required connections.")
         }
         
-        for cp in connectionPointInputs as [ConnectionPoint] + connectionPointOutputs as [ConnectionPoint] {
+        for cp in self.connectionPoints() {
             if cp.isRequired && cp.connector == nil {
                 if !printedHeader { printHeader() }
                 println("Required connection point \(cp) was not connected")
             }
         }
+    }
+    
+    func connectionPoints() -> [ConnectionPoint] {
+        return CurrentLevel.connectionPoints.filter { $0.machine == self }
     }
     
     // MARK: Running Phase
