@@ -31,12 +31,8 @@ class TransferBox: Machine {
     // MARK: Connection Phase
     
     override func allow(#inputPoint: ConnectionPoint, toConnectFromMachine machine: Machine) -> Bool {
-        // don't input to a machine that's an output
-        let result = !contains(connectionPointOutputs.filter{$0.connector != nil}.map{$0.connector!.destination}, machine)
-        if !result {
-            println("\(self) denied incoming connection from \(machine) at \(inputPoint)")
-        }
-        return result
+        // don't input from a machine that's an output
+        return !contains(connectionPointOutputs.filter{$0.connector != nil}.map{$0.connector!.destination}, machine)
     }
     
     override func allow(#outputPoint: ConnectionPoint, toConnectToMachine machine: Machine) -> Bool {

@@ -32,7 +32,7 @@ class ConnectionPoint {
 //    }
 }
 
-class ConnectionPointDestination : ConnectionPoint {
+class ConnectionPointIntoMachine : ConnectionPoint {
     var destinationState: WidgeState
 
     init(machine: Machine, position: CGPoint, name: NSString, destinationState: WidgeState, priority:Int = 0, isRequired: Bool = true) {
@@ -41,8 +41,8 @@ class ConnectionPointDestination : ConnectionPoint {
     }
 }
 
-class ConnectionPointSource : ConnectionPoint {
-    func tryToConnectToPoint(otherPoint:ConnectionPointDestination) {
+class ConnectionPointOutOfMachine : ConnectionPoint {
+    func tryToConnectToPoint(otherPoint:ConnectionPointIntoMachine) {
         /* Basic connection point rules */
         
         // don't connect a connection point that has already been connected

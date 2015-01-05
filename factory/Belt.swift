@@ -14,7 +14,7 @@ private let HorizontalBeltHeight: CGFloat = 12.0
 
 private let Moving: WidgeState = "Moving"
 
-class Belt: Machine {
+class Belt: Mover {
 
     let thruZone: Zone!
     let direction: Direction
@@ -29,7 +29,7 @@ class Belt: Machine {
         
         // Validation
         if !(direction == .E || direction == .W) {
-            println("Error: invalid direction \(direction) for belt")
+            println("Error: invalid direction \(direction.rawValue) for belt")
             return nil
         }
         
@@ -51,14 +51,14 @@ class Belt: Machine {
             addOutput(zone^(.center), name: "output-\(zone.x)", isRequired: false)
         }
         
-        addOutput(overEdgeZone^(.center), name: "over-edge")
+        addOutput(overEdgeZone^(.center), name: "over-edge", isRequired: false)
     }
     
     class override func numberOfInitializerParameters() -> Int {
         return 2
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required override init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -68,6 +68,12 @@ class Belt: Machine {
     
     override func allow(#outputPoint: ConnectionPoint, toConnectToMachine machine: Machine) -> Bool {
         return !(machine is VerticalBelt)
+    }
+    
+    override func validateConnections() {
+        super.validateConnections()
+        
+        // TODO - require either over-edge, or last zone of belt to have outgoing connection (with none incoming)
     }
     
     override func update(_dt: CFTimeInterval) {
@@ -130,7 +136,7 @@ class Belt: Machine {
     }
     
     override func description() -> String {
-        return "Belt from \(originZone) thru \(thruZone) moving \(direction)"
+        return "Belt from \(originZone) thru \(thruZone) moving \(direction.rawValue)"
     }
 
 }

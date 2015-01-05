@@ -11,7 +11,7 @@ import SpriteKit
 
 private let Falling: WidgeState = "Falling"
 
-class Gravity: Machine {
+class Gravity: Mover {
     
     let direction = Direction.S
     
@@ -39,7 +39,7 @@ class Gravity: Machine {
         return 2
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required override init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

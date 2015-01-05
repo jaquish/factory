@@ -14,37 +14,37 @@ private let kVerticalBeltWidth: CGFloat = 30.0
 
 private let Moving: WidgeState = "Moving"
 
-class VerticalBelt: Machine {
+class VerticalBelt: Mover {
     
     let direction: Direction
-    let endZone: Zone
-    var lastZone: Zone { return (direction == .N) ? originZone : endZone }
+    let thruZone: Zone
+    var lastZone: Zone { return (direction == Direction.N) ? thruZone : originZone }
 
     init(from: Zone, thru: Zone, direction: Direction) {
         
         if !(direction == .N || direction == .S) {
-            println("Warning: invalid direction \(direction) for belt")
+            println("Warning: invalid direction \(direction.rawValue) for belt")
             direction == .N
         }
         
         self.direction = direction
-        self.endZone = thru
+        self.thruZone = thru
         super.init(originZone: from)
         
         zPosition = SpriteLayerBehindWidges
         
-        let sprite = SKSpriteNode(color: UIColor(red: 0.0, green: 0.4, blue: 0.9, alpha: 1.0), size: CGSizeMake(kVerticalBeltWidth, ZoneSize * CGFloat(endZone.y - originZone.y + 1)))
+        let sprite = SKSpriteNode(color: UIColor(red: 0.0, green: 0.4, blue: 0.9, alpha: 1.0), size: CGSizeMake(kVerticalBeltWidth, ZoneSize * CGFloat(thruZone.y - originZone.y + 1)))
         sprite.anchorPoint = CGPointZero
         addChild(sprite)
         
-        let inputZone  = (direction == .N) ? originZone : endZone
-        let outputZone = (direction == .N) ? endZone : originZone
+        let inputZone  = (direction == .N) ? originZone : thruZone
+        let outputZone = (direction == .N) ? thruZone : originZone
         
         addInput(inputZone^(.center), name:"input", startingState: Moving)
         addOutput(outputZone^(.center), name:"output")
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required override init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
         
@@ -79,6 +79,6 @@ class VerticalBelt: Machine {
     }
     
     override func description() -> String {
-        return "VerticalBelt from \(originZone) thru \(endZone) moving \(direction)"
+        return "VerticalBelt from \(originZone) thru \(thruZone) moving \(direction.rawValue)"
     }
 }

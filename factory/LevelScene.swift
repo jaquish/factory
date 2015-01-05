@@ -51,14 +51,14 @@ class LevelScene: SKScene {
         let sorter = NSSortDescriptor(key: "priority", ascending: false)
         
         // get outputs in sorted priority order
-        var allOutputs = [ConnectionPointSource]()
+        var allOutputs = [ConnectionPointOutOfMachine]()
         for machine in machines {
             allOutputs += machine.connectionPointOutputs
         }
         allOutputs.sort {$0.priority > $1.priority }
         
         // get inputs in sorted priority order
-        var allInputs = [ConnectionPointDestination]()
+        var allInputs = [ConnectionPointIntoMachine]()
         for machine in machines {
             allInputs += machine.connectionPointInputs
         }

@@ -15,7 +15,7 @@ make-yellow Transformation red yellow black
 
 @Machines
 Input 1,7 3
-Gravity 1,7 1,5
+Gravity 1,5 1,7
 Belt 1,5 10,5 E
 
 # alternative path to machine

@@ -24,8 +24,8 @@ class Machine: SKSpriteNode, LevelFileObject {
         }
     }
     
-    var connectionPointInputs: [ConnectionPointDestination] = Array()
-    var connectionPointOutputs: [ConnectionPointSource] = Array()
+    var connectionPointInputs: [ConnectionPointIntoMachine] = Array()
+    var connectionPointOutputs: [ConnectionPointOutOfMachine] = Array()
     var connectors: [String:Connector] = Dictionary()
     
     init(originZone: Zone) {
@@ -57,12 +57,12 @@ class Machine: SKSpriteNode, LevelFileObject {
     // MARK: Setup Phase
     
     func addInput(position: CGPoint, name: String, startingState: WidgeState, priority:Int = 1, isRequired: Bool = true) {
-        let cp = ConnectionPointDestination(machine: self, position: position, name: name, destinationState: startingState, priority: priority, isRequired: isRequired)
+        let cp = ConnectionPointIntoMachine(machine: self, position: position, name: name, destinationState: startingState, priority: priority, isRequired: isRequired)
         connectionPointInputs.append(cp)
     }
     
     func addOutput(position: CGPoint, name: String, priority:Int = 1, isRequired: Bool = true) {
-        let cp = ConnectionPointSource(machine: self, position: position, name: name, priority: priority, isRequired: isRequired)
+        let cp = ConnectionPointOutOfMachine(machine: self, position: position, name: name, priority: priority, isRequired: isRequired)
         connectionPointOutputs.append(cp)
     }
     
@@ -83,7 +83,7 @@ class Machine: SKSpriteNode, LevelFileObject {
             }
         }
         println("Connectors for \(self)")
-        connectors.keys.array.map { println("-- \($0)") }
+        connectors.values.array.map { println("-- \($0)") }
         validateConnections()
     }
     

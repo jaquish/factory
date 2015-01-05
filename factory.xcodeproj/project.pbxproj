@@ -21,6 +21,7 @@
 		84872C0D182607D5008F86DE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84872BE8182607D4008F86DE /* UIKit.framework */; };
 		84872C15182607D5008F86DE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84872C13182607D5008F86DE /* InfoPlist.strings */; };
 		84872C17182607D5008F86DE /* factoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C16182607D5008F86DE /* factoryTests.m */; };
+		922CC1A01A5322FE00562309 /* Mover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922CC19F1A5322FE00562309 /* Mover.swift */; };
 		924B1A4219A95AC10096EED9 /* Connector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924B1A4119A95AC10096EED9 /* Connector.swift */; };
 		924B1A4519A95B060096EED9 /* ConnectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924B1A4419A95B060096EED9 /* ConnectorTests.swift */; };
 		92576EC71A14679F00815C05 /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92576EC61A14679F00815C05 /* Zone.swift */; };
@@ -88,6 +89,7 @@
 		84872C12182607D5008F86DE /* factoryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "factoryTests-Info.plist"; sourceTree = "<group>"; };
 		84872C14182607D5008F86DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		84872C16182607D5008F86DE /* factoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = factoryTests.m; sourceTree = "<group>"; };
+		922CC19F1A5322FE00562309 /* Mover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mover.swift; sourceTree = "<group>"; };
 		924B1A4019A95AC10096EED9 /* factory-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "factory-Bridging-Header.h"; sourceTree = "<group>"; };
 		924B1A4119A95AC10096EED9 /* Connector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connector.swift; sourceTree = "<group>"; };
 		924B1A4319A95B050096EED9 /* factoryTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "factoryTests-Bridging-Header.h"; path = "../factory/factoryTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				92893B871A280B730069C3A4 /* SwitchBox.swift */,
 				929198D61A286C2700A0EF35 /* Container.swift */,
 				92717C171A2999A100D5C7A6 /* Combiner.swift */,
+				922CC19F1A5322FE00562309 /* Mover.swift */,
 			);
 			name = Machines;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				928933281A0EBC800013A598 /* TransferBox.swift in Sources */,
 				92EE3A2B1A3E359300328266 /* GridNumbering.swift in Sources */,
 				926B3D931A1EE6630095D60F /* ValidationFileProtocols.swift in Sources */,
+				922CC1A01A5322FE00562309 /* Mover.swift in Sources */,
 				929198D71A286C2700A0EF35 /* Container.swift in Sources */,
 				928933221A0EB17F0013A598 /* Input.swift in Sources */,
 				92C62CED1A148B3D00DC2D5C /* Level.swift in Sources */,

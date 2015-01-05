@@ -12,14 +12,14 @@ import UIKit
 let Enqueued:   WidgeState = "Enqueued"
 let Propogated: WidgeState = "Propogated"
 
-@objc class Connector : NSObject, DebugPrintable {
+@objc class Connector : NSObject, Printable {
     
     let position: CGPoint
     let source: Machine
     let destination: Machine
     var destinationState: WidgeState
     
-    class func connect(#from: ConnectionPointSource, to: ConnectionPointDestination) {
+    class func connect(#from: ConnectionPointOutOfMachine, to: ConnectionPointIntoMachine) {
         assert(CGPointEqualToPoint(from.position, to.position) , "Connection points must be at same point")
         assert(from.machine != to.machine , "Connection points must be on different machines")
         
@@ -73,7 +73,7 @@ let Propogated: WidgeState = "Propogated"
     
     // MARK: Debug
     
-    func debugDescription() -> String {
+    func description() -> String {
         return "Connector from " + self.source.name! + " to " + self.destination.name! + " at " + "\(position)"
     }
 }
