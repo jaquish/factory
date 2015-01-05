@@ -53,6 +53,7 @@ class LevelFileParser {
         if loadedStringData != nil {
             
             level = Level()
+            CurrentLevel = level
             widgeTypes.removeAll()
             currentLine = 1
             

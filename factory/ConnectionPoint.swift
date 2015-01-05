@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let PriorityLevelRequired = 100
+
 class ConnectionPoint {
     
     var position:CGPoint
@@ -15,29 +17,30 @@ class ConnectionPoint {
     var machine:Machine
     var name:NSString
     var priority: Int
-    var isRequired: Bool
 
-    init(machine: Machine, position:CGPoint, name:NSString, priority:Int = 0, isRequired: Bool = true) {
+    init(machine: Machine, position:CGPoint, name:NSString, priority:Int = PriorityLevelRequired) {
         assert(name.length > 0, "Connection point should have a name.")
         self.machine = machine
         self.position = position
         self.name = name
         self.priority = priority
-        self.isRequired = isRequired
     }
     
     // TODO
 //    func description() -> String {
 //        return "\(self.machine.name!) \(self.name)"
 //    }
+    func isRequired() -> Bool {
+        return priority >= PriorityLevelRequired
+    }
 }
 
 class ConnectionPointIntoMachine : ConnectionPoint {
     var destinationState: WidgeState
 
-    init(machine: Machine, position: CGPoint, name: NSString, destinationState: WidgeState, priority:Int = 0, isRequired: Bool = true) {
+    init(machine: Machine, position: CGPoint, name: NSString, destinationState: WidgeState, priority:Int = 0) {
         self.destinationState = destinationState
-        super.init(machine: machine, position: position, name: name, priority: priority, isRequired: isRequired)
+        super.init(machine: machine, position: position, name: name, priority: priority)
     }
 }
 
