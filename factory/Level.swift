@@ -76,18 +76,13 @@ class Level: NSObject {
     func makeConnections() {
         
         // priority order
-        let sorter = NSSortDescriptor(key: "priority", ascending: false)
-        connectionPoints.sort {$0.priority > $1.priority }
+        var outputs = connectionPoints.filter { $0 is ConnectionPointOutOfMachine } as [ConnectionPointOutOfMachine]
+        outputs.sort {$0.priority > $1.priority }
         
         // Bucket connections into points
-        
-        for cp in connectionPoints {
-            let atSamePoint = connectionPoints.filter { CGPointEqualToPoint(cp.position,$0.position) }
-            let outputs = atSamePoint.filter { $0 is ConnectionPointOutOfMachine } as [ConnectionPointOutOfMachine]
-            for output in outputs {
-                let inputs = atSamePoint.filter { $0 is ConnectionPointIntoMachine } as [ConnectionPointIntoMachine]
-                (output as ConnectionPointOutOfMachine).tryToConnectToOneOf(inputs)
-            }
+        for output in outputs {
+            let inputsAtSamePoint = connectionPoints.filter { $0 is ConnectionPointIntoMachine && CGPointEqualToPoint(output.position,$0.position) } as [ConnectionPointIntoMachine]
+            output.tryToConnectToOneOf(inputsAtSamePoint)
         }
         
         for cp in connectionPoints {
