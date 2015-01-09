@@ -19,8 +19,8 @@ class Belt: Mover {
     let thruZone: Zone!
     let direction: Direction
     
-    var lastZone: Zone     { return (direction == Direction.E) ? thruZone : originZone }
-    var overEdgeZone: Zone { return (direction == .E) ? thruZone.zone(.E) : originZone.zone(.W) }
+    var firstZone: Zone    { return (direction == Direction.E) ? originZone : thruZone }
+    var overEdgeZone: Zone { return (direction == Direction.E) ? thruZone.zone(.E) : originZone.zone(.W) }
     
     init!(from: Zone, thru: Zone, direction: Direction) {
         
@@ -47,11 +47,11 @@ class Belt: Mover {
         addChild(spriteNode)
         
         for zone in ZoneSequence(originZone, thruZone) {
-            addInput(zone^(.center), name: "input-\(zone.x)", startingState: Moving, isRequired: false)
-            addOutput(zone^(.center), name: "output-\(zone.x)", isRequired: false)
+            addInput(zone^(.center), name: "input-\(zone.x)", startingState: Moving, priority:PriorityLevelLow)
+            addOutput(zone^(.center), name: "output-\(zone.x)", priority: PriorityLevelLow)
         }
         
-        addOutput(overEdgeZone^(.center), name: "over-edge", isRequired: false)
+        addOutput(overEdgeZone^(.center), name: "over-edge")
     }
     
     class override func numberOfInitializerParameters() -> Int {
@@ -71,9 +71,7 @@ class Belt: Mover {
     }
     
     override func validateConnections() {
-        super.validateConnections()
-        
-        // TODO - require either over-edge, or last zone of belt to have outgoing connection (with none incoming)
+        // If there is an input, there should be an output
     }
     
     override func update(_dt: CFTimeInterval) {
@@ -138,5 +136,19 @@ class Belt: Mover {
     override func description() -> String {
         return "Belt from \(originZone) thru \(thruZone) moving \(direction.rawValue)"
     }
-
+    
+    override func movingDirection() -> Direction {
+        return self.direction
+    }
+    
+    override func stateAtZone(zone: Zone) -> MoverStateAtZone {
+        if zone == firstZone {
+            return .Start
+        } else if zone == overEdgeZone {
+            return .End
+        } else {
+            // TODO: verify?
+            return .Thru
+        }
+    }
 }

@@ -48,7 +48,7 @@ let Propogated: WidgeState = "Propogated"
     func propogate() {
         for widge in widges() {
             if widge.state != Enqueued {
-                fatalError("Widge \(widge) was not in equeued state before propogation")
+                fatalError("Widge \(widge) was not in dequeued state before propogation")
             }
             widge.state = Propogated
         }
@@ -74,6 +74,6 @@ let Propogated: WidgeState = "Propogated"
     // MARK: Debug
     
     func description() -> String {
-        return "Connector from " + self.source.name! + " to " + self.destination.name! + " at " + "\(position)"
+        return "Connector from " + self.source.name! + " to " + self.destination.name! + " at " + "\(Zone(containing:position))"
     }
 }

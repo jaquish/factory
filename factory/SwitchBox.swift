@@ -43,8 +43,8 @@ class SwitchBox: Machine {
         addChild(labelNode)
         
         for i in 0..<2 {
-            addInput(originZone^(.center), name: "input-\(i)", startingState: WaitingToTransfer, priority: 1)
-            addOutput(originZone^(.center), name: "output-\(i)", priority: 1)
+            addInput(originZone^(.center), name: "input-\(i)", startingState: WaitingToTransfer)
+            addOutput(originZone^(.center), name: "output-\(i)")
         }
 
         userInteractionEnabled = true
@@ -84,8 +84,6 @@ class SwitchBox: Machine {
 
     override func validateConnections() {
         
-        super.validateConnections()
-        
         outputList = outputs()
         
         let outputCount = outputs().count
@@ -108,8 +106,8 @@ class SwitchBox: Machine {
     }
     
     override func description() -> String {
-        let inputDirections = inputs().map { ($0.source as Mover).direction().rawValue } // TODO: Protocol conformance to Mover?
-        let outputDirections = outputs().map { ($0.source as Mover).direction().rawValue } // TODO: Protocol conformance to Mover?
+        let inputDirections = inputs().map { ($0.source as Mover).movingDirection().rawValue }
+        let outputDirections = outputs().map { ($0.destination as Mover).movingDirection().rawValue }
         return "SwitchBox at \(originZone) inputDirections=\(inputDirections) outputDirections=\(outputDirections)"
     }
 }

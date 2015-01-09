@@ -48,6 +48,8 @@ class LevelFileParser {
         
         status = .InProgress
         
+        println("***** Parsing Level \(url.lastPathComponent) *****")
+        
         let loadedStringData:NSString! = NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding, error: nil)
         
         if loadedStringData != nil {
@@ -177,6 +179,7 @@ class LevelFileParser {
             if machine == nil {
                 failWithError("Failed to create machine of type \(machineType)"); return
             } else {
+                machine.name! += "[\(currentLine)]"
                 level.machines.append(machine)
             }
             

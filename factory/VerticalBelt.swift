@@ -18,7 +18,8 @@ class VerticalBelt: Mover {
     
     let direction: Direction
     let thruZone: Zone
-    var lastZone: Zone { return (direction == Direction.N) ? thruZone : originZone }
+    var firstZone: Zone { return (direction == Direction.N) ? originZone :   thruZone }
+    var lastZone: Zone  { return (direction == Direction.N) ? thruZone   : originZone }
 
     init(from: Zone, thru: Zone, direction: Direction) {
         
@@ -80,5 +81,21 @@ class VerticalBelt: Mover {
     
     override func description() -> String {
         return "VerticalBelt from \(originZone) thru \(thruZone) moving \(direction.rawValue)"
+    }
+    
+    // MARK: Mover
+    override func movingDirection() -> Direction {
+        return self.direction
+    }
+    
+    override func stateAtZone(zone: Zone) -> MoverStateAtZone {
+        if zone == firstZone {
+            return .Start
+        } else if zone == lastZone {
+            return .End
+        } else {
+            // TODO: verify?
+            return .Thru
+        }
     }
 }

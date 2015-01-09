@@ -8,9 +8,10 @@
 
 import UIKit
 
-private let PriorityLevelRequired = 100
+let PriorityLevelHigh = 100
+let PriorityLevelLow = 50
 
-class ConnectionPoint {
+class ConnectionPoint : Printable {
     
     var position:CGPoint
     var connector:Connector?
@@ -18,7 +19,7 @@ class ConnectionPoint {
     var name:NSString
     var priority: Int
 
-    init(machine: Machine, position:CGPoint, name:NSString, priority:Int = PriorityLevelRequired) {
+    init(machine: Machine, position:CGPoint, name:NSString, priority:Int = PriorityLevelHigh) {
         assert(name.length > 0, "Connection point should have a name.")
         self.machine = machine
         self.position = position
@@ -26,12 +27,8 @@ class ConnectionPoint {
         self.priority = priority
     }
     
-    // TODO
-//    func description() -> String {
-//        return "\(self.machine.name!) \(self.name)"
-//    }
-    func isRequired() -> Bool {
-        return priority >= PriorityLevelRequired
+    var description:String {
+        return "\(self.name) at \(Zone(containing:position))"
     }
 }
 

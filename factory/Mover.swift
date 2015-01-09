@@ -17,7 +17,7 @@ enum MoverStateAtZone {
 
 class Mover: Machine {
 
-    func direction() -> Direction {
+    func movingDirection() -> Direction {
         fatalError("Override me")
     }
     

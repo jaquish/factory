@@ -160,6 +160,7 @@
 			children = (
 				926B3D921A1EE6630095D60F /* ValidationFileProtocols.swift */,
 				92AB7F761A0B3AB500128B91 /* Machine.swift */,
+				922CC19F1A5322FE00562309 /* Mover.swift */,
 				92AB7F781A0B568C00128B91 /* Belt.swift */,
 				9289331F1A0EAF220013A598 /* Gravity.swift */,
 				928933211A0EB17F0013A598 /* Input.swift */,
@@ -170,7 +171,6 @@
 				92893B871A280B730069C3A4 /* SwitchBox.swift */,
 				929198D61A286C2700A0EF35 /* Container.swift */,
 				92717C171A2999A100D5C7A6 /* Combiner.swift */,
-				922CC19F1A5322FE00562309 /* Mover.swift */,
 			);
 			name = Machines;
 			sourceTree = "<group>";

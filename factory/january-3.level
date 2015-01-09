@@ -14,12 +14,12 @@ combine Combination red,yellow orange black
 
 @Machines
 Input 1,10 3
-Gravity 1,10 1,7
+Gravity 1,7 1,10
 Belt 1,7 10,7 E
 
 #Combiner setup
 SwitchBox 5,7
-Gravity 5,7 5,6
+Gravity 5,6 5,7
 Combiner 5,5 combine
 
 #Right corner
@@ -27,7 +27,7 @@ TransferBox 10,7
 VerticalBelt 10,5 10,7 S
 TransferBox 10,5
 Belt 3,5 10,5 W
-Gravity 2,5 2,4
+Gravity 2,4 2,5
 Output 2,4
 
 @Context

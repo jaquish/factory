@@ -34,7 +34,7 @@ class Machine: SKSpriteNode, LevelFileObject {
         position = originZone.worldPoint(.SW)  // :-( no didSet
         
         machineCount++
-        self.name = "\(NSStringFromClass(self.dynamicType))-\(machineCount)"
+        self.name = NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last
     }
     
     class func numberOfInitializerParameters() -> Int {
@@ -54,12 +54,12 @@ class Machine: SKSpriteNode, LevelFileObject {
     
     // MARK: Setup Phase
     
-    func addInput(position: CGPoint, name: String, startingState: WidgeState, priority:Int = 1, isRequired: Bool = true) {
+    func addInput(position: CGPoint, name: String, startingState: WidgeState, priority:Int = PriorityLevelHigh) {
         let cp = ConnectionPointIntoMachine(machine: self, position: position, name: name, destinationState: startingState, priority: priority)
         CurrentLevel.connectionPoints.append(cp)
     }
     
-    func addOutput(position: CGPoint, name: String, priority:Int = 1, isRequired: Bool = true) {
+    func addOutput(position: CGPoint, name: String, priority:Int = PriorityLevelHigh) {
         let cp = ConnectionPointOutOfMachine(machine: self, position: position, name: name, priority: priority)
         CurrentLevel.connectionPoints.append(cp)
     }
@@ -87,8 +87,9 @@ class Machine: SKSpriteNode, LevelFileObject {
             println("Validation warning: \(self) did not make all required connections.")
         }
         
+        // Default validation is to require all connection points with high priority
         for cp in self.connectionPoints() {
-            if cp.isRequired() && cp.connector == nil {
+            if cp.priority >= PriorityLevelHigh && cp.connector == nil {
                 if !printedHeader { printHeader() }
                 println("Required connection point \(cp) was not connected")
             }

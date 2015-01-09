@@ -66,4 +66,19 @@ class Gravity: Mover {
     override func description() -> String {
         return "Gravity falling \(originZone) thru \(endZone)"
     }
+    
+    override func movingDirection() -> Direction {
+        return .S
+    }
+    
+    override func stateAtZone(zone: Zone) -> MoverStateAtZone {
+        if zone == originZone {
+            return .End
+        } else if zone == endZone {
+            return .Start
+        } else {
+            // TODO: verify?
+            return .Thru
+        }
+    }
 }

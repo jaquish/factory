@@ -19,9 +19,9 @@ struct Zone : Printable, Equatable {
         self.y = y
     }
     
-    init(containingPoint:CGPoint) {
-        x = Int(containingPoint.x) / Int(ZoneSize)
-        y = Int(containingPoint.y) / Int(ZoneSize)
+    init(containing:CGPoint) {
+        x = Int(containing.x) / Int(ZoneSize)
+        y = Int(containing.y) / Int(ZoneSize)
     }
     
     init(_ string: String) {
