@@ -29,12 +29,12 @@ class Belt: Mover {
         
         // Validation
         if !(direction == .E || direction == .W) {
-            println("Error: invalid direction \(direction.rawValue) for belt")
+            ErrorMessageReason = "invalid direction \(direction.rawValue) for belt"
             return nil
         }
         
         if from.x > thru.x || thru.y < from.y {
-            println("Error: zoning should progress from lower-left to upper-right")
+            ErrorMessageReason = "zoning should progress from lower-left to upper-right"
             return nil
         }
         
@@ -67,10 +67,15 @@ class Belt: Mover {
     }
     
     override func allow(#outputPoint: ConnectionPoint, toConnectToMachine machine: Machine) -> Bool {
-        return !(machine is VerticalBelt)
+        if outputPoint.name == "over-edge" {
+            return machine is Gravity
+        } else {
+            return (machine is SwitchBox || machine is TransferBox || machine is BeltMachine || machine is Transformer)
+        }
     }
     
-    override func validateConnections() {
+    override func validateConnections() -> Bool {
+        return true
         // If there is an input, there should be an output
     }
     
@@ -85,6 +90,11 @@ class Belt: Mover {
         for widge in widgesInState(Moving) {
             let oldPosition = widge.position
             widge.changeXBy(deltaX)
+            
+            // check if widge passed over wait point.
+            // If BeltMachine is ready to accept a new widge, continue.
+            // Else, hold at wait point outside of machine. (todo: jiggle animation)
+            // associate wait point with machine?
             
             // check if widge passed over connection point
             for connector in outputs() {

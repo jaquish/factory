@@ -22,6 +22,8 @@ enum LevelFileSection : String {
     case Context  = "@Context"
 }
 
+var ErrorMessageReason: String! = nil
+
 class LevelFileParser {
     var url: NSURL!
     var currentLine = 0
@@ -48,7 +50,7 @@ class LevelFileParser {
         
         status = .InProgress
         
-        println("***** Parsing Level \(url.lastPathComponent) *****")
+        println("***** Parsing \(url.lastPathComponent!) *****")
         
         let loadedStringData:NSString! = NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding, error: nil)
         
@@ -84,6 +86,7 @@ class LevelFileParser {
         
         switch status {
         case .InProgress:
+            println("....file appears to be valid. Loading level components...")
             status = .Success
             return level
         default: return nil
@@ -211,9 +214,10 @@ class LevelFileParser {
         println(info)
     }
     
-    func failWithError(reason: String) {
+    func failWithError(message: String) {
         status = .Failed
-        println("[\(url.lastPathComponent!)][line \(currentLine)] Parsing failed: " + reason)
+        let reason = ErrorMessageReason ?? "none given"
+        println("[\(url.lastPathComponent!)][line \(currentLine)][ERROR] \(message) Reason:\(ErrorMessageReason)")
     }
     
     func logWarning(reason: String) {

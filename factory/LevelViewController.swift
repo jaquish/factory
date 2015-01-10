@@ -35,7 +35,10 @@ class LevelViewController: UIViewController, SKSceneDelegate {
             }
             
             CurrentLevel = level
-            scene.loadLevel(level!)
+            let valid = scene.loadLevel(level!)
+            if !valid {
+                self.dismissViewControllerAnimated(false, completion: nil)
+            }
             
             // double-touch triple-tap back to level selection screen
             let tripleTapGesture = UITapGestureRecognizer (target: self, action: "gameOver")

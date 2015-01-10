@@ -51,13 +51,14 @@
 		92C62CED1A148B3D00DC2D5C /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C62CEC1A148B3D00DC2D5C /* Level.swift */; };
 		92C7FB001A0F070000ED13AD /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7FAFF1A0F070000ED13AD /* LevelViewController.swift */; };
 		92C7FB021A0F07D500ED13AD /* GridOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7FB011A0F07D500ED13AD /* GridOverlay.swift */; };
-		92CD66741A315E1B00AA2E74 /* january-2.level in Resources */ = {isa = PBXBuildFile; fileRef = 92CD66731A315E1B00AA2E74 /* january-2.level */; };
+		92CD66741A315E1B00AA2E74 /* test-2.level in Resources */ = {isa = PBXBuildFile; fileRef = 92CD66731A315E1B00AA2E74 /* test-2.level */; };
 		92E51D411A19F17200F1EEA2 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E51D401A19F17200F1EEA2 /* Action.swift */; };
 		92E7CB8D1A1DB33A007A78DA /* LevelFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7CB8C1A1DB33A007A78DA /* LevelFileParser.swift */; };
 		92EE3A2B1A3E359300328266 /* GridNumbering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE3A2A1A3E359300328266 /* GridNumbering.swift */; };
-		92EE3A2D1A3EBC2400328266 /* january-3.level in Resources */ = {isa = PBXBuildFile; fileRef = 92EE3A2C1A3EBC2400328266 /* january-3.level */; };
+		92EE3A2D1A3EBC2400328266 /* test-3.level in Resources */ = {isa = PBXBuildFile; fileRef = 92EE3A2C1A3EBC2400328266 /* test-3.level */; };
+		92F43F7F1A5FA03000119A6D /* BeltMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F43F7E1A5FA03000119A6D /* BeltMachine.swift */; };
 		92FBF2B51A1C54A300C7300D /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FBF2B41A1C54A300C7300D /* GameOverViewController.swift */; };
-		92FBF2B71A1C56CB00C7300D /* january-1.level in Resources */ = {isa = PBXBuildFile; fileRef = 92FBF2B61A1C56CB00C7300D /* january-1.level */; };
+		92FBF2B71A1C56CB00C7300D /* test-1.level in Resources */ = {isa = PBXBuildFile; fileRef = 92FBF2B61A1C56CB00C7300D /* test-1.level */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,13 +122,14 @@
 		92C62CEC1A148B3D00DC2D5C /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		92C7FAFF1A0F070000ED13AD /* LevelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
 		92C7FB011A0F07D500ED13AD /* GridOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridOverlay.swift; sourceTree = "<group>"; };
-		92CD66731A315E1B00AA2E74 /* january-2.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-2.level"; sourceTree = "<group>"; };
+		92CD66731A315E1B00AA2E74 /* test-2.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-2.level"; sourceTree = "<group>"; };
 		92E51D401A19F17200F1EEA2 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		92E7CB8C1A1DB33A007A78DA /* LevelFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelFileParser.swift; sourceTree = "<group>"; };
 		92EE3A2A1A3E359300328266 /* GridNumbering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridNumbering.swift; sourceTree = "<group>"; };
-		92EE3A2C1A3EBC2400328266 /* january-3.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-3.level"; sourceTree = "<group>"; };
+		92EE3A2C1A3EBC2400328266 /* test-3.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-3.level"; sourceTree = "<group>"; };
+		92F43F7E1A5FA03000119A6D /* BeltMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeltMachine.swift; sourceTree = "<group>"; };
 		92FBF2B41A1C54A300C7300D /* GameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
-		92FBF2B61A1C56CB00C7300D /* january-1.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-1.level"; sourceTree = "<group>"; };
+		92FBF2B61A1C56CB00C7300D /* test-1.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-1.level"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,9 +160,8 @@
 		84374E3A182CB4FA00F74638 /* Machines */ = {
 			isa = PBXGroup;
 			children = (
-				926B3D921A1EE6630095D60F /* ValidationFileProtocols.swift */,
+				92F43F8B1A61C9D200119A6D /* Protocols */,
 				92AB7F761A0B3AB500128B91 /* Machine.swift */,
-				922CC19F1A5322FE00562309 /* Mover.swift */,
 				92AB7F781A0B568C00128B91 /* Belt.swift */,
 				9289331F1A0EAF220013A598 /* Gravity.swift */,
 				928933211A0EB17F0013A598 /* Input.swift */,
@@ -300,15 +301,25 @@
 			isa = PBXGroup;
 			children = (
 				926BD2961A15FAE4005BD6FF /* LevelTemplate */,
-				92FBF2B61A1C56CB00C7300D /* january-1.level */,
-				92CD66731A315E1B00AA2E74 /* january-2.level */,
-				92EE3A2C1A3EBC2400328266 /* january-3.level */,
+				92FBF2B61A1C56CB00C7300D /* test-1.level */,
+				92CD66731A315E1B00AA2E74 /* test-2.level */,
+				92EE3A2C1A3EBC2400328266 /* test-3.level */,
 				926B3D941A1F2F730095D60F /* testing-belts-and-switchboxes.level */,
 				92893B891A285C190069C3A4 /* switchbox.level */,
 				929198D81A286E3A00A0EF35 /* containers.level */,
 				92717C191A299BFA00D5C7A6 /* combiner.level */,
 			);
 			name = Levels;
+			sourceTree = "<group>";
+		};
+		92F43F8B1A61C9D200119A6D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				92F43F7E1A5FA03000119A6D /* BeltMachine.swift */,
+				922CC19F1A5322FE00562309 /* Mover.swift */,
+				926B3D921A1EE6630095D60F /* ValidationFileProtocols.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		92FBF2B31A1C545A00C7300D /* Game Over */ = {
@@ -410,15 +421,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92EE3A2D1A3EBC2400328266 /* january-3.level in Resources */,
+				92EE3A2D1A3EBC2400328266 /* test-3.level in Resources */,
 				92893B8A1A285C190069C3A4 /* switchbox.level in Resources */,
 				84872BF1182607D4008F86DE /* InfoPlist.strings in Resources */,
-				92CD66741A315E1B00AA2E74 /* january-2.level in Resources */,
+				92CD66741A315E1B00AA2E74 /* test-2.level in Resources */,
 				84872C04182607D5008F86DE /* Images.xcassets in Resources */,
 				84872BFA182607D4008F86DE /* Main.storyboard in Resources */,
 				929198D91A286E3A00A0EF35 /* containers.level in Resources */,
 				92717C1A1A299BFA00D5C7A6 /* combiner.level in Resources */,
-				92FBF2B71A1C56CB00C7300D /* january-1.level in Resources */,
+				92FBF2B71A1C56CB00C7300D /* test-1.level in Resources */,
 				926B3D951A1F2F730095D60F /* testing-belts-and-switchboxes.level in Resources */,
 				926BD2971A15FAE4005BD6FF /* LevelTemplate in Resources */,
 			);
@@ -449,6 +460,7 @@
 				928933241A0EB37C0013A598 /* Output.swift in Sources */,
 				92576EC71A14679F00815C05 /* Zone.swift in Sources */,
 				9270239D1A08A7B2004DB6CB /* Widge.swift in Sources */,
+				92F43F7F1A5FA03000119A6D /* BeltMachine.swift in Sources */,
 				9289332A1A0EBF750013A598 /* VerticalBelt.swift in Sources */,
 				924B1A4219A95AC10096EED9 /* Connector.swift in Sources */,
 				84872BF7182607D4008F86DE /* FGAppDelegate.m in Sources */,

@@ -82,17 +82,26 @@ class SwitchBox: Machine {
         }
     }
 
-    override func validateConnections() {
+    override func validateConnections() -> Bool {
         
+        var  valid = true
         outputList = outputs()
         
         let outputCount = outputs().count
-        assert(outputCount >= 2, "Expected switchbox to have at least 2 outputs, not \(outputCount)")
+        if outputCount < 2 {
+            valid = false
+            println( "Expected switchbox to have at least 2 outputs, not \(outputCount)")
+        }
         
         let inputCount = inputs().count
-        assert(inputCount >= 1, "Expected switchbox to have at least 1 input, not \(inputCount)")
+        if inputCount < 1 {
+            valid = false
+            println ("Expected switchbox to have at least 1 input, not \(inputCount)")
+        }
         
         selectedOutput = outputList.first!
+        
+        return valid
     }
     
     override func update(_dt: CFTimeInterval) {

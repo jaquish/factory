@@ -45,21 +45,14 @@ class Machine: SKSpriteNode, LevelFileObject {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(_dt: CFTimeInterval) {
-        fatalError("update has not been implemented")
-        
-        // Cycle through connectors, take control of all widges.
-        // You may do this in any order.
-    }
-    
     // MARK: Setup Phase
     
-    func addInput(position: CGPoint, name: String, startingState: WidgeState, priority:Int = PriorityLevelHigh) {
+    final func addInput(position: CGPoint, name: String, startingState: WidgeState, priority:Int = PriorityLevelHigh) {
         let cp = ConnectionPointIntoMachine(machine: self, position: position, name: name, destinationState: startingState, priority: priority)
         CurrentLevel.connectionPoints.append(cp)
     }
     
-    func addOutput(position: CGPoint, name: String, priority:Int = PriorityLevelHigh) {
+    final func addOutput(position: CGPoint, name: String, priority:Int = PriorityLevelHigh) {
         let cp = ConnectionPointOutOfMachine(machine: self, position: position, name: name, priority: priority)
         CurrentLevel.connectionPoints.append(cp)
     }
@@ -74,12 +67,19 @@ class Machine: SKSpriteNode, LevelFileObject {
         return true // override for advanced decision making
     }
     
-    func printConnections() {
+    // return true if validation passes
+    // if something is invalid, println the reason and return false
+    func validateConnections() -> Bool {
         println("Connectors for \(self)")
-        connectors.values.array.map { println("-- \($0)") }
+        connectors.values.array.map { println(" * \($0)") }
+        
+        // Default validation is to require all connection points with high priority
+        return requireConnectionsForHighPriorityLevel()
     }
     
-    func validateConnections() {
+    // return true if all high priority level connections were made
+    func requireConnectionsForHighPriorityLevel() -> Bool {
+        
         var printedHeader = false
         
         let printHeader = { () -> () in
@@ -87,40 +87,50 @@ class Machine: SKSpriteNode, LevelFileObject {
             println("Validation warning: \(self) did not make all required connections.")
         }
         
-        // Default validation is to require all connection points with high priority
         for cp in self.connectionPoints() {
             if cp.priority >= PriorityLevelHigh && cp.connector == nil {
                 if !printedHeader { printHeader() }
                 println("Required connection point \(cp) was not connected")
             }
         }
+        
+        return !printedHeader
     }
     
-    func connectionPoints() -> [ConnectionPoint] {
+    final func connectionPoints() -> [ConnectionPoint] {
         return CurrentLevel.connectionPoints.filter { $0.machine == self }
+    }
+    
+    // MARK: Connector Management
+    
+    final func inputs() -> [Connector] {
+        return connectors.values.array.filter { $0.destination == self }
+    }
+    
+    final func outputs() -> [Connector] {
+        return connectors.values.array.filter { $0.source == self }
+    }
+    
+    final func connector(name: String) -> Connector {
+        return connectors[name]!
     }
     
     // MARK: Running Phase
     
-    func inputs() -> [Connector] {
-        return connectors.values.array.filter { $0.destination == self }
+    func update(_dt: CFTimeInterval) {
+        fatalError("update has not been implemented")
+        
+        // Cycle through connectors, take control of all widges.
+        // You may do this in any order.
     }
     
-    func outputs() -> [Connector] {
-        return connectors.values.array.filter { $0.source == self }
-    }
-    
-    func connector(name: String) -> Connector {
-        return connectors[name]!
-    }
-    
-    func dequeueAllWidges() {
+    final func dequeueAllWidges() {
         inputs().map { $0.dequeueWidges() }
     }
     
     // MARK: Widge Management
     
-    func createWidge(type: String, position: CGPoint, state: WidgeState) -> Widge {
+    final func createWidge(type: String, position: CGPoint, state: WidgeState) -> Widge {
         let count = AllWidges.count
         let newWidge = CurrentLevel.createWidge(type)
         newWidge.owner = self
@@ -131,7 +141,7 @@ class Machine: SKSpriteNode, LevelFileObject {
         return newWidge
     }
     
-    func transform(widge: Widge, toType: String) -> Widge {
+    final func transform(widge: Widge, toType: String) -> Widge {
         let count = AllWidges.count
         let replacement = createWidge(toType, position: widge.position, state: widge.state)
 
@@ -140,11 +150,11 @@ class Machine: SKSpriteNode, LevelFileObject {
         return replacement
     }
     
-    func transformToGarbage(widges: [Widge]) {
+    final func transformToGarbage(widges: [Widge]) {
         // TODO
     }
     
-    func deleteWidge(widge: Widge) {
+    final func deleteWidge(widge: Widge) {
         assert((widge.owner as Machine) == self, "cannot delete a widge that you do not own")
         
         let count = AllWidges.count
@@ -153,15 +163,20 @@ class Machine: SKSpriteNode, LevelFileObject {
         assert(AllWidges.count == count - 1, "Expected one less widge after creating expected=\(count-1) actual=\(AllWidges.count)")
     }
     
-    func widges() -> [Widge] {
+    final func widges() -> [Widge] {
         return AllWidges.filter { ($0.owner as? Machine) == self }
     }
     
-    func widgesInState(state: WidgeState) -> [Widge] {
+    final func widgesInState(state: WidgeState) -> [Widge] {
         return AllWidges.filter { (($0.owner as? Machine) == self) && $0.state == state }
     }
     
     // MARK: Debug
+    
+    func printConnections() {
+        println("Connectors for \(self)")
+        connectors.values.array.map { println(" * \($0)") }
+    }
     
     func description() -> String {
         return "Machine with origin \(originZone)"

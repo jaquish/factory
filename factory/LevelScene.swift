@@ -26,11 +26,13 @@ class LevelScene: SKScene {
         self.backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)
     }
     
-    func loadLevel(level: Level) {
-        self.level = level
-        addMachines(level.machines)
-        level.makeConnections()
+    func loadLevel(level: Level) -> Bool {
         AllWidges.removeAll()
+        self.level = level
+    
+        addMachines(level.machines)
+        let valid = level.makeConnections()
+        return valid
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -38,7 +40,7 @@ class LevelScene: SKScene {
     }
     
     func addMachine(machine: Machine) {
-        println("added machine \(machine)")
+        println("+ added machine \(machine)")
         machines.append(machine)
         addChild(machine)
     }

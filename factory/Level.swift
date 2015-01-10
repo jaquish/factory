@@ -73,7 +73,7 @@ class Level: NSObject {
         outputs.append(widgeTypeID)
     }
     
-    func makeConnections() {
+    func makeConnections() -> Bool {
         
         // priority order
         var outputs = connectionPoints.filter { $0 is ConnectionPointOutOfMachine } as [ConnectionPointOutOfMachine]
@@ -91,10 +91,16 @@ class Level: NSObject {
             }
         }
         
+        var allConnectionsValid = true
         for machine in machines {
             machine.printConnections()
-            machine.validateConnections()
+            let valid = machine.validateConnections()
+            if !valid {
+                allConnectionsValid = false
+            }
         }
+        
+        return allConnectionsValid
     }
 }
 

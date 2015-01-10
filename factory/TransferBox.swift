@@ -38,12 +38,22 @@ class TransferBox: Machine {
         return machine is Mover && (machine as Mover).stateAtZone(Zone(containing: outputPoint.position)) != .End
     }
     
-    override func validateConnections() {
+    override func validateConnections() -> Bool {
+        var valid = true
+        
         let outputCount = outputs().count
-        assert(outputCount == 1, "Expected \(self) to have 1 output, not \(outputCount)")
+        if outputCount != 1 {
+            valid = false
+            println("Expected \(self) to have 1 output, not \(outputCount)")
+        }
         
         let inputCount = inputs().count
-        assert(inputCount >= 1, "Expected \(self) to have at least input, not \(inputCount)")
+        if inputCount < 1 {
+            valid = false
+            println("Expected \(self) to have at least input, not \(inputCount)")
+        }
+            
+        return valid
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -11,11 +11,11 @@ import SpriteKit
 
 private let Falling: WidgeState = "Falling"
 
+let GravityPointsPerSecond: CGFloat = 300.0    // gravity linear
+
 class Gravity: Mover {
     
     let direction = Direction.S
-    
-    let kGravityPointsPerSecond: CGFloat = 300.0    // gravity linear
     
     let endZone: Zone
     
@@ -25,7 +25,7 @@ class Gravity: Mover {
         super.init(originZone: from)
         
         if from.x > thru.x || thru.y < from.y {
-            println("Error: zoning should progress from lower-left to upper-right")
+            ErrorMessageReason = "zoning should progress from lower-left to upper-right"
             return nil
         }
         
@@ -51,7 +51,7 @@ class Gravity: Mover {
         top.dequeueWidges()
         
         for widge in widgesInState(Falling) {
-            let deltaY = -kGravityPointsPerSecond * CGFloat(_dt)
+            let deltaY = -GravityPointsPerSecond * CGFloat(_dt)
             let oldPosition = widge.position
             widge.changeYBy(deltaY)
             

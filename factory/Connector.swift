@@ -29,7 +29,7 @@ let Propogated: WidgeState = "Propogated"
         from.connector = connector
         to.connector   = connector
         
-        println("Connected \(from.machine) \(from.name) to \(to.machine) \(to.name)")
+        println("<-> connected \(from.machine) \(from.name) to \(to.machine) \(to.name)")
     }
     
     init(position: CGPoint, source: Machine, destination: Machine, destinationState: WidgeState) {
@@ -66,6 +66,12 @@ let Propogated: WidgeState = "Propogated"
         return dequeued
     }
     
+    func dequeueWidge() -> Widge? {
+        let widges = dequeueWidges()
+        assert(widges.count <= 1, "Expected only 1 widge")
+        return widges.first
+    }
+    
     func widges() -> [Widge] {
         return AllWidges.filter { ($0.owner as? Connector) == self }
     }
@@ -74,6 +80,6 @@ let Propogated: WidgeState = "Propogated"
     // MARK: Debug
     
     func description() -> String {
-        return "Connector from " + self.source.name! + " to " + self.destination.name! + " at " + "\(Zone(containing:position))"
+        return self.source.name! + " to " + self.destination.name! + " at " + "\(Zone(containing:position))"
     }
 }

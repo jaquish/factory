@@ -9,7 +9,11 @@
 import UIKit
 import SpriteKit
 
-class Combiner: Machine {
+private let Contained: WidgeState = "Contained"
+private let Source: WidgeState = "Source"
+private let InternalGravity: WidgeState = "InternalGravity"
+
+class Combiner: BeltMachine {
 
     var containedCount: Int = 0 {
         didSet {
@@ -19,6 +23,11 @@ class Combiner: Machine {
     var countLabel: SKLabelNode!
     var containedType: String!
     var action: Action
+    
+    var topHalfZone:Zone    { return originZone[.N] }
+    var bottomHalfZone:Zone { return originZone }
+    
+    var isOn: Bool = true
     
     init(_ originZone: Zone, action: Action) {
         
@@ -43,16 +52,14 @@ class Combiner: Machine {
         a.changeYBy(ZoneSize*0.20)
         box.addChild(a)
         
-//        // gravity into the container
-//        let cpInput = ConnectionPoint(position:originZone[.N].worldPoint(.center), name: "container-input")
-//        self.addInput(cpInput)
-//        
-//        // widge out of the container
-//        let cpOutput = ConnectionPoint(position: originZone.zone(.N).worldPoint(.center), name: "drop-output")
-//        self.addOutput(cpOutput)
-//        
-//        let cpInput2 = ConnectionPoint(position: originZone.worldPoint(.center), name: "belt-input")
-//        self.addInput(cpInput2)
+        // gravity into the container
+        addInput(topHalfZone^(.center), name: "container-input", startingState: Contained)
+
+        // no gravity inside of machine, instead, move widges manually
+        
+        // widge out of the container
+        addInput(bottomHalfZone^(.center), name: "belt-input", startingState: Source)
+        addOutput(bottomHalfZone^(.center), name:"belt-output")
         
         countLabel = SKLabelNode()
         countLabel.position = ZoneZero.worldPoint(.center)
@@ -63,7 +70,7 @@ class Combiner: Machine {
         self.userInteractionEnabled = true
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required override init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -73,17 +80,18 @@ class Combiner: Machine {
             // drop contained type
             let created = Widge.widgeBy(containedType)!
             scene?.addChild(created)
-            created.position = connector("output").position
-            connector("output").insert(created)
+            created.position = connector("container-input").position
+            created.owner = self
+            created.state = InternalGravity
         }
     }
     
     override func update(_dt: CFTimeInterval) {
         
-        dequeueAllWidges()
-        
-        // Container
+        let output = connector("belt-output")
         var madeGarbage = false
+        
+        // into container
         for widge in connector("container-input").dequeueWidges() {
             if widge.widgeTypeID == containedType {
                 containedCount++
@@ -92,13 +100,32 @@ class Combiner: Machine {
             }
             widge.removeFromParent()
         }
-        if madeGarbage {
-            // Oh no!
-            containedCount = 0
-            let garbage = Widge.garbage()
-            scene?.addChild(garbage)
-            garbage.position = connector("drop-output").position
-            connector("drop-output").insert(garbage)
+        
+        // falling widges
+        for widge in widgesInState(InternalGravity) {
+            let deltaY = -GravityPointsPerSecond * CGFloat(_dt)
+            let oldPosition = widge.position
+            widge.changeYBy(deltaY)
+            
+            if path(from: oldPosition, to: widge.position, ranOver:output.position) {
+                // TODO: Calculate extra distance delta
+                widge.changeYTo(output.position.y)
+                output.insert(widge)
+            }
+        }
+        
+        // from belt
+        if let widge = connector("belt-input").dequeueWidge() {
+            
+            if isOn && containedCount > 0 {
+                // determine new widge type
+                let determinedType = action.performAction([containedType, widge.widgeTypeID]).first!
+                let transformed = transform(widge, toType: determinedType)
+                containedCount--
+                connector("belt-output").insert(transformed)
+            } else {
+                connector("belt-output").insert(widge) // pass through
+            }
         }
     }
 }
