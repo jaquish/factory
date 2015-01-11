@@ -13,6 +13,7 @@ private let BeltSpeedPointsPerSecond: CGFloat = 100.0
 private let HorizontalBeltHeight: CGFloat = 12.0
 
 private let Moving: WidgeState = "Moving"
+private let Waiting: WidgeState = "Waiting"
 
 class Belt: Mover {
 
@@ -81,11 +82,31 @@ class Belt: Mover {
     
     override func update(_dt: CFTimeInterval) {
         
+        // Lot of assumptions here.... make sure holds for reasonable _dt
+        
         // TODO - save leftover deltaTime to update
         
         let deltaX = BeltSpeedPointsPerSecond * CGFloat(_dt) * (direction == .W ? -1.0 : 1.0)
         
         dequeueAllWidges()
+        
+        for widge in widgesInState(Waiting) {
+            // find the machine it's waiting on
+            for connector in (outputs().filter{ $0.destination is BeltMachine }) {
+                
+                
+                let beltMachine = connector.destination as BeltMachine
+                let target = (direction == .E) ? beltMachine.waitPointOnLeft()
+                    : beltMachine.waitPointOnRight()
+                
+                if widge.position == target {
+                    // found the machine it was waiting for
+                    if beltMachine.isProcessingWidge() {
+                        widge.state = Moving // back to moving
+                    }
+                }
+            }
+        }
         
         for widge in widgesInState(Moving) {
             let oldPosition = widge.position
@@ -95,13 +116,30 @@ class Belt: Mover {
             // If BeltMachine is ready to accept a new widge, continue.
             // Else, hold at wait point outside of machine. (todo: jiggle animation)
             // associate wait point with machine?
+            for connector in (outputs().filter{ $0.destination is BeltMachine }) {
+                
+                let beltMachine = connector.destination as BeltMachine
+                let target = (direction == .E) ? beltMachine.waitPointOnLeft()
+                                               : beltMachine.waitPointOnRight()
+                
+                if path(from: oldPosition, to: widge.position, ranOver: target) {
+                    if beltMachine.isProcessingWidge() {
+                        widge.position = target
+                        widge.state = Waiting
+                    }
+                }
+            }
             
-            // check if widge passed over connection point
-            for connector in outputs() {
-                if path(from: oldPosition, to: widge.position, ranOver: connector.position) {
-                    // TODO: Calculate extra distance delta
-                    widge.changeXTo(connector.position.x)
-                    connector.insert(widge)
+            // Check state again, in case it was waiting
+            if widge.state == Moving {
+                // check if widge passed over connection point
+                for connector in outputs() {
+                    if path(from: oldPosition, to: widge.position, ranOver: connector.position) {
+                        // TODO: Calculate extra distance delta
+                        widge.changeXTo(connector.position.x)
+                        connector.insert(widge)
+                        break
+                    }
                 }
             }
         }
@@ -143,9 +181,13 @@ class Belt: Mover {
 //        }
     }
     
+    // MARK: Debug
+    
     override func description() -> String {
         return "Belt from \(originZone) thru \(thruZone) moving \(direction.rawValue)"
     }
+    
+    // MARK: Mover
     
     override func movingDirection() -> Direction {
         return self.direction

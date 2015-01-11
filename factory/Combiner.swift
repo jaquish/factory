@@ -9,6 +9,9 @@
 import UIKit
 import SpriteKit
 
+private let ProcessingTime = 2.0
+
+private let Processing: WidgeState = "Processing"
 private let Contained: WidgeState = "Contained"
 private let Source: WidgeState = "Source"
 private let InternalGravity: WidgeState = "InternalGravity"
@@ -26,6 +29,8 @@ class Combiner: BeltMachine {
     
     var upperHalfZone:Zone    { return originZone[.N] }
     var lowerHalfZone:Zone { return originZone }
+    
+    var processingTimeRemaining = 0.0
     
     let upperHalfNode: SKNode!
     let lowerHalfNode: SKNode!
@@ -87,6 +92,12 @@ class Combiner: BeltMachine {
         let location = (touches.anyObject() as UITouch).locationInNode(self)
         
         if upperHalfNode.containsPoint(location) {
+            
+            if processingTimeRemaining > 0 {
+                println("Can't drop widge during processing")
+                return
+            }
+            
             if containedCount > 0 {
                 containedCount--
                 // drop contained type
@@ -106,6 +117,17 @@ class Combiner: BeltMachine {
     override func update(_dt: CFTimeInterval) {
         
         let output = connector("belt-output")
+        
+        // Processing
+        if processingTimeRemaining > 0 {
+            processingTimeRemaining -= _dt
+            if processingTimeRemaining <= 0 {
+                processingTimeRemaining = 0
+                for widge in widgesInState(Processing) {
+                    output.insert(widge)
+                }
+            }
+        }
         
         // into container
         for widge in connector("container-input").dequeueWidges() {
@@ -134,15 +156,31 @@ class Combiner: BeltMachine {
         // from belt
         if let widge = connector("belt-input").dequeueWidge() {
             
+            assert(processingTimeRemaining == 0, "Shouldn't receive widges when still processing")
+            
             if isOn && containedCount > 0 {
+                
                 // determine new widge type
                 let determinedType = action.resultType(beltInput: widge.widgeType, containedInput: containedType)
                 let transformed = transform(widge, toType: determinedType)
+                transformed.state = Processing
                 containedCount--
-                connector("belt-output").insert(transformed)
+                processingTimeRemaining = ProcessingTime
+                // wait for processing to complete
+                
             } else {
-                connector("belt-output").insert(widge) // pass through
+                output.insert(widge) // pass through
             }
         }
+    }
+    
+    // MARK: BeltMachine
+    
+    override func baseZone() -> Zone {
+        return lowerHalfZone
+    }
+    
+    override func isProcessingWidge() -> Bool {
+        return processingTimeRemaining > 0
     }
 }

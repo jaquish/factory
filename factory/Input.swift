@@ -49,10 +49,6 @@ class Input: Machine {
     
     override func update(_dt: CFTimeInterval) {
         
-        if _dt > 1000 {
-            // CRAZY FIRST INTERVAL WTF
-            return
-        }
         if interval > 0 {
             timeRemaining -= _dt
             if timeRemaining < 0 {
@@ -60,7 +56,6 @@ class Input: Machine {
                 generateWidge()
                 if timeRemaining < 0 {
                     println("Warning: Rendering slipped too far behind.")
-//                    fatalError("Rendering slipped too far behind.")
                 }
             }
         }

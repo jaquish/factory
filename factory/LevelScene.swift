@@ -50,8 +50,14 @@ class LevelScene: SKScene {
     }
     
     override func update(currentTime: NSTimeInterval) {
+        
         /* Called before each frame is rendered */
         _dt = currentTime - _prevTime;
+        
+        if _dt > 1 {
+            println("Interval too large, resetting to 1/60 s")
+            _dt = 1.0/60.0
+        }
         
         for machine in machines {
             machine.update(_dt)
