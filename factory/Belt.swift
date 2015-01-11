@@ -71,7 +71,7 @@ class Belt: Mover {
         if outputPoint.name == "over-edge" {
             return machine is Gravity
         } else {
-            return (machine is SwitchBox || machine is TransferBox || machine is BeltMachine || machine is Transformer)
+            return (machine is SwitchBox || machine is TransferBox || machine is BeltMachine || machine is Transformer || machine is Output)
         }
     }
     

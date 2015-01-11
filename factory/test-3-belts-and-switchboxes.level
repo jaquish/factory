@@ -7,7 +7,7 @@ Name:January 1st
 
 @Machines
 Input 1,10
-Gravity 1,10 1,7
+Gravity 1,7 1,10
 
 Belt 1,7 12,7 E
 TransferBox 12,7
@@ -28,7 +28,7 @@ VerticalBelt 3,1 3,8 S
 TransferBox 3,1
 
 Belt 2,1 3,1 W
-Gravity 1,1 1,0
+Gravity 1,0 1,1
 
 Output 1,0
 
