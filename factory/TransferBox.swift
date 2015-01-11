@@ -60,7 +60,7 @@ class TransferBox: Machine {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: Game Phase
+    // MARK: Gameplay Phase
     
     override func update(_dt: CFTimeInterval) {
         
@@ -70,6 +70,8 @@ class TransferBox: Machine {
             connector("output").insert(widge)
         }
     }
+    
+    // MARK: Debug
 
     override func description() -> String {
         return "Transfer box at \(originZone)"

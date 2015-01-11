@@ -124,6 +124,8 @@ class Combiner: BeltMachine {
         }
     }
     
+    // MARK: Gameplay Phase
+    
     override func update(_dt: CFTimeInterval) {
         
         let output = connector("belt-output")

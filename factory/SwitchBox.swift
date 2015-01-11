@@ -104,6 +104,8 @@ class SwitchBox: Machine {
         return valid
     }
     
+    // MARK: Gameplay Phase
+    
     override func update(_dt: CFTimeInterval) {
         
         dequeueAllWidges()
@@ -113,6 +115,8 @@ class SwitchBox: Machine {
             selectedOutput.insert(widge)
         }
     }
+    
+    // MARK: Debug
     
     override func description() -> String {
         let inputDirections = inputs().map { ($0.source as Mover).movingDirection().rawValue }

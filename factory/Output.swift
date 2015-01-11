@@ -48,6 +48,8 @@ class Output: Machine {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Gameplay Phase
+    
     override func update(_dt: CFTimeInterval) {
         connector("input").dequeueWidges()
         for widge in widgesInState(OutputWidge) {
@@ -56,6 +58,8 @@ class Output: Machine {
             deleteWidge(widge)
         }
     }
+    
+    // MARK: Debug
     
     override func description() -> String {
         return "Output at \(originZone)"

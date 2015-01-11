@@ -54,6 +54,8 @@ class Container: Machine {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Gameplay Phase
+    
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         if containedCount > 0 {
             containedCount--

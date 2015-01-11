@@ -43,6 +43,8 @@ class Gravity: Mover {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Mark: Gameplay Phase
+    
     override func update(_dt: CFTimeInterval) {
         
         let top = connector("top")
@@ -62,10 +64,8 @@ class Gravity: Mover {
             }
         }
     }
-    
-    override func description() -> String {
-        return "Gravity falling \(originZone) thru \(endZone)"
-    }
+   
+    // MARK: Mover
     
     override func movingDirection() -> Direction {
         return .S
@@ -81,4 +81,11 @@ class Gravity: Mover {
             return .Thru
         }
     }
+    
+    // MARK: Debug
+    
+    override func description() -> String {
+        return "Gravity falling \(originZone) thru \(endZone)"
+    }
+
 }

@@ -39,6 +39,8 @@ class Input: Machine {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Gameplay Phase
+    
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         generateWidge()
     }
@@ -64,6 +66,8 @@ class Input: Machine {
             connectors["next"]!.insert(widge)
         }
     }
+    
+    // MARK: Debug
     
     override func description() -> String {
         return "Input at \(originZone) generationInterval=\(interval)"

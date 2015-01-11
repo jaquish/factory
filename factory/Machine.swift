@@ -150,10 +150,6 @@ class Machine: SKSpriteNode, LevelFileObject {
         return replacement
     }
     
-    final func transformToGarbage(widges: [Widge]) {
-        // TODO
-    }
-    
     final func deleteWidge(widge: Widge) {
         assert((widge.owner as Machine) == self, "cannot delete a widge that you do not own")
         

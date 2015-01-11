@@ -57,6 +57,8 @@ class VerticalBelt: Mover {
         return (machine is TransferBox) || (machine is SwitchBox) || (machine is Output)
     }
     
+    // MARK: Gameplay Phase
+    
     override func update(_dt: CFTimeInterval) {
         // TODO - save leftover deltaTime to update
 
@@ -79,11 +81,8 @@ class VerticalBelt: Mover {
         }
     }
     
-    override func description() -> String {
-        return "VerticalBelt from \(originZone) thru \(thruZone) moving \(direction.rawValue)"
-    }
-    
     // MARK: Mover
+    
     override func movingDirection() -> Direction {
         return self.direction
     }
@@ -97,5 +96,11 @@ class VerticalBelt: Mover {
             // TODO: verify?
             return .Thru
         }
+    }
+    
+    // MARK: Debug
+    
+    override func description() -> String {
+        return "VerticalBelt from \(originZone) thru \(thruZone) moving \(direction.rawValue)"
     }
 }

@@ -80,6 +80,8 @@ class Belt: Mover {
         // If there is an input, there should be an output
     }
     
+    // MARK: Gameplay Phase
+    
     override func update(_dt: CFTimeInterval) {
         
         // Lot of assumptions here.... make sure holds for reasonable _dt
