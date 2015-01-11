@@ -18,6 +18,8 @@ let MarkedForDeletion: WidgeState = "MarkedForDeletion"
 
 class Machine: SKSpriteNode, LevelFileObject {
     
+    var level: Level { return scene as Level }
+    
     var originZone: Zone = ZoneZero {  // The most lower-left zone of the machine.
         didSet {
             position = originZone.worldPoint(.SW)
@@ -70,8 +72,6 @@ class Machine: SKSpriteNode, LevelFileObject {
     // return true if validation passes
     // if something is invalid, println the reason and return false
     func validateConnections() -> Bool {
-        println("Connectors for \(self)")
-        connectors.values.array.map { println(" * \($0)") }
         
         // Default validation is to require all connection points with high priority
         return requireConnectionsForHighPriorityLevel()

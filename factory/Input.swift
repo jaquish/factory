@@ -44,7 +44,7 @@ class Input: Machine {
     }
     
     func generateWidge() {
-        createWidge((scene as LevelScene).level.nextInputType(), position: originZone^(.center), state: WaitingToDrop)
+        createWidge(level.nextInputType(), position: originZone^(.center), state: WaitingToDrop)
     }
     
     override func update(_dt: CFTimeInterval) {

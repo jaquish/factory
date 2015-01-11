@@ -26,9 +26,9 @@ var ErrorMessageReason: String! = nil
 
 class LevelFileParser {
     var url: NSURL!
+    var level: Level!
     var currentLine = 0
     var currentSection: LevelFileSection = .Unknown
-    var level:Level!
     var status: ParseStatus = .Waiting
     
     init(url: NSURL) {
@@ -46,7 +46,7 @@ class LevelFileParser {
         self.init(url: url ?? NSURL())
     }
     
-    func parseLevel() -> Level! {
+    func parseLevel(summaryOnly:Bool = false) -> Level! {
         
         status = .InProgress
         
@@ -56,6 +56,7 @@ class LevelFileParser {
         
         if loadedStringData != nil {
             
+            // Build up this level
             level = Level()
             CurrentLevel = level
             widgeTypes.removeAll()
@@ -86,9 +87,17 @@ class LevelFileParser {
         
         switch status {
         case .InProgress:
-            println("....file appears to be valid. Loading level components...")
-            status = .Success
-            return level
+            println("...parsed file successfully. Connecting components...")
+            
+            AllWidges.removeAll()
+            
+            let valid = level.makeConnections()
+            if (valid) {
+                status = .Success
+                return level
+            } else {
+                return nil
+            }
         default: return nil
         }
     }
@@ -182,7 +191,7 @@ class LevelFileParser {
                 failWithError("Failed to create machine of type \(machineType)"); return
             } else {
                 machine.name! += "[\(currentLine)]"
-                level.machines.append(machine)
+                level.addMachine(machine)
             }
             
         case .Context:
@@ -191,10 +200,10 @@ class LevelFileParser {
             switch key {
                 case "inputs":
                     let widgeTypeIDs = parts[1].componentsSeparatedByString(",")
-                    level.inputWidgeTypes += widgeTypeIDs
+                    level.inputTypes += widgeTypeIDs
                 case "winning-outputs":
                     let widgeTypeIDs = parts[1].componentsSeparatedByString(",")
-                    level.outputWidgeTypes += widgeTypeIDs
+                    level.outputTypes += widgeTypeIDs
                 case "input-order":
                     level.inputOrder = InputOrder(rawValue: value)!
                 case "endgame-output-count":

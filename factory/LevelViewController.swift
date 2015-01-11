@@ -11,7 +11,7 @@ import SpriteKit
 
 class LevelViewController: UIViewController, SKSceneDelegate {
 
-    var level: Level?
+    var level: Level!
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -21,7 +21,8 @@ class LevelViewController: UIViewController, SKSceneDelegate {
             skView.showsFPS = true
             skView.showsNodeCount = true
             
-            let scene = LevelScene(size: skView.bounds.size)
+            let scene = level
+            scene.size = skView.bounds.size
             scene.scaleMode = .AspectFill
             scene.delegate = self
             skView.presentScene(scene)
@@ -35,10 +36,6 @@ class LevelViewController: UIViewController, SKSceneDelegate {
             }
             
             CurrentLevel = level
-            let valid = scene.loadLevel(level!)
-            if !valid {
-                self.dismissViewControllerAnimated(false, completion: nil)
-            }
             
             // double-touch triple-tap back to level selection screen
             let tripleTapGesture = UITapGestureRecognizer (target: self, action: "gameOver")

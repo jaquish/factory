@@ -1,12 +1,13 @@
 //
-//  Level.swift
+//  MyScene.swift
 //  factory
 //
-//  Created by Zach Jaquish on 11/12/14.
+//  Created by Zach Jaquish on 11/8/14.
 //  Copyright (c) 2014 Zach Jaquish. All rights reserved.
 //
 
 import UIKit
+import SpriteKit
 
 enum InputOrder : String {
     case Linear = "linear"
@@ -15,27 +16,77 @@ enum InputOrder : String {
 
 var CurrentLevel: Level!
 
-class Level: NSObject {
+class Level: SKScene {
    
-    var inputOrder:InputOrder = .Linear
-    var inputIndex = 0
+    // Setup
+    var metadata = [String : AnyObject]()
+    var actions = [String : Action]()
+    var machines = [Machine]()
+    var inputMachine: Input!
+    var inputTypes  = [WidgeType]()
+    var outputTypes = [WidgeType]()
     
     var preamble = String()
+    var inputIndex = 0
+    var inputOrder:InputOrder = .Linear
     
-    var inputMachine: Input!
-    var inputWidgeTypes  = [String]()
-    var outputWidgeTypes = [String]()
-    
-    var actions = [String : Action]()
-
-    var machines: [Machine] = Array()
-    
-    var metadata = [String : AnyObject]()
+    // Gameplay Phase
+    var _prevTime: CFTimeInterval
+    var _dt: CFTimeInterval
     
     var outputs = [String]()
     var endgame_output_count: Int = 0
     
     var connectionPoints = [ConnectionPoint]()
+    
+    override convenience init() {
+        self.init(size: CGSizeZero)
+    }
+    override init(size: CGSize) {
+        
+        _prevTime = 0
+        _dt = 0
+        
+        super.init(size: size)
+        
+        self.backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addMachine(machine: Machine) {
+        println("+ \(machine.name!) \(machine)")
+        machines.append(machine)
+        addChild(machine)
+    }
+    
+    override func update(currentTime: NSTimeInterval) {
+        
+        /* Called before each frame is rendered */
+        _dt = currentTime - _prevTime;
+        
+        if _dt > 1 {
+            println("Interval too large, resetting to 1/60 s")
+            _dt = 1.0/60.0
+        }
+        
+        for machine in machines {
+            machine.update(_dt)
+        }
+        
+        // propogate
+        
+        for machine in machines {
+            machine.inputs().map { $0.propogate() }
+        }
+        
+        /*** TODO - insert phase 2 processing here ***/
+        
+        _prevTime = currentTime;
+    }
+    
     
     func summary() -> String {
         var summary = ""
@@ -45,7 +96,7 @@ class Level: NSObject {
         summary += "\n\n" + preamble
         return summary
     }
-
+    
     func createWidge(widgeTypeID: String) -> Widge {
         var spriteName = widgeTypes[widgeTypeID]!
         if spriteName.hasPrefix("$") {
@@ -60,8 +111,8 @@ class Level: NSObject {
     func nextInputType() -> String {
         inputIndex++
         switch inputOrder {
-        case .Random: return inputWidgeTypes.randomItem()
-        case .Linear: return inputWidgeTypes[(inputIndex-1) % inputWidgeTypes.count]
+        case .Random: return inputTypes.randomItem()
+        case .Linear: return inputTypes[(inputIndex-1) % inputTypes.count]
         }
     }
     
@@ -72,6 +123,8 @@ class Level: NSObject {
     func addOutput(widgeTypeID: String) {
         outputs.append(widgeTypeID)
     }
+    
+    // MARK: Connection Phase
     
     func makeConnections() -> Bool {
         
@@ -101,22 +154,5 @@ class Level: NSObject {
         }
         
         return allConnectionsValid
-    }
-}
-
-extension UIColor {
-    func toString() -> String {
-        var r:CGFloat = 0
-        var g:CGFloat = 0
-        var b:CGFloat = 0
-        self.getRed(&r, green: &g, blue: &b, alpha: nil)
-        return "\(r),\(g),\(b)"
-    }
-    
-    convenience init(_ string: String) {
-        let stringParts = string.componentsSeparatedByString(",") as [String]
-        let floatParts = stringParts.map { CGFloat(($0 as NSString).floatValue) }
-        assert(floatParts.count == 3)
-        self.init(red:floatParts[0], green: floatParts[1], blue: floatParts[2], alpha: 1.0)
     }
 }
