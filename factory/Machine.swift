@@ -175,7 +175,7 @@ class Machine: SKSpriteNode, LevelFileObject {
     
     func printConnections() {
         println("Connectors for \(self)")
-        connectors.values.array.map { println(" * \($0)") }
+        connectors.values.array.map { println(" -> \($0.destination.name!) at \(Zone(containing:$0.position))") }
     }
     
     func description() -> String {

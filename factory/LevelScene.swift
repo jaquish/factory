@@ -40,7 +40,7 @@ class LevelScene: SKScene {
     }
     
     func addMachine(machine: Machine) {
-        println("+ added machine \(machine)")
+        println("+ \(machine.name!) \(machine)")
         machines.append(machine)
         addChild(machine)
     }

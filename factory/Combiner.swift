@@ -113,7 +113,7 @@ class Combiner: BeltMachine {
                 containedCount++
             } else {
                 containedCount = 0
-                createWidge("purple", position: upperHalfZone^(.center), state: InternalGravity)
+                createWidge("black", position: upperHalfZone^(.center), state: InternalGravity)
             }
             deleteWidge(widge)
         }

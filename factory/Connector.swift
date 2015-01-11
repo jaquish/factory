@@ -29,7 +29,7 @@ let Propogated: WidgeState = "Propogated"
         from.connector = connector
         to.connector   = connector
         
-        println("<-> connected \(from.machine) \(from.name) to \(to.machine) \(to.name)")
+//        println("<-> connected \(from.machine) \(from.name) to \(to.machine) \(to.name)")
     }
     
     init(position: CGPoint, source: Machine, destination: Machine, destinationState: WidgeState) {
