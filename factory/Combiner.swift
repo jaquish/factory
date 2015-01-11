@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-private let ProcessingTime = 2.0
+private let ProcessingTime = 1.0
 
 private let Processing: WidgeState = "Processing"
 private let Contained: WidgeState = "Contained"
@@ -32,10 +32,16 @@ class Combiner: BeltMachine {
     
     var processingTimeRemaining = 0.0
     
-    let upperHalfNode: SKNode!
-    let lowerHalfNode: SKNode!
+    let upperHalfNode: SKSpriteNode!
+    let lowerHalfNode: SKSpriteNode!
     
-    var isOn: Bool = true
+    let cover: SKSpriteNode!
+    
+    var isOn: Bool = true {
+        didSet {
+            upperHalfNode.color = isOn ? UIColor.greenColor() : UIColor.redColor()
+        }
+    }
     
     init(_ originZone: Zone, action: CombinationAction) {
         
@@ -48,9 +54,13 @@ class Combiner: BeltMachine {
         
         zPosition = SpriteLayerInFrontOfWidges
 
-        let box = Util.zoneBoxWithBorder(UIColor.blueColor(), innerColor: UIColor.darkGrayColor())
+        let box = Util.zoneBoxWithBorder(UIColor.greenColor(), innerColor: UIColor.darkGrayColor())
         box.position = ZoneZero.worldPoint(.NW)
         addChild(box)
+
+        cover = Util.zoneBoxWithColor(UIColor.darkGrayColor())
+        cover.hidden = true
+        addChild(cover) // cover over lower half for processing
         
         // show a preview of the output in the center
         let a = Widge.widgeBy(action.containedType() , isPreview: true)!
@@ -108,7 +118,7 @@ class Combiner: BeltMachine {
                 created.state = InternalGravity
             }
         } else if lowerHalfNode.containsPoint(location) {
-            println("Lower half touch")
+            isOn = !isOn
         } else {
             println("Touch not inside combiner. Investigate")
         }
@@ -122,7 +132,10 @@ class Combiner: BeltMachine {
         if processingTimeRemaining > 0 {
             processingTimeRemaining -= _dt
             if processingTimeRemaining <= 0 {
+                // End processing
+                cover.hidden = true
                 processingTimeRemaining = 0
+                
                 for widge in widgesInState(Processing) {
                     output.insert(widge)
                 }
@@ -166,6 +179,7 @@ class Combiner: BeltMachine {
                 transformed.state = Processing
                 containedCount--
                 processingTimeRemaining = ProcessingTime
+                cover.hidden = false
                 // wait for processing to complete
                 
             } else {
