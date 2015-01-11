@@ -115,7 +115,7 @@ class Machine: SKSpriteNode, LevelFileObject {
         return connectors[name]!
     }
     
-    // MARK: Running Phase
+    // MARK: Gameplay Phase
     
     func update(_dt: CFTimeInterval) {
         fatalError("update has not been implemented")

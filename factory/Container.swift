@@ -71,7 +71,7 @@ class Container: Machine {
         
         var madeGarbage = false
         for widge in connector("input").dequeueWidges() {
-            if widge.widgeTypeID == containedType {
+            if widge.widgeType == containedType {
                 containedCount++
             } else {
                 madeGarbage = true

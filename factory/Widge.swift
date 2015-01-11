@@ -13,6 +13,8 @@ var AllWidges = [Widge]()
 
 var widgeTypes = [String : String]()
 
+typealias WidgeType = String
+
 private var incrementingID = 1
 
 class Widge: SKSpriteNode, LevelFileObject {
@@ -22,7 +24,7 @@ class Widge: SKSpriteNode, LevelFileObject {
     var owner: AnyObject! // Machine or Connector
     var state: WidgeState!
     
-    var widgeTypeID: String!
+    var widgeType: WidgeType!
 
     class func widgeBy(typeID:String, isPreview: Bool = false) -> Widge? {
         if let value = widgeTypes[typeID] {
@@ -36,7 +38,7 @@ class Widge: SKSpriteNode, LevelFileObject {
     
     class func widgeWith(typeID:String, color: UIColor, isPreview: Bool = false) -> Widge {
         let widge = Widge(color: color, size: CGSizeMake(WidgeSize, WidgeSize))
-        widge.widgeTypeID = typeID
+        widge.widgeType = typeID
         widge.zPosition = SpriteLayerWidges
         
         if !isPreview {

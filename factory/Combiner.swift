@@ -21,23 +21,25 @@ class Combiner: BeltMachine {
         }
     }
     var countLabel: SKLabelNode!
-    var containedType: String!
-    var action: Action
+    var containedType: String { return action.containedType() }
+    var action: CombinationAction
     
-    var topHalfZone:Zone    { return originZone[.N] }
-    var bottomHalfZone:Zone { return originZone }
+    var upperHalfZone:Zone    { return originZone[.N] }
+    var lowerHalfZone:Zone { return originZone }
+    
+    let upperHalfNode: SKNode!
+    let lowerHalfNode: SKNode!
     
     var isOn: Bool = true
     
-    init(_ originZone: Zone, action: Action) {
+    init(_ originZone: Zone, action: CombinationAction) {
         
         self.action = action
-        self.containedType = action.inputTypeIDs.first!
         
         super.init(originZone: originZone)
         
-        let bottom = Util.combinerBottom()
-        addChild(bottom)
+        lowerHalfNode = Util.combinerBottom()
+        addChild(lowerHalfNode)
         
         zPosition = SpriteLayerInFrontOfWidges
 
@@ -46,26 +48,32 @@ class Combiner: BeltMachine {
         addChild(box)
         
         // show a preview of the output in the center
-        let a = Widge.widgeBy(containedType, isPreview: true)!
+        let a = Widge.widgeBy(action.containedType() , isPreview: true)!
         a.setScale(0.4)
         a.position = ZoneZero.worldPoint(.center)
         a.changeYBy(ZoneSize*0.20)
         box.addChild(a)
         
-        // gravity into the container
-        addInput(topHalfZone^(.center), name: "container-input", startingState: Contained)
-
-        // no gravity inside of machine, instead, move widges manually
-        
-        // widge out of the container
-        addInput(bottomHalfZone^(.center), name: "belt-input", startingState: Source)
-        addOutput(bottomHalfZone^(.center), name:"belt-output")
-        
+        // Show a count of the number of contained objects
         countLabel = SKLabelNode()
         countLabel.position = ZoneZero.worldPoint(.center)
         countLabel.changeYBy(-ZoneSize*0.40)
         countLabel.fontSize = LabelFontSize
+        countLabel.text = "0"
         box.addChild(countLabel)
+        
+        upperHalfNode = box
+        
+        // gravity into the container
+        addInput(upperHalfZone^(.center), name: "container-input", startingState: Contained)
+
+        // no gravity inside of machine, instead, move widges manually
+        
+        // widge out of the container
+        addInput(lowerHalfZone^(.center), name: "belt-input", startingState: Source)
+        addOutput(lowerHalfZone^(.center), name:"belt-output")
+        
+        
         
         self.userInteractionEnabled = true
     }
@@ -75,30 +83,39 @@ class Combiner: BeltMachine {
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        if containedCount > 0 {
-            containedCount--
-            // drop contained type
-            let created = Widge.widgeBy(containedType)!
-            scene?.addChild(created)
-            created.position = connector("container-input").position
-            created.owner = self
-            created.state = InternalGravity
+        
+        let location = (touches.anyObject() as UITouch).locationInNode(self)
+        
+        if upperHalfNode.containsPoint(location) {
+            if containedCount > 0 {
+                containedCount--
+                // drop contained type
+                let created = Widge.widgeBy(containedType)!
+                scene?.addChild(created)
+                created.position = connector("container-input").position
+                created.owner = self
+                created.state = InternalGravity
+            }
+        } else if lowerHalfNode.containsPoint(location) {
+            println("Lower half touch")
+        } else {
+            println("Touch not inside combiner. Investigate")
         }
     }
     
     override func update(_dt: CFTimeInterval) {
         
         let output = connector("belt-output")
-        var madeGarbage = false
         
         // into container
         for widge in connector("container-input").dequeueWidges() {
-            if widge.widgeTypeID == containedType {
+            if widge.widgeType == containedType {
                 containedCount++
             } else {
-                madeGarbage = true
+                containedCount = 0
+                createWidge("purple", position: upperHalfZone^(.center), state: InternalGravity)
             }
-            widge.removeFromParent()
+            deleteWidge(widge)
         }
         
         // falling widges
@@ -119,7 +136,7 @@ class Combiner: BeltMachine {
             
             if isOn && containedCount > 0 {
                 // determine new widge type
-                let determinedType = action.performAction([containedType, widge.widgeTypeID]).first!
+                let determinedType = action.resultType(beltInput: widge.widgeType, containedInput: containedType)
                 let transformed = transform(widge, toType: determinedType)
                 containedCount--
                 connector("belt-output").insert(transformed)

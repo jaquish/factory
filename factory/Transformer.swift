@@ -13,7 +13,7 @@ private let WaitingToTransform: WidgeState = "WaitingToTransform"
 
 class Transformer: Machine {
    
-    var action: Action
+    var action: TransformAction
     var box:SKSpriteNode!
 
     var isOn: Bool = true {
@@ -22,7 +22,7 @@ class Transformer: Machine {
         }
     }
     
-    init(_ originZone: Zone, action: Action) {
+    init(_ originZone: Zone, action: TransformAction) {
         
         self.action = action
         
@@ -32,8 +32,7 @@ class Transformer: Machine {
         addChild(box)
         
         // show a preview of the output in the center
-        let outputType = action.successTypeIDs.first!
-        let outputPreview = Widge.widgeBy(outputType, isPreview: true)!
+        let outputPreview = Widge.widgeBy(action.successType(), isPreview: true)!
         outputPreview.setScale(0.5)
         addChild(outputPreview)
         outputPreview.position = ZoneZero.worldPoint(.center)
@@ -48,6 +47,8 @@ class Transformer: Machine {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Gameplay Phase
+    
     override func update(_dt: CFTimeInterval) {
         
         connector("input").dequeueWidges()
@@ -55,8 +56,7 @@ class Transformer: Machine {
         for widge in widgesInState(WaitingToTransform) {
             
             if isOn {
-                let newType = action.performAction([widge.widgeTypeID]).first!
-                let replacement = transform(widge, toType: newType)
+                let replacement = transform(widge, toType: action.resultType(input: widge.widgeType))
                 connector("output").insert(replacement)
                 
             } else {
@@ -68,6 +68,8 @@ class Transformer: Machine {
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         isOn = !isOn
     }
+    
+    // MARK: Debug 
     
     override func description() -> String {
         return "Transformer at \(originZone) action=\(action) isOn=\(isOn)"

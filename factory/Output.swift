@@ -32,6 +32,7 @@ class Output: Machine {
         label.position = ZoneZero.worldPoint(.center)
         label.position.y -= 20
         label.fontSize = LabelFontSize
+        label.text = "0"
         
         super.init(originZone: originZone)
         
@@ -51,7 +52,7 @@ class Output: Machine {
         connector("input").dequeueWidges()
         for widge in widgesInState(OutputWidge) {
             count += 1
-            CurrentLevel.addOutput(widge.widgeTypeID)
+            CurrentLevel.addOutput(widge.widgeType)
             deleteWidge(widge)
         }
     }

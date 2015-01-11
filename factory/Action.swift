@@ -13,22 +13,64 @@ enum ActionType : String {
     case Combination = "Combination"
 }
 
-struct Action : LevelFileObject {
+class Action : LevelFileObject {
     let actionID: String
     let actionType: ActionType
-    let inputTypeIDs: [String]
-    var successTypeIDs: [String]
-    var failureTypeIDs: [String]
+    let inputTypes: [WidgeType]
+    var successTypes: [WidgeType]
+    var failureTypes: [WidgeType]
     
-    func performAction(inputs:[String]) -> [String] {
-        if inputs == inputTypeIDs || contains(inputTypeIDs, "*") {
-            return successTypeIDs
-        } else {
-            return failureTypeIDs
+    class func actionWith(actionType: ActionType, actionID: String, inputTypeIDs: [WidgeType], successTypeIDs: [WidgeType], failureTypeIDs: [WidgeType]) -> Action! {
+        
+        switch actionType {
+        case .Transformation: return TransformAction(actionID: actionID, actionType: actionType, inputTypeIDs: inputTypeIDs, successTypeIDs: successTypeIDs, failureTypeIDs: failureTypeIDs)
+        case .Combination : return CombinationAction(actionID: actionID, actionType: actionType, inputTypeIDs: inputTypeIDs, successTypeIDs: successTypeIDs, failureTypeIDs: failureTypeIDs)
         }
     }
     
-    static func numberOfInitializerParameters() -> Int {
+    init(actionID: String, actionType: ActionType, inputTypeIDs: [WidgeType], successTypeIDs: [WidgeType], failureTypeIDs: [WidgeType]) {
+        self.actionID = actionID
+        self.actionType = actionType
+        self.inputTypes = inputTypeIDs
+        self.successTypes = successTypeIDs
+        self.failureTypes = failureTypeIDs
+    }
+    
+    class func numberOfInitializerParameters() -> Int {
         return 5
+    }
+}
+
+class TransformAction : Action {
+    
+    func resultType(#input: WidgeType) -> WidgeType {
+        if contains(inputTypes, "*") || inputTypes == [input] {
+            return successTypes[0]
+        } else {
+            return failureTypes[0]
+        }
+    }
+    
+    func successType() -> WidgeType {
+        return successTypes[0]
+    }
+}
+
+class CombinationAction : Action {
+    
+    func resultType(#beltInput: WidgeType, containedInput: WidgeType) -> WidgeType {
+        if beltInput == inputTypes[0] && containedInput == inputTypes[1] {
+            return successTypes[0]
+        } else {
+            return failureTypes[0]
+        }
+    }
+    
+    func containedType() -> WidgeType {
+        return inputTypes[1]
+    }
+    
+    func successType() -> WidgeType {
+        return successTypes[0]
     }
 }

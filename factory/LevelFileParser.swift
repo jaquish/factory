@@ -138,7 +138,7 @@ class LevelFileParser {
             let inputIDs = parts[2].componentsSeparatedByString(",")
             let successIDs = parts[3].componentsSeparatedByString(",")
             let failureIDs = parts[4].componentsSeparatedByString(",")
-            level.actions[name] = Action(actionID: name, actionType: actionType, inputTypeIDs: inputIDs, successTypeIDs: successIDs, failureTypeIDs: failureIDs)
+            level.actions[name] = Action.actionWith(actionType, actionID: name, inputTypeIDs: inputIDs, successTypeIDs: successIDs, failureTypeIDs: failureIDs)
         case .Machines:
 
             let machineType = parts[0]
@@ -161,8 +161,7 @@ class LevelFileParser {
                 case "Output":
                     machine = Output(Zone(parts[1]))
                 case "Transformer":
-                    
-                    let action = level.actions[parts[2]]!
+                    let action = level.actions[parts[2]]! as TransformAction
                     machine = Transformer(Zone(parts[1]), action: action)
                 case "TransferBox":
                     machine = TransferBox(Zone(parts[1]))
@@ -173,7 +172,7 @@ class LevelFileParser {
                 case "Container":
                     machine = Container(Zone(parts[1]), containedType:parts[2])
                 case "Combiner":
-                    let action = level.actions[parts[2]]!
+                    let action = level.actions[parts[2]]! as CombinationAction
                     machine = Combiner(Zone(parts[1]), action:action)
                 default:
                     failWithError("Unknown class of machine '\(machineType)'"); return
