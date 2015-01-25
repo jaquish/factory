@@ -1,0 +1,39 @@
+@Metadata
+Format-Version:1.0
+Name:January 2nd
+
+@Description
+Goal: Learn how a transformer works.
+@End
+
+@Widges
+[basic]
+
+@Actions
+red-to-blue Transformation red blue black
+combine Combination red,yellow orange black
+
+@Machines
+Input 13,8
+Gravity 13,7 13,8
+
+# top belt
+Belt 3,7 13,7 W
+Transformer 4,7 red-to-blue
+SwitchBox 9,7
+Gravity 2,4 2,7
+Gravity 9,2 9,7
+
+# middle belt
+Belt 2,4 10,4 E
+Gravity 11,1 11,4
+
+# bottom belt
+Belt 4,1 11,1 W
+Combiner 9,1 combine
+Output 4,1
+
+@Context
+inputs:red,yellow
+input-order:linear
+endgame-output-count:10

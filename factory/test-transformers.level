@@ -1,0 +1,30 @@
+@Metadata
+Format-Version:1.0
+Name:January 1st
+
+@Description
+
+Test transformers as belt machines on horizontal belts.
+Widges should travel along belt, and be transformed.
+Garbage is not yet implemented.
+
+@End
+
+@Widges
+[basic]
+
+@Actions
+red-to-yellow Transformation red yellow black
+
+@Machines
+Input 1,7 5
+Gravity 1,5 1,7
+Belt 1,5 10,5 E
+Transformer 6,5 red-to-yellow
+Gravity 11,3 11,5
+Output 11,3
+
+@Context
+inputs:red,yellow
+input-order:linear
+endgame-output-count:10

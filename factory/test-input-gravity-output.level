@@ -1,0 +1,45 @@
+@Metadata
+Format-Version:1.0
+Name:January 1st
+
+@Description
+Test Input, Gravity, and Output.
+
+Widges should travel correctly from input, through gravity, into output.
+
+@End
+
+@Widges
+[basic]
+
+@Machines
+
+# output 1 square below
+Input 1,8 3
+Gravity 1,7 1,8
+Output 1,7
+
+# output 2 squares below
+Input 3,8 3
+Gravity 3,6 3,8
+Output 3,6
+
+# output 3 squares below
+Input 5,8 3
+Gravity 5,5 5,8
+Output 5,5
+
+# output 4 squares below
+Input 7,8 3
+Gravity 7,4 7,8
+Output 7,4
+
+#output 5 squares below
+Input 9,8 3
+Gravity 9,3 9,8
+Output 9,3
+
+@Context
+inputs:red,yellow
+input-order:linear
+endgame-output-count:100

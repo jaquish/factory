@@ -1,0 +1,73 @@
+@Metadata
+Format-Version:1.0
+Name:January 1st
+
+@Description
+
+Test inputs and outputs directly on belts. Widges should travel from input,
+along belt, to output.
+
+@End
+
+@Widges
+[basic]
+
+@Actions
+make-yellow Transformation red yellow black
+
+@Machines
+
+# input/output direct connect belt, going East (length = 9)
+Input 1,9 3
+Belt 1,9 10,9 E
+Output 10,9
+
+# input/output direct connect belt, going East (length = 1)
+Input 1,7 3
+Belt 1,7 2,7 E
+Output 2,7
+
+# input/output direct connect belt, going East (length = 2)
+Input 4,7 3
+Belt 4,7 6,7 E
+Output 6,7
+
+# input/output direct connect belt, going West (length = 9)
+Input 10,5 3
+Belt 1,5 10,5 W
+Output 1,5
+
+# input/output direct connect belt, going West (length = 1)
+Input 10,3 3
+Belt 9,3 10,3 W
+Output 9,3
+
+# input/output direct connect belt, going West (length = 2)
+Input 7,3 3
+Belt 5,3 7,3 W
+Output 5,3
+
+# input/output direct connect belt, going South (length = 1)
+Input 12,9 3
+VerticalBelt 12,8 12,9 S
+Output 12,8
+
+# input/output direct connect belt, going South (length = 2)
+Input 12,6 3
+VerticalBelt 12,4 12,6 S
+Output 12,4
+
+# input/output direct connect belt, going North (length = 1)
+Input 14,1 3
+VerticalBelt 14,1 14,2 N
+Output 14,2
+
+# input/output direct connect belt, going North (length = 2)
+Input 14,4 3
+VerticalBelt 14,4 14,6 N
+Output 14,6
+
+@Context
+inputs:red,yellow
+input-order:linear
+endgame-output-count:100
