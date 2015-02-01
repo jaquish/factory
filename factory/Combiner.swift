@@ -24,9 +24,8 @@ class Combiner: BeltMachine {
         }
     }
     var countLabel: SKLabelNode!
-    var containedType: String { return action.containedType() }
-    var action: CombinationAction
-    
+    var containedType: WidgeType { return action.containedInput }
+    var action: CombinerAction
     var upperHalfZone:Zone    { return originZone[.N] }
     var lowerHalfZone:Zone { return originZone }
     
@@ -43,7 +42,7 @@ class Combiner: BeltMachine {
         }
     }
     
-    init(_ originZone: Zone, action: CombinationAction) {
+    init(_ originZone: Zone, action: CombinerAction) {
         
         self.action = action
         
@@ -63,16 +62,16 @@ class Combiner: BeltMachine {
         addChild(cover) // cover over lower half for processing
         
         // show a preview of the output in the center
-        let a = Widge.widgeBy(action.containedType() , isPreview: true)!
-        a.setScale(0.4)
-        a.position = ZoneZero.worldPoint(.center)
-        a.changeYBy(ZoneSize*0.20)
-        box.addChild(a)
+        let previewSprite = Widge(widgeType: action.containedInput)
+        previewSprite.setScale(0.4)
+        previewSprite.position = ZoneZero.worldPoint(.center)
+        previewSprite.changeYBy(ZoneHeight*0.20)
+        box.addChild(previewSprite)
         
         // Show a count of the number of contained objects
         countLabel = SKLabelNode()
         countLabel.position = ZoneZero.worldPoint(.center)
-        countLabel.changeYBy(-ZoneSize*0.40)
+        countLabel.changeYBy(-ZoneHeight*0.40)
         countLabel.fontSize = LabelFontSize
         countLabel.text = "0"
         box.addChild(countLabel)
@@ -111,7 +110,7 @@ class Combiner: BeltMachine {
             if containedCount > 0 {
                 containedCount--
                 // drop contained type
-                let created = Widge.widgeBy(containedType)!
+                let created = Widge(widgeType: containedType)
                 scene?.addChild(created)
                 created.position = connector("container-input").position
                 created.owner = self
@@ -150,7 +149,7 @@ class Combiner: BeltMachine {
                 containedCount++
             } else {
                 containedCount = 0
-                createWidge("black", position: upperHalfZone^(.center), state: InternalGravity)
+                createWidge(widge.widgeType.garbage, position: upperHalfZone^(.center), state: InternalGravity)
             }
             deleteWidge(widge)
         }
@@ -176,8 +175,8 @@ class Combiner: BeltMachine {
             if isOn && containedCount > 0 {
                 
                 // determine new widge type
-                let determinedType = action.resultType(beltInput: widge.widgeType, containedInput: containedType)
-                let transformed = transform(widge, toType: determinedType)
+                let newType = action.resultTypeFor(beltInput: widge.widgeType, containedCount: containedCount)
+                let transformed = transform(widge, toType: newType)
                 transformed.state = Processing
                 containedCount--
                 processingTimeRemaining = ProcessingTime
@@ -198,5 +197,30 @@ class Combiner: BeltMachine {
     
     override func isProcessingWidge() -> Bool {
         return processingTimeRemaining > 0
+    }
+}
+
+class CombinerAction : Action {
+    let containedInput: WidgeType
+    let requiredCount: Int
+    let successBeltInput: WidgeType
+    let mapping: [WidgeType:WidgeType]
+    
+    func resultTypeFor(#beltInput: WidgeType, containedCount: Int) -> WidgeType {
+        assert(containedCount >= requiredCount, "Shouldn't call unless count is enough")
+        if let mapped = mapping[beltInput] {
+            return mapped
+        } else {
+            return beltInput.garbage
+        }
+    }
+    
+    init(ID: ActionID, containedInput: WidgeType, count: Int, successType: WidgeType, mapping:[WidgeType:WidgeType]) {
+        self.containedInput = containedInput
+        self.requiredCount = count
+        self.successBeltInput = successType
+        self.mapping = mapping
+        
+        super.init(ID: ID)
     }
 }

@@ -22,8 +22,11 @@
 		84872C15182607D5008F86DE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84872C13182607D5008F86DE /* InfoPlist.strings */; };
 		84872C17182607D5008F86DE /* factoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84872C16182607D5008F86DE /* factoryTests.m */; };
 		922CC1A01A5322FE00562309 /* Mover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922CC19F1A5322FE00562309 /* Mover.swift */; };
+		924AA21A1A78D25D00E70147 /* StatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924AA2191A78D25D00E70147 /* StatusBar.swift */; };
 		924B1A4219A95AC10096EED9 /* Connector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924B1A4119A95AC10096EED9 /* Connector.swift */; };
 		924B1A4519A95B060096EED9 /* ConnectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924B1A4419A95B060096EED9 /* ConnectorTests.swift */; };
+		924F70811A7B72270076D048 /* WidgeGraphManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F70801A7B72270076D048 /* WidgeGraphManager.swift */; };
+		924F70831A7B77220076D048 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F70821A7B77220076D048 /* Action.swift */; };
 		92576EC71A14679F00815C05 /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92576EC61A14679F00815C05 /* Zone.swift */; };
 		92576EC91A14791800815C05 /* LevelSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92576EC81A14791800815C05 /* LevelSelectViewController.swift */; };
 		926B3D931A1EE6630095D60F /* ValidationFileProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B3D921A1EE6630095D60F /* ValidationFileProtocols.swift */; };
@@ -32,7 +35,6 @@
 		9270239D1A08A7B2004DB6CB /* Widge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9270239C1A08A7B2004DB6CB /* Widge.swift */; };
 		92714AE41A744AFB009AFC31 /* test-input-gravity-output.level in Resources */ = {isa = PBXBuildFile; fileRef = 92714AE31A744AFB009AFC31 /* test-input-gravity-output.level */; };
 		92714AE71A744D3C009AFC31 /* test-transformers.level in Resources */ = {isa = PBXBuildFile; fileRef = 92714AE61A744D3C009AFC31 /* test-transformers.level */; };
-		92714AE91A748E98009AFC31 /* january-1.level in Resources */ = {isa = PBXBuildFile; fileRef = 92714AE81A748E98009AFC31 /* january-1.level */; };
 		92717C181A2999A100D5C7A6 /* Combiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92717C171A2999A100D5C7A6 /* Combiner.swift */; };
 		928933201A0EAF220013A598 /* Gravity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289331F1A0EAF220013A598 /* Gravity.swift */; };
 		928933221A0EB17F0013A598 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928933211A0EB17F0013A598 /* Input.swift */; };
@@ -45,13 +47,13 @@
 		928933301A0ECEB90013A598 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289332F1A0ECEB90013A598 /* Utility.swift */; };
 		92893B881A280B730069C3A4 /* SwitchBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92893B871A280B730069C3A4 /* SwitchBox.swift */; };
 		929198D71A286C2700A0EF35 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929198D61A286C2700A0EF35 /* Container.swift */; };
+		9292EE611A7EC32100311CF6 /* january-1.level in Resources */ = {isa = PBXBuildFile; fileRef = 92714AE81A748E98009AFC31 /* january-1.level */; };
+		9292EE621A7EC45200311CF6 /* january-2.level in Resources */ = {isa = PBXBuildFile; fileRef = 92CD66731A315E1B00AA2E74 /* january-2.level */; };
 		92AB7F771A0B3AB500128B91 /* Machine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB7F761A0B3AB500128B91 /* Machine.swift */; };
 		92AB7F791A0B568C00128B91 /* Belt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB7F781A0B568C00128B91 /* Belt.swift */; };
 		92C1FCA319E9D439001C1178 /* ConnectionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FCA219E9D439001C1178 /* ConnectionPoint.swift */; };
 		92C7FB001A0F070000ED13AD /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7FAFF1A0F070000ED13AD /* LevelViewController.swift */; };
 		92C7FB021A0F07D500ED13AD /* GridOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7FB011A0F07D500ED13AD /* GridOverlay.swift */; };
-		92CD66741A315E1B00AA2E74 /* january-2.level in Resources */ = {isa = PBXBuildFile; fileRef = 92CD66731A315E1B00AA2E74 /* january-2.level */; };
-		92E51D411A19F17200F1EEA2 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E51D401A19F17200F1EEA2 /* Action.swift */; };
 		92E7CB8D1A1DB33A007A78DA /* LevelFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7CB8C1A1DB33A007A78DA /* LevelFileParser.swift */; };
 		92EE3A2B1A3E359300328266 /* GridNumbering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE3A2A1A3E359300328266 /* GridNumbering.swift */; };
 		92EE3A2D1A3EBC2400328266 /* test-4-simple-combiner.level in Resources */ = {isa = PBXBuildFile; fileRef = 92EE3A2C1A3EBC2400328266 /* test-4-simple-combiner.level */; };
@@ -91,12 +93,16 @@
 		84872C14182607D5008F86DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		84872C16182607D5008F86DE /* factoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = factoryTests.m; sourceTree = "<group>"; };
 		922CC19F1A5322FE00562309 /* Mover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mover.swift; sourceTree = "<group>"; };
+		924AA2191A78D25D00E70147 /* StatusBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBar.swift; sourceTree = "<group>"; };
 		924B1A4019A95AC10096EED9 /* factory-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "factory-Bridging-Header.h"; sourceTree = "<group>"; };
 		924B1A4119A95AC10096EED9 /* Connector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connector.swift; sourceTree = "<group>"; };
 		924B1A4319A95B050096EED9 /* factoryTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "factoryTests-Bridging-Header.h"; path = "../factory/factoryTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		924B1A4419A95B060096EED9 /* ConnectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectorTests.swift; path = ../factory/ConnectorTests.swift; sourceTree = "<group>"; };
+		924F70801A7B72270076D048 /* WidgeGraphManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgeGraphManager.swift; sourceTree = "<group>"; };
+		924F70821A7B77220076D048 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		92576EC61A14679F00815C05 /* Zone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zone.swift; sourceTree = "<group>"; };
 		92576EC81A14791800815C05 /* LevelSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectViewController.swift; sourceTree = "<group>"; };
+		925DA3E61A74A4C900C7AC25 /* january-3.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-3.level"; sourceTree = "<group>"; };
 		926B3D921A1EE6630095D60F /* ValidationFileProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationFileProtocols.swift; sourceTree = "<group>"; };
 		926B3D941A1F2F730095D60F /* test-3-belts-and-switchboxes.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-3-belts-and-switchboxes.level"; sourceTree = "<group>"; };
 		926BD2961A15FAE4005BD6FF /* LevelTemplate */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LevelTemplate; sourceTree = "<group>"; };
@@ -122,7 +128,6 @@
 		92C7FAFF1A0F070000ED13AD /* LevelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
 		92C7FB011A0F07D500ED13AD /* GridOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridOverlay.swift; sourceTree = "<group>"; };
 		92CD66731A315E1B00AA2E74 /* january-2.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-2.level"; sourceTree = "<group>"; };
-		92E51D401A19F17200F1EEA2 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		92E7CB8C1A1DB33A007A78DA /* LevelFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelFileParser.swift; sourceTree = "<group>"; };
 		92EE3A2A1A3E359300328266 /* GridNumbering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridNumbering.swift; sourceTree = "<group>"; };
 		92EE3A2C1A3EBC2400328266 /* test-4-simple-combiner.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-4-simple-combiner.level"; sourceTree = "<group>"; };
@@ -210,6 +215,8 @@
 		84872BEC182607D4008F86DE /* factory */ = {
 			isa = PBXGroup;
 			children = (
+				84872BF5182607D4008F86DE /* FGAppDelegate.h */,
+				84872BF6182607D4008F86DE /* FGAppDelegate.m */,
 				924B1A4019A95AC10096EED9 /* factory-Bridging-Header.h */,
 				84872BF8182607D4008F86DE /* Main.storyboard */,
 				92C62CEE1A148C1800DC2D5C /* Levels */,
@@ -217,8 +224,6 @@
 				92576ECB1A1479DC00815C05 /* Level Scene */,
 				92FBF2B31A1C545A00C7300D /* Game Over */,
 				84A4CD921831FA6D00DAD99C /* Custom Views */,
-				84872BF5182607D4008F86DE /* FGAppDelegate.h */,
-				84872BF6182607D4008F86DE /* FGAppDelegate.m */,
 				DD17B2F218340D650011AC7C /* Widge Graph */,
 				84374E3A182CB4FA00F74638 /* Machines */,
 				92576ECC1A147A0400815C05 /* Utility */,
@@ -264,6 +269,7 @@
 			children = (
 				92C7FB011A0F07D500ED13AD /* GridOverlay.swift */,
 				92EE3A2A1A3E359300328266 /* GridNumbering.swift */,
+				924AA2191A78D25D00E70147 /* StatusBar.swift */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -314,6 +320,7 @@
 			children = (
 				92714AE81A748E98009AFC31 /* january-1.level */,
 				92CD66731A315E1B00AA2E74 /* january-2.level */,
+				925DA3E61A74A4C900C7AC25 /* january-3.level */,
 			);
 			name = January;
 			sourceTree = "<group>";
@@ -334,6 +341,7 @@
 				92F43F7E1A5FA03000119A6D /* BeltMachine.swift */,
 				922CC19F1A5322FE00562309 /* Mover.swift */,
 				926B3D921A1EE6630095D60F /* ValidationFileProtocols.swift */,
+				924F70821A7B77220076D048 /* Action.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -349,10 +357,10 @@
 		DD17B2F218340D650011AC7C /* Widge Graph */ = {
 			isa = PBXGroup;
 			children = (
+				924F70801A7B72270076D048 /* WidgeGraphManager.swift */,
 				9270239C1A08A7B2004DB6CB /* Widge.swift */,
 				924B1A4119A95AC10096EED9 /* Connector.swift */,
 				92C1FCA219E9D439001C1178 /* ConnectionPoint.swift */,
-				92E51D401A19F17200F1EEA2 /* Action.swift */,
 			);
 			name = "Widge Graph";
 			sourceTree = "<group>";
@@ -439,10 +447,10 @@
 			files = (
 				92EE3A2D1A3EBC2400328266 /* test-4-simple-combiner.level in Resources */,
 				84872BF1182607D4008F86DE /* InfoPlist.strings in Resources */,
-				92CD66741A315E1B00AA2E74 /* january-2.level in Resources */,
 				84872C04182607D5008F86DE /* Images.xcassets in Resources */,
+				9292EE611A7EC32100311CF6 /* january-1.level in Resources */,
 				84872BFA182607D4008F86DE /* Main.storyboard in Resources */,
-				92714AE91A748E98009AFC31 /* january-1.level in Resources */,
+				9292EE621A7EC45200311CF6 /* january-2.level in Resources */,
 				92FBF2B71A1C56CB00C7300D /* test-input-belts-output.level in Resources */,
 				92714AE71A744D3C009AFC31 /* test-transformers.level in Resources */,
 				92714AE41A744AFB009AFC31 /* test-input-gravity-output.level in Resources */,
@@ -467,8 +475,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				84872BF3182607D4008F86DE /* main.m in Sources */,
-				92E51D411A19F17200F1EEA2 /* Action.swift in Sources */,
+				924F70831A7B77220076D048 /* Action.swift in Sources */,
 				9289332E1A0ECDB40013A598 /* Constants.swift in Sources */,
+				924AA21A1A78D25D00E70147 /* StatusBar.swift in Sources */,
 				928933201A0EAF220013A598 /* Gravity.swift in Sources */,
 				92C7FB001A0F070000ED13AD /* LevelViewController.swift in Sources */,
 				928933261A0EB8CE0013A598 /* Transformer.swift in Sources */,
@@ -476,6 +485,7 @@
 				928933241A0EB37C0013A598 /* Output.swift in Sources */,
 				92576EC71A14679F00815C05 /* Zone.swift in Sources */,
 				9270239D1A08A7B2004DB6CB /* Widge.swift in Sources */,
+				924F70811A7B72270076D048 /* WidgeGraphManager.swift in Sources */,
 				92F43F7F1A5FA03000119A6D /* BeltMachine.swift in Sources */,
 				9289332A1A0EBF750013A598 /* VerticalBelt.swift in Sources */,
 				924B1A4219A95AC10096EED9 /* Connector.swift in Sources */,

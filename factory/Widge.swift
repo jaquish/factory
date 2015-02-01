@@ -9,66 +9,48 @@
 import UIKit
 import SpriteKit
 
-var AllWidges = [Widge]()
-
-var widgeTypes = [String : String]()
-
-typealias WidgeType = String
-
-private var incrementingID = 1
+private var nextWidgeID = 1
 
 class Widge: SKSpriteNode, LevelFileObject {
     
-    var widgeID: Int = 0
+    let widgeID: Int
+    let widgeType: WidgeType
     
     var owner: AnyObject! // Machine or Connector
     var state: WidgeState!
     
-    var widgeType: WidgeType!
-
-    class func widgeBy(typeID:String, isPreview: Bool = false) -> Widge? {
-        if let value = widgeTypes[typeID] {
-            if value.hasPrefix("$") {
-                let colorString = value.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "$"))
-                return widgeWith(typeID, color: UIColor(colorString))
-            }
-        }
-        return nil
-    }
+    /**
+    Create a widge with the given type.
     
-    class func widgeWith(typeID:String, color: UIColor, isPreview: Bool = false) -> Widge {
-        let widge = Widge(color: color, size: CGSizeMake(WidgeSize, WidgeSize))
-        widge.widgeType = typeID
-        widge.zPosition = SpriteLayerWidges
+    :param: widgeType
+    
+    :returns: A widge sprite that just needs to be added to the level.
+    */
+    init(widgeType: WidgeType) {
+        widgeID = nextWidgeID
+        nextWidgeID++
         
-        if !isPreview {
-            widge.widgeID = incrementingID
-            incrementingID++
-            AllWidges.append(widge)
+        self.widgeType = widgeType
+        
+        // choose image or basic color
+        let visual: AnyObject = widgeType.visual()
+        switch visual {
+        case is UIColor:
+            super.init(texture: nil, color: visual as UIColor, size: WidgeSize)
+        case is UIImage:
+            super.init(texture: SKTexture(image: visual as UIImage), color: nil, size: WidgeSize)
+        default:
+            fatalError("Unable to process widgeType")
         }
-
-        return widge
+        
+        zPosition = SpriteLayerWidges
     }
-    
-    class func garbage() -> Widge {
-        return widgeWith("garbage", color: UIColor.blackColor())
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     class func numberOfInitializerParameters() -> Int {
         return 2
-    }
-    
-    class func register(typeName:String, spriteName:String) {
-        widgeTypes[typeName] = spriteName
-    }
-    
-    class func registerBasicWidges() {
-        register("red",     spriteName: "$\(UIColor.redColor().toString())")
-        register("orange",  spriteName: "$\(UIColor.orangeColor().toString())")
-        register("yellow",  spriteName: "$\(UIColor.yellowColor().toString())")
-        register("green",   spriteName: "$\(UIColor.greenColor().toString())")
-        register("blue",    spriteName: "$\(UIColor.blueColor().toString())")
-        register("purple",  spriteName: "$\(UIColor.purpleColor().toString())")
-        register("black",   spriteName: "$\(UIColor.blackColor().toString())")
     }
 }

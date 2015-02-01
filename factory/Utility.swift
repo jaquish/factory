@@ -26,23 +26,23 @@ enum Direction : String {
 class Util : NSObject {
     
     class func zoneBoxWithColor(color: UIColor) -> SKSpriteNode {
-        let box = SKSpriteNode(texture: nil, color: color, size: CGSizeMake(ZoneSize, ZoneSize))
+        let box = SKSpriteNode(texture: nil, color: color, size: ZoneSize)
         box.userInteractionEnabled = false
         box.anchorPoint = CGPointZero
         return box
     }
     
     class func combinerBottom() -> SKSpriteNode {
-        let box = SKSpriteNode(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(ZoneSize, ZoneSize))
+        let box = SKSpriteNode(texture: nil, color: UIColor.clearColor(), size: ZoneSize)
         
-        let left = SKSpriteNode(texture: nil, color: UIColor.grayColor(), size: CGSizeMake(0.1*ZoneSize, ZoneSize))
+        let left = SKSpriteNode(texture: nil, color: UIColor.grayColor(), size: CGSizeMake(0.1*ZoneWidth, ZoneHeight))
         left.anchorPoint = CGPointZero
         left.position = CGPointZero
         box.addChild(left)
         
-        let right = SKSpriteNode(texture: nil, color: UIColor.grayColor(), size: CGSizeMake(0.1*ZoneSize, ZoneSize))
+        let right = SKSpriteNode(texture: nil, color: UIColor.grayColor(), size: CGSizeMake(0.1*ZoneWidth, ZoneHeight))
         right.anchorPoint = CGPointZero
-        right.position = CGPointMake(ZoneSize*0.9, 0)
+        right.position = CGPointMake(ZoneWidth*0.9, 0)
         box.addChild(right)
         
         box.userInteractionEnabled = false
@@ -51,10 +51,10 @@ class Util : NSObject {
     }
     
     class func zoneBoxWithBorder(color: UIColor, innerColor: UIColor) -> SKSpriteNode {
-        let box = SKSpriteNode(texture: nil, color: color, size: CGSizeMake(ZoneSize, ZoneSize))
+        let box = SKSpriteNode(texture: nil, color: color, size: ZoneSize)
         box.anchorPoint = CGPointZero
         
-        let inner = SKSpriteNode(texture: nil, color: innerColor, size:CGSizeMake(ZoneSize - 2*kBorderInset, ZoneSize - 2*kBorderInset))
+        let inner = SKSpriteNode(texture: nil, color: innerColor, size:CGSizeMake(ZoneWidth - 2*kBorderInset, ZoneHeight - 2*kBorderInset))
         inner.anchorPoint = CGPointZero
         inner.userInteractionEnabled = false
         inner.position = CGPointMake(kBorderInset, kBorderInset)

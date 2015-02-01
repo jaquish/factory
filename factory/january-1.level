@@ -10,7 +10,7 @@ Goals: Learn how the Input, Belt, Combiner, Gravity, and Output work.
 [basic]
 
 @Actions
-combine Combination red,yellow orange black
+combine Combiner red 1 yellow yellow:orange
 
 @Machines
 Input 1,8 3

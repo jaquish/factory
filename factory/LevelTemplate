@@ -10,7 +10,8 @@ Name:<string>
 <widge id> <sprite name>
 
 @Actions
-<id> <[input widgeTypeIDs]> <[success widgeTypeIDs]> <[failure widgeTypeIDs]>
+<id> Combiner <contained-id> <#-required> <success-type> <a:b,c:d,e:f>
+<id> Transformer <a:b,c:d,e:f>
 
 @Machines
 <class name> ...initializer parameters

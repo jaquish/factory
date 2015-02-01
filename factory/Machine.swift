@@ -130,18 +130,18 @@ class Machine: SKSpriteNode, LevelFileObject {
     
     // MARK: Widge Management
     
-    final func createWidge(type: String, position: CGPoint, state: WidgeState) -> Widge {
+    final func createWidge(type: WidgeType, position: CGPoint, state: WidgeState) -> Widge {
         let count = AllWidges.count
-        let newWidge = CurrentLevel.createWidge(type)
+        let newWidge = Widge(widgeType: type)
         newWidge.owner = self
         newWidge.state = state
         newWidge.position = position
         scene?.addChild(newWidge)
-        assert(AllWidges.count == count + 1, "Expected one more widge after creating expected=\(count+1) actual=\(AllWidges.count)")
+        AllWidges.append(newWidge)
         return newWidge
     }
     
-    final func transform(widge: Widge, toType: String) -> Widge {
+    final func transform(widge: Widge, toType: WidgeType) -> Widge {
         let count = AllWidges.count
         let replacement = createWidge(toType, position: widge.position, state: widge.state)
 

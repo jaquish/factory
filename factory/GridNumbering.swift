@@ -16,21 +16,21 @@ class GridNumbering: UIView {
         
         // different coordinate system than sprite kit
         
-        for x in stride(from: 0, through: WorldWidth, by: ZoneSize) {
+        for x in stride(from: 0, through: WorldWidth, by: ZoneWidth) {
             let numberLabel = UILabel()
             numberLabel.textColor = UIColor.lightGrayColor()
             numberLabel.textAlignment = .Center
-            numberLabel.text = "\(Int(x) / Int(ZoneSize))"
-            numberLabel.frame = CGRectMake(x, WorldHeight - 15, ZoneSize, 15)
+            numberLabel.text = "\(Int(x) / Int(ZoneWidth))"
+            numberLabel.frame = CGRectMake(x, WorldHeight - 15, ZoneWidth, 15)
             addSubview(numberLabel)
         }
         
         var yCount = 0
-        for y in stride(from: WorldHeight - (ZoneSize / 2), through: 0, by: -ZoneSize) {
+        for y in stride(from: WorldHeight - (ZoneHeight / 2), through: 0, by: -ZoneHeight) {
             let numberLabel = UILabel()
             numberLabel.textColor = UIColor.lightGrayColor()
             numberLabel.text = "\(yCount)"
-            numberLabel.frame = CGRectMake(0, y-7.5, ZoneSize, 15)
+            numberLabel.frame = CGRectMake(0, y-7.5, ZoneHeight, 15)
             addSubview(numberLabel)
             yCount++
         }

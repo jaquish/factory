@@ -16,17 +16,23 @@ enum InputOrder : String {
 
 var CurrentLevel: Level!
 
+var AllWidges: [Widge] = []
+
 class Level: SKScene {
    
-    // Setup
-    var metadata = [String : AnyObject]()
-    var actions = [String : Action]()
-    var machines = [Machine]()
-    var inputMachine: Input!
-    var inputTypes  = [WidgeType]()
-    var outputTypes = [WidgeType]()
-    
+    // Level Description
     var preamble = String()
+    
+    // Setup
+    
+    var metadata: [String : AnyObject] = [:]
+    
+    let widgeGraphManager:WidgeGraphManager = WidgeGraphManager()
+    
+    var inputTypes: [WidgeType] = []
+    var machines: [Machine] = []
+    
+    // TODO: Refactor to per-machine basis
     var inputIndex = 0
     var inputOrder:InputOrder = .Linear
     
@@ -34,7 +40,7 @@ class Level: SKScene {
     var _prevTime: CFTimeInterval
     var _dt: CFTimeInterval
     
-    var outputs = [String]()
+    var outputs:[WidgeType] = []
     var endgame_output_count: Int = 0
     
     var connectionPoints = [ConnectionPoint]()
@@ -97,18 +103,7 @@ class Level: SKScene {
         return summary
     }
     
-    func createWidge(widgeTypeID: String) -> Widge {
-        var spriteName = widgeTypes[widgeTypeID]!
-        if spriteName.hasPrefix("$") {
-            spriteName = spriteName.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "$"))
-            return Widge.widgeWith(widgeTypeID, color: UIColor(spriteName))
-        } else {
-            println("Warning! not ready to process")
-            return Widge.garbage()
-        }
-    }
-    
-    func nextInputType() -> String {
+    func nextInputType() -> WidgeType {
         inputIndex++
         switch inputOrder {
         case .Random: return inputTypes.randomItem()
@@ -120,8 +115,8 @@ class Level: SKScene {
         return outputs.count >= endgame_output_count
     }
     
-    func addOutput(widgeTypeID: String) {
-        outputs.append(widgeTypeID)
+    func addOutput(widgeType: WidgeType) {
+        outputs.append(widgeType)
     }
     
     // MARK: Connection Phase

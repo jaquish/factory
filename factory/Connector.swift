@@ -28,8 +28,6 @@ let Propogated: WidgeState = "Propogated"
         // point both connection points to single connector
         from.connector = connector
         to.connector   = connector
-        
-//        println("<-> connected \(from.machine) \(from.name) to \(to.machine) \(to.name)")
     }
     
     init(position: CGPoint, source: Machine, destination: Machine, destinationState: WidgeState) {
@@ -75,7 +73,6 @@ let Propogated: WidgeState = "Propogated"
     func widges() -> [Widge] {
         return AllWidges.filter { ($0.owner as? Connector) == self }
     }
-    
     
     // MARK: Debug
     

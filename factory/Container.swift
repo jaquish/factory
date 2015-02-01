@@ -20,9 +20,9 @@ class Container: Machine {
         }
     }
     var countLabel: SKLabelNode!
-    var containedType: String!
+    var containedType: WidgeType!
     
-    init(_ originZone: Zone, containedType: String) {
+    init(_ originZone: Zone, containedType: WidgeType) {
         
         self.containedType = containedType
         
@@ -32,18 +32,18 @@ class Container: Machine {
         addChild(box)
         
         // show a preview of the output in the center
-        let outputPreview = Widge.widgeBy(containedType)!
+        let outputPreview = Widge(widgeType: containedType)
         outputPreview.setScale(0.5)
         addChild(outputPreview)
         outputPreview.position = ZoneZero.worldPoint(.center)
-        outputPreview.changeYBy(ZoneSize*0.20)
+        outputPreview.changeYBy(ZoneHeight*0.20)
         
         addInput(originZone^(.center), name: "input", startingState: Contained)
         addOutput(originZone^(.center), name: "output")
         
         countLabel = SKLabelNode()
         countLabel.position = ZoneZero.worldPoint(.center)
-        countLabel.changeYBy(-ZoneSize*0.40)
+        countLabel.changeYBy(-ZoneHeight*0.40)
         countLabel.fontSize = LabelFontSize
         addChild(countLabel)
         
@@ -83,11 +83,13 @@ class Container: Machine {
         }
         if madeGarbage {
             // Oh no! sound
+            
             containedCount = 0
             
+            // TODO: Insert garbage
             let output = connector("output")
-            let garbage = createWidge("garbage", position: output.position, state: ReadyToDrop)
-            output.insert(garbage)
+//            let garbage = createWidge("garbage", position: output.position, state: ReadyToDrop)
+//            output.insert(garbage)
         }
     }
 }

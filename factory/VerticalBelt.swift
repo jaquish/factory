@@ -34,7 +34,7 @@ class VerticalBelt: Mover {
         
         zPosition = SpriteLayerBehindWidges
         
-        let sprite = SKSpriteNode(color: UIColor(red: 0.0, green: 0.4, blue: 0.9, alpha: 1.0), size: CGSizeMake(kVerticalBeltWidth, ZoneSize * CGFloat(thruZone.y - originZone.y + 1)))
+        let sprite = SKSpriteNode(color: UIColor(red: 0.0, green: 0.4, blue: 0.9, alpha: 1.0), size: CGSizeMake(kVerticalBeltWidth, ZoneHeight * CGFloat(thruZone.y - originZone.y + 1)))
         sprite.anchorPoint = CGPointZero
         addChild(sprite)
         

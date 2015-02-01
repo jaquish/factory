@@ -36,7 +36,6 @@ class LevelViewController: UIViewController, SKSceneDelegate {
             }
             
             CurrentLevel = level
-            AllWidges.removeAll()
             
             // double-touch triple-tap back to level selection screen
             let tripleTapGesture = UITapGestureRecognizer (target: self, action: "gameOver")

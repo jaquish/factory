@@ -43,7 +43,7 @@ class Belt: Mover {
         
         self.zPosition = SpriteLayerBehindWidges
         
-        let spriteNode = SKSpriteNode(color: UIColor.grayColor(), size: CGSizeMake(ZoneSize * CGFloat(thruZone.x - originZone.x + 1), HorizontalBeltHeight))
+        let spriteNode = SKSpriteNode(color: UIColor.grayColor(), size: CGSizeMake(ZoneWidth * CGFloat(thruZone.x - originZone.x + 1), HorizontalBeltHeight))
         spriteNode.anchorPoint = CGPointZero
         addChild(spriteNode)
         

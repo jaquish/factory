@@ -20,8 +20,8 @@ struct Zone : Printable, Equatable {
     }
     
     init(containing:CGPoint) {
-        x = Int(containing.x) / Int(ZoneSize)
-        y = Int(containing.y) / Int(ZoneSize)
+        x = Int(containing.x) / Int(ZoneWidth)
+        y = Int(containing.y) / Int(ZoneHeight)
     }
     
     init(_ string: String) {
@@ -33,15 +33,15 @@ struct Zone : Printable, Equatable {
     
     func worldPoint(cp: Direction) -> CGPoint {
         switch (cp) {
-            case .N:     return CGPointMake(ZoneSize * (CGFloat(x) + 0.5), ZoneSize * (CGFloat(y) + 1.0));
-            case .NE:    return CGPointMake(ZoneSize * (CGFloat(x) + 1.0), ZoneSize * (CGFloat(y) + 1.0));
-            case .E:     return CGPointMake(ZoneSize * (CGFloat(x) + 1.0), ZoneSize * (CGFloat(y) + 0.5));
-            case .SE:    return CGPointMake(ZoneSize * (CGFloat(x) + 1.0), ZoneSize * (CGFloat(y)      ));
-            case .S:     return CGPointMake(ZoneSize * (CGFloat(x) + 0.5), ZoneSize * (CGFloat(y)      ));
-            case .SW:    return CGPointMake(ZoneSize * (CGFloat(x)      ), ZoneSize * (CGFloat(y)      ));
-            case .W:     return CGPointMake(ZoneSize * (CGFloat(x)      ), ZoneSize * (CGFloat(y) + 0.5));
-            case .NW:    return CGPointMake(ZoneSize * (CGFloat(x)      ), ZoneSize * (CGFloat(y) + 1.0));
-            case .center:return CGPointMake(ZoneSize * (CGFloat(x) + 0.5), ZoneSize * (CGFloat(y) + 0.5));
+            case .N:     return CGPointMake(ZoneWidth * (CGFloat(x) + 0.5), ZoneHeight * (CGFloat(y) + 1.0));
+            case .NE:    return CGPointMake(ZoneWidth * (CGFloat(x) + 1.0), ZoneHeight * (CGFloat(y) + 1.0));
+            case .E:     return CGPointMake(ZoneWidth * (CGFloat(x) + 1.0), ZoneHeight * (CGFloat(y) + 0.5));
+            case .SE:    return CGPointMake(ZoneWidth * (CGFloat(x) + 1.0), ZoneHeight * (CGFloat(y)      ));
+            case .S:     return CGPointMake(ZoneWidth * (CGFloat(x) + 0.5), ZoneHeight * (CGFloat(y)      ));
+            case .SW:    return CGPointMake(ZoneWidth * (CGFloat(x)      ), ZoneHeight * (CGFloat(y)      ));
+            case .W:     return CGPointMake(ZoneWidth * (CGFloat(x)      ), ZoneHeight * (CGFloat(y) + 0.5));
+            case .NW:    return CGPointMake(ZoneWidth * (CGFloat(x)      ), ZoneHeight * (CGFloat(y) + 1.0));
+            case .center:return CGPointMake(ZoneWidth * (CGFloat(x) + 0.5), ZoneHeight * (CGFloat(y) + 0.5));
         }
     }
     

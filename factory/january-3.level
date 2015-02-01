@@ -10,8 +10,8 @@ Goal: Learn how a transformer works.
 [basic]
 
 @Actions
-red-to-blue Transformer yellow:blue
-combine Combiner red 1 blue blue:purple,yellow:orange
+red-to-blue Transformation red blue black
+combine Combination red,yellow orange black
 
 @Machines
 Input 13,8 3

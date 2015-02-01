@@ -13,7 +13,7 @@ private let WaitingToTransform: WidgeState = "WaitingToTransform"
 
 class Transformer: Machine {
    
-    var action: TransformAction
+    var action: TransformerAction
     var box:SKSpriteNode!
 
     var isOn: Bool = true {
@@ -22,7 +22,7 @@ class Transformer: Machine {
         }
     }
     
-    init(_ originZone: Zone, action: TransformAction) {
+    init(_ originZone: Zone, action: TransformerAction) {
         
         self.action = action
         
@@ -30,12 +30,6 @@ class Transformer: Machine {
         
         box = Util.zoneBoxWithBorder(UIColor.greenColor(), innerColor: UIColor.darkGrayColor())
         addChild(box)
-        
-        // show a preview of the output in the center
-        let outputPreview = Widge.widgeBy(action.successType(), isPreview: true)!
-        outputPreview.setScale(0.5)
-        addChild(outputPreview)
-        outputPreview.position = ZoneZero.worldPoint(.center)
         
         addInput(originZone^(.center), name: "input", startingState: WaitingToTransform)
         addOutput(originZone^(.center), name: "output")
@@ -56,7 +50,7 @@ class Transformer: Machine {
         for widge in widgesInState(WaitingToTransform) {
             
             if isOn {
-                let replacement = transform(widge, toType: action.resultType(input: widge.widgeType))
+                let replacement = transform(widge, toType: action.resultForInput(widge.widgeType))
                 connector("output").insert(replacement)
                 
             } else {
@@ -73,5 +67,22 @@ class Transformer: Machine {
     
     override func description() -> String {
         return "Transformer at \(originZone) action=\(action) isOn=\(isOn)"
+    }
+}
+
+class TransformerAction : Action {
+    let transformMapping: [WidgeType:WidgeType]
+    
+    init(ID: ActionID, transformMapping: [WidgeType:WidgeType]) {
+        self.transformMapping = transformMapping
+        super.init(ID: ID)
+    }
+    
+    func resultForInput(widgeType: WidgeType) -> WidgeType {
+        if let result = transformMapping[widgeType] {
+            return result
+        } else {
+            return widgeType.garbage
+        }
     }
 }

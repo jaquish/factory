@@ -59,7 +59,6 @@ class LevelFileParser {
             // Build up this level
             level = Level()
             CurrentLevel = level
-            widgeTypes.removeAll()
             currentLine = 1
             
             let lines = loadedStringData.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()) as [NSString]
@@ -121,7 +120,6 @@ class LevelFileParser {
         // Verify Count
         let expectedPartsForSection: [LevelFileSection:Int] = [ .Context : 2,
                                                                .Metadata : 2,
-                                                                .Actions : 5,
                                                                  .Widges : 0];
         
         let expectedPartsCount = expectedPartsForSection[currentSection] ?? 0
@@ -139,15 +137,47 @@ class LevelFileParser {
             level.metadata[parts[0]] = parts[1]
         case .Widges:
             if line == "[basic]" {
-                Widge.registerBasicWidges()
+                level.widgeGraphManager.registerBasicWidges()
             }
         case .Actions:
-            let name = parts[0]
-            let actionType = ActionType(rawValue: parts[1])!
-            let inputIDs = parts[2].componentsSeparatedByString(",")
-            let successIDs = parts[3].componentsSeparatedByString(",")
-            let failureIDs = parts[4].componentsSeparatedByString(",")
-            level.actions[name] = Action.actionWith(actionType, actionID: name, inputTypeIDs: inputIDs, successTypeIDs: successIDs, failureTypeIDs: failureIDs)
+            let actionID = parts[0]
+            let actionType = parts[1]
+            if actionType == "Combiner" {
+                // <id> Combiner <contained-id> <#-required> <success-type> <a:b,c:d,e:f>
+                let containedInput = level.widgeGraphManager.widgeType(parts[2])
+                let count = parts[3].toInt()!
+                let successType = level.widgeGraphManager.widgeType(parts[4])
+                let list = parts[5]
+                let entries = list.componentsSeparatedByString(",")
+                let pairs = entries.map({ ($0.componentsSeparatedByString(":")[0], $0.componentsSeparatedByString(":")[1]) } )
+                var mapDict: [WidgeType:WidgeType] = [:]
+                for (inputID,outputID) in pairs {
+                    let input = level.widgeGraphManager.widgeType(inputID)
+                    let output = level.widgeGraphManager.widgeType(outputID)
+                    mapDict[input] = output
+                }
+                
+                let action = CombinerAction(ID: actionID, containedInput: containedInput, count: count, successType: successType, mapping: mapDict)
+                level.widgeGraphManager.actions.append(action)
+            } else if actionType == "Transformer" {
+                // <id> Transformer <a:b,c:d,e:f>
+                
+                let list = parts[2]
+                let entries = list.componentsSeparatedByString(",")
+                let pairs = entries.map({ ($0.componentsSeparatedByString(":")[0], $0.componentsSeparatedByString(":")[1]) } )
+                var mapDict: [WidgeType:WidgeType] = [:]
+                for (inputID,outputID) in pairs {
+                    let input = level.widgeGraphManager.widgeType(inputID)
+                    let output = level.widgeGraphManager.widgeType(outputID)
+                    mapDict[input] = output
+                }
+                
+                let action = TransformerAction(ID: actionID, transformMapping: mapDict)
+                level.widgeGraphManager.actions.append(action)
+            } else {
+                failWithError("unabled to parse action"); return
+            }
+            
         case .Machines:
 
             let machineType = parts[0]
@@ -170,7 +200,7 @@ class LevelFileParser {
                 case "Output":
                     machine = Output(Zone(parts[1]))
                 case "Transformer":
-                    let action = level.actions[parts[2]]! as TransformAction
+                    let action = level.widgeGraphManager.action(parts[2]) as TransformerAction
                     machine = Transformer(Zone(parts[1]), action: action)
                 case "TransferBox":
                     machine = TransferBox(Zone(parts[1]))
@@ -179,9 +209,10 @@ class LevelFileParser {
                 case "SwitchBox":
                     machine = SwitchBox(Zone(parts[1]))
                 case "Container":
-                    machine = Container(Zone(parts[1]), containedType:parts[2])
+                    let containedType = level.widgeGraphManager.widgeType(parts[2])
+                    machine = Container(Zone(parts[1]), containedType:containedType)
                 case "Combiner":
-                    let action = level.actions[parts[2]]! as CombinationAction
+                    let action = level.widgeGraphManager.action(parts[2]) as CombinerAction
                     machine = Combiner(Zone(parts[1]), action:action)
                 default:
                     failWithError("Unknown class of machine '\(machineType)'"); return
@@ -200,10 +231,10 @@ class LevelFileParser {
             switch key {
                 case "inputs":
                     let widgeTypeIDs = parts[1].componentsSeparatedByString(",")
-                    level.inputTypes += widgeTypeIDs
+                    level.inputTypes += widgeTypeIDs.map { self.level.widgeGraphManager.widgeType($0) }
                 case "winning-outputs":
                     let widgeTypeIDs = parts[1].componentsSeparatedByString(",")
-                    level.outputTypes += widgeTypeIDs
+                    level.outputs += widgeTypeIDs.map { self.level.widgeGraphManager.widgeType($0) }
                 case "input-order":
                     level.inputOrder = InputOrder(rawValue: value)!
                 case "endgame-output-count":
