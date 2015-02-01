@@ -88,8 +88,6 @@ class LevelFileParser {
         case .InProgress:
             println("...parsed file successfully. Connecting components...")
             
-            AllWidges.removeAll()
-            
             let valid = level.makeConnections()
             if (valid) {
                 status = .Success
@@ -137,28 +135,31 @@ class LevelFileParser {
             level.metadata[parts[0]] = parts[1]
         case .Widges:
             if line == "[basic]" {
-                level.widgeGraphManager.registerBasicWidges()
+                let basics = WidgeType.basicWidgeTypes()
+                for type in basics {
+                    level.registerWidgeType(type)
+                }
             }
         case .Actions:
             let actionID = parts[0]
             let actionType = parts[1]
             if actionType == "Combiner" {
                 // <id> Combiner <contained-id> <#-required> <success-type> <a:b,c:d,e:f>
-                let containedInput = level.widgeGraphManager.widgeType(parts[2])
+                let containedInput = level.widgeType(parts[2])
                 let count = parts[3].toInt()!
-                let successType = level.widgeGraphManager.widgeType(parts[4])
+                let successType = level.widgeType(parts[4])
                 let list = parts[5]
                 let entries = list.componentsSeparatedByString(",")
                 let pairs = entries.map({ ($0.componentsSeparatedByString(":")[0], $0.componentsSeparatedByString(":")[1]) } )
                 var mapDict: [WidgeType:WidgeType] = [:]
                 for (inputID,outputID) in pairs {
-                    let input = level.widgeGraphManager.widgeType(inputID)
-                    let output = level.widgeGraphManager.widgeType(outputID)
+                    let input = level.widgeType(inputID)
+                    let output = level.widgeType(outputID)
                     mapDict[input] = output
                 }
                 
                 let action = CombinerAction(ID: actionID, containedInput: containedInput, count: count, successType: successType, mapping: mapDict)
-                level.widgeGraphManager.actions.append(action)
+                level.registerAction(action)
             } else if actionType == "Transformer" {
                 // <id> Transformer <a:b,c:d,e:f>
                 
@@ -167,13 +168,13 @@ class LevelFileParser {
                 let pairs = entries.map({ ($0.componentsSeparatedByString(":")[0], $0.componentsSeparatedByString(":")[1]) } )
                 var mapDict: [WidgeType:WidgeType] = [:]
                 for (inputID,outputID) in pairs {
-                    let input = level.widgeGraphManager.widgeType(inputID)
-                    let output = level.widgeGraphManager.widgeType(outputID)
+                    let input = level.widgeType(inputID)
+                    let output = level.widgeType(outputID)
                     mapDict[input] = output
                 }
                 
                 let action = TransformerAction(ID: actionID, transformMapping: mapDict)
-                level.widgeGraphManager.actions.append(action)
+                level.registerAction(action)
             } else {
                 failWithError("unabled to parse action"); return
             }
@@ -200,7 +201,7 @@ class LevelFileParser {
                 case "Output":
                     machine = Output(Zone(parts[1]))
                 case "Transformer":
-                    let action = level.widgeGraphManager.action(parts[2]) as TransformerAction
+                    let action = level.action(parts[2]) as TransformerAction
                     machine = Transformer(Zone(parts[1]), action: action)
                 case "TransferBox":
                     machine = TransferBox(Zone(parts[1]))
@@ -209,10 +210,10 @@ class LevelFileParser {
                 case "SwitchBox":
                     machine = SwitchBox(Zone(parts[1]))
                 case "Container":
-                    let containedType = level.widgeGraphManager.widgeType(parts[2])
+                    let containedType = level.widgeType(parts[2])
                     machine = Container(Zone(parts[1]), containedType:containedType)
                 case "Combiner":
-                    let action = level.widgeGraphManager.action(parts[2]) as CombinerAction
+                    let action = level.action(parts[2]) as CombinerAction
                     machine = Combiner(Zone(parts[1]), action:action)
                 default:
                     failWithError("Unknown class of machine '\(machineType)'"); return
@@ -231,10 +232,10 @@ class LevelFileParser {
             switch key {
                 case "inputs":
                     let widgeTypeIDs = parts[1].componentsSeparatedByString(",")
-                    level.inputTypes += widgeTypeIDs.map { self.level.widgeGraphManager.widgeType($0) }
+                    level.inputTypes += widgeTypeIDs.map { self.level.widgeType($0) }
                 case "winning-outputs":
                     let widgeTypeIDs = parts[1].componentsSeparatedByString(",")
-                    level.outputs += widgeTypeIDs.map { self.level.widgeGraphManager.widgeType($0) }
+                    level.outputs += widgeTypeIDs.map { self.level.widgeType($0) }
                 case "input-order":
                     level.inputOrder = InputOrder(rawValue: value)!
                 case "endgame-output-count":

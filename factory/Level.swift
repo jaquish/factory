@@ -16,38 +16,36 @@ enum InputOrder : String {
 
 var CurrentLevel: Level!
 
-var AllWidges: [Widge] = []
+
 
 class Level: SKScene {
    
-    // Level Description
     var preamble = String()
-    
-    // Setup
-    
     var metadata: [String : AnyObject] = [:]
     
-    let widgeGraphManager:WidgeGraphManager = WidgeGraphManager()
-    
-    var inputTypes: [WidgeType] = []
     var machines: [Machine] = []
+    var connectionPoints = [ConnectionPoint]()
     
-    // TODO: Refactor to per-machine basis
-    var inputIndex = 0
-    var inputOrder:InputOrder = .Linear
+    private let widgeGraphManager:WidgeGraphManager = WidgeGraphManager()
     
     // Gameplay Phase
+    
     var _prevTime: CFTimeInterval
     var _dt: CFTimeInterval
+    
+    var widges: [Widge] = []
+    
+    var inputIndex = 0
+    var inputOrder:InputOrder = .Linear
+    var inputTypes: [WidgeType] = []
     
     var outputs:[WidgeType] = []
     var endgame_output_count: Int = 0
     
-    var connectionPoints = [ConnectionPoint]()
-    
     override convenience init() {
         self.init(size: CGSizeZero)
     }
+    
     override init(size: CGSize) {
         
         _prevTime = 0
@@ -62,61 +60,28 @@ class Level: SKScene {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Setup Phase
+    
     func addMachine(machine: Machine) {
         println("+ \(machine.name!) \(machine)")
         machines.append(machine)
         addChild(machine)
     }
     
-    override func update(currentTime: NSTimeInterval) {
-        
-        /* Called before each frame is rendered */
-        _dt = currentTime - _prevTime;
-        
-        if _dt > 1 {
-            println("Interval too large, resetting to 1/60 s")
-            _dt = 1.0/60.0
-        }
-        
-        for machine in machines {
-            machine.update(_dt)
-        }
-        
-        // propogate
-        
-        for machine in machines {
-            machine.inputs().map { $0.propogate() }
-        }
-        
-        /*** TODO - insert phase 2 processing here ***/
-        
-        _prevTime = currentTime;
+    func registerWidgeType(widgeType: WidgeType) {
+        widgeGraphManager.register(widgeType)
     }
     
-    
-    func summary() -> String {
-        var summary = ""
-        for (key, value) in metadata {
-            summary += "\(key) : \(value)\n"
-        }
-        summary += "\n\n" + preamble
-        return summary
+    func registerAction(action: Action) {
+        widgeGraphManager.register(action)
     }
     
-    func nextInputType() -> WidgeType {
-        inputIndex++
-        switch inputOrder {
-        case .Random: return inputTypes.randomItem()
-        case .Linear: return inputTypes[(inputIndex-1) % inputTypes.count]
-        }
+    func widgeType(id: WidgeTypeID) -> WidgeType {
+        return widgeGraphManager.widgeType(id)
     }
     
-    func isGameOver() -> Bool {
-        return outputs.count >= endgame_output_count
-    }
-    
-    func addOutput(widgeType: WidgeType) {
-        outputs.append(widgeType)
+    func action(id: ActionID) -> Action {
+        return widgeGraphManager.action(id)
     }
     
     // MARK: Connection Phase
@@ -149,5 +114,64 @@ class Level: SKScene {
         }
         
         return allConnectionsValid
+    }
+    
+    // MARK: Gameplay Phase
+    
+    override func update(currentTime: NSTimeInterval) {
+        
+        /* Called before each frame is rendered */
+        _dt = currentTime - _prevTime;
+        
+        if _dt > 1 {
+            println("Interval too large, resetting to 1/60 s")
+            _dt = 1.0/60.0
+        }
+        
+        for machine in machines {
+            machine.update(_dt)
+        }
+        
+        // propogate
+        
+        for machine in machines {
+            machine.inputs().map { $0.propogate() }
+        }
+        
+        /*** TODO - insert phase 2 processing here ***/
+        
+        _prevTime = currentTime;
+    }
+    
+    func nextInputType() -> WidgeType {
+        
+        var next: WidgeType
+        
+        switch inputOrder {
+        case .Random: next = inputTypes.randomItem()
+        case .Linear: next = inputTypes[(inputIndex) % inputTypes.count]
+        }
+        
+        inputIndex++
+        return next
+    }
+    
+    func isGameOver() -> Bool {
+        return outputs.count >= endgame_output_count
+    }
+    
+    func addOutput(widgeType: WidgeType) {
+        outputs.append(widgeType)
+    }
+    
+    // MARK: Debug
+    
+    func summary() -> String {
+        var summary = ""
+        for (key, value) in metadata {
+            summary += "\(key) : \(value)\n"
+        }
+        summary += "\n\n" + preamble
+        return summary
     }
 }

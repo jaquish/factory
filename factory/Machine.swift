@@ -131,40 +131,39 @@ class Machine: SKSpriteNode, LevelFileObject {
     // MARK: Widge Management
     
     final func createWidge(type: WidgeType, position: CGPoint, state: WidgeState) -> Widge {
-        let count = AllWidges.count
         let newWidge = Widge(widgeType: type)
         newWidge.owner = self
         newWidge.state = state
         newWidge.position = position
         scene?.addChild(newWidge)
-        AllWidges.append(newWidge)
+        level.widges.append(newWidge)
         return newWidge
     }
     
     final func transform(widge: Widge, toType: WidgeType) -> Widge {
-        let count = AllWidges.count
+        let count = level.widges.count
         let replacement = createWidge(toType, position: widge.position, state: widge.state)
 
         deleteWidge(widge)
-        assert(AllWidges.count == count, "Expected same number of widges after transform \(AllWidges.count) as before \(count)")
+        assert(level.widges.count == count, "Expected same number of widges after transform \(level.widges.count) as before \(count)")
         return replacement
     }
     
     final func deleteWidge(widge: Widge) {
         assert((widge.owner as Machine) == self, "cannot delete a widge that you do not own")
         
-        let count = AllWidges.count
-        AllWidges = AllWidges.filter { $0.widgeID != widge.widgeID }
+        let count = level.widges.count
+        level.widges = level.widges.filter { $0.widgeID != widge.widgeID }
         widge.removeFromParent()
-        assert(AllWidges.count == count - 1, "Expected one less widge after creating expected=\(count-1) actual=\(AllWidges.count)")
+        assert(level.widges.count == count - 1, "Expected one less widge after creating expected=\(count-1) actual=\(level.widges.count)")
     }
     
     final func widges() -> [Widge] {
-        return AllWidges.filter { ($0.owner as? Machine) == self }
+        return level.widges.filter { ($0.owner as? Machine) == self }
     }
     
     final func widgesInState(state: WidgeState) -> [Widge] {
-        return AllWidges.filter { (($0.owner as? Machine) == self) && $0.state == state }
+        return level.widges.filter { (($0.owner as? Machine) == self) && $0.state == state }
     }
     
     // MARK: Debug

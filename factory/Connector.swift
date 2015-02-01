@@ -14,6 +14,7 @@ let Propogated: WidgeState = "Propogated"
 
 @objc class Connector : NSObject, Printable {
     
+    var level: Level { return source.level }
     let position: CGPoint
     let source: Machine
     let destination: Machine
@@ -71,7 +72,7 @@ let Propogated: WidgeState = "Propogated"
     }
     
     func widges() -> [Widge] {
-        return AllWidges.filter { ($0.owner as? Connector) == self }
+        return level.widges.filter { ($0.owner as? Connector) == self }
     }
     
     // MARK: Debug

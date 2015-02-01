@@ -16,6 +16,20 @@ class WidgeType : Hashable {
     let spriteName: String!
     let garbage: WidgeType!
     
+    class func basicWidgeTypes() -> [WidgeType] {
+        
+        let black = WidgeType(id: "black", color: UIColor.blackColor(), garbage: nil)
+        return [
+            black,
+            WidgeType(id:"red",    color:UIColor.redColor(), garbage: black),
+            WidgeType(id:"orange", color:UIColor.orangeColor(), garbage: black),
+            WidgeType(id:"yellow", color:UIColor.yellowColor(), garbage: black),
+            WidgeType(id:"green",  color:UIColor.greenColor(), garbage: black),
+            WidgeType(id:"blue",   color:UIColor.blueColor(), garbage: black),
+            WidgeType(id:"purple", color:UIColor.purpleColor(), garbage: black)
+        ]
+    }
+    
     init(id: WidgeTypeID, color: UIColor, var garbage: WidgeType! = nil) {
        
         self.ID = id
@@ -78,15 +92,5 @@ class WidgeGraphManager {
         }
     }
     
-    func registerBasicWidges() {
-        
-        let black = WidgeType(id: "black", color: UIColor.blackColor(), garbage: nil)
-        register(black)
-        register(WidgeType(id:"red",    color:UIColor.redColor(), garbage: black))
-        register(WidgeType(id:"orange", color:UIColor.orangeColor(), garbage: black))
-        register(WidgeType(id:"yellow", color:UIColor.yellowColor(), garbage: black))
-        register(WidgeType(id:"green",  color:UIColor.greenColor(), garbage: black))
-        register(WidgeType(id:"blue",   color:UIColor.blueColor(), garbage: black))
-        register(WidgeType(id:"purple", color:UIColor.purpleColor(), garbage: black))
-    }
+    
 }
