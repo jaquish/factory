@@ -9,7 +9,7 @@ Widges should travel correctly from input, through gravity, into output.
 
 @End
 
-@Widges
+@WidgeTypes
 [basic]
 
 @Machines

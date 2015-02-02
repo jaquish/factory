@@ -6,7 +6,7 @@ Name:January 2nd
 Goal: Learn how a transformer works.
 @End
 
-@Widges
+@WidgeTypes
 [basic]
 
 @Actions
@@ -14,11 +14,11 @@ yellow-to-blue Transformer yellow:blue
 combine Combiner red 1 blue blue:purple,yellow:orange
 
 @Machines
-Input 13,8 3
-Gravity 13,7 13,8
+Input 14,8 3
+Gravity 14,7 14,8
 
 # top belt
-Belt 3,7 13,7 W
+Belt 3,7 14,7 W
 Transformer 4,7 yellow-to-blue
 SwitchBox 9,7
 Gravity 2,4 2,7

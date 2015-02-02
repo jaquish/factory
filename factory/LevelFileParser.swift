@@ -16,7 +16,7 @@ enum LevelFileSection : String {
     case Unknown  = "@End"
     case Description = "@Description"
     case Metadata = "@Metadata"
-    case Widges   = "@Widges"
+    case WidgeTypes = "@WidgeTypes"
     case Actions  = "@Actions"
     case Machines = "@Machines"
     case Context  = "@Context"
@@ -117,8 +117,7 @@ class LevelFileParser {
         
         // Verify Count
         let expectedPartsForSection: [LevelFileSection:Int] = [ .Context : 2,
-                                                               .Metadata : 2,
-                                                                 .Widges : 0];
+                                                               .Metadata : 2]
         
         let expectedPartsCount = expectedPartsForSection[currentSection] ?? 0
         
@@ -133,12 +132,15 @@ class LevelFileParser {
             level.preamble += line + "\n"
         case .Metadata:
             level.metadata[parts[0]] = parts[1]
-        case .Widges:
+        case .WidgeTypes:
             if line == "[basic]" {
                 let basics = WidgeType.basicWidgeTypes()
                 for type in basics {
                     level.registerWidgeType(type)
                 }
+            } else {
+                let widgeType = WidgeType(id: parts[0], spriteName: parts[1], garbage: nil)
+                level.registerWidgeType(widgeType)
             }
         case .Actions:
             let actionID = parts[0]

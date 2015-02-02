@@ -49,6 +49,7 @@
 		929198D71A286C2700A0EF35 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929198D61A286C2700A0EF35 /* Container.swift */; };
 		9292EE611A7EC32100311CF6 /* january-1.level in Resources */ = {isa = PBXBuildFile; fileRef = 92714AE81A748E98009AFC31 /* january-1.level */; };
 		9292EE621A7EC45200311CF6 /* january-2.level in Resources */ = {isa = PBXBuildFile; fileRef = 92CD66731A315E1B00AA2E74 /* january-2.level */; };
+		9292EE691A7F409800311CF6 /* january-3.level in Resources */ = {isa = PBXBuildFile; fileRef = 9292EE681A7F409800311CF6 /* january-3.level */; };
 		92AB7F771A0B3AB500128B91 /* Machine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB7F761A0B3AB500128B91 /* Machine.swift */; };
 		92AB7F791A0B568C00128B91 /* Belt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB7F781A0B568C00128B91 /* Belt.swift */; };
 		92C1FCA319E9D439001C1178 /* ConnectionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FCA219E9D439001C1178 /* ConnectionPoint.swift */; };
@@ -121,6 +122,7 @@
 		9289332F1A0ECEB90013A598 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		92893B871A280B730069C3A4 /* SwitchBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchBox.swift; sourceTree = "<group>"; };
 		929198D61A286C2700A0EF35 /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		9292EE681A7F409800311CF6 /* january-3.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-3.level"; sourceTree = "<group>"; };
 		92AB7F761A0B3AB500128B91 /* Machine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Machine.swift; sourceTree = "<group>"; };
 		92AB7F781A0B568C00128B91 /* Belt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Belt.swift; sourceTree = "<group>"; };
 		92C1FCA219E9D439001C1178 /* ConnectionPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionPoint.swift; sourceTree = "<group>"; };
@@ -307,9 +309,9 @@
 			children = (
 				92714AE31A744AFB009AFC31 /* test-1-input-gravity-output.level */,
 				92FBF2B61A1C56CB00C7300D /* test-2-input-belts-output.level */,
-				92714AE61A744D3C009AFC31 /* test-5-transformers.level */,
 				926B3D941A1F2F730095D60F /* test-3-belts-and-switchboxes.level */,
 				92EE3A2C1A3EBC2400328266 /* test-4-simple-combiner.level */,
+				92714AE61A744D3C009AFC31 /* test-5-transformers.level */,
 			);
 			name = Testing;
 			sourceTree = "<group>";
@@ -319,6 +321,7 @@
 			children = (
 				92714AE81A748E98009AFC31 /* january-1.level */,
 				92CD66731A315E1B00AA2E74 /* january-2.level */,
+				9292EE681A7F409800311CF6 /* january-3.level */,
 			);
 			name = January;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 				92EE3A2D1A3EBC2400328266 /* test-4-simple-combiner.level in Resources */,
 				84872BF1182607D4008F86DE /* InfoPlist.strings in Resources */,
 				84872C04182607D5008F86DE /* Images.xcassets in Resources */,
+				9292EE691A7F409800311CF6 /* january-3.level in Resources */,
 				9292EE611A7EC32100311CF6 /* january-1.level in Resources */,
 				84872BFA182607D4008F86DE /* Main.storyboard in Resources */,
 				9292EE621A7EC45200311CF6 /* january-2.level in Resources */,

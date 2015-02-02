@@ -5,7 +5,7 @@
 Format-Version:<string>
 Name:<string>
 
-@Widges
+@WidgeTypes
 [default]
 <widge id> <sprite name>
 
