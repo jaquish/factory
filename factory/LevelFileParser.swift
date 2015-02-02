@@ -176,7 +176,7 @@ class LevelFileParser {
                 let action = TransformerAction(ID: actionID, transformMapping: mapDict)
                 level.registerAction(action)
             } else {
-                failWithError("unabled to parse action"); return
+                failWithError("unable to parse action"); return
             }
             
         case .Machines:

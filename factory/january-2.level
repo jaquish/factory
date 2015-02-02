@@ -10,7 +10,7 @@ Goal: Learn how a transformer works.
 [basic]
 
 @Actions
-red-to-blue Transformer yellow:blue
+yellow-to-blue Transformer yellow:blue
 combine Combiner red 1 blue blue:purple,yellow:orange
 
 @Machines
@@ -19,7 +19,7 @@ Gravity 13,7 13,8
 
 # top belt
 Belt 3,7 13,7 W
-Transformer 4,7 red-to-blue
+Transformer 4,7 yellow-to-blue
 SwitchBox 9,7
 Gravity 2,4 2,7
 Gravity 9,2 9,7

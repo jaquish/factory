@@ -30,12 +30,12 @@ class Level: SKScene {
     
     // Gameplay Phase
     
-    var _prevTime: CFTimeInterval
-    var _dt: CFTimeInterval
+    private var _prevTime: CFTimeInterval
+    private var _dt: CFTimeInterval
     
     var widges: [Widge] = []
     
-    var inputIndex = 0
+    private var inputIndex = 0
     var inputOrder:InputOrder = .Linear
     var inputTypes: [WidgeType] = []
     

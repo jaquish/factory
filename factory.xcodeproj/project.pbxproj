@@ -33,8 +33,8 @@
 		926B3D951A1F2F730095D60F /* test-3-belts-and-switchboxes.level in Resources */ = {isa = PBXBuildFile; fileRef = 926B3D941A1F2F730095D60F /* test-3-belts-and-switchboxes.level */; };
 		926BD2971A15FAE4005BD6FF /* LevelTemplate in Resources */ = {isa = PBXBuildFile; fileRef = 926BD2961A15FAE4005BD6FF /* LevelTemplate */; };
 		9270239D1A08A7B2004DB6CB /* Widge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9270239C1A08A7B2004DB6CB /* Widge.swift */; };
-		92714AE41A744AFB009AFC31 /* test-input-gravity-output.level in Resources */ = {isa = PBXBuildFile; fileRef = 92714AE31A744AFB009AFC31 /* test-input-gravity-output.level */; };
-		92714AE71A744D3C009AFC31 /* test-transformers.level in Resources */ = {isa = PBXBuildFile; fileRef = 92714AE61A744D3C009AFC31 /* test-transformers.level */; };
+		92714AE41A744AFB009AFC31 /* test-1-input-gravity-output.level in Resources */ = {isa = PBXBuildFile; fileRef = 92714AE31A744AFB009AFC31 /* test-1-input-gravity-output.level */; };
+		92714AE71A744D3C009AFC31 /* test-5-transformers.level in Resources */ = {isa = PBXBuildFile; fileRef = 92714AE61A744D3C009AFC31 /* test-5-transformers.level */; };
 		92717C181A2999A100D5C7A6 /* Combiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92717C171A2999A100D5C7A6 /* Combiner.swift */; };
 		928933201A0EAF220013A598 /* Gravity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289331F1A0EAF220013A598 /* Gravity.swift */; };
 		928933221A0EB17F0013A598 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928933211A0EB17F0013A598 /* Input.swift */; };
@@ -60,7 +60,7 @@
 		92F43F7F1A5FA03000119A6D /* BeltMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F43F7E1A5FA03000119A6D /* BeltMachine.swift */; };
 		92F43F8D1A6319A500119A6D /* FileParsingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F43F8C1A6319A500119A6D /* FileParsingExtensions.swift */; };
 		92FBF2B51A1C54A300C7300D /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FBF2B41A1C54A300C7300D /* GameOverViewController.swift */; };
-		92FBF2B71A1C56CB00C7300D /* test-input-belts-output.level in Resources */ = {isa = PBXBuildFile; fileRef = 92FBF2B61A1C56CB00C7300D /* test-input-belts-output.level */; };
+		92FBF2B71A1C56CB00C7300D /* test-2-input-belts-output.level in Resources */ = {isa = PBXBuildFile; fileRef = 92FBF2B61A1C56CB00C7300D /* test-2-input-belts-output.level */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,13 +102,12 @@
 		924F70821A7B77220076D048 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		92576EC61A14679F00815C05 /* Zone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zone.swift; sourceTree = "<group>"; };
 		92576EC81A14791800815C05 /* LevelSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectViewController.swift; sourceTree = "<group>"; };
-		925DA3E61A74A4C900C7AC25 /* january-3.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-3.level"; sourceTree = "<group>"; };
 		926B3D921A1EE6630095D60F /* ValidationFileProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationFileProtocols.swift; sourceTree = "<group>"; };
 		926B3D941A1F2F730095D60F /* test-3-belts-and-switchboxes.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-3-belts-and-switchboxes.level"; sourceTree = "<group>"; };
 		926BD2961A15FAE4005BD6FF /* LevelTemplate */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LevelTemplate; sourceTree = "<group>"; };
 		9270239C1A08A7B2004DB6CB /* Widge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Widge.swift; sourceTree = "<group>"; };
-		92714AE31A744AFB009AFC31 /* test-input-gravity-output.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-input-gravity-output.level"; sourceTree = "<group>"; };
-		92714AE61A744D3C009AFC31 /* test-transformers.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-transformers.level"; sourceTree = "<group>"; };
+		92714AE31A744AFB009AFC31 /* test-1-input-gravity-output.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-1-input-gravity-output.level"; sourceTree = "<group>"; };
+		92714AE61A744D3C009AFC31 /* test-5-transformers.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-5-transformers.level"; sourceTree = "<group>"; };
 		92714AE81A748E98009AFC31 /* january-1.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-1.level"; sourceTree = "<group>"; };
 		92717C171A2999A100D5C7A6 /* Combiner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Combiner.swift; sourceTree = "<group>"; };
 		9289331F1A0EAF220013A598 /* Gravity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gravity.swift; sourceTree = "<group>"; };
@@ -134,7 +133,7 @@
 		92F43F7E1A5FA03000119A6D /* BeltMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeltMachine.swift; sourceTree = "<group>"; };
 		92F43F8C1A6319A500119A6D /* FileParsingExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileParsingExtensions.swift; sourceTree = "<group>"; };
 		92FBF2B41A1C54A300C7300D /* GameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
-		92FBF2B61A1C56CB00C7300D /* test-input-belts-output.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-input-belts-output.level"; sourceTree = "<group>"; };
+		92FBF2B61A1C56CB00C7300D /* test-2-input-belts-output.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-2-input-belts-output.level"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,9 +305,9 @@
 		92714AE21A744ABC009AFC31 /* Testing */ = {
 			isa = PBXGroup;
 			children = (
-				92714AE31A744AFB009AFC31 /* test-input-gravity-output.level */,
-				92FBF2B61A1C56CB00C7300D /* test-input-belts-output.level */,
-				92714AE61A744D3C009AFC31 /* test-transformers.level */,
+				92714AE31A744AFB009AFC31 /* test-1-input-gravity-output.level */,
+				92FBF2B61A1C56CB00C7300D /* test-2-input-belts-output.level */,
+				92714AE61A744D3C009AFC31 /* test-5-transformers.level */,
 				926B3D941A1F2F730095D60F /* test-3-belts-and-switchboxes.level */,
 				92EE3A2C1A3EBC2400328266 /* test-4-simple-combiner.level */,
 			);
@@ -320,7 +319,6 @@
 			children = (
 				92714AE81A748E98009AFC31 /* january-1.level */,
 				92CD66731A315E1B00AA2E74 /* january-2.level */,
-				925DA3E61A74A4C900C7AC25 /* january-3.level */,
 			);
 			name = January;
 			sourceTree = "<group>";
@@ -451,9 +449,9 @@
 				9292EE611A7EC32100311CF6 /* january-1.level in Resources */,
 				84872BFA182607D4008F86DE /* Main.storyboard in Resources */,
 				9292EE621A7EC45200311CF6 /* january-2.level in Resources */,
-				92FBF2B71A1C56CB00C7300D /* test-input-belts-output.level in Resources */,
-				92714AE71A744D3C009AFC31 /* test-transformers.level in Resources */,
-				92714AE41A744AFB009AFC31 /* test-input-gravity-output.level in Resources */,
+				92FBF2B71A1C56CB00C7300D /* test-2-input-belts-output.level in Resources */,
+				92714AE71A744D3C009AFC31 /* test-5-transformers.level in Resources */,
+				92714AE41A744AFB009AFC31 /* test-1-input-gravity-output.level in Resources */,
 				926B3D951A1F2F730095D60F /* test-3-belts-and-switchboxes.level in Resources */,
 				926BD2971A15FAE4005BD6FF /* LevelTemplate in Resources */,
 			);
