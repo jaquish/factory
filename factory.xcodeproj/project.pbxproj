@@ -51,6 +51,7 @@
 		9292EE621A7EC45200311CF6 /* january-2.level in Resources */ = {isa = PBXBuildFile; fileRef = 92CD66731A315E1B00AA2E74 /* january-2.level */; };
 		9292EE691A7F409800311CF6 /* january-3.level in Resources */ = {isa = PBXBuildFile; fileRef = 9292EE681A7F409800311CF6 /* january-3.level */; };
 		9292EE6B1A7F4E4A00311CF6 /* january-4.level in Resources */ = {isa = PBXBuildFile; fileRef = 9292EE6A1A7F4E4A00311CF6 /* january-4.level */; };
+		9292EE651A7F3ACA00311CF6 /* TransportNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9292EE641A7F3ACA00311CF6 /* TransportNetwork.swift */; };
 		92AB7F771A0B3AB500128B91 /* Machine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB7F761A0B3AB500128B91 /* Machine.swift */; };
 		92AB7F791A0B568C00128B91 /* Belt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB7F781A0B568C00128B91 /* Belt.swift */; };
 		92C1FCA319E9D439001C1178 /* ConnectionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FCA219E9D439001C1178 /* ConnectionPoint.swift */; };
@@ -127,6 +128,7 @@
 		929198D61A286C2700A0EF35 /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		9292EE681A7F409800311CF6 /* january-3.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-3.level"; sourceTree = "<group>"; };
 		9292EE6A1A7F4E4A00311CF6 /* january-4.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-4.level"; sourceTree = "<group>"; };
+		9292EE641A7F3ACA00311CF6 /* TransportNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransportNetwork.swift; sourceTree = "<group>"; };
 		92AB7F761A0B3AB500128B91 /* Machine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Machine.swift; sourceTree = "<group>"; };
 		92AB7F781A0B568C00128B91 /* Belt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Belt.swift; sourceTree = "<group>"; };
 		92C1FCA219E9D439001C1178 /* ConnectionPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionPoint.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				92893B871A280B730069C3A4 /* SwitchBox.swift */,
 				929198D61A286C2700A0EF35 /* Container.swift */,
 				92717C171A2999A100D5C7A6 /* Combiner.swift */,
+				9292EE641A7F3ACA00311CF6 /* TransportNetwork.swift */,
 			);
 			name = Machines;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				84872BF7182607D4008F86DE /* FGAppDelegate.m in Sources */,
 				92AB7F791A0B568C00128B91 /* Belt.swift in Sources */,
 				928933281A0EBC800013A598 /* TransferBox.swift in Sources */,
+				9292EE651A7F3ACA00311CF6 /* TransportNetwork.swift in Sources */,
 				92EE3A2B1A3E359300328266 /* GridNumbering.swift in Sources */,
 				926B3D931A1EE6630095D60F /* ValidationFileProtocols.swift in Sources */,
 				922CC1A01A5322FE00562309 /* Mover.swift in Sources */,
