@@ -54,7 +54,7 @@ class Output: Machine {
         connector("input").dequeueWidges()
         for widge in widgesInState(OutputWidge) {
             count += 1
-            CurrentLevel.addOutput(widge.widgeType)
+            level.addOutput(widge.widgeType)
             deleteWidge(widge)
         }
     }

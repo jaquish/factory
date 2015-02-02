@@ -35,8 +35,6 @@ class LevelViewController: UIViewController, SKSceneDelegate {
                 self.view.addSubview(GridNumbering(frame: self.view.bounds))
             }
             
-            CurrentLevel = level
-            
             // double-touch triple-tap back to level selection screen
             let tripleTapGesture = UITapGestureRecognizer (target: self, action: "gameOver")
             tripleTapGesture.numberOfTapsRequired = 3

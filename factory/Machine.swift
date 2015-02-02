@@ -51,12 +51,12 @@ class Machine: SKSpriteNode, LevelFileObject {
     
     final func addInput(position: CGPoint, name: String, startingState: WidgeState, priority:Int = PriorityLevelHigh) {
         let cp = ConnectionPointIntoMachine(machine: self, position: position, name: name, destinationState: startingState, priority: priority)
-        CurrentLevel.connectionPoints.append(cp)
+        level.connectionPoints.append(cp)
     }
     
     final func addOutput(position: CGPoint, name: String, priority:Int = PriorityLevelHigh) {
         let cp = ConnectionPointOutOfMachine(machine: self, position: position, name: name, priority: priority)
-        CurrentLevel.connectionPoints.append(cp)
+        level.connectionPoints.append(cp)
     }
     
     // MARK: Connection Phase
@@ -98,7 +98,7 @@ class Machine: SKSpriteNode, LevelFileObject {
     }
     
     final func connectionPoints() -> [ConnectionPoint] {
-        return CurrentLevel.connectionPoints.filter { $0.machine == self }
+        return level.connectionPoints.filter { $0.machine == self }
     }
     
     // MARK: Connector Management

@@ -58,7 +58,6 @@ class LevelFileParser {
             
             // Build up this level
             level = Level()
-            CurrentLevel = level
             currentLine = 1
             
             let lines = loadedStringData.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()) as [NSString]

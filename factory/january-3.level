@@ -3,17 +3,31 @@ Format-Version:1.0
 Name:January 3rd
 
 @Description
-Goal: Learn how a transformer works.
+Goal: Learn about combining transformers.
 @End
 
 @WidgeTypes
 [basic]
 
 @Actions
+step1 Transformer red:yellow
+step2 Transformer yellow:blue
+step3 Transformer blue:purple
 
 @Machines
+Input 2,8 3
+Gravity 2,6 2,8
+Belt 2,6 12,6 E
+
+# Machines
+Transformer 6,6 step1
+Transformer 8,6 step2
+Transformer 10,6 step3
+
+Gravity 13,4 13,6
+Output 13,4
 
 @Context
-inputs:red,yellow
+inputs:red,yellow,blue,purple
 input-order:linear
 endgame-output-count:10

@@ -10,7 +10,7 @@ import UIKit
 
 class LevelSelectViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    var currentLevel: Level? {
+    var currentLevel: Level! {
         didSet {
             summary!.text = currentLevel?.summary()
             playButton.enabled = (currentLevel != nil)
@@ -23,6 +23,7 @@ class LevelSelectViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet var playButton: UIButton!
     
     @IBAction func playLevel() {
+        currentLevel.play()
         performSegueWithIdentifier("playLevelSegue", sender: self)
     }
     

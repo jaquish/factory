@@ -14,10 +14,6 @@ enum InputOrder : String {
     case Random = "random"
 }
 
-var CurrentLevel: Level!
-
-
-
 class Level: SKScene {
    
     var preamble = String()
@@ -117,6 +113,13 @@ class Level: SKScene {
     }
     
     // MARK: Gameplay Phase
+    
+    func play() {
+        widges.removeAll()
+        outputs.removeAll()
+        _prevTime = 0.0
+        _dt = 0.0
+    }
     
     override func update(currentTime: NSTimeInterval) {
         
