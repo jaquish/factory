@@ -46,6 +46,32 @@ class Belt: Mover {
         let spriteNode = SKSpriteNode(color: UIColor.grayColor(), size: CGSizeMake(ZoneWidth * CGFloat(thruZone.x - originZone.x + 1), HorizontalBeltHeight))
         spriteNode.anchorPoint = CGPointZero
         addChild(spriteNode)
+        
+        for zone in ZoneSequence(originZone, thruZone) {
+            var animation = SKAction.animateWithTextures([
+                SKTexture(imageNamed: "moving-belt-1"),
+                SKTexture(imageNamed: "moving-belt-2"),
+                SKTexture(imageNamed: "moving-belt-3"),
+                SKTexture(imageNamed: "moving-belt-4"),
+                SKTexture(imageNamed: "moving-belt-5"),
+                SKTexture(imageNamed: "moving-belt-6"),
+                SKTexture(imageNamed: "moving-belt-7"),
+                SKTexture(imageNamed: "moving-belt-8")
+                ], timePerFrame: 0.04)
+            
+            if direction == .W {
+                animation = animation.reversedAction()
+            }
+            
+            let run = SKAction.repeatActionForever(animation)
+            
+            let tile = SKSpriteNode()
+            tile.size = CGSize(width: ZoneWidth, height: HorizontalBeltHeight)
+            tile.anchorPoint = CGPointZero
+            tile.position = Zone(zone.x - originZone.x, 0)^(.SW)
+            tile.runAction(run, withKey: "run")
+            addChild(tile)
+        }
     }
     
     class override func numberOfInitializerParameters() -> Int {
