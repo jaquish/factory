@@ -39,13 +39,16 @@ class Output: Machine {
         addChild(Util .zoneBoxWithBorder(UIColor.grayColor(), innerColor:UIColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 1.0)))
         addChild(title)
         addChild(label)
-        addInput(originZone^(.center), name: "input", startingState: OutputWidge)
         
         self.color = UIColor.grayColor().colorWithAlphaComponent(0.2)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func addConnectionPoints() {
+        addInput(originZone^(.center), name: "input", startingState: OutputWidge)
     }
     
     // MARK: Gameplay Phase

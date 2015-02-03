@@ -30,9 +30,6 @@ class Gravity: Mover {
         }
         
         self.zPosition = SpriteLayerBehindWidges
-        
-        addInput(endZone^(.center), name: "top", startingState: "Falling")
-        addOutput(originZone^(.center), name: "bottom")
     }
     
     class override func numberOfInitializerParameters() -> Int {
@@ -41,6 +38,11 @@ class Gravity: Mover {
 
     required override init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func addConnectionPoints() {
+        addInput(endZone^(.center), name: "top", startingState: "Falling")
+        addOutput(originZone^(.center), name: "bottom")
     }
     
     // Mark: Gameplay Phase

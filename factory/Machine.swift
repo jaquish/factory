@@ -49,6 +49,10 @@ class Machine: SKSpriteNode, LevelFileObject {
     
     // MARK: Setup Phase
     
+    func addConnectionPoints() {
+        fatalError("addConnectionPoints has not been implemented")
+    }
+    
     final func addInput(position: CGPoint, name: String, startingState: WidgeState, priority:Int = PriorityLevelHigh) {
         let cp = ConnectionPointIntoMachine(machine: self, position: position, name: name, destinationState: startingState, priority: priority)
         level.connectionPoints.append(cp)

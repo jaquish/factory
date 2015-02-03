@@ -84,6 +84,10 @@ class Level: SKScene {
     
     func makeConnections() -> Bool {
         
+        for machine in machines {
+            machine.addConnectionPoints()
+        }
+        
         // priority order
         var outputs = connectionPoints.filter { $0 is ConnectionPointOutOfMachine } as [ConnectionPointOutOfMachine]
         outputs.sort {$0.priority > $1.priority }

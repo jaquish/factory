@@ -28,6 +28,10 @@ Belt 3,4 10,4 W
 Gravity 2,3 2,4
 Output 2,3
 
+@StaticSprites
+coach-direction yellow E 8,7
+coach-direction orange S 2,4
+
 @Context
 inputs:red,yellow
 input-order:linear

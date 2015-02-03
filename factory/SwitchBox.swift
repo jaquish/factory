@@ -17,11 +17,11 @@ class SwitchBox: Machine {
     var selectedOutput:Connector! {
         didSet {
             if let beltOutput = selectedOutput.destination as? Belt {
-                labelNode.text = labelForDirection(beltOutput.direction)
+                labelNode.text = charForDirection(beltOutput.direction)
             } else if let beltOutput = selectedOutput.destination as? VerticalBelt  {
-                labelNode.text = labelForDirection(beltOutput.direction)
+                labelNode.text = charForDirection(beltOutput.direction)
             } else if let gravityOutput = selectedOutput.destination as? Gravity {
-                labelNode.text = labelForDirection(.S)
+                labelNode.text = charForDirection(.S)
             } else {
                 fatalError("Unable to process connection to output machine")
             }
@@ -41,11 +41,6 @@ class SwitchBox: Machine {
         labelNode.position = ZoneZero.worldPoint(.center)
         labelNode.fontSize = LabelFontSize * 2
         addChild(labelNode)
-        
-        for i in 0..<2 {
-            addInput(originZone^(.center), name: "input-\(i)", startingState: WaitingToTransfer)
-            addOutput(originZone^(.center), name: "output-\(i)")
-        }
 
         userInteractionEnabled = true
     }
@@ -54,10 +49,13 @@ class SwitchBox: Machine {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        // toggle output
-        let currentIndex = find(outputs(), selectedOutput)!
-        selectedOutput = outputs()[(currentIndex + 1) % outputs().count]
+    
+    
+    override func addConnectionPoints() {
+        for i in 0..<2 {
+            addInput(originZone^(.center), name: "input-\(i)", startingState: WaitingToTransfer)
+            addOutput(originZone^(.center), name: "output-\(i)")
+        }
     }
     
     override func allow(#inputPoint: ConnectionPoint, toConnectFromMachine machine: Machine) -> Bool {
@@ -68,19 +66,7 @@ class SwitchBox: Machine {
         return (machine is Belt) || (machine is VerticalBelt) || (machine is Gravity)
     }
     
-    func labelForDirection(d:Direction) -> String {
-        switch d {
-        case .N:  return "⬆️"
-        case .NE: return "↗️"
-        case .E:  return "➡️"
-        case .SE: return "↘️"
-        case .S:  return "⬇️"
-        case .SW: return "↙️"
-        case .W:  return "⬅️"
-        case .NW: return "↖️"
-        case .center: fatalError("Invalid output direction for transfer box")
-        }
-    }
+    
 
     override func validateConnections() -> Bool {
         
@@ -114,6 +100,12 @@ class SwitchBox: Machine {
         for widge in widgesInState(WaitingToTransfer) {
             selectedOutput.insert(widge)
         }
+    }
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        // toggle output
+        let currentIndex = find(outputs(), selectedOutput)!
+        selectedOutput = outputs()[(currentIndex + 1) % outputs().count]
     }
     
     // MARK: Debug

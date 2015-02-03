@@ -30,15 +30,17 @@ class Transformer: Machine {
         
         box = Util.zoneBoxWithBorder(UIColor.greenColor(), innerColor: UIColor.darkGrayColor())
         addChild(box)
-        
-        addInput(originZone^(.center), name: "input", startingState: WaitingToTransform)
-        addOutput(originZone^(.center), name: "output")
-        
+
         self.userInteractionEnabled = true
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func addConnectionPoints() {
+        addInput(originZone^(.center), name: "input", startingState: WaitingToTransform)
+        addOutput(originZone^(.center), name: "output")
     }
     
     // MARK: Gameplay Phase

@@ -50,9 +50,12 @@
 		9292EE611A7EC32100311CF6 /* january-1.level in Resources */ = {isa = PBXBuildFile; fileRef = 92714AE81A748E98009AFC31 /* january-1.level */; };
 		9292EE621A7EC45200311CF6 /* january-2.level in Resources */ = {isa = PBXBuildFile; fileRef = 92CD66731A315E1B00AA2E74 /* january-2.level */; };
 		9292EE691A7F409800311CF6 /* january-3.level in Resources */ = {isa = PBXBuildFile; fileRef = 9292EE681A7F409800311CF6 /* january-3.level */; };
+		9292EE6B1A7F4E4A00311CF6 /* january-4.level in Resources */ = {isa = PBXBuildFile; fileRef = 9292EE6A1A7F4E4A00311CF6 /* january-4.level */; };
 		92AB7F771A0B3AB500128B91 /* Machine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB7F761A0B3AB500128B91 /* Machine.swift */; };
 		92AB7F791A0B568C00128B91 /* Belt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB7F781A0B568C00128B91 /* Belt.swift */; };
 		92C1FCA319E9D439001C1178 /* ConnectionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FCA219E9D439001C1178 /* ConnectionPoint.swift */; };
+		92C566B61A7F4FAC00AB4234 /* CoachMarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C566B51A7F4FAC00AB4234 /* CoachMarks.swift */; };
+		92C566BB1A807D1100AB4234 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C566BA1A807D1100AB4234 /* Helpers.swift */; };
 		92C7FB001A0F070000ED13AD /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7FAFF1A0F070000ED13AD /* LevelViewController.swift */; };
 		92C7FB021A0F07D500ED13AD /* GridOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7FB011A0F07D500ED13AD /* GridOverlay.swift */; };
 		92E7CB8D1A1DB33A007A78DA /* LevelFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7CB8C1A1DB33A007A78DA /* LevelFileParser.swift */; };
@@ -123,9 +126,12 @@
 		92893B871A280B730069C3A4 /* SwitchBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchBox.swift; sourceTree = "<group>"; };
 		929198D61A286C2700A0EF35 /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		9292EE681A7F409800311CF6 /* january-3.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-3.level"; sourceTree = "<group>"; };
+		9292EE6A1A7F4E4A00311CF6 /* january-4.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-4.level"; sourceTree = "<group>"; };
 		92AB7F761A0B3AB500128B91 /* Machine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Machine.swift; sourceTree = "<group>"; };
 		92AB7F781A0B568C00128B91 /* Belt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Belt.swift; sourceTree = "<group>"; };
 		92C1FCA219E9D439001C1178 /* ConnectionPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionPoint.swift; sourceTree = "<group>"; };
+		92C566B51A7F4FAC00AB4234 /* CoachMarks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarks.swift; sourceTree = "<group>"; };
+		92C566BA1A807D1100AB4234 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		92C7FAFF1A0F070000ED13AD /* LevelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
 		92C7FB011A0F07D500ED13AD /* GridOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridOverlay.swift; sourceTree = "<group>"; };
 		92CD66731A315E1B00AA2E74 /* january-2.level */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "january-2.level"; sourceTree = "<group>"; };
@@ -227,6 +233,7 @@
 				84A4CD921831FA6D00DAD99C /* Custom Views */,
 				DD17B2F218340D650011AC7C /* Widge Graph */,
 				84374E3A182CB4FA00F74638 /* Machines */,
+				92C566B41A7F4F5500AB4234 /* BackgroundSprite */,
 				92576ECC1A147A0400815C05 /* Utility */,
 				84872C03182607D5008F86DE /* Images.xcassets */,
 				84872BED182607D4008F86DE /* Supporting Files */,
@@ -300,6 +307,7 @@
 				9289332D1A0ECDB40013A598 /* Constants.swift */,
 				9289332F1A0ECEB90013A598 /* Utility.swift */,
 				92576EC61A14679F00815C05 /* Zone.swift */,
+				92C566BA1A807D1100AB4234 /* Helpers.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -322,8 +330,17 @@
 				92714AE81A748E98009AFC31 /* january-1.level */,
 				92CD66731A315E1B00AA2E74 /* january-2.level */,
 				9292EE681A7F409800311CF6 /* january-3.level */,
+				9292EE6A1A7F4E4A00311CF6 /* january-4.level */,
 			);
 			name = January;
+			sourceTree = "<group>";
+		};
+		92C566B41A7F4F5500AB4234 /* BackgroundSprite */ = {
+			isa = PBXGroup;
+			children = (
+				92C566B51A7F4FAC00AB4234 /* CoachMarks.swift */,
+			);
+			name = BackgroundSprite;
 			sourceTree = "<group>";
 		};
 		92C62CEE1A148C1800DC2D5C /* Levels */ = {
@@ -458,6 +475,7 @@
 				92714AE41A744AFB009AFC31 /* test-1-input-gravity-output.level in Resources */,
 				926B3D951A1F2F730095D60F /* test-3-belts-and-switchboxes.level in Resources */,
 				926BD2971A15FAE4005BD6FF /* LevelTemplate in Resources */,
+				9292EE6B1A7F4E4A00311CF6 /* january-4.level in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +502,7 @@
 				92C7FB001A0F070000ED13AD /* LevelViewController.swift in Sources */,
 				928933261A0EB8CE0013A598 /* Transformer.swift in Sources */,
 				928933301A0ECEB90013A598 /* Utility.swift in Sources */,
+				92C566BB1A807D1100AB4234 /* Helpers.swift in Sources */,
 				928933241A0EB37C0013A598 /* Output.swift in Sources */,
 				92576EC71A14679F00815C05 /* Zone.swift in Sources */,
 				9270239D1A08A7B2004DB6CB /* Widge.swift in Sources */,
@@ -503,6 +522,7 @@
 				92C7FB021A0F07D500ED13AD /* GridOverlay.swift in Sources */,
 				92FBF2B51A1C54A300C7300D /* GameOverViewController.swift in Sources */,
 				92576EC91A14791800815C05 /* LevelSelectViewController.swift in Sources */,
+				92C566B61A7F4FAC00AB4234 /* CoachMarks.swift in Sources */,
 				92F43F8D1A6319A500119A6D /* FileParsingExtensions.swift in Sources */,
 				92E7CB8D1A1DB33A007A78DA /* LevelFileParser.swift in Sources */,
 				92717C181A2999A100D5C7A6 /* Combiner.swift in Sources */,

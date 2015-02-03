@@ -23,6 +23,20 @@ enum Direction : String {
     case center = "center"
 }
 
+func opposite(direction: Direction) -> Direction {
+    switch direction {
+    case .N: return .S
+    case .NE:return .SW
+    case .E: return .W
+    case .SE:return .NW
+    case .S: return .N
+    case .SW:return .NE
+    case .W: return .E
+    case .NW:return .SE
+    case .center:return .center
+    }
+}
+
 class Util : NSObject {
     
     class func zoneBoxWithColor(color: UIColor) -> SKSpriteNode {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SpriteKit
 
 enum ParseStatus {
     case Waiting, InProgress, Failed, Success
@@ -19,6 +20,7 @@ enum LevelFileSection : String {
     case WidgeTypes = "@WidgeTypes"
     case Actions  = "@Actions"
     case Machines = "@Machines"
+    case StaticSprites = "@StaticSprites"
     case Context  = "@Context"
 }
 
@@ -225,6 +227,12 @@ class LevelFileParser {
             } else {
                 machine.name! += "[\(currentLine)]"
                 level.addMachine(machine)
+            }
+        case .StaticSprites:
+            if parts[0] == "coach-direction" {
+                let sprite = SKSpriteNode(coachMarkForWidgeType: level.widgeType(parts[1]), direction: Direction(rawValue:parts[2])!)
+                sprite.position = Zone(parts[3])^(.center)
+                level.addChild(sprite)
             }
             
         case .Context:

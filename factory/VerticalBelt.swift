@@ -37,16 +37,18 @@ class VerticalBelt: Mover {
         let sprite = SKSpriteNode(color: UIColor(red: 0.0, green: 0.4, blue: 0.9, alpha: 1.0), size: CGSizeMake(kVerticalBeltWidth, ZoneHeight * CGFloat(thruZone.y - originZone.y + 1)))
         sprite.anchorPoint = CGPointZero
         addChild(sprite)
-        
+    }
+
+    required override init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func addConnectionPoints() {
         let inputZone  = (direction == .N) ? originZone : thruZone
         let outputZone = (direction == .N) ? thruZone : originZone
         
         addInput(inputZone^(.center), name:"input", startingState: Moving)
         addOutput(outputZone^(.center), name:"output")
-    }
-
-    required override init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
         
     override func allow(#inputPoint: ConnectionPoint, toConnectFromMachine machine: Machine) -> Bool {

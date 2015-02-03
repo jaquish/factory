@@ -78,17 +78,6 @@ class Combiner: BeltMachine {
         
         upperHalfNode = box
         
-        // gravity into the container
-        addInput(upperHalfZone^(.center), name: "container-input", startingState: Contained)
-
-        // no gravity inside of machine, instead, move widges manually
-        
-        // widge out of the container
-        addInput(lowerHalfZone^(.center), name: "belt-input", startingState: Source)
-        addOutput(lowerHalfZone^(.center), name:"belt-output")
-        
-        
-        
         self.userInteractionEnabled = true
     }
     
@@ -96,31 +85,15 @@ class Combiner: BeltMachine {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func addConnectionPoints() {
+        // gravity into the container
+        addInput(upperHalfZone^(.center), name: "container-input", startingState: Contained)
         
-        let location = (touches.anyObject() as UITouch).locationInNode(self)
+        // no gravity inside of machine, instead, move widges manually
         
-        if upperHalfNode.containsPoint(location) {
-            
-            if processingTimeRemaining > 0 {
-                println("Can't drop widge during processing")
-                return
-            }
-            
-            if containedCount > 0 {
-                containedCount--
-                // drop contained type
-                let created = Widge(widgeType: containedType)
-                scene?.addChild(created)
-                created.position = connector("container-input").position
-                created.owner = self
-                created.state = InternalGravity
-            }
-        } else if lowerHalfNode.containsPoint(location) {
-            isOn = !isOn
-        } else {
-            println("Touch not inside combiner. Investigate")
-        }
+        // widge out of the container
+        addInput(lowerHalfZone^(.center), name: "belt-input", startingState: Source)
+        addOutput(lowerHalfZone^(.center), name:"belt-output")
     }
     
     // MARK: Gameplay Phase
@@ -186,6 +159,33 @@ class Combiner: BeltMachine {
             } else {
                 output.insert(widge) // pass through
             }
+        }
+    }
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        
+        let location = (touches.anyObject() as UITouch).locationInNode(self)
+        
+        if upperHalfNode.containsPoint(location) {
+            
+            if processingTimeRemaining > 0 {
+                println("Can't drop widge during processing")
+                return
+            }
+            
+            if containedCount > 0 {
+                containedCount--
+                // drop contained type
+                let created = Widge(widgeType: containedType)
+                scene?.addChild(created)
+                created.position = connector("container-input").position
+                created.owner = self
+                created.state = InternalGravity
+            }
+        } else if lowerHalfNode.containsPoint(location) {
+            isOn = !isOn
+        } else {
+            println("Touch not inside combiner. Investigate")
         }
     }
     

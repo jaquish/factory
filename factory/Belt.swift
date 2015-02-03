@@ -46,13 +46,6 @@ class Belt: Mover {
         let spriteNode = SKSpriteNode(color: UIColor.grayColor(), size: CGSizeMake(ZoneWidth * CGFloat(thruZone.x - originZone.x + 1), HorizontalBeltHeight))
         spriteNode.anchorPoint = CGPointZero
         addChild(spriteNode)
-        
-        for zone in ZoneSequence(originZone, thruZone) {
-            addInput(zone^(.center), name: "input-\(zone.x)", startingState: Moving, priority:PriorityLevelLow)
-            addOutput(zone^(.center), name: "output-\(zone.x)", priority: PriorityLevelLow)
-        }
-        
-        addOutput(overEdgeZone^(.center), name: "over-edge")
     }
     
     class override func numberOfInitializerParameters() -> Int {
@@ -61,6 +54,15 @@ class Belt: Mover {
 
     required override init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func addConnectionPoints() {
+        for zone in ZoneSequence(originZone, thruZone) {
+            addInput(zone^(.center), name: "input-\(zone.x)", startingState: Moving, priority:PriorityLevelLow)
+            addOutput(zone^(.center), name: "output-\(zone.x)", priority: PriorityLevelLow)
+        }
+        
+        addOutput(overEdgeZone^(.center), name: "over-edge")
     }
     
     override func allow(#inputPoint: ConnectionPoint, toConnectFromMachine machine: Machine) -> Bool {

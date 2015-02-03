@@ -30,13 +30,15 @@ class Input: Machine {
         label.fontSize = LabelFontSize
         addChild(label)
         
-        addOutput(originZone^(.center), name: "next")
-        
         userInteractionEnabled = true
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func addConnectionPoints() {
+        addOutput(originZone^(.center), name: "next")
     }
     
     // MARK: Gameplay Phase

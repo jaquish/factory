@@ -18,17 +18,19 @@ class TransferBox: Machine {
         zPosition = SpriteLayerInFrontOfWidges
         
         addChild(Util.zoneBoxWithBorder(UIColor.darkGrayColor(), innerColor: UIColor.grayColor()))
-        
+    }
+    
+    // MARK: Connection Phase
+    
+    override func addConnectionPoints() {
         // up to 3 inputs
         for i in 0..<3 {
             addInput(originZone^(.center), name: "input-\(i)", startingState: WaitingToTransfer, priority: 1)
         }
-
+        
         // only 1 output
         addOutput(originZone^(.center), name: "output", priority: 1)
     }
-    
-    // MARK: Connection Phase
     
     override func allow(#inputPoint: ConnectionPoint, toConnectFromMachine machine: Machine) -> Bool {
         return machine is Mover && (machine as Mover).stateAtZone(Zone(containing:inputPoint.position)) != .Start
