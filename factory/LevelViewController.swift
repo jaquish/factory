@@ -108,6 +108,9 @@ class LevelViewController: UIViewController, SKSceneDelegate {
     func debugNotification(notification: NSNotification) {
         let hidden = debugViews[0].hidden
         debugViews.map { $0.hidden = !hidden }
+        
+        (self.view as SKView).showsFPS = hidden
+        (self.view as SKView).showsNodeCount = hidden
     }
     
     func outputCountNotification(notification: NSNotification) {
