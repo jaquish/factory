@@ -60,6 +60,8 @@ class LevelViewController: UIViewController, SKSceneDelegate {
             doubleTapGesture.numberOfTouchesRequired = 2
             doubleTapGesture.requireGestureRecognizerToFail(tripleTapGesture)
             view.addGestureRecognizer(doubleTapGesture)
+            
+            toggleDebug()
         }
     }
     
@@ -73,10 +75,6 @@ class LevelViewController: UIViewController, SKSceneDelegate {
         } else {
             return Int(UIInterfaceOrientationMask.All.rawValue)
         }
-    }
-    
-    override func prefersStatusBarHidden() -> Bool {
-        return true
     }
     
     func didFinishUpdateForScene(scene: SKScene) {
