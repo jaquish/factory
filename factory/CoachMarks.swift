@@ -22,15 +22,32 @@ extension SKSpriteNode {
         
         let arrow = SKLabelNode(text: arrowCharForDirection(direction))
         arrow.fontSize = 24.0
-        arrow.color = UIColor.greenColor()
         arrow.verticalAlignmentMode = .Center
         arrow.position = insetFromDirection(direction)
         
         addChild(arrow)
     }
     
-    convenience init(coachMarkForTransformationFrom: WidgeType, to: WidgeType) {
-        self.init(texture: nil, color: UIColor.darkGrayColor(), size: ZoneSize)
+    convenience init(coachMarkForTransformationFrom from: WidgeType, to: WidgeType, direction: Direction) {
+        self.init(texture: nil, color: nil, size: ZoneSize)
+        
+        let miniInput = Widge(widgeType: from)
+        miniInput.xScale = 0.4
+        miniInput.yScale = 0.4
+        miniInput.position = insetFromDirection(opposite(direction))
+        addChild(miniInput)
+        
+        let miniOutput = Widge(widgeType: to)
+        miniOutput.xScale = 0.4
+        miniOutput.yScale = 0.4
+        miniOutput.position = insetFromDirection(direction)
+        addChild(miniOutput)
+        
+        let arrow = SKLabelNode(text: arrowCharForDirection(direction))
+        arrow.fontSize = 24.0
+        arrow.verticalAlignmentMode = .Center
+        arrow.zPosition = 1
+        addChild(arrow)
     }
     
     func arrowCharForDirection(d: Direction) -> String {

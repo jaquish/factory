@@ -27,6 +27,11 @@ Transformer 10,6 step3
 Gravity 13,4 13,6
 Output 13,4
 
+@StaticSprites
+coach-transformation red yellow E 6,7
+coach-transformation yellow blue E 8,7
+coach-transformation blue purple E 10,7
+
 @Context
 inputs:red,yellow,blue,purple
 input-order:linear

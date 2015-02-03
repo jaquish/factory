@@ -33,6 +33,9 @@ Belt 4,1 11,1 W
 Combiner 9,1 combine
 Output 4,1
 
+@StaticSprites
+coach-transformation yellow blue W 4,8
+
 @Context
 inputs:red,yellow
 input-order:linear

@@ -233,6 +233,10 @@ class LevelFileParser {
                 let sprite = SKSpriteNode(coachMarkForWidgeType: level.widgeType(parts[1]), direction: Direction(rawValue:parts[2])!)
                 sprite.position = Zone(parts[3])^(.center)
                 level.addChild(sprite)
+            } else if parts[0] == "coach-transformation" {
+                let sprite = SKSpriteNode(coachMarkForTransformationFrom: level.widgeType(parts[1]), to: level.widgeType(parts[2]), direction: Direction(rawValue:parts[3])!)
+                sprite.position = Zone(parts[4])^(.center)
+                level.addChild(sprite)
             }
             
         case .Context:
