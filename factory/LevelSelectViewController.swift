@@ -40,6 +40,12 @@ class LevelSelectViewController: UIViewController, UIPickerViewDelegate, UIPicke
         pickerView(picker, didSelectRow: 0, inComponent: 0)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        let parser = LevelFileParser(url: levelFileURLS[picker.selectedRowInComponent(0)])
+        currentLevel = parser.parseLevel()
+    }
+    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
