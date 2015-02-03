@@ -37,6 +37,32 @@ class VerticalBelt: Mover {
         let sprite = SKSpriteNode(color: UIColor(red: 0.0, green: 0.4, blue: 0.9, alpha: 1.0), size: CGSizeMake(kVerticalBeltWidth, ZoneHeight * CGFloat(thruZone.y - originZone.y + 1)))
         sprite.anchorPoint = CGPointZero
         addChild(sprite)
+        
+        for zone in ZoneSequence(originZone, thruZone) {
+            var animation = SKAction.animateWithTextures([
+                SKTexture(imageNamed: "moving-vertical-1"),
+                SKTexture(imageNamed: "moving-vertical-2"),
+                SKTexture(imageNamed: "moving-vertical-3"),
+                SKTexture(imageNamed: "moving-vertical-4"),
+                SKTexture(imageNamed: "moving-vertical-5"),
+                SKTexture(imageNamed: "moving-vertical-6"),
+                SKTexture(imageNamed: "moving-vertical-7"),
+                SKTexture(imageNamed: "moving-vertical-8")
+                ], timePerFrame: 0.08)
+            
+            if direction == .S {
+                animation = animation.reversedAction()
+            }
+            
+            let run = SKAction.repeatActionForever(animation)
+            
+            let tile = SKSpriteNode()
+            tile.size = CGSize(width: kVerticalBeltWidth, height: ZoneHeight)
+            tile.anchorPoint = CGPointZero
+            tile.position = Zone(0, zone.y - originZone.y)^(.SW)
+            tile.runAction(run, withKey: "run")
+            addChild(tile)
+        }
     }
 
     required override init?(coder aDecoder: NSCoder) {
