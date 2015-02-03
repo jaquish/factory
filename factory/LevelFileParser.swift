@@ -248,7 +248,7 @@ class LevelFileParser {
                     level.inputTypes += widgeTypeIDs.map { self.level.widgeType($0) }
                 case "winning-outputs":
                     let widgeTypeIDs = parts[1].componentsSeparatedByString(",")
-                    level.outputs += widgeTypeIDs.map { self.level.widgeType($0) }
+                    level.winning_outputs += widgeTypeIDs.map { self.level.widgeType($0) }
                 case "input-order":
                     level.inputOrder = InputOrder(rawValue: value)!
                 case "endgame-output-count":

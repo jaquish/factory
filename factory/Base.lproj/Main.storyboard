@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6246"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Level Select View Controller-->
@@ -121,14 +122,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BR1-sl-CrJ">
+                                <rect key="frame" x="70" y="188.5" width="628" height="579"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAME OVER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGN-hG-GD2">
-                                <rect key="frame" x="292" y="493" width="183.5" height="38.5"/>
+                                <rect key="frame" x="292" y="100" width="183.5" height="38.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAa-6J-gs9">
-                                <rect key="frame" x="298" y="631.5" width="172" height="36"/>
+                                <rect key="frame" x="298" y="888" width="172" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Back to Main Menu">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -137,15 +142,31 @@
                                     <action selector="unwindToMainMenu" destination="QKy-2M-EL1" eventType="touchUpInside" id="Qpr-0a-ydo"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePQ-EP-g0k">
+                                <rect key="frame" x="363" y="817.5" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="BR1-sl-CrJ" firstAttribute="leading" secondItem="RUP-G8-dUQ" secondAttribute="leadingMargin" constant="50" id="74i-nB-sZd"/>
+                            <constraint firstItem="PAa-6J-gs9" firstAttribute="top" secondItem="ePQ-EP-g0k" secondAttribute="bottom" constant="50" id="7Ks-B6-wgb"/>
+                            <constraint firstItem="fGN-hG-GD2" firstAttribute="top" secondItem="Nbl-cc-xD0" secondAttribute="bottom" constant="100" id="GbM-Nc-gL8"/>
                             <constraint firstAttribute="centerX" secondItem="PAa-6J-gs9" secondAttribute="centerX" id="Scf-q3-DXd"/>
-                            <constraint firstItem="PAa-6J-gs9" firstAttribute="top" secondItem="fGN-hG-GD2" secondAttribute="bottom" constant="100" id="x0W-y4-2Qf"/>
+                            <constraint firstItem="BR1-sl-CrJ" firstAttribute="top" secondItem="fGN-hG-GD2" secondAttribute="bottom" constant="50" id="TJz-PY-4Qe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BR1-sl-CrJ" secondAttribute="trailing" constant="50" id="Xdr-rn-gQ6"/>
+                            <constraint firstAttribute="centerX" secondItem="ePQ-EP-g0k" secondAttribute="centerX" id="lQb-Bj-CXO"/>
+                            <constraint firstItem="2Wy-yY-bDd" firstAttribute="top" secondItem="PAa-6J-gs9" secondAttribute="bottom" constant="100" id="rHE-Pg-0fK"/>
                             <constraint firstAttribute="centerX" secondItem="fGN-hG-GD2" secondAttribute="centerX" id="xjW-ng-YjR"/>
-                            <constraint firstAttribute="centerY" secondItem="fGN-hG-GD2" secondAttribute="centerY" id="yyz-8O-acD"/>
+                            <constraint firstItem="ePQ-EP-g0k" firstAttribute="top" secondItem="BR1-sl-CrJ" secondAttribute="bottom" constant="50" id="z71-Ws-iAk"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="outputSummary" destination="BR1-sl-CrJ" id="6QY-Ot-nsY"/>
+                        <outlet property="summaryLabel" destination="ePQ-EP-g0k" id="faJ-xU-eMH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8VY-7f-HW3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

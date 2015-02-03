@@ -102,6 +102,13 @@ class LevelViewController: UIViewController, SKSceneDelegate {
         self.performSegueWithIdentifier("kSegueGameOver", sender: nil)
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "kSegueGameOver" {
+            let gameoverVC = segue.destinationViewController as GameOverViewController
+            gameoverVC.level = level
+        }
+    }
+    
     func toggleDebug() {
         let hidden = debugViews[0].hidden
         debugViews.map { $0.hidden = !hidden }

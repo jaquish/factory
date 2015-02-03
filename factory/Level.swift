@@ -31,6 +31,8 @@ class Level: SKScene {
     
     var widges: [Widge] = []
     
+    var winning_outputs:[WidgeType] = []
+    
     private var inputIndex = 0
     var inputOrder:InputOrder = .Linear
     var inputTypes: [WidgeType] = []
