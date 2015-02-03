@@ -139,7 +139,7 @@ class Machine: SKSpriteNode, LevelFileObject {
         newWidge.owner = self
         newWidge.state = state
         newWidge.position = position
-        scene?.addChild(newWidge)
+        scene!.addChild(newWidge)
         level.widges.append(newWidge)
         return newWidge
     }

@@ -176,11 +176,7 @@ class Combiner: BeltMachine {
             if containedCount > 0 {
                 containedCount--
                 // drop contained type
-                let created = Widge(widgeType: containedType)
-                scene?.addChild(created)
-                created.position = connector("container-input").position
-                created.owner = self
-                created.state = InternalGravity
+                createWidge(containedType, position: connector("container-input").position, state: InternalGravity)
             }
         } else if lowerHalfNode.containsPoint(location) {
             isOn = !isOn
