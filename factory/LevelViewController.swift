@@ -9,9 +9,14 @@
 import UIKit
 import SpriteKit
 
+let DebugViewNotification = "DebugViewNotification"
+let OutputCountNotification = "OutputCountNotification"
+
 class LevelViewController: UIViewController, SKSceneDelegate {
 
     var level: Level!
+    var debugViews: [UIView] = []
+    var statusBar: StatusBar!
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -28,12 +33,20 @@ class LevelViewController: UIViewController, SKSceneDelegate {
             skView.presentScene(scene)
             
             if DEBUG_SHOW_GRID {
-                self.view.addSubview(GridOverlay(frame: self.view.bounds))
+                let grid = GridOverlay(frame: self.view.bounds)
+                self.view.addSubview(grid)
+                debugViews.append(grid)
             }
             
             if DEBUG_SHOW_NUMBERS {
-                self.view.addSubview(GridNumbering(frame: self.view.bounds))
+                let numbers = GridNumbering(frame: self.view.bounds)
+                self.view.addSubview(numbers)
+                debugViews.append(numbers)
             }
+            
+            statusBar = StatusBar()
+            view.addSubview(statusBar)
+            statusBar.updateWith(0, endGameCount: level.endgame_output_count)
             
             // double-touch triple-tap back to level selection screen
             let tripleTapGesture = UITapGestureRecognizer (target: self, action: "gameOver")
@@ -48,6 +61,17 @@ class LevelViewController: UIViewController, SKSceneDelegate {
             doubleTapGesture.requireGestureRecognizerToFail(tripleTapGesture)
             view.addGestureRecognizer(doubleTapGesture)
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "debugNotification:", name: DebugViewNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "outputCountNotification:", name: OutputCountNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: DebugViewNotification, object: nil)
     }
     
     override func shouldAutorotate() -> Bool {
@@ -79,5 +103,14 @@ class LevelViewController: UIViewController, SKSceneDelegate {
     func gameOver() {
         (self.view as SKView).paused = true
         self.performSegueWithIdentifier("kSegueGameOver", sender: nil)
+    }
+    
+    func debugNotification(notification: NSNotification) {
+        let hidden = debugViews[0].hidden
+        debugViews.map { $0.hidden = !hidden }
+    }
+    
+    func outputCountNotification(notification: NSNotification) {
+        statusBar.updateWith(level.outputs.count, endGameCount: level.endgame_output_count)
     }
 }

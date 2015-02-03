@@ -169,6 +169,7 @@ class Level: SKScene {
     
     func addOutput(widgeType: WidgeType) {
         outputs.append(widgeType)
+        NSNotificationCenter.defaultCenter().postNotificationName(OutputCountNotification, object: nil)
     }
     
     // MARK: Debug
