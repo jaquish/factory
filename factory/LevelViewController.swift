@@ -113,12 +113,13 @@ class LevelViewController: UIViewController, SKSceneDelegate {
         let hidden = debugViews[0].hidden
         debugViews.map { $0.hidden = !hidden }
         
-        (self.view as SKView).showsFPS = hidden
-        (self.view as SKView).showsNodeCount = hidden
+        (view as SKView).showsFPS = hidden
+        (view as SKView).showsNodeCount = hidden
     }
     
     func togglePause(sender: AnyObject) {
-        
+        let skView = view as SKView
+        skView.paused = !skView.paused
     }
     
     func updateStatusBarCount() {
