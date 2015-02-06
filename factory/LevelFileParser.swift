@@ -218,6 +218,10 @@ class LevelFileParser {
                 case "Combiner":
                     let action = level.action(parts[2]) as CombinerAction
                     machine = Combiner(Zone(parts[1]), action:action)
+                case "TransportNetwork":
+                    let points = parts[1].componentsSeparatedByString(":")
+                    let zones = points.map { Zone($0) }
+                    machine = TransportNetwork(zones: zones)
                 default:
                     failWithError("Unknown class of machine '\(machineType)'"); return
             }
