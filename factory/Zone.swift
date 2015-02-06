@@ -45,6 +45,10 @@ struct Zone : Printable, Hashable, Equatable {
         }
     }
     
+    func originPoint() -> CGPoint {
+        return worldPoint(.SW)
+    }
+    
     func zone(cp: Direction) -> Zone {
         switch (cp) {
             case .N:     return Zone(x    , y + 1)

@@ -66,6 +66,11 @@ func ==(a: TransportZone, b: TransportZone) -> Bool {
     return a.zone == b.zone
 }
 
+private let InTransport: WidgeState = "InTransport"
+private let TransportSpeedPerZone: CFTimeInterval = 0.5
+private let UserInfoTimeInZone = "UserInfoTimeInZone"
+private let UserInfoTransportZone = "UserInfoTransportZone"
+
 class TransportNetwork: Machine {
     
     private var transportZones: [TransportZone]
@@ -106,6 +111,12 @@ class TransportNetwork: Machine {
             }
         }
         
+        // display
+        for tz in transportZones {
+            let translucentTube = Util.zoneBoxWithColor(UIColor.yellowColor().colorWithAlphaComponent(0.5))
+            translucentTube.position = tz.zone.originPoint()
+        }
+        
         super.init(originZone:ZoneZero)
     }
     
@@ -113,6 +124,71 @@ class TransportNetwork: Machine {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func addConnectionPoints() {
+        for zone in entranceZones() {
+            addInput(zone.zone^(.center), name: "input-\(zone.zone.x)-\(zone.zone.y))", startingState: InTransport)
+        }
+        
+        for zone in exitZones() {
+            addOutput(zone.zone^(.center), name: "output-\(zone.zone.x)-\(zone.zone.y))")
+        }
+    }
+    
     override func update(_dt: CFTimeInterval) {
+        
+        for connector in inputs() {
+            let widges = connector.dequeueWidges()
+
+            // assign to zone
+            let matchingZone = transportZones.filter { $0.zone == Zone(containing:connector.position) }.first!
+            
+            for widge in widges {
+                widge.userData = [
+                        UserInfoTransportZone : matchingZone,
+                        UserInfoTimeInZone : 0.0
+                    ]
+            }
+        }
+        
+        for widge in widgesInState(InTransport) {
+            let current = widge.userData![UserInfoTimeInZone] as CFTimeInterval
+            widge.userData![UserInfoTimeInZone] = current + _dt
+            
+            if widge.userData![UserInfoTimeInZone] as CFTimeInterval > TransportSpeedPerZone {
+                
+                let tz = widge.userData![UserInfoTransportZone]! as TransportZone
+                if tz.type == .Exit {
+                    // exiting the transport network
+                    widge.userData = nil
+                    let matchingOutput = outputs().filter { tz.zone == Zone(containing:$0.position) }.first!
+                    matchingOutput.insert(widge)
+                } else {
+                    // move to next zone
+                    let current = widge.userData![UserInfoTimeInZone] as CFTimeInterval
+                    widge.userData![UserInfoTimeInZone] = current - TransportSpeedPerZone
+                    
+                    widge.userData![UserInfoTransportZone] = tz.next
+                    widge.position = tz.next.zone^(.center)
+                }
+            }
+        }
+    }
+    
+    private func entranceZones() -> [TransportZone] {
+        return transportZones.filter {
+            switch $0.type! {
+            case .EntranceMoveTo(let a): return true
+            default: return false
+            }
+        }
+    }
+    
+    private func exitZones() -> [TransportZone] {
+        return transportZones.filter {
+            switch $0.type! {
+            case .Exit: return true
+            default: return false
+            }
+        }
     }
 }
