@@ -67,7 +67,7 @@ func ==(a: TransportZone, b: TransportZone) -> Bool {
 }
 
 private let InTransport: WidgeState = "InTransport"
-private let TransportSpeedPerZone: CFTimeInterval = 0.5
+private let TransportSpeedPerZone: CFTimeInterval = 0.25
 private let UserInfoTimeInZone = "UserInfoTimeInZone"
 private let UserInfoTransportZone = "UserInfoTransportZone"
 
@@ -111,13 +111,14 @@ class TransportNetwork: Machine {
             }
         }
         
+        super.init(originZone:ZoneZero)
+        
         // display
         for tz in transportZones {
-            let translucentTube = Util.zoneBoxWithColor(UIColor.yellowColor().colorWithAlphaComponent(0.5))
+            let translucentTube = Util.zoneBoxWithColor(UIColor.lightGrayColor())
             translucentTube.position = tz.zone.originPoint()
+            addChild(translucentTube)
         }
-        
-        super.init(originZone:ZoneZero)
     }
     
     required init?(coder aDecoder: NSCoder) {
