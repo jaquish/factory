@@ -10,7 +10,7 @@ Day 3
 [basic]
 
 @Actions
-combine Combination red,yellow orange black
+combine Combiner red,yellow orange black
 
 @Machines
 Input 1,10 3

@@ -1,0 +1,29 @@
+# Comments start with #
+# [] means a comma-delimited list, no spaces
+
+@Metadata
+# Format-Version:<string>
+Name: Side By Side Combiners
+
+@WidgeTypes
+[basic]
+
+@Actions
+combine Combiner red 1 yellow yellow:orange
+
+@Machines
+Input 2,10
+Gravity 2,5 2,10
+Belt 2,5 10,5 E
+Combiner 6,5 combine
+Combiner 7,5 combine
+#Combiner 8,5 combine
+#Combiner 9,5 combine
+Gravity 11,2 11,5
+Output 11,2
+
+@StaticSprites
+
+@Context
+inputs:red
+endgame-output-count:100

@@ -13,7 +13,7 @@ along belt, to output.
 [basic]
 
 @Actions
-make-yellow Transformation red yellow black
+make-yellow Transformer red yellow black
 
 @Machines
 
