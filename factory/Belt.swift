@@ -173,6 +173,8 @@ class Belt: Mover {
                 }
             }
         }
+        
+        garbagify(widgesInState(Moving))
 //        
 //        var newGarbage = [Widge]()
 //        

@@ -162,6 +162,37 @@ class Machine: SKSpriteNode, LevelFileObject {
         assert(level.widges.count == count - 1, "Expected one less widge after creating expected=\(count-1) actual=\(level.widges.count)")
     }
     
+    final func garbagify(widges: [Widge]) {
+        
+        if widges.count < 2 {
+            return
+        }
+        
+        var rootGarbageLists: [Widge:[Widge]] = [:]
+        
+        for i in 0 ..< widges.count-1 {
+            for j in i+1 ..< widges.count {
+                assert(widges[i].widgeID != widges[j].widgeID, "Don't compare to self")
+                
+                let widge1 = widges[i]
+                let widge2 = widges[j]
+                
+                if widge1.intersectsNode(widge2) {
+                    let (priority, other) = widge1.widgeID < widge2.widgeID ? (widge1,widge2) : (widge2,widge1)
+                    if !contains(rootGarbageLists.keys, priority) {
+                        rootGarbageLists[priority] = []
+                    }
+                    rootGarbageLists[priority]?.append(other)
+                }
+            }
+        }
+        
+        for (keep, deleteList) in rootGarbageLists {
+            transform(keep, toType: keep.widgeType.garbage)
+            deleteList.map{ self.deleteWidge($0) }
+        }
+    }
+    
     final func widges() -> [Widge] {
         return level.widges.filter { ($0.owner as? Machine) == self }
     }

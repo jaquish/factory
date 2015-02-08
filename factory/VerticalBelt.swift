@@ -107,6 +107,8 @@ class VerticalBelt: Mover {
                 output.insert(widge)
             }
         }
+        
+        garbagify(widgesInState(Moving))
     }
     
     // MARK: Mover

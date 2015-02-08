@@ -35,7 +35,7 @@ coach-direction yellow E 8,7
 coach-direction orange S 2,4
 
 @Context
-inputs:red,yellow
+inputs:red
 input-order:linear
 winning-outputs:orange
 endgame-output-count:10

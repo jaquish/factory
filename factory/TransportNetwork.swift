@@ -173,6 +173,8 @@ class TransportNetwork: Machine {
                 }
             }
         }
+        
+        garbagify(widgesInState(InTransport))
     }
     
     private func entranceZones() -> [TransportZone] {
