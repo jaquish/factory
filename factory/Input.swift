@@ -44,7 +44,9 @@ class Input: Machine {
     // MARK: Gameplay Phase
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        generateWidge()
+        if level.inDebugMode {
+            generateWidge()
+        }
     }
     
     func generateWidge() {
