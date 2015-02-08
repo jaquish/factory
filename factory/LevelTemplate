@@ -21,6 +21,6 @@
 # coach-transformation <widgeTypeIn> <widgeTypeOut> <direction> <Zone>
 
 @Context
-# inputs          <[widgeTypeIDs]>
-# winning-outputs <[widgeTypeIDs]>
-# endgame-output-count <#>
+# inputs:<[widgeTypeIDs]>
+# winning-outputs:<[widgeTypeIDs]>
+# endgame-output-count:<#>

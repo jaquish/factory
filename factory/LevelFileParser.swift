@@ -203,6 +203,9 @@ class LevelFileParser {
                     }
                 case "Output":
                     machine = Output(Zone(parts[1]))
+                case "TimedTransformer":
+                    let action = level.action(parts[2]) as TransformerAction
+                    machine = TimedTransformer(Zone(parts[1]), action: action)
                 case "Transformer":
                     let action = level.action(parts[2]) as TransformerAction
                     machine = Transformer(Zone(parts[1]), action: action)
