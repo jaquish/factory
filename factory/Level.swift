@@ -108,6 +108,10 @@ class Level: SKScene {
             }
         }
         
+        for machine in machines {
+            machine.didMakeConnections()
+        }
+        
         var allConnectionsValid = true
         for machine in machines {
             machine.printConnections()

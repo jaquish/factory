@@ -103,6 +103,12 @@ class Belt: Mover {
         }
     }
     
+    override func didMakeConnections() {
+        for beltMachine in beltMachines() {
+            beltMachine.belt = self
+        }
+    }
+    
     override func validateConnections() -> Bool {
         return true
         // If there is an input, there should be an output
@@ -121,20 +127,12 @@ class Belt: Mover {
         dequeueAllWidges()
         
         for widge in widgesInState(Waiting) {
-            // find the machine it's waiting on
-            for connector in (outputs().filter{ $0.destination is BeltMachine }) {
-                
-                
-                let beltMachine = connector.destination as BeltMachine
-                let target = (direction == .E) ? beltMachine.waitPointOnLeft()
-                    : beltMachine.waitPointOnRight()
-                
-                if widge.position == target {
-                    // found the machine it was waiting for
-                    if beltMachine.isProcessingWidge() {
-                        widge.state = Moving // back to moving
-                    }
-                }
+            
+            let beltMachine = widge.userData!["waitingFor"] as BeltMachine
+            
+            if beltMachine.willAcceptBeltInput(widge) {
+                widge.state = Moving
+                widge.userData!["waitingFor"] = nil
             }
         }
         
@@ -146,27 +144,33 @@ class Belt: Mover {
             // If BeltMachine is ready to accept a new widge, continue.
             // Else, hold at wait point outside of machine. (todo: jiggle animation)
             // associate wait point with machine?
-            for connector in (outputs().filter{ $0.destination is BeltMachine }) {
+            for beltMachine in beltMachines() {
                 
-                let beltMachine = connector.destination as BeltMachine
-                let target = (direction == .E) ? beltMachine.waitPointOnLeft()
-                                               : beltMachine.waitPointOnRight()
+                let halfWidge = WidgeWidth / 2
+                let oldEdge = oldPosition.x    + ((direction == .E) ? halfWidge : -halfWidge)
+                let newEdge = widge.position.x + ((direction == .E) ? halfWidge : -halfWidge)
                 
-                if path(from: oldPosition, to: widge.position, ranOver: target) {
-                    if beltMachine.isProcessingWidge() {
-                        widge.position = target
+                if path(from: oldEdge, to: newEdge, ranOver: beltMachine.entranceBoundary()) {
+                    if beltMachine.willAcceptBeltInput(widge) {
+                        // already moved widge, just need to inform beltMachine
+                        beltMachine.waitForBeltInput(widge)
+                    } else {
+                        // wait
+                        widge.position = beltMachine.waitPointForEntrance()
                         widge.state = Waiting
+                        widge.userData!["waitingFor"] = beltMachine
                     }
                 }
             }
             
-            // Check state again, in case it was waiting
+            // If doesn't need to deal with BeltMachine, continue as normal
             if widge.state == Moving {
                 // check if widge passed over connection point
                 for connector in outputs() {
                     if path(from: oldPosition, to: widge.position, ranOver: connector.position) {
                         // TODO: Calculate extra distance delta
                         widge.changeXTo(connector.position.x)
+                        widge.userData!.removeAllObjects()
                         connector.insert(widge)
                         break
                     }
@@ -174,7 +178,13 @@ class Belt: Mover {
             }
         }
         
-        garbagify(widgesInState(Moving))
+        let deleted = garbagify(widgesInState(Moving) + widgesInState(Waiting))
+        
+        // TODO - tricky. What happens when you delete or transform a widge that is being waited on
+    }
+    
+    func beltMachines() -> [BeltMachine] {
+        return outputs().map{ $0.destination }.filter{ $0 is BeltMachine } as [BeltMachine]
     }
     
     // MARK: Debug

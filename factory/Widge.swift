@@ -44,6 +44,7 @@ class Widge: SKSpriteNode, LevelFileObject {
         }
         
         zPosition = SpriteLayerWidges
+        self.userData = [:]
     }
 
     required init?(coder aDecoder: NSCoder) {

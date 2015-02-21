@@ -79,6 +79,7 @@ class TimedTransformer: BeltMachine {
                 // End processing
                 cover.hidden = true
                 processingTimeRemaining = 0
+                beltMachineState = .Open
                 
                 for widge in widgesInState(Processing) {
                     output.insert(widge)
@@ -99,7 +100,6 @@ class TimedTransformer: BeltMachine {
                 transformed.state = Processing
                 processingTimeRemaining = ProcessingTime
                 cover.hidden = false
-                // wait for processing to complete
                 
             } else {
                 output.insert(widge) // pass through
@@ -115,9 +115,5 @@ class TimedTransformer: BeltMachine {
     
     override func baseZone() -> Zone {
         return lowerHalfZone
-    }
-    
-    override func isProcessingWidge() -> Bool {
-        return processingTimeRemaining > 0
     }
 }

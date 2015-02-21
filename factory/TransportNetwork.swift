@@ -160,7 +160,7 @@ class TransportNetwork: Machine {
                 let tz = widge.userData![UserInfoTransportZone]! as TransportZone
                 if tz.type == .Exit {
                     // exiting the transport network
-                    widge.userData = nil
+                    widge.userData!.removeAllObjects()
                     let matchingOutput = outputs().filter { tz.zone == Zone(containing:$0.position) }.first!
                     matchingOutput.insert(widge)
                 } else {

@@ -112,6 +112,7 @@ extension SKNode {
     }
 }
 
+// doesn't include from == ranOver
 func path(#from:CGPoint, #to:CGPoint, #ranOver:CGPoint) -> Bool {
     if (from.x == to.x && to.x == ranOver.x) {
         return min(from.y, to.y)...max(from.y, to.y) ~= ranOver.y && from.y != ranOver.y
@@ -120,4 +121,8 @@ func path(#from:CGPoint, #to:CGPoint, #ranOver:CGPoint) -> Bool {
     } else {
         return false
     }
+}
+
+func path(#from:CGFloat, #to:CGFloat, #ranOver:CGFloat) -> Bool {
+    return min(from, to)...max(from, to) ~= ranOver && from != ranOver
 }

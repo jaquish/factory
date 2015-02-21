@@ -190,10 +190,6 @@ class Combiner: BeltMachine {
     override func baseZone() -> Zone {
         return lowerHalfZone
     }
-    
-    override func isProcessingWidge() -> Bool {
-        return processingTimeRemaining > 0
-    }
 }
 
 class CombinerAction : Action {

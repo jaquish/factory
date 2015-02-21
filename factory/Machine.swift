@@ -73,6 +73,10 @@ class Machine: SKSpriteNode, LevelFileObject {
         return true // override for advanced decision making
     }
     
+    func didMakeConnections() {
+        
+    }
+    
     // return true if validation passes
     // if something is invalid, println the reason and return false
     func validateConnections() -> Bool {
@@ -147,6 +151,7 @@ class Machine: SKSpriteNode, LevelFileObject {
     final func transform(widge: Widge, toType: WidgeType) -> Widge {
         let count = level.widges.count
         let replacement = createWidge(toType, position: widge.position, state: widge.state)
+        replacement.userData = widge.userData
 
         deleteWidge(widge)
         assert(level.widges.count == count, "Expected same number of widges after transform \(level.widges.count) as before \(count)")
@@ -162,10 +167,10 @@ class Machine: SKSpriteNode, LevelFileObject {
         assert(level.widges.count == count - 1, "Expected one less widge after creating expected=\(count-1) actual=\(level.widges.count)")
     }
     
-    final func garbagify(widges: [Widge]) {
+    final func garbagify(widges: [Widge]) -> [Widge] {
         
         if widges.count < 2 {
-            return
+            return []
         }
         
         var rootGarbageLists: [Widge:[Widge]] = [:]
@@ -187,10 +192,19 @@ class Machine: SKSpriteNode, LevelFileObject {
             }
         }
         
+        var deleted: [Widge] = []
         for (keep, deleteList) in rootGarbageLists {
+            assert(deleteList.count < 2, "Undefined behavior when deleting multiple")
             transform(keep, toType: keep.widgeType.garbage)
+            if deleteList.first!.state == "Waiting" {
+                keep.userData = deleteList.first!.userData
+                keep.state = deleteList.first!.state
+            }
+            deleted += deleteList
             deleteList.map{ self.deleteWidge($0) }
         }
+        
+        return deleted
     }
     
     final func widges() -> [Widge] {
