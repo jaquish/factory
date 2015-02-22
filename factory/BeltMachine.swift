@@ -10,7 +10,7 @@ import UIKit
 
 enum BeltMachineState {
     case Open
-    case WaitingFor
+    case MovingIn
     case Processing
 }
 
@@ -54,18 +54,15 @@ class BeltMachine: Machine {
     }
     
     // MARK: Manage Belt Machine state s
-    func willAcceptBeltInput(widge: Widge) -> Bool {
-        switch beltMachineState {
-        case .Open: return true
-        default: return false
-        }
+    func canAcceptBeltInput() -> Bool {
+        return (beltMachineState == .Open)
     }
     
-    func waitForBeltInput(widge: Widge) {
-        beltMachineState = .WaitingFor
+    func acceptBeltInput() {
+        beltMachineState = .MovingIn
     }
     
-    func stopWaiting() {
+    func forceReopen() {
         beltMachineState = .Open
     }
 }

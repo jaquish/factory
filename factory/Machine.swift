@@ -132,8 +132,10 @@ class Machine: SKSpriteNode, LevelFileObject {
         // You may do this in any order.
     }
     
-    final func dequeueAllWidges() {
-        inputs().map { $0.dequeueWidges() }
+    final func dequeueAllWidges() -> [Widge] {
+        var allWidges: [Widge] = []
+        inputs().map { allWidges += $0.dequeueWidges() }
+        return allWidges
     }
     
     // MARK: Widge Management
@@ -213,6 +215,12 @@ class Machine: SKSpriteNode, LevelFileObject {
     
     final func widgesInState(state: WidgeState) -> [Widge] {
         return level.widges.filter { (($0.owner as? Machine) == self) && $0.state == state }
+    }
+    
+    final func widgeInState(state: WidgeState) -> Widge! {
+        let widges = widgesInState(state)
+        assert(widges.count <= 1, "Expected 1 or less widges in this state")
+        return widges.first
     }
     
     // MARK: Debug

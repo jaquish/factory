@@ -124,18 +124,22 @@ class Belt: Mover {
         
         let deltaX = BeltSpeedPointsPerSecond * CGFloat(_dt) * (direction == .W ? -1.0 : 1.0)
         
-        dequeueAllWidges()
+        let newWidges = dequeueAllWidges()
+        newWidges.map { $0.userData?.removeObjectForKey("beltMachine") }
         
+        // Widges waiting for BeltMachine
         for widge in widgesInState(Waiting) {
             
-            let beltMachine = widge.userData!["waitingFor"] as BeltMachine
+            let beltMachine = widge.userData!["beltMachine"] as BeltMachine
             
-            if beltMachine.willAcceptBeltInput(widge) {
+            // resume moving into BeltMachine
+            if beltMachine.canAcceptBeltInput() {
+                beltMachine.acceptBeltInput()
                 widge.state = Moving
-                widge.userData!["waitingFor"] = nil
             }
         }
         
+        // Move Widges on Belt
         for widge in widgesInState(Moving) {
             let oldPosition = widge.position
             widge.changeXBy(deltaX)
@@ -143,7 +147,6 @@ class Belt: Mover {
             // check if widge passed over wait point.
             // If BeltMachine is ready to accept a new widge, continue.
             // Else, hold at wait point outside of machine. (todo: jiggle animation)
-            // associate wait point with machine?
             for beltMachine in beltMachines() {
                 
                 let halfWidge = WidgeWidth / 2
@@ -151,14 +154,14 @@ class Belt: Mover {
                 let newEdge = widge.position.x + ((direction == .E) ? halfWidge : -halfWidge)
                 
                 if path(from: oldEdge, to: newEdge, ranOver: beltMachine.entranceBoundary()) {
-                    if beltMachine.willAcceptBeltInput(widge) {
+                    widge.userData!["beltMachine"] = beltMachine
+                    if beltMachine.canAcceptBeltInput() {
                         // already moved widge, just need to inform beltMachine
-                        beltMachine.waitForBeltInput(widge)
+                        beltMachine.acceptBeltInput()
                     } else {
                         // wait
                         widge.position = beltMachine.waitPointForEntrance()
                         widge.state = Waiting
-                        widge.userData!["waitingFor"] = beltMachine
                     }
                 }
             }
@@ -178,9 +181,15 @@ class Belt: Mover {
             }
         }
         
-        let deleted = garbagify(widgesInState(Moving) + widgesInState(Waiting))
+        let deleted = garbagify(widges())
         
-        // TODO - tricky. What happens when you delete or transform a widge that is being waited on
+        for widge in deleted {
+            if let beltMachine = widge.userData?["beltMachine"] as? BeltMachine {
+                if widge.state != Waiting {
+                    beltMachine.forceReopen()
+                }
+            }
+        }
     }
     
     func beltMachines() -> [BeltMachine] {

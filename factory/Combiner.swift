@@ -102,62 +102,71 @@ class Combiner: BeltMachine {
         
         let output = connector("belt-output")
         
-        // Processing
-        if processingTimeRemaining > 0 {
+        // Widge undergoing process
+        if beltMachineState == .Processing {
             processingTimeRemaining -= _dt
             if processingTimeRemaining <= 0 {
                 // End processing
                 cover.hidden = true
                 processingTimeRemaining = 0
                 
-                for widge in widgesInState(Processing) {
-                    output.insert(widge)
-                }
+                output.insert(widgeInState(Processing))
+                beltMachineState = .Open
             }
         }
         
-        // into container
-        for widge in connector("container-input").dequeueWidges() {
+        // Try containing a widge
+        if let widge = connector("container-input").dequeueWidge() {
             if widge.widgeType == containedType {
+                // type matches, contain it
                 containedCount++
             } else {
+                // doesn't match, turn all to garbage
                 containedCount = 0
                 createWidge(widge.widgeType.garbage, position: upperHalfZone^(.center), state: InternalGravity)
+                beltMachineState == .MovingIn
             }
             deleteWidge(widge)
         }
         
         // falling widges
         for widge in widgesInState(InternalGravity) {
+
             let deltaY = -GravityPointsPerSecond * CGFloat(_dt)
             let oldPosition = widge.position
             widge.changeYBy(deltaY)
             
+            // fall until hit output to belt
             if path(from: oldPosition, to: widge.position, ranOver:output.position) {
                 // TODO: Calculate extra distance delta
                 widge.changeYTo(output.position.y)
                 output.insert(widge)
+                beltMachineState = .Open
             }
         }
         
         // from belt
         if let widge = connector("belt-input").dequeueWidge() {
             
-            assert(processingTimeRemaining == 0, "Shouldn't receive widges when still processing")
+            assert(beltMachineState == .MovingIn, "Should be in correct state")
             
             if isOn && containedCount > 0 {
                 
                 // determine new widge type
                 let newType = action.resultTypeFor(beltInput: widge.widgeType, containedCount: containedCount)
                 let transformed = transform(widge, toType: newType)
+                
+                // start processing
+                beltMachineState = .Processing
                 transformed.state = Processing
                 containedCount--
                 processingTimeRemaining = ProcessingTime
                 cover.hidden = false
-                // wait for processing to complete
                 
             } else {
-                output.insert(widge) // pass through
+                // pass through
+                beltMachineState = .Open
+                output.insert(widge)
             }
         }
     }
@@ -166,23 +175,30 @@ class Combiner: BeltMachine {
         
         let location = (touches.anyObject() as UITouch).locationInNode(self)
         
+        // route touch
         if upperHalfNode.containsPoint(location) {
-            
-            if processingTimeRemaining > 0 {
-                println("Can't drop widge during processing")
-                return
-            }
-            
-            if containedCount > 0 {
-                containedCount--
-                // drop contained type
-                createWidge(containedType, position: connector("container-input").position, state: InternalGravity)
-            }
+            touchContainer()
         } else if lowerHalfNode.containsPoint(location) {
-            isOn = !isOn
+            touchPowerToggle()
         } else {
             println("Touch not inside combiner. Investigate")
         }
+    }
+    
+    func touchContainer() {
+        if beltMachineState == .MovingIn || beltMachineState == .Processing
+           || containedCount == 0 {
+            return
+        }
+        
+        assert(containedCount > 0, "Can't drop nothing")
+        containedCount--
+        createWidge(containedType, position: connector("container-input").position, state: InternalGravity)
+        beltMachineState = .MovingIn    // No dropping or processing allowed until widge hits middle
+    }
+    
+    func touchPowerToggle() {
+        isOn = !isOn
     }
     
     // MARK: BeltMachine
