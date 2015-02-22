@@ -73,6 +73,10 @@ class Machine: SKSpriteNode, LevelFileObject {
         return true // override for advanced decision making
     }
     
+    func didMakeConnections() {
+        
+    }
+    
     // return true if validation passes
     // if something is invalid, println the reason and return false
     func validateConnections() -> Bool {
@@ -128,8 +132,10 @@ class Machine: SKSpriteNode, LevelFileObject {
         // You may do this in any order.
     }
     
-    final func dequeueAllWidges() {
-        inputs().map { $0.dequeueWidges() }
+    final func dequeueAllWidges() -> [Widge] {
+        var allWidges: [Widge] = []
+        inputs().map { allWidges += $0.dequeueWidges() }
+        return allWidges
     }
     
     // MARK: Widge Management
@@ -147,6 +153,7 @@ class Machine: SKSpriteNode, LevelFileObject {
     final func transform(widge: Widge, toType: WidgeType) -> Widge {
         let count = level.widges.count
         let replacement = createWidge(toType, position: widge.position, state: widge.state)
+        replacement.userData = widge.userData
 
         deleteWidge(widge)
         assert(level.widges.count == count, "Expected same number of widges after transform \(level.widges.count) as before \(count)")
@@ -162,12 +169,58 @@ class Machine: SKSpriteNode, LevelFileObject {
         assert(level.widges.count == count - 1, "Expected one less widge after creating expected=\(count-1) actual=\(level.widges.count)")
     }
     
+    final func garbagify(widges: [Widge]) -> [Widge] {
+        
+        if widges.count < 2 {
+            return []
+        }
+        
+        var rootGarbageLists: [Widge:[Widge]] = [:]
+        
+        for i in 0 ..< widges.count-1 {
+            for j in i+1 ..< widges.count {
+                assert(widges[i].widgeID != widges[j].widgeID, "Don't compare to self")
+                
+                let widge1 = widges[i]
+                let widge2 = widges[j]
+                
+                if widge1.intersectsNode(widge2) {
+                    let (priority, other) = widge1.widgeID < widge2.widgeID ? (widge1,widge2) : (widge2,widge1)
+                    if !contains(rootGarbageLists.keys, priority) {
+                        rootGarbageLists[priority] = []
+                    }
+                    rootGarbageLists[priority]?.append(other)
+                }
+            }
+        }
+        
+        var deleted: [Widge] = []
+        for (keep, deleteList) in rootGarbageLists {
+            assert(deleteList.count < 2, "Undefined behavior when deleting multiple")
+            transform(keep, toType: keep.widgeType.garbage)
+            if deleteList.first!.state == "Waiting" {
+                keep.userData = deleteList.first!.userData
+                keep.state = deleteList.first!.state
+            }
+            deleted += deleteList
+            deleteList.map{ self.deleteWidge($0) }
+        }
+        
+        return deleted
+    }
+    
     final func widges() -> [Widge] {
         return level.widges.filter { ($0.owner as? Machine) == self }
     }
     
     final func widgesInState(state: WidgeState) -> [Widge] {
         return level.widges.filter { (($0.owner as? Machine) == self) && $0.state == state }
+    }
+    
+    final func widgeInState(state: WidgeState) -> Widge! {
+        let widges = widgesInState(state)
+        assert(widges.count <= 1, "Expected 1 or less widges in this state")
+        return widges.first
     }
     
     // MARK: Debug

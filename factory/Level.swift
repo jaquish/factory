@@ -40,6 +40,8 @@ class Level: SKScene {
     var outputs:[WidgeType] = []
     var endgame_output_count: Int = 0
     
+    var inDebugMode:Bool = false
+    
     override convenience init() {
         self.init(size: CGSizeZero)
     }
@@ -104,6 +106,10 @@ class Level: SKScene {
             if let connector = cp.connector {
                 cp.machine.connectors[cp.name] = cp.connector
             }
+        }
+        
+        for machine in machines {
+            machine.didMakeConnections()
         }
         
         var allConnectionsValid = true
@@ -173,6 +179,8 @@ class Level: SKScene {
         outputs.append(widgeType)
         NSNotificationCenter.defaultCenter().postNotificationName(OutputCountNotification, object: nil)
     }
+    
+    
     
     // MARK: Debug
     

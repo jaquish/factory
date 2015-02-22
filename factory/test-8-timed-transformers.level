@@ -1,0 +1,30 @@
+# Comments start with #
+# [] means a comma-delimited list, no spaces
+
+@Metadata
+# Format-Version:<string>
+Name:Test 8
+
+@WidgeTypes
+[basic]
+
+@Actions
+combine Transformer yellow:blue
+
+@Machines
+Input 2,10 0.5
+Gravity 2,5 2,10
+Belt 2,5 10,5 E
+TimedTransformer 6,5 combine
+TimedTransformer 7,5 combine
+Gravity 11,2 11,5
+Output 11,2
+
+@StaticSprites
+# coach-direction <widgeType> <direction> <Zone>
+# coach-transformation <widgeTypeIn> <widgeTypeOut> <direction> <Zone>
+
+@Context
+inputs:red,yellow,blue
+input-order:random
+endgame-output-count:1000

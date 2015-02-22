@@ -203,6 +203,9 @@ class LevelFileParser {
                     }
                 case "Output":
                     machine = Output(Zone(parts[1]))
+                case "TimedTransformer":
+                    let action = level.action(parts[2]) as TransformerAction
+                    machine = TimedTransformer(Zone(parts[1]), action: action)
                 case "Transformer":
                     let action = level.action(parts[2]) as TransformerAction
                     machine = Transformer(Zone(parts[1]), action: action)
@@ -218,6 +221,10 @@ class LevelFileParser {
                 case "Combiner":
                     let action = level.action(parts[2]) as CombinerAction
                     machine = Combiner(Zone(parts[1]), action:action)
+                case "TransportNetwork":
+                    let points = parts[1].componentsSeparatedByString(":")
+                    let zones = points.map { Zone($0) }
+                    machine = TransportNetwork(zones: zones)
                 default:
                     failWithError("Unknown class of machine '\(machineType)'"); return
             }

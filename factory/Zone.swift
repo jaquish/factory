@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Zone : Printable, Equatable {
+struct Zone : Printable, Hashable, Equatable {
     var x: Int
     var y: Int
     
@@ -45,6 +45,10 @@ struct Zone : Printable, Equatable {
         }
     }
     
+    func originPoint() -> CGPoint {
+        return worldPoint(.SW)
+    }
+    
     func zone(cp: Direction) -> Zone {
         switch (cp) {
             case .N:     return Zone(x    , y + 1)
@@ -71,6 +75,10 @@ struct Zone : Printable, Equatable {
     subscript(direction: Direction) -> Zone {
         return zone(direction)
     }
+    
+    // Hashable
+    
+    var hashValue: Int { return x + 100*y }
 }
 
 func ZoneSequence(from:Zone, to: Zone) -> [Zone]! {

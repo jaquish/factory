@@ -115,6 +115,7 @@ class LevelViewController: UIViewController, SKSceneDelegate {
         
         (view as SKView).showsFPS = hidden
         (view as SKView).showsNodeCount = hidden
+        level.inDebugMode = hidden
     }
     
     func togglePause(sender: AnyObject) {

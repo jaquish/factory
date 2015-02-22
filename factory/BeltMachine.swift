@@ -8,23 +8,61 @@
 
 import UIKit
 
+enum BeltMachineState {
+    case Open
+    case MovingIn
+    case Processing
+}
+
 // Describes things that can go on a belt, that take up 1 zone.
 class BeltMachine: Machine {
    
+    var belt: Belt!
+    var beltMachineState: BeltMachineState = .Open
+    
     // return the zone where the machine interfaces with the belt
     func baseZone() -> Zone {
         fatalError("Override me")
     }
     
-    func isProcessingWidge() -> Bool {
-        fatalError("Override me")
+    func waitPointForEntrance() -> CGPoint {
+        var point: CGPoint = CGPointZero
+        if belt.direction == .E {
+            point = baseZone()^(.W)
+            point.x -= WidgeWidth / 2
+        } else {
+            point = baseZone()^(.E)
+            point.x += WidgeWidth / 2
+        }
+        return point
     }
     
-    func waitPointOnLeft() -> CGPoint {
-        return baseZone()^(.W)
+    func entranceBoundary() -> CGFloat {
+        if belt.direction == .E {
+            return (baseZone()^(.W) as CGPoint).x
+        } else {
+            return (baseZone()^(.E) as CGPoint).x
+        }
     }
     
-    func waitPointOnRight() -> CGPoint {
-        return baseZone()^(.E)
+    func exitBoundary() -> CGFloat {
+        if belt.direction == .W {
+            return (baseZone()^(.E) as CGPoint).x
+        } else {
+            return (baseZone()^(.W) as CGPoint).x
+        }
+    }
+    
+    // MARK: Manage Belt Machine state s
+    func canAcceptBeltInput() -> Bool {
+        return (beltMachineState == .Open)
+    }
+    
+    func acceptBeltInput() {
+        beltMachineState = .MovingIn
+    }
+    
+    func forceReopen() {
+        beltMachineState = .Open
     }
 }

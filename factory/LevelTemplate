@@ -2,21 +2,25 @@
 # [] means a comma-delimited list, no spaces
 
 @Metadata
-Format-Version:<string>
-Name:<string>
+# Format-Version:<string>
+# Name:<string>
 
 @WidgeTypes
-[default]
-<widge id> <sprite name>
+# [basic]
+# <widge id> <sprite name>
 
 @Actions
-<id> Combiner <contained-id> <#-required> <success-type> <a:b,c:d,e:f>
-<id> Transformer <a:b,c:d,e:f>
+# <id> Combiner <contained-id> <#-required> <success-type> <a:b,c:d,e:f>
+# <id> Transformer <a:b,c:d,e:f>
 
 @Machines
-<class name> ...initializer parameters
+# <class name> ...initializer parameters
+
+@StaticSprites
+# coach-direction <widgeType> <direction> <Zone>
+# coach-transformation <widgeTypeIn> <widgeTypeOut> <direction> <Zone>
 
 @Context
-inputs          <[widgeTypeIDs]>
-winning-outputs <[widgeTypeIDs]>
-endgame-output-count <#>
+# inputs:<[widgeTypeIDs]>
+# winning-outputs:<[widgeTypeIDs]>
+# endgame-output-count:<#>

@@ -17,7 +17,7 @@ Garbage is not yet implemented.
 [basic]
 
 @Actions
-red-to-yellow Transformation red yellow black
+red-to-yellow Transformer red yellow black
 
 @Machines
 

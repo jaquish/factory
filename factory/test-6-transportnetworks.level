@@ -1,0 +1,24 @@
+@Metadata
+Format-Version:1.0
+Name:January 1st
+
+@Description
+
+Test transport networks
+
+@End
+
+@WidgeTypes
+[basic]
+
+@Machines
+Input 5,6
+Gravity 5,5 5,6
+TransportNetwork 5,5:5,4:5,3:5,2
+Gravity 5,1 5,2
+Output 5,1
+
+@Context
+inputs:red,yellow
+input-order:linear
+endgame-output-count:1000

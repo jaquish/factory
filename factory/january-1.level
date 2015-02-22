@@ -13,8 +13,8 @@ Goals: Learn how the Input, Belt, Combiner, Gravity, and Output work.
 combine Combiner red 1 yellow yellow:orange
 
 @Machines
-Input 1,8 3
-Gravity 1,7 1,8
+Input 1,13 1
+Gravity 1,7 1,13
 Belt 1,7 9,7 E
 
 #Combiner setup
@@ -23,7 +23,9 @@ Gravity 6,5 6,7
 Combiner 6,4 combine
 
 #Right corner
-Gravity 10,4 10,7
+Gravity 10,6 10,7
+TransportNetwork 10,5:10,6
+Gravity 10,4 10,5
 Belt 3,4 10,4 W
 Gravity 2,3 2,4
 Output 2,3
@@ -33,7 +35,7 @@ coach-direction yellow E 8,7
 coach-direction orange S 2,4
 
 @Context
-inputs:red,yellow
-input-order:linear
+inputs:red,yellow,blue
+input-order:random
 winning-outputs:orange
 endgame-output-count:10

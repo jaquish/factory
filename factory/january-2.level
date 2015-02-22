@@ -22,7 +22,9 @@ Belt 3,7 14,7 W
 Transformer 4,7 yellow-to-blue
 SwitchBox 9,7
 Gravity 2,4 2,7
-Gravity 9,2 9,7
+Gravity 9,6 9,7
+TransportNetwork 9,6:9,5:9,4:9,3
+Gravity 9,2 9,3
 
 # middle belt
 Belt 2,4 10,4 E
